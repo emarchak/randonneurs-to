@@ -1,33 +1,32 @@
+/* eslint-disable no-undef */
 module.exports = {
   siteMetadata: {
-    title: `Randonneurs.to`,
-    description: `Automations for Randonneurs Toronto`,
-    author: `@emarchak`,
+    title: 'Toronto Randonneurs',
+    description: 'Automations for Randonneurs Toronto',
+    author: '@emarchak',
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-typescript',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-sass',
+    'gatsby-transformer-typescript-css-modules',
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `images`,
+        name: 'images',
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-web-font-loader',
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#FFF`,
-        theme_color: `#E57373`,
-        display: `minimal-ui`,
+        google: {
+          families: ['EB Garamond', 'Roboto:400,400i,700'],
+        },
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
-}
+};
+/* eslint-enable no-undef */

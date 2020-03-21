@@ -1,0 +1,24 @@
+@import 'theme';
+
+$footer-height: 10rem;
+
+.content {
+  @include max-width();
+};
+
+.main-content {
+  min-height: calc(100vh - #{$footer-height});
+}
+
+.header {
+  border-top: get-spacing() solid get-color('primary');
+  border-bottom: get-spacing() solid get-color('primary');
+  margin-bottom: get-spacing();
+  text-align: center;
+}
+
+.footer {
+  background: desaturate(get-color('primary'), 90%);
+  height: $footer-height;
+  font-size: 0.7rem;
+}

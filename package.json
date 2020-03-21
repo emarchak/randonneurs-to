@@ -10,16 +10,24 @@
     "gatsby-plugin-manifest": "^2.1.1",
     "gatsby-plugin-offline": "^2.1.1",
     "gatsby-plugin-react-helmet": "^3.0.12",
+    "gatsby-plugin-sass": "^2.2.0",
     "gatsby-plugin-sharp": "^2.0.37",
+    "gatsby-plugin-typescript": "^2.3.0",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^2.0.36",
     "gatsby-transformer-sharp": "^2.1.19",
-    "gh-pages": "^2.0.1",
+    "gatsby-transformer-typescript-css-modules": "^1.0.14",
+    "jshint": "^2.11.0",
+    "netlify-cli": "^2.40.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-shopify": "^35.0.0",
     "prettier": "^1.17.1"
   },
   "keywords": [
@@ -33,13 +41,6 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "deploy": "gatsby build && gh-pages -d public"  
-},
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "deploy": "gatsby build && gh-pages -d public"
   }
 }

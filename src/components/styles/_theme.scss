@@ -1,0 +1,38 @@
+@use "sass:map";
+
+$theme-colors: (
+  "primary": #c5eada,
+  "secondary": #B888A0,
+  "tertiary": #88B2B8,
+  "success": #28a745,
+  "text": #333333,
+  "info": #17a2b8,
+  "warning": #ffc107,
+);
+
+$theme-fonts: (
+  "header": 'EB Garamond',
+  "body": 'Roboto',
+);
+
+$theme-spacing: (
+ "normal": 1.45rem,
+ );
+
+@mixin max-width() {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+}
+
+@function get-font($name) {
+  @return map-get($theme-fonts, $name);
+}
+
+@function get-color($name) {
+  @return map-get($theme-colors, $name);
+}
+
+@function get-spacing($name: 'normal') {
+  @return map-get($theme-spacing, $name);
+}
