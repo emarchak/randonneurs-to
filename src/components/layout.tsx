@@ -5,20 +5,31 @@
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
 
-import React from "react";
+import React, {useState} from "react";
 import {Header} from "./header";
 import {Footer} from "./footer";
 import {StaticQuery, graphql} from "gatsby";
+import {Menu, MenuState, MenuTrigger, menuConfig} from './menu';
 
 import styles from './styles/layout.module.scss';
 import "./styles/index.scss";
-
 
 type Props = {
   children: React.ReactNode;
 }
 
-export const Layout = ({children}: Props) => (
+export const Layout = ({children}: Props) => {
+  const [menuOpen, setMenuState] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuState(!menuOpen);
+  }
+
+  const handleMenuChange = (state: MenuState) => {
+    setMenuState(state.isOpen)
+  }
+
+  return (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -30,15 +41,19 @@ export const Layout = ({children}: Props) => (
       }
     `}
     render={(data) => (
-      <>
+      <div id={menuConfig.outerContainerId}>
+        <Menu isOpen={menuOpen} onMenuChange={handleMenuChange}/>
         <div
           className={styles.mainContent}
+          id={menuConfig.pageWrapId}
         >
+          <MenuTrigger onTrigger={toggleMenu} />
           <Header siteTitle={data.site.siteMetadata.title} />
+          
           <main>{children}</main>
         </div>
         <Footer />
-      </>
+      </div>
     )}
   />
-);
+)};
