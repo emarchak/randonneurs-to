@@ -1,13 +1,15 @@
 @use "sass:map";
 
 $theme-colors: (
-  "primary": #c5eada,
-  "secondary": #B888A0,
-  "tertiary": #88B2B8,
-  "success": #28a745,
-  "text": #333333,
-  "info": #17a2b8,
-  "warning": #ffc107,
+  "primary": (
+    'normal': #c5eada, 
+    'desaturate': desaturate(#c5eada, 90%)),
+  "secondary": ('normal': #B888A0),
+  "tertiary": ('normal': #88B2B8),
+  "success": ('normal': #28a745),
+  "text": ('normal': #333333),
+  "info": ('normal': #17a2b8),
+  "warning": ('normal': #ffc107),
 );
 
 $theme-fonts: (
@@ -16,8 +18,18 @@ $theme-fonts: (
 );
 
 $theme-spacing: (
+ "small": 0.72rem,
+ "medium": 1rem,
  "normal": 1.45rem,
+ "large": 2.9rem,
  );
+
+$theme-font-size: (
+  'large': 2.25rem,
+  'medium': 1.62671rem,
+  'small': 0.7rem,
+  'normal': 1rem,
+);
 
 @mixin max-width() {
   margin: 0 auto;
@@ -29,8 +41,14 @@ $theme-spacing: (
   @return map-get($theme-fonts, $name);
 }
 
-@function get-color($name) {
-  @return map-get($theme-colors, $name);
+@function get-font-size($name: 'normal') {
+  @return map-get($theme-font-size, $name);
+}
+
+
+@function get-color($name, $variant: 'normal') {
+  $color: map-get($theme-colors, $name);
+  @return map-get($color, $variant);
 }
 
 @function get-spacing($name: 'normal') {

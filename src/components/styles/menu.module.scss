@@ -1,0 +1,44 @@
+@import 'theme';
+
+.link {
+  font-family: get-font('header');
+  font-size: get-font-size('medium');
+  padding-bottom: get-spacing('small');
+  margin-bottom: get-spacing('small');
+  color: get-color('text');
+  text-decoration: none;
+  border-bottom: 1px solid lighten($color:get-color('text'), $amount: 50);
+}
+
+.link:hover, 
+.link:focus {
+  background-color: get-color('primary', 'desaturate');
+  border-bottom-color: get-color('text');
+}
+
+.trigger-wrapper {
+  padding: get-spacing('small');
+  text-align: right;
+  background-color: get-color(primary);
+}
+
+.trigger-button {
+  color:  get-color(text);
+  font-family: get-font('header');
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  line-height: 0.1;
+  overflow: hidden;
+  &:hover, 
+  &:focus {
+    cursor: pointer;
+  }
+}
+
+.trigger-icon {
+  height: .65rem;
+  padding-left: 0.64rem;
+  fill: get-color(text)
+}

@@ -11,14 +11,12 @@ $footer-height: 10rem;
 }
 
 .header {
-  border-top: get-spacing() solid get-color('primary');
-  border-bottom: get-spacing() solid get-color('primary');
-  margin-bottom: get-spacing();
+  border-bottom: get-spacing('large') solid get-color(primary);
   text-align: center;
 }
 
 .footer {
-  background: desaturate(get-color('primary'), 90%);
+  background: get-color(primary, desaturate);
   height: $footer-height;
   font-size: 0.7rem;
 }

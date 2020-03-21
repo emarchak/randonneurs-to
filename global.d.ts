@@ -3,3 +3,7 @@ declare module '*.scss' {
   export = content;
 }
 
+declare module '*.module.scss' {
+  const content: {[className: string]: string};
+  export = content;
+}
