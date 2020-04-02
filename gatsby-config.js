@@ -23,7 +23,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['EB Garamond', 'Roboto:400,400i,700'],
+          families: ['EB Garamond', 'Dawning of a New Day', 'Roboto:400,400i,700'],
         },
       },
     },

@@ -49,9 +49,18 @@ type MenuProps = {
 
 export const Menu = ({isOpen, onMenuChange}: MenuProps) => (
   <Burger {...menuConfig} styles={menuStyles} isOpen={isOpen} onStateChange={onMenuChange} customBurgerIcon={false} right>
-    <Link className={styles.link} to='/'>Home</Link>
-    <a className={styles.link} href='http://randonneursontario.ca'>Randonneurs Ontario</a>
-    <a className={styles.link} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Events</a>
+    <ul className={styles.list}>
+      <li className={styles.listItem}><Link className={styles.link} to='/'>Home</Link></li>
+      <li className={styles.listItem}><Link className={styles.link} to='/loneliness'>Club audax à distance</Link></li>
+      <li className={styles.listItem}>
+        <a className={styles.link} href='http://randonneursontario.ca'>Randonneurs Ontario</a>
+        <ul className={styles.list}>
+          <li><a className={styles.linkSecondary} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Events</a></li>
+          <li><a className={styles.linkSecondary} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Blog</a></li>
+        </ul>
+      
+      </li>
+    </ul>
   </Burger>
 )
 
