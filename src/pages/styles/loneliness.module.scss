@@ -1,0 +1,22 @@
+@import '../../components/styles/theme';
+
+.heading {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.slogan {
+  display: block;
+  font-family: "Dawning of a New Day", get-font(header);
+  text-align: center;
+  font-size: get-font-size(large);
+  letter-spacing: -0.04em;
+  color: get-color(text, light);
+  padding: get-spacing(large);
+}
+
+.callout {
+  padding: get-spacing() get-spacing(large);
+  background-color: get-color(secondary, light);
+  margin-bottom: get-spacing();
+}

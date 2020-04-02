@@ -3,18 +3,25 @@
 $theme-colors: (
   "primary": (
     'normal': #c5eada, 
-    'desaturate': desaturate(#c5eada, 90%)),
-  "secondary": ('normal': #B888A0),
+    'desaturate': desaturate(#c5eada, 90%),
+    'dark': darken(#c5eada, 10%)),
+  "secondary": (
+    'normal': #B888A0, 
+    'light': lighten(#B888A0, 20%)
+  ),
   "tertiary": ('normal': #88B2B8),
   "success": ('normal': #28a745),
-  "text": ('normal': #333333),
+  "text": ('normal': #333333, 'light': lighten(#333333, 20%)),
   "info": ('normal': #17a2b8),
   "warning": ('normal': #ffc107),
 );
 
+$font-family-serif:  'EB Garamond', serif;
+$font-family-sans-serif:  'Roboto', sans-serif;
+
 $theme-fonts: (
-  "header": 'EB Garamond',
-  "body": 'Roboto',
+  "header": $font-family-serif,
+  "body": $font-family-sans-serif,
 );
 
 $theme-spacing: (
