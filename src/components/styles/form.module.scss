@@ -1,0 +1,76 @@
+@import "theme";
+
+.form {
+  padding: 0 0;
+  margin: 0 0;
+  background-color: get-color(secondary, light);
+}
+
+.submit {
+  box-shadow: get-dropshadow();
+  display: block;
+  border: none;
+  padding: get-spacing(small) get-spacing(medium);
+  background: get-color(primary, dark);
+  text-align: center;
+  outline: 0.1rem solid get-color(primary, dark);
+  width: 100%;
+  transition: all 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  &:hover:enabled,
+  &:focus:enabled {
+    cursor: pointer;
+    box-shadow: get-dropshadow("dark");
+  }
+
+  &:focus:enabled {
+    outline-color: get-color(primary, darkest);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+
+  @include media(large) {
+    width: auto;
+  }
+}
+
+.input {
+  line-height: get-font-size(large);
+  padding-left: get-spacing(small);
+  outline: 0.1rem solid get-color(secondary, light);
+  border: 0;
+  width: 100%;
+
+  &:focus {
+    outline-offset: 0;
+    outline-color: get-color(secondary);
+  }
+
+  @include media(large) {
+    width: 66%;
+  }
+}
+
+.label {
+  display: block;
+  font-size: get-font-size(small);
+}
+
+.error-list {
+  list-style: none;
+  margin-bottom: get-spacing();
+  margin-left: 0;
+}
+
+.error {
+  font-size: get-font-size(small);
+  margin-bottom: 0;
+  &:before {
+    content: "✗";
+    margin-right: 0.25rem;
+  }
+}

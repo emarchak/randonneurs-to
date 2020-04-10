@@ -2,26 +2,37 @@
 
 $theme-colors: (
   "primary": (
-    'normal': #c5eada, 
-    'desaturate': desaturate(#c5eada, 90%),
-    'dark': darken(#c5eada, 10%),
-    'darkest': desaturate(darken(#c5eada, 20%), 10%)
+    "normal": #c5eada,
+    "desaturate": desaturate(#c5eada, 90%),
+    "dark": darken(#c5eada, 10%),
+    "darkest": desaturate(darken(#c5eada, 20%), 10%),
   ),
   "secondary": (
-    'normal': #B888A0, 
-    'light': lighten(#B888A0, 20%),
-    'dark': darken(#B888A0, 10%),
-    'darkest': desaturate(darken(#B888A0, 30%), 10%)
+    "normal": #b888a0,
+    "light": lighten(#b888a0, 20%),
+    "dark": darken(#b888a0, 10%),
+    "darkest": desaturate(darken(#b888a0, 30%), 10%),
   ),
-  "tertiary": ('normal': #88B2B8),
-  "success": ('normal': #28a745),
-  "text": ('normal': #333333, 'light': lighten(#333333, 20%)),
-  "info": ('normal': #17a2b8),
-  "warning": ('normal': #ffc107),
+  "tertiary": (
+    "normal": #88b2b8,
+  ),
+  "success": (
+    "normal": #28a745,
+  ),
+  "text": (
+    "normal": #333333,
+    "light": lighten(#333333, 20%),
+  ),
+  "info": (
+    "normal": #17a2b8,
+  ),
+  "warning": (
+    "normal": #ffc107,
+  ),
 );
 
-$font-family-serif:  'EB Garamond', serif;
-$font-family-sans-serif:  'Roboto', sans-serif;
+$font-family-serif: "EB Garamond", serif;
+$font-family-sans-serif: "Roboto", sans-serif;
 
 $theme-fonts: (
   "header": $font-family-serif,
@@ -29,17 +40,22 @@ $theme-fonts: (
 );
 
 $theme-spacing: (
- "small": 0.72rem,
- "medium": 1rem,
- "normal": 1.45rem,
- "large": 2.9rem,
- );
+  "small": 0.72rem,
+  "medium": 1rem,
+  "normal": 1.45rem,
+  "large": 2.9rem,
+);
 
 $theme-font-size: (
-  'large': 2.25rem,
-  'medium': 1.62671rem,
-  'small': 0.7rem,
-  'normal': 1rem,
+  "large": 2.25rem,
+  "medium": 1.62671rem,
+  "small": 0.7rem,
+  "normal": 1rem,
+);
+
+$dropshadow: (
+  "normal": 0 0 0.1rem transparentize(#333333, 0.75),
+  "dark": 0.05rem 0.05rem 0.1rem transparentize(#333333, 0.5),
 );
 
 @mixin max-width() {
@@ -52,16 +68,31 @@ $theme-font-size: (
   @return map-get($theme-fonts, $name);
 }
 
-@function get-font-size($name: 'normal') {
+@function get-font-size($name: "normal") {
   @return map-get($theme-font-size, $name);
 }
 
-
-@function get-color($name, $variant: 'normal') {
+@function get-color($name, $variant: "normal") {
   $color: map-get($theme-colors, $name);
   @return map-get($color, $variant);
 }
 
-@function get-spacing($name: 'normal') {
+@function get-spacing($name: "normal") {
   @return map-get($theme-spacing, $name);
+}
+
+@function get-dropshadow($name: "normal") {
+  @return map-get($dropshadow, $name);
+}
+
+@mixin media($point) {
+  @if $point == large {
+    @media only screen and (min-width: 481px) {
+      @content;
+    }
+  } @else if $point == small {
+    @media only screen and (max-width: 480px) {
+      @content;
+    }
+  }
 }
