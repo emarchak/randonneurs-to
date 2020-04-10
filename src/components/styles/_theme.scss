@@ -4,10 +4,14 @@ $theme-colors: (
   "primary": (
     'normal': #c5eada, 
     'desaturate': desaturate(#c5eada, 90%),
-    'dark': darken(#c5eada, 10%)),
+    'dark': darken(#c5eada, 10%),
+    'darkest': desaturate(darken(#c5eada, 20%), 10%)
+  ),
   "secondary": (
     'normal': #B888A0, 
-    'light': lighten(#B888A0, 20%)
+    'light': lighten(#B888A0, 20%),
+    'dark': darken(#B888A0, 10%),
+    'darkest': desaturate(darken(#B888A0, 30%), 10%)
   ),
   "tertiary": ('normal': #88B2B8),
   "success": ('normal': #28a745),
