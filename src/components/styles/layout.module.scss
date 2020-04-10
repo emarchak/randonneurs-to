@@ -1,17 +1,16 @@
-@import 'theme';
+@import "theme";
 
 $footer-height: 4.3rem;
 
 @mixin body-link() {
-  a{
+  a {
     &,
     &:visited {
       color: get-color(secondary, darkest);
       text-decoration: none;
       border-bottom: 0.05em dashed get-color(secondary, light);
-
     }
-    &:hover, 
+    &:hover,
     &:focus {
       border-bottom-color: get-color(secondary);
     }
@@ -20,10 +19,10 @@ $footer-height: 4.3rem;
 
 .content {
   @include max-width();
-};
+}
 
 .header {
-  border-bottom: get-spacing('large') solid get-color(primary);
+  border-bottom: get-spacing("large") solid get-color(primary);
   text-align: center;
 }
 
@@ -35,10 +34,14 @@ $footer-height: 4.3rem;
   @include body-link();
 }
 
-
 .footer {
   @include body-link();
   background: get-color(primary, desaturate);
   height: $footer-height;
   font-size: 0.7rem;
+}
+
+.copyleft {
+  display: inline-block;
+  transform: scale(-1, 1);
 }

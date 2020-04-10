@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import { ContentWrapper } from "./content-wrapper"
+import styles from "./styles/form.module.scss"
 
 const formName = "clubaudaxadistance"
 
@@ -36,7 +38,11 @@ type FormData = {
 
 type FormState = "submitted" | "dirty" | null
 
-export const LonelinessForm = () => {
+type Props = {
+  children: React.ReactNode
+}
+
+export const LonelinessForm = ({ children }: Props) => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -48,7 +54,6 @@ export const LonelinessForm = () => {
   const isDirty = formState === "dirty"
   const hasError = Boolean(formErrors.length)
 
-  console.log({ formState, formErrors, formData })
   const handleSubmit = async evt => {
     evt.preventDefault()
 
@@ -88,7 +93,15 @@ export const LonelinessForm = () => {
 
   if (isSubmitted) {
     return (
-      <div aria-live="polite">Thank you for sharing your journey with us.</div>
+      <div className={styles.form}>
+        <ContentWrapper>
+          {children}
+          <div aria-live="polite">
+            Thank you for sharing your journey with us. Refresh the page to
+            submit again.
+          </div>
+        </ContentWrapper>
+      </div>
     )
   }
 
@@ -98,55 +111,63 @@ export const LonelinessForm = () => {
       method="post"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
+      className={styles.form}
     >
-      {hasError && (
-        <ul aria-live="polite">
-          {formErrors.map((message, i) => (
-            <li key={i}>{message}</li>
-          ))}
-        </ul>
-      )}
-      <p>
-        <label>
-          Your Name:
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </label>
-      </p>
-      <p>
-        <label>
-          Your Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </label>
-      </p>
-      <p>
-        <label>
-          Strava URL:
-          <input
-            name="strava"
-            value={formData.strava}
-            onChange={handleChange}
-          />
-        </label>
-      </p>
-      <p>
+      <ContentWrapper>
+        {children}
+        <p>
+          <label>
+            <span className={styles.label}>Your name</span>
+            <input
+              type="text"
+              name="name"
+              className={styles.input}
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            <span className={styles.label}>Your email</span>
+            <input
+              type="email"
+              name="email"
+              className={styles.input}
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            <span className={styles.label}>Strava activity url</span>
+            <input
+              name="strava"
+              className={styles.input}
+              value={formData.strava}
+              onChange={handleChange}
+            />
+          </label>
+        </p>
+        {hasError && (
+          <ul className={styles.errorList} aria-live="polite">
+            {formErrors.map((message, i) => (
+              <li className={styles.error} key={i}>
+                {message}
+              </li>
+            ))}
+          </ul>
+        )}
         <button
           type="submit"
+          className={styles.submit}
           disabled={hasError && !isDirty}
           onClick={handleSubmit}
         >
           Share your journey
         </button>
-      </p>
+      </ContentWrapper>
     </form>
   )
 }

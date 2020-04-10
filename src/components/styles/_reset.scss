@@ -27,17 +27,6 @@ progress,
 video {
   display: inline-block;
 }
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-progress {
-  vertical-align: baseline;
-}
-[hidden],
-template {
-  display: none;
-}
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -56,49 +45,11 @@ strong {
   font-weight: inherit;
   font-weight: bolder;
 }
-dfn {
-  font-style: italic;
-}
-mark {
-  background-color: #ff0;
-  color: #000;
-}
-small {
-  font-size: 80%;
-}
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-sub {
-  bottom: -0.25em;
-}
-sup {
-  top: -0.5em;
-}
 img {
   border-style: none;
 }
 svg:not(:root) {
   overflow: hidden;
-}
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-figure {
-  margin: 1em 40px;
-}
-hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
 }
 button,
 input,
@@ -107,6 +58,7 @@ select,
 textarea {
   font: inherit;
   margin: 0;
+  border: none;
 }
 optgroup {
   font-weight: 700;
@@ -137,11 +89,6 @@ button::-moz-focus-inner {
 [type="submit"]:-moz-focusring,
 button:-moz-focusring {
   outline: 1px dotted ButtonText;
-}
-fieldset {
-  border: 1px solid silver;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
 }
 legend {
   box-sizing: border-box;
@@ -193,7 +140,7 @@ html {
 *:after {
   box-sizing: inherit;
 }
-body {  
+body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -210,7 +157,12 @@ img {
   max-width: 100%;
   margin-bottom: 1.45rem;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @include no-space;
   color: inherit;
   text-rendering: optimizeLegibility;
@@ -249,19 +201,6 @@ figure {
   @include no-space;
   margin-bottom: 1.45rem;
 }
-pre {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  margin-bottom: 1.45rem;
-  font-size: 0.85rem;
-  line-height: 1.42;
-  background: hsla(0, 0%, 0%, 0.04);
-  border-radius: 3px;
-  overflow: auto;
-  word-wrap: normal;
-  padding: 1.45rem;
-}
 table {
   @include no-space;
   margin-bottom: 1.45rem;
@@ -288,10 +227,6 @@ form {
   @include no-space;
   margin-bottom: 1.45rem;
 }
-noscript {
-  @include no-space;
-  margin-bottom: 1.45rem;
-}
 iframe {
   @include no-space;
   margin-bottom: 1.45rem;
@@ -303,19 +238,9 @@ hr {
   border: none;
   height: 1px;
 }
-address {
-  @include no-space;
-  margin-bottom: 1.45rem;
-}
-b {
-  font-weight: bold;
-}
-strong {
-  font-weight: bold;
-}
-dt {
-  font-weight: bold;
-}
+b,
+strong,
+dt,
 th {
   font-weight: bold;
 }
@@ -350,31 +275,6 @@ p *:last-child {
 li > p {
   margin-bottom: calc(1.45rem / 2);
 }
-code {
-  font-size: 0.85rem;
-  line-height: 1.45rem;
-}
-kbd {
-  font-size: 0.85rem;
-  line-height: 1.45rem;
-}
-samp {
-  font-size: 0.85rem;
-  line-height: 1.45rem;
-}
-abbr {
-  border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
-  cursor: help;
-}
-acronym {
-  border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
-  cursor: help;
-}
-abbr[title] {
-  border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
-  cursor: help;
-  text-decoration: none;
-}
 thead {
   text-align: left;
 }
@@ -398,35 +298,4 @@ td:first-child {
 th:last-child,
 td:last-child {
   padding-right: 0;
-}
-tt,
-code {
-  background-color: hsla(0, 0%, 0%, 0.04);
-  border-radius: 3px;
-  font-family: monospace;
-  padding: 0;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-}
-pre code {
-  background: none;
-  line-height: 1.42;
-}
-code:before,
-code:after,
-tt:before,
-tt:after {
-  letter-spacing: -0.2em;
-  content: " ";
-}
-pre code:before,
-pre code:after,
-pre tt:before,
-pre tt:after {
-  content: "";
-}
-@media only screen and (max-width: 480px) {
-  html {
-    font-size: 100%;
-  }
 }
