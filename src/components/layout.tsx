@@ -44,13 +44,14 @@ export const Layout = ({children}: Props) => {
       <div id={menuConfig.outerContainerId}>
         <Menu isOpen={menuOpen} onMenuChange={handleMenuChange}/>
         <div
-          className={styles.mainContent}
+          className={styles.mainWraper}
           id={menuConfig.pageWrapId}
         >
           <MenuTrigger onTrigger={toggleMenu} />
           <Header siteTitle={data.site.siteMetadata.title} />
           
-          <main>{children}</main>
+          <main
+          className={styles.mainContent}>{children}</main>
         </div>
         <Footer />
       </div>

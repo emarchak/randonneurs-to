@@ -23,6 +23,8 @@ const Page = () => (
 
       <p>We are riders that are commited to socially distancing ourself, to do the right thing. But we're also commited to our sport. If we must be alone in these tough times, let us be alone together.</p>
 
+      <p><a href="https://www.cycleto.ca/news/cycling-time-covid-19">Learn how to cycle during a pandemic from Cycle Toronto</a>.</p>
+      
       <section className={style.callout}>
       <h3>The rules</h3>
       <ol>
