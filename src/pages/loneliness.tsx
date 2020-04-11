@@ -3,8 +3,9 @@ import React from "react"
 import { Layout } from "../components/layout"
 import { SEO } from "../components/seo"
 import { ContentWrapper } from "../components/content-wrapper"
+import { Callout } from "../components/callout"
 import { LonelinessForm } from "../components/loneliness-form"
-import Logo from "./assets/ClubAudux.svg"
+import Logo from "./assets/ClubAudax.svg"
 import style from "./styles/loneliness.module.scss"
 
 const Page = () => (
@@ -32,7 +33,7 @@ const Page = () => (
         .
       </p>
 
-      <section className={style.callout}>
+      <Callout>
         <h3>The rules</h3>
         <ol>
           <li>
@@ -51,7 +52,7 @@ const Page = () => (
           to any official club, organization, or community. We maintain
           distance.
         </p>
-      </section>
+      </Callout>
 
       <h3>The rides</h3>
 

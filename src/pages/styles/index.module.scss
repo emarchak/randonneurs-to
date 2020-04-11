@@ -1,0 +1,34 @@
+@import "../../components/styles/theme";
+
+.home-wrapper {
+  @include media(large) {
+    display: flex;
+  }
+}
+
+.updates,
+.gallery {
+  padding: get-spacing(large) 0;
+  @include media(large) {
+    width: 50%;
+  }
+}
+
+.updates {
+  @include media(large) {
+    padding-right: get-spacing();
+  }
+}
+
+.gallery {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+.gallery-tile {
+  width: 33%;
+  float: right;
+}

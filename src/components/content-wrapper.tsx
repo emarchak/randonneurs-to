@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react"
 
-import styles from './styles/layout.module.scss';
+import styles from "./styles/layout.module.scss"
 
 type Props = {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
-export const ContentWrapper = ({children}: Props)  => (
+export const ContentWrapper = ({ children }: Props) => (
   <div className={styles.content}>{children}</div>
 )

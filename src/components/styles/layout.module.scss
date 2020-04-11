@@ -45,3 +45,9 @@ $footer-height: 4.3rem;
   display: inline-block;
   transform: scale(-1, 1);
 }
+
+.callout {
+  padding: get-spacing() get-spacing(large);
+  background-color: get-color(secondary, light);
+  margin-bottom: get-spacing();
+}
