@@ -17,12 +17,6 @@
   padding: get-spacing(large);
 }
 
-.callout {
-  padding: get-spacing() get-spacing(large);
-  background-color: get-color(secondary, light);
-  margin-bottom: get-spacing();
-}
-
 .iframe {
   min-width: 100%;
   height: 25rem;
