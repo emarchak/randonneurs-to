@@ -2,8 +2,9 @@
 module.exports = {
   siteMetadata: {
     title: "Toronto Randonneurs",
-    description: "Automations for Randonneurs Toronto",
+    description: "Long distance cyclists of Toronto, Canada",
     author: "@emarchak",
+    siteURL: "https://randonneurs.to",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -40,5 +41,5 @@ module.exports = {
       },
     },
   ],
-}
+};
 /* eslint-enable no-undef */
