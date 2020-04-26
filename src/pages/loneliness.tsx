@@ -6,6 +6,9 @@ import { SEO } from "../components/seo"
 import { ContentWrapper } from "../components/content-wrapper"
 import { Callout } from "../components/callout"
 import { LonelinessForm } from "../components/loneliness-form"
+import { LonelinessRoute } from "../components/loneliness-route"
+
+import Routes from "../data/loneliness-routes.yaml"
 import Logo from "./assets/ClubAudax.svg"
 import style from "./styles/loneliness.module.scss"
 
@@ -82,24 +85,9 @@ const Page = () => {
         <h3>The rides</h3>
 
         <p>We will be sharing new routes every two weeks.</p>
-
-        <article className={style.ride}>
-          <div>
-            <h4>1. Giro del Toronto</h4>
-            <h5>Posted on April 10, 2020</h5>
-            <h5>Complete by April 24, 2020</h5>
-
-            <p>
-              A circle around the city, a route that hasn't been used in over a
-              decade, roads that were bustling now sit empty.
-            </p>
-          </div>
-          <iframe
-            src="https://ridewithgps.com/embeds?type=route&id=32322586"
-            className={style.iframe}
-            scrolling="no"
-          />
-        </article>
+        {Routes.map(route => (
+          <LonelinessRoute {...route} />
+        ))}
       </ContentWrapper>
       <LonelinessForm>
         <h3>Join Club audax à distance</h3>

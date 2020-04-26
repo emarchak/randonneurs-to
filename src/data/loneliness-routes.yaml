@@ -1,0 +1,11 @@
+- routeNumber: 2
+  name: E-Z Loop
+  description: A circle around East toronto and the Zoo that climbs up the Don Valley in both directions. As we hit the lowest lows, we are reminded that the upward journey is never too far away.
+  postedDate: April 26, 2020
+  rwgpsRouteId: 32463456
+
+- routeNumber: 1
+  name: Giro del Toronto
+  description: A circle around the city, a route that hasn't been used in over a decade, roads that were bustling now sit empty.
+  postedDate: April 10, 2020
+  rwgpsRouteId: 32322586
