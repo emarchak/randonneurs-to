@@ -16,19 +16,3 @@
   color: get-color(text, light);
   padding: get-spacing(large);
 }
-
-.iframe {
-  min-width: 100%;
-  height: 25rem;
-  max-height: 100vh;
-  border: none;
-  @include media(large) {
-    min-width: 50%;
-  }
-}
-
-.ride {
-  @include media(large) {
-    display: flex;
-  }
-}

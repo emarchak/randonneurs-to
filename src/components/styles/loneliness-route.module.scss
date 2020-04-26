@@ -1,0 +1,24 @@
+@import "theme";
+
+.iframe {
+  min-width: 100%;
+  height: 24rem;
+  max-height: 100vh;
+  border: none;
+  @include media(large) {
+    height: 18rem;
+    min-width: 50%;
+  }
+}
+
+.ride {
+  @include media(large) {
+    display: flex;
+  }
+
+  + .ride {
+    border-top: 1px solid get-color(secondary, light);
+    margin-top: get-spacing();
+    padding-top: get-spacing(large);
+  }
+}
