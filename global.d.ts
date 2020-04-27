@@ -11,3 +11,9 @@ declare module "*.svg" {
   const content: React.ReactType
   export = content
 }
+
+declare namespace NodeJS {
+  export interface Global {
+    fetch: any
+  }
+}

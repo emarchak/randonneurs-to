@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import { ContentWrapper } from "./content-wrapper"
-import styles from "./styles/form.module.scss"
+import { ContentWrapper } from "../content-wrapper"
+import styles from "../styles/form.module.scss"
 
 const formName = "clubaudaxadistance"
 
@@ -70,10 +70,7 @@ export const LonelinessForm = ({ children }: Props) => {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body,
       })
-      console.log({
-        response,
-        body,
-      })
+
       if (response.ok) {
         setFormState("submitted")
       }
@@ -84,6 +81,7 @@ export const LonelinessForm = ({ children }: Props) => {
 
   const handleChange = evt => {
     const { value = "", name } = evt.target
+
     setFormState("dirty")
     setFormData({
       ...formData,
