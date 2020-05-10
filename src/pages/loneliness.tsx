@@ -8,6 +8,7 @@ import { Callout } from "../components/callout"
 import { LonelinessForm, LonelinessRoute } from "../components/loneliness"
 
 import Routes from "../data/loneliness-routes.yaml"
+import Riders from "../data/loneliness-riders.yaml"
 import Logo from "./assets/ClubAudax.svg"
 import style from "./styles/loneliness.module.scss"
 
@@ -81,10 +82,10 @@ const Page = () => {
           </p>
         </Callout>
 
-        <h3>The rides</h3>
+        <h3>Current ride</h3>
 
         <p>We will be sharing new routes every two weeks.</p>
-        {Routes.map(route => (
+        {Routes.slice(0, 1).map(route => (
           <LonelinessRoute {...route} />
         ))}
       </ContentWrapper>
@@ -97,11 +98,33 @@ const Page = () => {
       </LonelinessForm>
       <ContentWrapper>
         <h3>Finishers</h3>
-        <p>A list will be posted as our travellers arrive.</p>
+        <table>
+          <thead>
+            <th>Rider</th>
+            <th>Date completed</th>
+            <th>Route</th>
+          </thead>
+          {Riders.map(rider => (
+            <tr>
+              <td>
+                {rider.name.first.charAt(0)}. {rider.name.last}
+              </td>
+              <td>{rider.date}</td>
+              <td>{rider.route}</td>
+            </tr>
+          ))}
+        </table>
+      </ContentWrapper>
+      <div className={style.slogan}>
+        – distance makes the heart grow stronger –
+      </div>
+      <ContentWrapper>
+        <h3>Previous rides</h3>
+        {Routes.slice(1).map(route => (
+          <LonelinessRoute {...route} />
+        ))}
 
-        <div className={style.slogan}>
-          – distance makes the heart grow stronger –
-        </div>
+        <Logo className={style.heading} alt="Club audax à distance" />
         <p style={{ textAlign: "center" }}>
           Wordmark designed by{" "}
           <a href="http://garethfowler.com/">Gareth Fowler</a>
