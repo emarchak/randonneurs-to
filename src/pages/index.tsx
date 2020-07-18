@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
+import moment from "moment"
 import { Layout } from "../components/layout"
 import { SEO } from "../components/seo"
 import { ContentWrapper } from "../components/content-wrapper"
@@ -11,9 +12,24 @@ import styles from "./styles/index.module.scss"
 const IndexPage = () => {
   const {
     allFile: { nodes: images },
+    allEvent: { nodes: events },
   } = useStaticQuery(
     graphql`
       query {
+        allEvent(
+          sort: { order: ASC, fields: starts_on }
+          filter: {
+            tag_names: { in: "Toronto" }
+            starts_on: { gte: "2020-07-11" }
+          }
+        ) {
+          nodes {
+            slug
+            name
+            starts_at
+            location
+          }
+        }
         allFile(
           filter: {
             extension: { regex: "/(jpg|JPG|jpeg)/" }
@@ -46,6 +62,25 @@ const IndexPage = () => {
           for updates.
         </Callout>
         <div className={styles.homeWrapper}>
+          <section className={styles.updates}>
+            <h3>Upcoming events</h3>
+            <ul>
+              {events.map(event => (
+                <li key={event.slug}>
+                  <h4>{event.name}</h4>
+                  <p>
+                    {moment(event.starts_at).format("MMMM DD YYYY, HH:mm")}
+                    <br />
+                    {event.location}
+                    <br />
+                    <a href={`https://ridewithgps.com/events/${event.slug}`}>
+                      View event
+                    </a>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
           <section className={styles.updates}>
             <p>
               <Link
