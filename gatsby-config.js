@@ -13,6 +13,7 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-plugin-sass",
     "gatsby-transformer-typescript-css-modules",
+    "gatsby-source-rwgps",
     {
       resolve: "gatsby-plugin-react-svg",
       options: {

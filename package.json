@@ -47,7 +47,7 @@
   "scripts": {
     "build": "gatsby build",
     "build:production": "jest && gatsby build",
-    "develop": "gatsby develop",
+    "develop": "netlify dev",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "serve": "gatsby serve",
     "test": "jest",
