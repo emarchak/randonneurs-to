@@ -11,7 +11,7 @@ describe("<LonelinessForm>", () => {
     global.fetch = mockFetch
   })
   afterEach(() => {
-    mockFetch.mockReset()
+    mockFetch.mockClear()
   })
 
   it("renders child content", () => {
@@ -21,7 +21,7 @@ describe("<LonelinessForm>", () => {
   })
 
   it("requires all fields", async () => {
-    const mount = render(<LonelinessForm>{"content"}</LonelinessForm>)
+    const mount = render(<LonelinessForm />)
 
     expect(mount.getByText("Share your journey")).not.toBeDisabled()
 
@@ -47,7 +47,7 @@ describe("<LonelinessForm>", () => {
   })
 
   it("rejects incorrect emails", () => {
-    const mount = render(<LonelinessForm>{"content"}</LonelinessForm>)
+    const mount = render(<LonelinessForm />)
 
     fireEvent.change(mount.getByLabelText(/email/i), {
       target: { value: "higgeldy-piggeldy" },
@@ -62,7 +62,7 @@ describe("<LonelinessForm>", () => {
   })
 
   it("rejects incorrect strava urls", () => {
-    const mount = render(<LonelinessForm>{"content"}</LonelinessForm>)
+    const mount = render(<LonelinessForm />)
 
     fireEvent.change(mount.getByLabelText(/strava/i), {
       target: { value: "google.com" },
@@ -72,5 +72,30 @@ describe("<LonelinessForm>", () => {
     expect(mount.getByText("Share your journey")).toBeDisabled()
 
     expect(mount.getByText(/google.com is not a valid strava/i)).toBeTruthy()
+  })
+
+  it("shows confirmation on submit", async () => {
+    const mount = render(<LonelinessForm />)
+
+    expect(mount.getByText("Share your journey")).not.toBeDisabled()
+
+    fireEvent.change(mount.getByLabelText(/name/i), {
+      target: { value: "Foo" },
+    })
+
+    fireEvent.change(mount.getByLabelText(/email/i), {
+      target: { value: "foo@bar.com" },
+    })
+
+    fireEvent.change(mount.getByLabelText(/activity/i), {
+      target: { value: "https://www.strava.com/activities/123" },
+    })
+    expect(mount.getByText("Share your journey")).not.toBeDisabled()
+    fireEvent.click(mount.getByText("Share your journey"))
+
+    await waitFor(() => {
+      expect(mockFetch).toHaveBeenCalled()
+      expect(mount.getByText(/Thank you for sharing your journey/)).toBeTruthy()
+    })
   })
 })

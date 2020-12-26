@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, ChangeEvent } from "react"
 import { ContentWrapper } from "../content-wrapper"
+import { InputField } from "../form/input-field"
 import styles from "../styles/form.module.scss"
 
 const formName = "clubaudaxadistance"
@@ -39,7 +40,7 @@ type FormData = {
 type FormState = "submitted" | "dirty" | null
 
 type Props = {
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export const LonelinessForm = ({ children }: Props) => {
@@ -79,7 +80,7 @@ export const LonelinessForm = ({ children }: Props) => {
     }
   }
 
-  const handleChange = evt => {
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { value = "", name } = evt.target
 
     setFormState("dirty")
@@ -113,41 +114,9 @@ export const LonelinessForm = ({ children }: Props) => {
     >
       <ContentWrapper>
         {children}
-        <p>
-          <label>
-            <span className={styles.label}>Your name</span>
-            <input
-              type="text"
-              name="name"
-              className={styles.input}
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            <span className={styles.label}>Your email</span>
-            <input
-              type="email"
-              name="email"
-              className={styles.input}
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            <span className={styles.label}>Strava activity url</span>
-            <input
-              name="strava"
-              className={styles.input}
-              value={formData.strava}
-              onChange={handleChange}
-            />
-          </label>
-        </p>
+        <InputField name="name" label="Your name" value={formData.name} onChange={handleChange} />
+        <InputField name="email" label="Your email" type="email" value={formData.email} onChange={handleChange} />
+        <InputField name="strava" label="Strava activity url" value={formData.strava} onChange={handleChange} />
         {hasError && (
           <ul className={styles.errorList} aria-live="polite">
             {formErrors.map((message, i) => (
