@@ -90,12 +90,41 @@ describe("<LonelinessForm>", () => {
     fireEvent.change(mount.getByLabelText(/activity/i), {
       target: { value: "https://www.strava.com/activities/123" },
     })
+
     expect(mount.getByText("Share your journey")).not.toBeDisabled()
     fireEvent.click(mount.getByText("Share your journey"))
 
     await waitFor(() => {
       expect(mockFetch).toHaveBeenCalled()
       expect(mount.getByText(/Thank you for sharing your journey/)).toBeTruthy()
+    })
+  })
+
+  it("shows error message if unable to submit", async () => {
+    mockFetch.mockRejectedValue({ ok: false });
+
+    const mount = render(<LonelinessForm />)
+
+    expect(mount.getByText("Share your journey")).not.toBeDisabled()
+
+    fireEvent.change(mount.getByLabelText(/name/i), {
+      target: { value: "Foo" },
+    })
+
+    fireEvent.change(mount.getByLabelText(/email/i), {
+      target: { value: "foo@bar.com" },
+    })
+
+    fireEvent.change(mount.getByLabelText(/activity/i), {
+      target: { value: "https://www.strava.com/activities/123" },
+    })
+
+    expect(mount.getByText("Share your journey")).not.toBeDisabled()
+    fireEvent.click(mount.getByText("Share your journey"))
+
+    await waitFor(() => {
+      expect(mockFetch).toHaveBeenCalled()
+      expect(mount.getByText(/Server error/)).toBeTruthy()
     })
   })
 })
