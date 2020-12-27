@@ -39,8 +39,8 @@
 }
 
 .input {
-  line-height: get-font-size(large);
-  padding-left: get-spacing(small);
+  height: get-font-size(large);
+  padding: 0 get-spacing(small);
   outline: 0.1rem solid get-color(secondary, light);
   border: 0;
   width: 100%;
@@ -53,6 +53,27 @@
   @include media(large) {
     width: 66%;
   }
+}
+
+.select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, get-color(secondary, light) 50%),
+    linear-gradient(135deg, get-color(secondary, light) 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .label {
