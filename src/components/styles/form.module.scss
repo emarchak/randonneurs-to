@@ -95,3 +95,10 @@
     margin-right: 0.25rem;
   }
 }
+
+.dateInput {
+  margin-bottom: 1.45rem;
+  .react-datepicker-wrapper {
+    display: block
+  }
+}

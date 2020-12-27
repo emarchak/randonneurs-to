@@ -39,14 +39,14 @@ export const RegistrationForm = () => {
         })
     }
 
-    const handleDateChange = (dates: Date[]) => {
+    const handleDateChange = (startDate: Date) => {
         setFormState("dirty")
         setFormData({
             ...formData,
-            'startDate': dates.pop(),
+            startDate
         })
     }
-
+    console.log(formData)
     return (
         <form
             name={formName}

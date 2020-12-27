@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from "react"
-import Flatpickr from "react-flatpickr"
+import DatePicker from "react-datepicker";
 
 import styles from "../styles/form.module.scss"
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 type FieldProps = {
     name: string
@@ -55,15 +56,10 @@ type DateFieldProps = Omit<FieldProps, 'value'> & {
 }
 
 export const DateField = ({ value, label, onChange }: DateFieldProps) => (
-    <p>
+    <div className={styles.dateInput}>
         <label>
             <span className={styles.label}>{label}</span>
-            <Flatpickr
-                className={styles.input}
-                data-enable-time
-                value={value}
-                onChange={onChange}
-            />
+            <DatePicker showTimeSelect selected={value} onChange={onChange} className={styles.input} dateFormat="MMMM d HH:mm" />
         </label>
-    </p>
+    </div>
 )
