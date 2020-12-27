@@ -49,11 +49,19 @@ describe('<RegistrationForm>', () => {
     })
 
     it('shows permanent description when registering for permanents', () => {
-        const mount = render(<RegistrationForm routes={[route, routeB]} />)
+        const mount = render(<RegistrationForm routes={[route]} />)
         fireEvent.change(mount.getByLabelText(/ride/i), {
             target: { value: "permanent" },
         })
         expect(mount.baseElement).toHaveTextContent(/A Permanent ride is one of the existing Randonneurs Ontario brevet route/i)
+    })
+
+    it('shows brevet description when registering for brevet', () => {
+        const mount = render(<RegistrationForm routes={[route]} />)
+        fireEvent.change(mount.getByLabelText(/ride/i), {
+            target: { value: "brevet" },
+        })
+        expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
     })
 
     it.skip('only shows bevets when registering for brevets', () => { })
