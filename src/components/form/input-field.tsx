@@ -7,11 +7,11 @@ type FieldProps = {
     name: string
     value: string
     label: string
-    onChange: (evt: ChangeEvent) => void
 }
 
 type InputFieldProps = FieldProps & {
     type?: 'text' | 'email'
+    onChange: (evt: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const InputField = ({ type = 'text', name, value, label, onChange }: InputFieldProps) => (
@@ -31,6 +31,7 @@ export const InputField = ({ type = 'text', name, value, label, onChange }: Inpu
 
 type SelectFieldProps = FieldProps & {
     options: string[]
+    onChange: (evt: ChangeEvent<HTMLSelectElement>) => void
 }
 
 export const SelectField = ({ name, options, value, label, onChange }: SelectFieldProps) => (
@@ -49,9 +50,11 @@ export const SelectField = ({ name, options, value, label, onChange }: SelectFie
 
 type DateFieldProps = Omit<FieldProps, 'value'> & {
     value: Date
+    onChange: (date: Date) => void
+    options?: {}
 }
 
-export const DateField = ({ name, value, label, onChange }: DateFieldProps) => (
+export const DateField = ({ value, label, onChange }: DateFieldProps) => (
     <p>
         <label>
             <span className={styles.label}>{label}</span>

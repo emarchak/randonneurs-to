@@ -29,7 +29,23 @@ export const RegistrationForm = () => {
     })
     const routes = ['routeA', 'routeB']
 
-    const handleChange = (evt: ChangeEvent<Element>) => { }
+    const handleInputChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { value = "", name } = evt.currentTarget
+
+        setFormState("dirty")
+        setFormData({
+            ...formData,
+            [name]: value,
+        })
+    }
+
+    const handleDateChange = (dates: Date[]) => {
+        setFormState("dirty")
+        setFormData({
+            ...formData,
+            'startDate': dates.pop(),
+        })
+    }
 
     return (
         <form
@@ -39,12 +55,12 @@ export const RegistrationForm = () => {
             data-netlify-honeypot="bot-field"
         >
             <ContentWrapper>
-                <InputField label="Your name" name="name" value={formData.name} onChange={handleChange} />
-                <InputField label="Your email" name="email" type="email" value={formData.email} onChange={handleChange} />
-                <SelectField label="Ride type" name="rideType" options={rideTypes} value={formData.rideType} onChange={handleChange} />
-                <SelectField label="Route" name="route" options={routes} value={formData.route} onChange={handleChange} />
-                <DateField label="Starting time" name="startDate" value={formData.startDate} onChange={handleChange} />
-                <InputField label="Notes for the organizer" name="notes" value={formData.notes} onChange={handleChange} />
+                <InputField label="Your name" name="name" value={formData.name} onChange={handleInputChange} />
+                <InputField label="Your email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
+                <SelectField label="Ride type" name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
+                <SelectField label="Route" name="route" options={routes} value={formData.route} onChange={handleInputChange} />
+                <DateField label="Starting time" name="startDate" value={formData.startDate} onChange={handleDateChange} />
+                <InputField label="Notes for the organizer" name="notes" value={formData.notes} onChange={handleInputChange} />
             </ContentWrapper>
         </form>)
 }
