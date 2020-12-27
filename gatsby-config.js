@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 module.exports = {
+  flags: { DEV_SSR: true },
   siteMetadata: {
     title: "Toronto Randonneurs",
     description: "Long distance cyclists of Toronto, Canada",

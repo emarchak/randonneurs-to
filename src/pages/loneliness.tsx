@@ -85,8 +85,8 @@ const Page = () => {
         <h3>Current ride</h3>
 
         <p>We will be sharing new routes every two weeks.</p>
-        {Routes.slice(0, 1).map(route => (
-          <LonelinessRoute {...route} />
+        {Routes.slice(0, 1).map((route, i) => (
+          <LonelinessRoute key={i} {...route} />
         ))}
       </ContentWrapper>
       <LonelinessForm>
@@ -99,20 +99,22 @@ const Page = () => {
       <ContentWrapper>
         <h3>Finishers</h3>
         <table>
-          <thead>
+          <thead><tr>
             <th>Rider</th>
             <th>Date completed</th>
             <th>Route</th>
-          </thead>
-          {Riders.map(rider => (
-            <tr>
-              <td>
-                {rider.name.first.charAt(0)}. {rider.name.last}
-              </td>
-              <td>{rider.date}</td>
-              <td>{rider.route}</td>
-            </tr>
-          ))}
+          </tr></thead>
+          <tbody>
+            {Riders.map((rider, i) => (
+              <tr key={i}>
+                <td>
+                  {rider.name.first.charAt(0)}. {rider.name.last}
+                </td>
+                <td>{rider.date}</td>
+                <td>{rider.route}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </ContentWrapper>
       <div className={style.slogan}>
@@ -120,8 +122,8 @@ const Page = () => {
       </div>
       <ContentWrapper>
         <h3>Previous rides</h3>
-        {Routes.slice(1).map(route => (
-          <LonelinessRoute {...route} />
+        {Routes.slice(1).map((route, i) => (
+          <LonelinessRoute key={i} {...route} />
         ))}
 
         <Logo className={style.heading} alt="Club audax à distance" />
