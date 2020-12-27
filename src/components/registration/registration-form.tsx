@@ -1,11 +1,12 @@
-import React, { useState, ChangeEvent } from 'react';
-import { ContentWrapper } from '../content-wrapper';
-import { InputField, SelectField, DateField } from '../form/input-field';
+import React, { useState, ChangeEvent } from 'react'
+import { ContentWrapper } from '../content-wrapper'
+import { InputField, SelectField, DateField } from '../form/input-field'
+import { Route } from './types'
 
 
 const formName = 'registration'
 
-const rideTypes = ['brevet', 'permanent']
+const rideTypes = [{ value: 'brevet', label: 'Brevet' }, { value: 'permanent', label: 'Permanent' }]
 
 type FormState = "submitted" | "dirty" | null
 type FormData = {
@@ -17,7 +18,11 @@ type FormData = {
     notes: string
 }
 
-export const RegistrationForm = () => {
+type Props = {
+    routes: Route[]
+}
+
+export const RegistrationForm = ({ routes }: Props) => {
     const [formState, setFormState] = useState<FormState>(null)
     const [formData, setFormData] = useState<FormData>({
         name: '',
@@ -27,7 +32,6 @@ export const RegistrationForm = () => {
         startDate: new Date(),
         notes: '',
     })
-    const routes = ['routeA', 'routeB']
 
     const handleInputChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { value = "", name } = evt.currentTarget
@@ -46,7 +50,9 @@ export const RegistrationForm = () => {
             startDate
         })
     }
-    console.log(formData)
+
+    const routeOptions = routes.map(route => ({ value: route.id, label: `${route.chapter} - ${route.routeName}` }))
+
     return (
         <form
             name={formName}
@@ -58,7 +64,7 @@ export const RegistrationForm = () => {
                 <InputField label="Your name" name="name" value={formData.name} onChange={handleInputChange} />
                 <InputField label="Your email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
                 <SelectField label="Ride type" name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
-                <SelectField label="Route" name="route" options={routes} value={formData.route} onChange={handleInputChange} />
+                <SelectField label="Route" name="route" options={routeOptions} value={formData.route} onChange={handleInputChange} />
                 <DateField label="Starting time" name="startDate" value={formData.startDate} onChange={handleDateChange} />
                 <InputField label="Notes for the organizer" name="notes" value={formData.notes} onChange={handleInputChange} />
             </ContentWrapper>

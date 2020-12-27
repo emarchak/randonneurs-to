@@ -96,9 +96,10 @@
   }
 }
 
-.dateInput {
+.date-input {
   margin-bottom: 1.45rem;
-  .react-datepicker-wrapper {
-    display: block
-  }
+}
+
+.date-input-overrides {
+  width: 100%;
 }

@@ -5,7 +5,7 @@ module.exports = {
     "^.+\\.(tsx?|jsx?)$": `<rootDir>/jest/jest-preprocess.js`,
   },
   moduleNameMapper: {
-    ".+\\.(scss)$": `identity-obj-proxy`,
+    ".+\\.(scss|css)$": `identity-obj-proxy`,
   },
   testPathIgnorePatterns: [`node_modules`, `\\.cache`, `<rootDir>.*/public`],
   transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],

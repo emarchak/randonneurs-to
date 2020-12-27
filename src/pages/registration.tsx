@@ -1,28 +1,50 @@
 import React from 'react'
-
+import { graphql, useStaticQuery } from "gatsby"
 import { Layout } from '../components/layout'
 import { SEO } from '../components/seo'
 import { ContentWrapper } from "../components/content-wrapper"
 import { Callout } from "../components/callout"
-import { RegistrationForm } from "../components/registration"
+import { RegistrationForm, Route } from "../components/registration"
 
-const Registration = () => (
-    <Layout>
-        <SEO title='Register for a ride' />
-        <ContentWrapper><h1>Register to ride</h1>
-            <Callout>
-                <p>For all sanctioned rides, we require riders to sign the OCA consent waiver and read their Progressive Return to Cycling Policy.</p>
+const Registration = () => {
+    const { allGoogleRoutesSheet: { edges } } = useStaticQuery(
+        graphql`
+          query {
+            allGoogleRoutesSheet(filter: {ableToRide_: {eq: "Yes"}}, sort: {fields: chapter}) {
+                edges {
+                  node {
+                    id
+                    chapter
+                    distance
+                    routeName
+                    startLocation
+                  }
+                }
+            }
+          }
+        `
+    )
 
-                <p>Please <a href="https://www.ontariocycling.org">visit the OCA Website for the latest information</a> regarding permissible club/team and group riding activities. </p>
+    const routes = edges.map(edge => edge.node) as Route[];
 
-                <p>If you have any questions, <a href="http://randonneursontario.ca/who/board.html">please contact your chapter VP</a>.</p>
-            </Callout>
+    return (
+        <Layout>
+            <SEO title='Register for a ride' />
+            <ContentWrapper><h1>Register to ride</h1>
+                <Callout>
+                    <p>For all sanctioned rides, we require riders to sign the OCA consent waiver and read their Progressive Return to Cycling Policy.</p>
 
-            <p>All rides must be submitted at least a week prior to the start date, and are not approved until the chapter VP has confirmed with the rider.</p>
+                    <p>Please <a href="https://www.ontariocycling.org">visit the OCA Website for the latest information</a> regarding permissible club/team and group riding activities. </p>
 
-        </ContentWrapper>
-        <RegistrationForm />
-    </Layout>
-)
+                    <p>If you have any questions, <a href="http://randonneursontario.ca/who/board.html">please contact your chapter VP</a>.</p>
+                </Callout>
+
+                <p>All rides must be submitted at least a week prior to the start date, and are not approved until the chapter VP has confirmed with the rider.</p>
+
+            </ContentWrapper>
+            <RegistrationForm routes={routes} />
+        </Layout>
+    )
+}
 
 export default Registration

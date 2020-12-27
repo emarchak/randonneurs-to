@@ -1,10 +1,25 @@
 import React from "react"
 import { render, fireEvent } from "@testing-library/react"
 import { RegistrationForm } from "./registration-form"
+import { Route } from './types'
+
+const route = {
+    chapter: 'Toronto',
+    distance: 200,
+    startLocation: 'Starbucks',
+    routeName: 'Urban 200'
+} as Route
+
+const routeB = {
+    chapter: 'Huron',
+    distance: 300,
+    startLocation: 'Careys House',
+    routeName: 'Golf 300'
+} as Route
 
 describe('<RegistrationForm>', () => {
     it('renders all the required fields to the user', () => {
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationForm routes={[route]} />)
 
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: "Foo" },
@@ -15,7 +30,7 @@ describe('<RegistrationForm>', () => {
         fireEvent.change(mount.getByLabelText(/ride/i), {
             target: { value: "brevet" },
         })
-        fireEvent.change(mount.getByLabelText(/ride/i), {
+        fireEvent.change(mount.getByLabelText(/route/i), {
             target: { value: "routeA" },
         })
         fireEvent.change(mount.getByLabelText(/starting time/i), {
@@ -25,9 +40,15 @@ describe('<RegistrationForm>', () => {
             target: { value: "notes" },
         })
     })
+
+    it('allows the rider to choose from all available routes', () => {
+        const mount = render(<RegistrationForm routes={[route, routeB]} />)
+        const RouteSelector = mount.getByLabelText(/route/i)
+        expect(RouteSelector).toHaveTextContent(/Toronto - Urban 200/i)
+        expect(RouteSelector).toHaveTextContent(/Huron - Golf 300/i)
+    })
+
     it.skip('only shows bevets when registering for brevets', () => { })
-    it.skip('only shows permanents when registering for permanents', () => { })
-    it.skip('allows the rider to choose from all available routes', () => { })
     it.skip('requires email and rider name', () => { })
     it.skip('requires rider to be registered with the OCA', () => { })
     it.skip('requires rider to acknowledge all policies', () => { })

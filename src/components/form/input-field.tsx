@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from "react"
-import DatePicker from "react-datepicker";
+import DatePicker from "react-datepicker"
 
 import styles from "../styles/form.module.scss"
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 
 type FieldProps = {
     name: string
@@ -31,7 +31,10 @@ export const InputField = ({ type = 'text', name, value, label, onChange }: Inpu
 )
 
 type SelectFieldProps = FieldProps & {
-    options: string[]
+    options: {
+        value: string
+        label: string
+    }[]
     onChange: (evt: ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -40,9 +43,9 @@ export const SelectField = ({ name, options, value, label, onChange }: SelectFie
         <label>
             <span className={styles.label}>{label}</span>
             <select value={value} name={name} className={styles.input + ' ' + styles.select} onChange={onChange}>
-                <option value=''> </option>
-                {options.map(option => {
-                    return <option value={option} key={option}>{option}</option>
+                <option value='' key={''}> </option>
+                {options.map(({ value, label }, i) => {
+                    return <option value={value} key={i}>{label}</option>
                 })}
             </select>
         </label>
@@ -59,7 +62,7 @@ export const DateField = ({ value, label, onChange }: DateFieldProps) => (
     <div className={styles.dateInput}>
         <label>
             <span className={styles.label}>{label}</span>
-            <DatePicker showTimeSelect selected={value} onChange={onChange} className={styles.input} dateFormat="MMMM d HH:mm" />
+            <DatePicker showTimeSelect wrapperClassName={styles.dateInputOverrides} selected={value} onChange={onChange} className={styles.input} dateFormat="MMMM d HH:mm" />
         </label>
     </div>
 )
