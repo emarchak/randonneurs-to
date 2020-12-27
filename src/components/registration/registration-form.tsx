@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react'
 import { ContentWrapper } from '../content-wrapper'
 import { InputField, SelectField, DateField } from '../form/input-field'
+import { PermanentDescription } from './permanent-description'
 import { Route } from './types'
 
 
@@ -52,6 +53,7 @@ export const RegistrationForm = ({ routes }: Props) => {
     }
 
     const routeOptions = routes.map(route => ({ value: route.id, label: `${route.chapter} - ${route.routeName}` }))
+    const isPermanent = formData.rideType === 'permanent'
 
     return (
         <form
@@ -64,6 +66,7 @@ export const RegistrationForm = ({ routes }: Props) => {
                 <InputField label="Your name" name="name" value={formData.name} onChange={handleInputChange} />
                 <InputField label="Your email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
                 <SelectField label="Ride type" name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
+                {isPermanent && <PermanentDescription />}
                 <SelectField label="Route" name="route" options={routeOptions} value={formData.route} onChange={handleInputChange} />
                 <DateField label="Starting time" name="startDate" value={formData.startDate} onChange={handleDateChange} />
                 <InputField label="Notes for the organizer" name="notes" value={formData.notes} onChange={handleInputChange} />

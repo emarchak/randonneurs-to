@@ -48,6 +48,14 @@ describe('<RegistrationForm>', () => {
         expect(RouteSelector).toHaveTextContent(/Huron - Golf 300/i)
     })
 
+    it('shows permanent description when registering for permanents', () => {
+        const mount = render(<RegistrationForm routes={[route, routeB]} />)
+        fireEvent.change(mount.getByLabelText(/ride/i), {
+            target: { value: "permanent" },
+        })
+        expect(mount.baseElement).toHaveTextContent(/A Permanent ride is one of the existing Randonneurs Ontario brevet route/i)
+    })
+
     it.skip('only shows bevets when registering for brevets', () => { })
     it.skip('requires email and rider name', () => { })
     it.skip('requires rider to be registered with the OCA', () => { })

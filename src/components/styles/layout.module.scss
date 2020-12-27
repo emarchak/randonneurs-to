@@ -36,3 +36,9 @@ $footer-height: 4.3rem;
   background-color: get-color(secondary, light);
   margin-bottom: get-spacing();
 }
+
+.aside {
+  padding: get-spacing(small) get-spacing();
+  background-color: get-color(primary, desaturate);
+  margin-bottom: get-spacing();
+}
