@@ -103,3 +103,64 @@
 .date-input-overrides {
   width: 100%;
 }
+
+.loading-wraper {
+  text-align: center;
+}
+
+.loading {
+  display: inline-block;
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+
+  div {
+    position: absolute;
+    top: 1rem;
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    background: get-color(text);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  div:nth-child(1) {
+    left: .5rem;
+    animation: loading1 0.6s infinite;
+  }
+  div:nth-child(2) {
+    left: .5rem;
+    animation: loading2 0.6s infinite;
+  }
+  div:nth-child(3) {
+    left: 2rem;
+    animation: loading2 0.6s infinite;
+  }
+  div:nth-child(4) {
+    left: 3.5rem;
+    animation: loading3 0.6s infinite;
+  }
+}
+@keyframes loading1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes loading3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes loading2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}

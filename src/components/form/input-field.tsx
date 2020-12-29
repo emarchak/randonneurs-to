@@ -66,3 +66,9 @@ export const DateField = ({ value, label, onChange }: DateFieldProps) => (
         </label>
     </div>
 )
+
+export const Loading = () => (
+    <div className={styles.loadingWrapper} aria-label={'Loading'}>
+        <div className={styles.loading}><div></div><div></div><div></div><div></div></div>
+    </div>
+)

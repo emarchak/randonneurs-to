@@ -3,8 +3,9 @@ import { ContentWrapper } from '../content-wrapper'
 import { InputField, SelectField, DateField } from '../form/input-field'
 import { PermanentDescription } from './permanent-description'
 import { BrevetDescription } from './brevet-description'
-import { Route } from './types'
-
+import { Route, Brevet, RideType } from './types'
+import { UpcomingBrevets } from './upcoming-brevets'
+import fetch from 'isomorphic-unfetch'
 
 const formName = 'registration'
 
@@ -14,7 +15,7 @@ type FormState = "submitted" | "dirty" | null
 type FormData = {
     name: string
     email: string
-    rideType: '' | 'brevet' | 'permanent'
+    rideType: RideType
     route: string
     startDate: Date
     notes: string
@@ -25,7 +26,6 @@ type Props = {
 }
 
 export const RegistrationForm = ({ routes }: Props) => {
-    const [formState, setFormState] = useState<FormState>(null)
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
@@ -34,6 +34,20 @@ export const RegistrationForm = ({ routes }: Props) => {
         startDate: new Date(),
         notes: '',
     })
+    const [formState, setFormState] = useState<FormState>(null)
+    const [brevets, setBrevets] = useState<Brevet[] | undefined>(undefined)
+    const fetchBrevet = async () => {
+        try {
+            const response = await fetch("http://localhost:3000/schedule.php", {
+                method: 'GET',
+            })
+            const body = await response.json()
+            if (body.status === 'ok') {
+                setBrevets(body.schedule as Brevet[]);
+            }
+        }
+        catch (err) { console.warn(err) }
+    }
 
     const handleInputChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { value = "", name } = evt.currentTarget
@@ -43,6 +57,11 @@ export const RegistrationForm = ({ routes }: Props) => {
             ...formData,
             [name]: value,
         })
+    }
+
+    const handleRideTypeChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+        if (!brevets) { fetchBrevet() }
+        handleInputChange(evt);
     }
 
     const handleDateChange = (startDate: Date) => {
@@ -67,9 +86,10 @@ export const RegistrationForm = ({ routes }: Props) => {
             <ContentWrapper>
                 <InputField label="Your name" name="name" value={formData.name} onChange={handleInputChange} />
                 <InputField label="Your email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
-                <SelectField label="Ride type" name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
+                <SelectField label="Ride type" name="rideType" options={rideTypes} value={formData.rideType} onChange={handleRideTypeChange} />
                 {isPermanent && <PermanentDescription />}
                 {isBrevet && <BrevetDescription />}
+                {isBrevet && <UpcomingBrevets brevets={brevets} />}
                 <SelectField label="Route" name="route" options={routeOptions} value={formData.route} onChange={handleInputChange} />
                 <DateField label="Starting time" name="startDate" value={formData.startDate} onChange={handleDateChange} />
                 <InputField label="Notes for the organizer" name="notes" value={formData.notes} onChange={handleInputChange} />
