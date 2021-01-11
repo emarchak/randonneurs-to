@@ -1,0 +1,13 @@
+name: Build at midnight
+on:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  build:
+    name: Build at midnight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build request
+        env:
+          NETLIFY: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: curl -X POST -d {} https://api.netlify.com/build_hooks/$NETLIFY
