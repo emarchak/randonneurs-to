@@ -1,6 +1,6 @@
 type Chapter = 'Toronto' | 'Huron' | 'Ottawa' | 'Simcoe'
 
-export type RideType = '' | 'brevet' | 'permanent' | 'fleche'
+export type RideType = 'brevet' | 'permanent' | 'fleche' | 'populaire'
 
 export type Route = {
     chapter: Chapter
@@ -12,14 +12,15 @@ export type Route = {
 
 export type Brevet = {
     chapter: Chapter
-    event: RideType
-    distance: string
-    date: string
-    route: string
-    startloc: string
-    stime: string
-    organizer: string
     contact: string
+    date: string
+    distance: string
+    event: RideType
+    organizer: string
+    route: string
     rwgps: string
-    Unixtime: number
+    startloc: string
+    sched_id: string
+    stime: string
+    unixtime: number
 }
