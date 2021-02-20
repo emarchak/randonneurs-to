@@ -8,6 +8,7 @@ type FieldProps = {
     name: string
     value: string
     label: string
+    disabled?: boolean
 }
 
 type InputFieldProps = FieldProps & {
@@ -15,7 +16,7 @@ type InputFieldProps = FieldProps & {
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const InputField = ({ type = 'text', name, value, label, onChange }: InputFieldProps) => (
+export const InputField = ({ type = 'text', name, value, label, onChange, disabled }: InputFieldProps) => (
     <p>
         <label>
             <span className={styles.label}>{label}</span>
@@ -25,6 +26,7 @@ export const InputField = ({ type = 'text', name, value, label, onChange }: Inpu
                 className={styles.input}
                 value={value}
                 onChange={onChange}
+                disabled={!!disabled}
             />
         </label>
     </p>

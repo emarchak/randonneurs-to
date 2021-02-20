@@ -38,6 +38,13 @@
   }
 }
 
+.fieldset {
+  padding: get-spacing() get-spacing(small) 0;
+  border: 0;
+  background-color: get-color(background);
+  width: 100%;
+}
+
 .input {
   height: get-font-size(large);
   padding: 0 get-spacing(small);

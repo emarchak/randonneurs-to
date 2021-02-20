@@ -2,8 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react'
 import { ContentWrapper } from '../content-wrapper'
 import { InputField, SelectField, DateField } from '../form/input-field'
 import { PermanentDescription } from './permanent-description'
-import { BrevetDescription } from './brevet-description'
-import { Route, RideType } from './types'
+import { Route, RideType, Brevet } from './types'
 import { UpcomingBrevets } from './upcoming-brevets'
 
 const formName = 'registration'
@@ -17,6 +16,7 @@ interface FormData {
     rideType: RideType | ''
     route: string
     startDate: Date
+    startLocation: string
     notes: string
 }
 
@@ -30,6 +30,7 @@ const defaultFormData = {
     rideType: '' as FormData["rideType"],
     route: '',
     startDate: new Date(),
+    startLocation: '',
     notes: '',
 }
 
@@ -59,6 +60,18 @@ export const RegistrationForm = ({ routes }: Props) => {
         })
     }
 
+    const handleBrevetChange = (brevet: Brevet) => {
+        console.log(brevet)
+        setFormState("dirty")
+        setFormData({
+            ...formData,
+            rideType: 'brevet',
+            route: `${brevet.chapter} - ${brevet.route} - ${brevet.distance}`,
+            startDate: new Date(brevet.unixtime * 1000),
+            startLocation: brevet.startloc
+        })
+    }
+
     return (
         <form
             name={formName}
@@ -70,11 +83,11 @@ export const RegistrationForm = ({ routes }: Props) => {
                 <InputField label="Your name" name="name" value={formData.name} onChange={handleInputChange} />
                 <InputField label="Your email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
                 <SelectField label="Ride type" name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
-                {isBrevet && <BrevetDescription />}
-                {isBrevet && <UpcomingBrevets />}
+                {isBrevet && <UpcomingBrevets onBrevetChange={handleBrevetChange} />}
                 {isPermanent && <PermanentDescription />}
                 {isPermanent && <SelectField label="Route" name="route" options={routeOptions} value={formData.route} onChange={handleInputChange} />}
                 <DateField label="Starting time" name="startDate" value={formData.startDate} onChange={handleDateChange} />
+                <InputField label="Starting location" name="startLocation" value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
                 <InputField label="Notes for the organizer" name="notes" value={formData.notes} onChange={handleInputChange} />
             </ContentWrapper>
         </form>)

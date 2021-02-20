@@ -31,6 +31,7 @@ jest.mock('./hooks/useBrevets', () => ({
                 startloc: "Second Cup, 355 Danforth Ave, Toronto",
                 stime: "10:00:00",
                 organizer: "Register",
+                sched_id: 1,
                 contact: "https://example.com",
                 rwgps: "https://rwgps.com",
                 unixtime: 1615734000
@@ -52,9 +53,6 @@ describe('<RegistrationForm>', () => {
             fireEvent.change(mount.getByLabelText(/ride/i), {
                 target: { value: "permanent" },
             })
-            fireEvent.change(mount.getByLabelText(/route/i), {
-                target: { value: "routeA" },
-            })
             fireEvent.change(mount.getByLabelText(/starting time/i), {
                 target: { value: new Date() },
             })
@@ -66,10 +64,12 @@ describe('<RegistrationForm>', () => {
 
     it('shows routes when registering for permanents', () => {
         const mount = render(<RegistrationForm routes={[route, routeB]} />)
-        const RouteSelector = mount.getByLabelText(/route/i)
+
         fireEvent.change(mount.getByLabelText(/ride/i), {
             target: { value: "permanent" },
         })
+
+        const RouteSelector = mount.getByLabelText(/route/i)
         expect(mount.baseElement).toHaveTextContent(/A Permanent ride is one of the existing Randonneurs Ontario brevet route/i)
         expect(RouteSelector).toHaveTextContent(/Toronto - Urban 200/i)
         expect(RouteSelector).toHaveTextContent(/Huron - Golf 300/i)
@@ -83,19 +83,14 @@ describe('<RegistrationForm>', () => {
         })
         expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
         expect(mount.baseElement).toHaveTextContent(/Rouge Ramble 60/i)
-        expect(mount.baseElement).toHaveTextContent(/Sun Mar 14, 2021/i)
+
+        fireEvent.click(mount.getByLabelText(/Rouge Ramble 60/i))
+
+        expect(mount.getByRole('textbox', { name: 'Starting location' })).toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
+        expect(mount.getByRole('textbox', { name: 'Starting location' })).toHaveAttribute('disabled')
     })
 
-    it('shows more brevets on click', () => {
-        const mount = render(<RegistrationForm routes={[route]} />)
-
-        fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: "brevet" },
-        })
-        expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
-        expect(mount.baseElement).toHaveTextContent(/Rouge Ramble 60/i)
-        expect(mount.baseElement).toHaveTextContent(/Sun Mar 14, 2021/i)
-    })
+    it.skip('shows more brevets on click', () => { })
     it.skip('requires email and rider name', () => { })
     it.skip('requires rider to be registered with the OCA', () => { })
     it.skip('requires rider to acknowledge all policies', () => { })
