@@ -158,7 +158,6 @@ describe('<RegistrationForm>', () => {
     it.skip('requires rider to acknowledge all policies', () => { })
     it.skip('requires the start date to be > 1 week in the future', () => { })
     it.skip('requires brevet start date to be within -2 / +1 weeks from scheduled date', () => { })
-    it.skip('allows the rider to choose a start time', () => { })
     it.skip('limits registration to maximum of 10 riders per start time', () => { })
     it.skip('records the registration when submitted', () => { })
     it.skip('notifies riders when submitted', () => { })

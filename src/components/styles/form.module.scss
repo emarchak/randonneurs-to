@@ -39,9 +39,8 @@
 }
 
 .fieldset {
-  padding: get-spacing() get-spacing(small) 0;
   border: 0;
-  background-color: get-color(background);
+  padding-top: get-spacing();
   width: 100%;
 }
 

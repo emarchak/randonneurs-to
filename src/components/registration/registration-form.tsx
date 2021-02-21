@@ -9,6 +9,8 @@ import { PermanentDescription } from './permanent-description'
 import { Route, RideType, Brevet } from './types'
 import { UpcomingBrevets } from './upcoming-brevets'
 
+import styles from '../styles/registration.module.scss'
+
 const formName = 'registration'
 
 const rideTypes = [{ value: 'brevet', label: 'Brevet' }, { value: 'permanent', label: 'Permanent' }]
@@ -98,7 +100,7 @@ export const RegistrationForm = ({ routes }: Props) => {
         setFormData({
             ...formData,
             rideType: 'brevet',
-            route: `${brevet.chapter} - ${brevet.route} - ${brevet.distance}`,
+            route: `${brevet.route}`,
             startDate: new Date(brevet.unixtime * 1000),
             startLocation: brevet.startloc
         })
@@ -106,7 +108,7 @@ export const RegistrationForm = ({ routes }: Props) => {
 
     const handleSubmit = async evt => {
         evt.preventDefault()
-        console.log(formData)
+
         const errors = checkForErrors(formData)
         if (errors.length) {
             setFormErrors(errors)
@@ -121,6 +123,7 @@ export const RegistrationForm = ({ routes }: Props) => {
             setFormErrors(["Server error! Try again later."])
         }
     }
+
     if (isSubmitted) {
         return (
             <ContentWrapper>
@@ -134,11 +137,13 @@ export const RegistrationForm = ({ routes }: Props) => {
     }
 
     return (
+
         <form
             name={formName}
             method="post"
             data-netlify="true"
             data-netlify-honeypot="bot-field"
+            className={styles.registrationForm}
         >
             <ContentWrapper>
                 <InputField label={fieldLabel['name']} name="name" value={formData.name} onChange={handleInputChange} />
@@ -153,7 +158,9 @@ export const RegistrationForm = ({ routes }: Props) => {
                 <ErrorsList formErrors={formErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
                     Register
-                </SubmitButton>
+            </SubmitButton>
             </ContentWrapper>
-        </form>)
+        </form>
+
+    )
 }

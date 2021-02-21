@@ -87,3 +87,28 @@ hr {
 p > a {
   @include body-link();
 }
+
+thead, tbody tr {
+  border-bottom: 1px solid get-color(text, lightest);
+}
+td, th {
+  padding: get-spacing()  get-spacing(small);
+}
+
+@include media(small) {
+  thead, tbody, th, td, tr { 
+      display: block; 
+  }
+  
+  thead tr { 
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  td {
+    position: relative; 
+    padding: 0 get-spacing(small);
+  }
+  td:first-child {padding-top: get-spacing() ;}
+  td:last-child {padding-bottom: get-spacing() ;}
+}

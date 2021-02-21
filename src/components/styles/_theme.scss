@@ -15,6 +15,7 @@ $theme-colors: (
   ),
   "tertiary": (
     "normal": #88b2b8,
+    "light": lighten(#88b2b8, 20%),
   ),
   "success": (
     "normal": #28a745,
@@ -22,6 +23,7 @@ $theme-colors: (
   "text": (
     "normal": #333333,
     "light": lighten(#333333, 20%),
+    "lightest": lighten(#333333, 75%)
   ),
   "info": (
     "normal": #17a2b8,
@@ -31,6 +33,7 @@ $theme-colors: (
   ),
   "background": (
     "normal": #fff,
+    "darken": lighten(#333333, 75%),
   )
 );
 

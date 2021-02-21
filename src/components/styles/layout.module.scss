@@ -37,6 +37,12 @@ $footer-height: 4.3rem;
   margin-bottom: get-spacing();
 }
 
+.calloutAlternative {
+  padding: get-spacing() get-spacing(large);
+  background-color: get-color(tertiary, light);
+  margin-bottom: get-spacing();
+}
+
 .aside {
   font-size: 0.8rem;
   padding: get-spacing(small) get-spacing();

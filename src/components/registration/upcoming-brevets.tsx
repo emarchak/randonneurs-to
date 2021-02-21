@@ -5,6 +5,8 @@ import { Brevet } from './types'
 import { useBrevets } from './hooks/useBrevets'
 import { BrevetDescription } from './brevet-description'
 
+import styles from '../styles/registration.module.scss'
+
 const minBrevet = 5
 const fieldSetID = 'upcoming_brevets'
 
@@ -16,16 +18,27 @@ const formatDate = (timestamp: number) => {
     return `${day[d.getDay()]} ${month[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
 }
 
-const BrevetRow = ({ brevet, handleChange }: { brevet: Brevet, handleChange: (brevet) => void }) => {
-    const onChange = () => {
+const BrevetRow = ({ brevet, isSelected, handleChange }: { brevet: Brevet, isSelected: boolean, handleChange: (brevet) => void }) => {
+    const onChange = (evt) => {
+        evt.preventDefault()
         handleChange(brevet)
     }
 
     const id = `brevet${brevet.sched_id}`
+    const classNames = `${styles.brevetRow} ${isSelected ? styles.brevetRowSelected : ''}`
+
     return (
-        <tr>
+        <tr className={classNames} onClick={onChange} >
             <td>
-                <input type="radio" aria-labelledby={id} name={fieldSetID} value={brevet.sched_id} onChange={onChange} />
+                <input
+                    type="radio"
+                    aria-labelledby={id}
+                    name={fieldSetID}
+                    value={brevet.sched_id}
+                    onChange={onChange}
+                    checked={isSelected}
+                    className={styles.brevetRadio}
+                />
             </td>
             <td>{formatDate(brevet.unixtime)}</td>
             <td>{brevet.stime}</td>
@@ -50,9 +63,11 @@ type Props = {
 export const UpcomingBrevets = ({ onBrevetChange }: Props) => {
     const { loading, brevets } = useBrevets()
     const [displayBrevets, setDisplay] = useState<number>(minBrevet)
+    const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['sched_id']>('')
 
     const onChange = (brevet: Brevet) => {
         onBrevetChange(brevet)
+        setSelectedBrevetId(brevet.sched_id)
     }
 
     if (loading) {
@@ -66,7 +81,7 @@ export const UpcomingBrevets = ({ onBrevetChange }: Props) => {
         <Fieldset id={fieldSetID}><>
             <h2>Upcoming Brevets</h2>
 
-            <table>
+            <table className={styles.brevetTable}>
                 <thead><tr>
                     <th></th>
                     <th>Date</th>
@@ -76,7 +91,7 @@ export const UpcomingBrevets = ({ onBrevetChange }: Props) => {
                 </tr></thead>
                 <tbody>
                     {brevets.slice(0, displayBrevets).map((brevet, i) => (
-                        <BrevetRow key={i} brevet={brevet} handleChange={onChange} />
+                        <BrevetRow key={i} brevet={brevet} handleChange={onChange} isSelected={selectedBrevetId === brevet.sched_id} />
                     ))}
                 </tbody>
                 <tfoot>
