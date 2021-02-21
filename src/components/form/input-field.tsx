@@ -9,6 +9,7 @@ type FieldProps = {
     value: string
     label: string
     disabled?: boolean
+    optional?: boolean
 }
 
 type InputFieldProps = FieldProps & {
@@ -16,17 +17,21 @@ type InputFieldProps = FieldProps & {
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const InputField = ({ type = 'text', name, value, label, onChange, disabled }: InputFieldProps) => (
+export const InputField = ({ type = 'text', name, value, label, onChange, disabled, optional }: InputFieldProps) => (
     <p>
         <label>
-            <span className={styles.label}>{label}</span>
+            <span className={styles.label}>
+                {label}
+                {optional && ' (optional)'}
+            </span>
             <input
                 type={type}
                 name={name}
                 className={styles.input}
                 value={value}
                 onChange={onChange}
-                disabled={!!disabled}
+                disabled={Boolean(disabled)}
+                required={!Boolean(optional)}
             />
         </label>
     </p>
@@ -40,11 +45,21 @@ type SelectFieldProps = FieldProps & {
     onChange: (evt: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const SelectField = ({ name, options, value, label, onChange }: SelectFieldProps) => (
+export const SelectField = ({ name, options, value, label, onChange, disabled, optional }: SelectFieldProps) => (
     <p>
         <label>
-            <span className={styles.label}>{label}</span>
-            <select value={value} name={name} className={styles.input + ' ' + styles.select} onChange={onChange}>
+            <span className={styles.label}>
+                {label}
+                {optional && ' (optional)'}
+            </span>
+            <select
+                value={value}
+                name={name}
+                className={styles.input + ' ' + styles.select}
+                onChange={onChange}
+                disabled={Boolean(disabled)}
+                required={!Boolean(optional)}
+            >
                 <option value='' key={''}> </option>
                 {options.map(({ value, label }, i) => {
                     return <option value={value} key={i}>{label}</option>
@@ -60,10 +75,13 @@ type DateFieldProps = Omit<FieldProps, 'value'> & {
     options?: {}
 }
 
-export const DateField = ({ value, label, onChange }: DateFieldProps) => (
+export const DateField = ({ value, label, onChange, optional }: DateFieldProps) => (
     <div className={styles.dateInput}>
         <label>
-            <span className={styles.label}>{label}</span>
+            <span className={styles.label}>
+                {label}
+                {optional && ' (optional)'}
+            </span>
             <DatePicker showTimeSelect wrapperClassName={styles.dateInputOverrides} selected={value} onChange={onChange} className={styles.input} dateFormat="MMMM d HH:mm" />
         </label>
     </div>

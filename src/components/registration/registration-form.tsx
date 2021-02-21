@@ -1,6 +1,9 @@
 import React, { useState, ChangeEvent, useEffect } from 'react'
 import { ContentWrapper } from '../content-wrapper'
+import { SubmitButton } from '../form/buttons'
+import { ErrorsList } from '../form/errors-list'
 import { InputField, SelectField, DateField } from '../form/input-field'
+import { emailRegex } from '../form/regex'
 import { PermanentDescription } from './permanent-description'
 import { Route, RideType, Brevet } from './types'
 import { UpcomingBrevets } from './upcoming-brevets'
@@ -34,9 +37,38 @@ const defaultFormData = {
     notes: '',
 }
 
+const fieldLabel = {
+    name: 'Your name',
+    email: 'Your email',
+    rideType: 'Ride type',
+    route: 'Route',
+    startDate: 'Starting time',
+    startLocation: 'Starting location',
+    notes: 'Notes for the organizer',
+}
+
+const checkForErrors = (fields: FormData) => (
+    Object.entries(fields)
+        .map(([field, value]) => {
+            if (field !== "notes" && !Boolean(value)) {
+                return `${fieldLabel[field]} is required`
+            }
+
+            if (field === "email" && !emailRegex.test(value)) {
+                return `${value} is not a valid email`
+            }
+        })
+        .filter(Boolean)
+)
+
+
 export const RegistrationForm = ({ routes }: Props) => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
+    const [formErrors, setFormErrors] = useState<String[]>([])
+    const isSubmitted = formState === "submitted"
+    const isDirty = formState === "dirty"
+    const hasError = Boolean(formErrors.length)
 
     const routeOptions = routes.map(route => ({ value: route.id, label: `${route.chapter} - ${route.routeName}` }))
     const isPermanent = formData.rideType === 'permanent'
@@ -61,7 +93,6 @@ export const RegistrationForm = ({ routes }: Props) => {
     }
 
     const handleBrevetChange = (brevet: Brevet) => {
-        console.log(brevet)
         setFormState("dirty")
         setFormData({
             ...formData,
@@ -72,6 +103,17 @@ export const RegistrationForm = ({ routes }: Props) => {
         })
     }
 
+    const handleSubmit = async evt => {
+        evt.preventDefault()
+        console.log(formData)
+        const errors = checkForErrors(formData)
+        if (errors.length) {
+            setFormErrors(errors)
+            setFormState(null)
+            return
+        }
+    }
+
     return (
         <form
             name={formName}
@@ -80,15 +122,19 @@ export const RegistrationForm = ({ routes }: Props) => {
             data-netlify-honeypot="bot-field"
         >
             <ContentWrapper>
-                <InputField label="Your name" name="name" value={formData.name} onChange={handleInputChange} />
-                <InputField label="Your email" name="email" type="email" value={formData.email} onChange={handleInputChange} />
-                <SelectField label="Ride type" name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
+                <InputField label={fieldLabel['name']} name="name" value={formData.name} onChange={handleInputChange} />
+                <InputField label={fieldLabel['email']} name="email" type="email" value={formData.email} onChange={handleInputChange} />
+                <SelectField label={fieldLabel['rideType']} name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
                 {isBrevet && <UpcomingBrevets onBrevetChange={handleBrevetChange} />}
                 {isPermanent && <PermanentDescription />}
-                {isPermanent && <SelectField label="Route" name="route" options={routeOptions} value={formData.route} onChange={handleInputChange} />}
-                <DateField label="Starting time" name="startDate" value={formData.startDate} onChange={handleDateChange} />
-                <InputField label="Starting location" name="startLocation" value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
-                <InputField label="Notes for the organizer" name="notes" value={formData.notes} onChange={handleInputChange} />
+                {isPermanent && <SelectField label={fieldLabel['route']} name="route" options={routeOptions} value={formData.route} onChange={handleInputChange} />}
+                <DateField label={fieldLabel['startDate']} name="startDate" value={formData.startDate} onChange={handleDateChange} />
+                <InputField label={fieldLabel['startLocation']} name="startLocation" value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
+                <InputField label={fieldLabel['notes']} name="notes" value={formData.notes} onChange={handleInputChange} optional />
+                <ErrorsList formErrors={formErrors} />
+                <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
+                    Register
+                </SubmitButton>
             </ContentWrapper>
         </form>)
 }

@@ -91,7 +91,27 @@ describe('<RegistrationForm>', () => {
     })
 
     it.skip('shows more brevets on click', () => { })
-    it.skip('requires email and rider name', () => { })
+
+    it('requires email and rider name', () => {
+        const mount = render(<RegistrationForm routes={[route]} />)
+        fireEvent.change(mount.getByLabelText(/name/i), {
+            target: { value: "" },
+        })
+        fireEvent.change(mount.getByLabelText(/email/i), {
+            target: { value: "higgeldy-piggeldy" },
+        })
+        fireEvent.click(mount.getByText("Register"))
+
+        expect(mount.getByText("Register")).toBeDisabled()
+
+        expect(
+            mount.getByText(/name is required/i)
+        ).toBeTruthy()
+        expect(
+            mount.getByText(/higgeldy-piggeldy is not a valid email/i)
+        ).toBeTruthy()
+    })
+
     it.skip('requires rider to be registered with the OCA', () => { })
     it.skip('requires rider to acknowledge all policies', () => { })
     it.skip('requires the start date to be > 1 week in the future', () => { })

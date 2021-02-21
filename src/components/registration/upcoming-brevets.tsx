@@ -58,7 +58,7 @@ export const UpcomingBrevets = ({ onBrevetChange }: Props) => {
     if (loading) {
         return <Loading />
     }
-    if (!brevets.length) {
+    if (!Boolean(brevets.length)) {
         return <h2>No upcoming brevets</h2>
     }
     return (<>
