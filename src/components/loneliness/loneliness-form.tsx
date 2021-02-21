@@ -4,15 +4,10 @@ import { ErrorsList } from "../form/errors-list"
 import { InputField } from "../form/input-field"
 import { SubmitButton } from "../form/buttons"
 import { emailRegex, stravaRegex } from "../form/regex"
+import { formSubmit } from "../form/helpers"
 import styles from "../styles/form.module.scss"
 
 const formName = "clubaudaxadistance"
-
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&")
-}
 
 const checkForErrors = (fields: FormData) =>
   Object.entries(fields)
@@ -64,18 +59,12 @@ export const LonelinessForm = ({ children }: Props) => {
       setFormState(null)
       return
     }
-    try {
-      const body = encode({ "form-name": formName, ...formData })
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body,
-      })
 
-      if (response.ok) {
-        setFormState("submitted")
-      }
-    } catch (err) {
+    const success = await formSubmit(formName, { ...formData })
+
+    if (success) {
+      setFormState("submitted")
+    } else {
       setFormErrors(["Server error! Try again later."])
     }
   }

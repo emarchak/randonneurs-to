@@ -1,9 +1,16 @@
-import React from "react"
-import { render, fireEvent } from "@testing-library/react"
-import { RegistrationForm } from "./registration-form"
+import React from 'react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { RegistrationForm } from './registration-form'
 import { Route } from './types'
+import * as isomorphicUnfetch from 'isomorphic-unfetch'
+
+jest.mock('isomorphic-unfetch', () => ({
+    __esModule: true,
+    default: jest.fn().mockReturnValue({ ok: true })
+}))
 
 const route = {
+    id: 'route1',
     chapter: 'Toronto',
     distance: 200,
     startLocation: 'Starbucks',
@@ -11,6 +18,7 @@ const route = {
 } as Route
 
 const routeB = {
+    id: 'route2',
     chapter: 'Huron',
     distance: 300,
     startLocation: 'Careys House',
@@ -23,17 +31,17 @@ jest.mock('./hooks/useBrevets', () => ({
         loading: false,
         brevets:
             [{
-                chapter: "Toronto",
-                event: "populaire",
-                distance: "60",
-                date: "2021-03-14",
-                route: "Rouge Ramble 60",
-                startloc: "Second Cup, 355 Danforth Ave, Toronto",
-                stime: "10:00:00",
-                organizer: "Register",
+                chapter: 'Toronto',
+                event: 'populaire',
+                distance: '60',
+                date: '2021-03-14',
+                route: 'Rouge Ramble 60',
+                startloc: 'Second Cup, 355 Danforth Ave, Toronto',
+                stime: '10:00:00',
+                organizer: 'Register',
                 sched_id: 1,
-                contact: "https://example.com",
-                rwgps: "https://rwgps.com",
+                contact: 'https://example.com',
+                rwgps: 'https://rwgps.com',
                 unixtime: 1615734000
             }]
     }
@@ -45,19 +53,19 @@ describe('<RegistrationForm>', () => {
         const mount = render(<RegistrationForm routes={[route]} />)
         expect(() => {
             fireEvent.change(mount.getByLabelText(/name/i), {
-                target: { value: "Foo" },
+                target: { value: 'Foo' },
             })
             fireEvent.change(mount.getByLabelText(/email/i), {
-                target: { value: "foo@bar.com" },
+                target: { value: 'foo@bar.com' },
             })
             fireEvent.change(mount.getByLabelText(/ride/i), {
-                target: { value: "permanent" },
+                target: { value: 'permanent' },
             })
             fireEvent.change(mount.getByLabelText(/starting time/i), {
                 target: { value: new Date() },
             })
             fireEvent.change(mount.getByLabelText(/notes/i), {
-                target: { value: "notes" },
+                target: { value: 'notes' },
             })
         }).not.toThrow()
     })
@@ -66,7 +74,7 @@ describe('<RegistrationForm>', () => {
         const mount = render(<RegistrationForm routes={[route, routeB]} />)
 
         fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: "permanent" },
+            target: { value: 'permanent' },
         })
 
         const RouteSelector = mount.getByLabelText(/route/i)
@@ -79,7 +87,7 @@ describe('<RegistrationForm>', () => {
         const mount = render(<RegistrationForm routes={[route]} />)
 
         fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: "brevet" },
+            target: { value: 'brevet' },
         })
         expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
         expect(mount.baseElement).toHaveTextContent(/Rouge Ramble 60/i)
@@ -95,14 +103,14 @@ describe('<RegistrationForm>', () => {
     it('requires email and rider name', () => {
         const mount = render(<RegistrationForm routes={[route]} />)
         fireEvent.change(mount.getByLabelText(/name/i), {
-            target: { value: "" },
+            target: { value: '' },
         })
         fireEvent.change(mount.getByLabelText(/email/i), {
-            target: { value: "higgeldy-piggeldy" },
+            target: { value: 'higgeldy-piggeldy' },
         })
-        fireEvent.click(mount.getByText("Register"))
+        fireEvent.click(mount.getByText('Register'))
 
-        expect(mount.getByText("Register")).toBeDisabled()
+        expect(mount.getByText('Register')).toBeDisabled()
 
         expect(
             mount.getByText(/name is required/i)
@@ -110,6 +118,40 @@ describe('<RegistrationForm>', () => {
         expect(
             mount.getByText(/higgeldy-piggeldy is not a valid email/i)
         ).toBeTruthy()
+    })
+
+    it('records the registration when submitted', async () => {
+        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+        const mount = render(<RegistrationForm routes={[route]} />)
+        fireEvent.change(mount.getByLabelText(/name/i), {
+            target: { value: 'Foo Bar' },
+        })
+        fireEvent.change(mount.getByLabelText(/email/i), {
+            target: { value: 'foo@bar.com' },
+        })
+        fireEvent.change(mount.getByLabelText(/ride/i), {
+            target: { value: 'permanent' },
+        })
+        fireEvent.change(mount.getByLabelText(/route/i), {
+            target: { value: 'route1' }
+        })
+        fireEvent.change(mount.getByLabelText(/starting time/i), {
+            target: { value: new Date() },
+        })
+
+        fireEvent.change(mount.getByLabelText(/starting location/i), {
+            target: { value: 'Starbucks' },
+        })
+        fireEvent.change(mount.getByLabelText(/notes/i), {
+            target: { value: 'notes' },
+        })
+
+        fireEvent.click(mount.getByText('Register'))
+
+        await waitFor(() => {
+            expect(fetchSpy).toHaveBeenCalled()
+            expect(mount.getByText(/Thank you for registering to ride/)).toBeTruthy()
+        })
     })
 
     it.skip('requires rider to be registered with the OCA', () => { })

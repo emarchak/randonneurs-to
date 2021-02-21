@@ -1,19 +1,14 @@
 import React from "react"
-import { act } from "react-dom/test-utils"
 import { render, fireEvent, waitFor } from "@testing-library/react"
-
+import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import { LonelinessForm } from "./loneliness-form"
 
-const mockFetch = jest.fn().mockReturnValue({ ok: true })
+jest.mock('isomorphic-unfetch', () => ({
+  __esModule: true,
+  default: jest.fn().mockReturnValue({ ok: true })
+}))
 
 describe("<LonelinessForm>", () => {
-  beforeAll(() => {
-    global.fetch = mockFetch
-  })
-  afterEach(() => {
-    mockFetch.mockClear()
-  })
-
   it("renders child content", () => {
     const mount = render(<LonelinessForm>{"content"}</LonelinessForm>)
 
@@ -21,6 +16,7 @@ describe("<LonelinessForm>", () => {
   })
 
   it("requires all fields", async () => {
+    const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
     const mount = render(<LonelinessForm />)
 
     expect(mount.getByText("Share your journey")).not.toBeDisabled()
@@ -34,7 +30,7 @@ describe("<LonelinessForm>", () => {
     })
     fireEvent.click(mount.getByText("Share your journey"))
 
-    expect(mockFetch).not.toHaveBeenCalled()
+    expect(fetchSpy).not.toHaveBeenCalled()
     expect(mount.getByText("Share your journey")).toBeDisabled()
 
     fireEvent.change(mount.getByLabelText(/activity/i), {
@@ -43,7 +39,7 @@ describe("<LonelinessForm>", () => {
     expect(mount.getByText("Share your journey")).not.toBeDisabled()
     fireEvent.click(mount.getByText("Share your journey"))
 
-    await waitFor(() => expect(mockFetch).toHaveBeenCalled())
+    await waitFor(() => expect(fetchSpy).toHaveBeenCalled())
   })
 
   it("rejects incorrect emails", () => {
@@ -75,6 +71,7 @@ describe("<LonelinessForm>", () => {
   })
 
   it("shows confirmation on submit", async () => {
+    const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
     const mount = render(<LonelinessForm />)
 
     expect(mount.getByText("Share your journey")).not.toBeDisabled()
@@ -95,13 +92,14 @@ describe("<LonelinessForm>", () => {
     fireEvent.click(mount.getByText("Share your journey"))
 
     await waitFor(() => {
-      expect(mockFetch).toHaveBeenCalled()
+      expect(fetchSpy).toHaveBeenCalled()
       expect(mount.getByText(/Thank you for sharing your journey/)).toBeTruthy()
     })
   })
 
   it("shows error message if unable to submit", async () => {
-    mockFetch.mockRejectedValue({ ok: false });
+    const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+    fetchSpy.mockRejectedValue({ ok: false })
 
     const mount = render(<LonelinessForm />)
 
@@ -123,7 +121,7 @@ describe("<LonelinessForm>", () => {
     fireEvent.click(mount.getByText("Share your journey"))
 
     await waitFor(() => {
-      expect(mockFetch).toHaveBeenCalled()
+      expect(fetchSpy).toHaveBeenCalled()
       expect(mount.getByText(/Server error/)).toBeTruthy()
     })
   })

@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react'
 import { ContentWrapper } from '../content-wrapper'
 import { SubmitButton } from '../form/buttons'
 import { ErrorsList } from '../form/errors-list'
+import { formSubmit } from '../form/helpers'
 import { InputField, SelectField, DateField } from '../form/input-field'
 import { emailRegex } from '../form/regex'
 import { PermanentDescription } from './permanent-description'
@@ -112,6 +113,24 @@ export const RegistrationForm = ({ routes }: Props) => {
             setFormState(null)
             return
         }
+        const success = await formSubmit(formName, { ...formData })
+
+        if (success) {
+            setFormState("submitted")
+        } else {
+            setFormErrors(["Server error! Try again later."])
+        }
+    }
+    if (isSubmitted) {
+        return (
+            <ContentWrapper>
+                <p aria-live="polite">
+                    <strong>Thank you for registering to ride with us.</strong><br />
+                    A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration.
+                    Refresh the page to submit again.
+              </p>
+            </ContentWrapper>
+        )
     }
 
     return (

@@ -60,7 +60,7 @@ export const SelectField = ({ name, options, value, label, onChange, disabled, o
                 disabled={Boolean(disabled)}
                 required={!Boolean(optional)}
             >
-                <option value='' key={''}> </option>
+                <option value='' key={''}> - </option>
                 {options.map(({ value, label }, i) => {
                     return <option value={value} key={i}>{label}</option>
                 })}
