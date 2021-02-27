@@ -34,7 +34,7 @@ module.exports = {
       options: {
         google: {
           families: [
-            "EB Garamond",
+            "EB Garamond:400,400i,700,800",
             "Dawning of a New Day",
             "Roboto:400,400i,700",
           ],
@@ -42,5 +42,5 @@ module.exports = {
       },
     },
   ],
-};
+}
 /* eslint-enable no-undef */

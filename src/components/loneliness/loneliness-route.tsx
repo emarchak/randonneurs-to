@@ -26,11 +26,11 @@ export const LonelinessRoute = ({
   return (
     <article className={style.ride}>
       <div>
-        <h4>
+        <h3>
           {routeNumber}. {name}
-        </h4>
-        <h5>Posted on {getDateString(postedDateObj)}</h5>
-        <h5>Complete by {getDateString(completeDate)}</h5>
+        </h3>
+        <h4>Posted on {getDateString(postedDateObj)}</h4>
+        <h4>Complete by {getDateString(completeDate)}</h4>
 
         <p>{description}</p>
       </div>
