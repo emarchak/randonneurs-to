@@ -1,16 +1,17 @@
 @import "theme";
 
+
+html {
+  font: 100%/1.48em get-font("body");
+  color: hsla(0, 0%, 0%, 0.8);
+  text-rendering: optimizeLegibility;
+}
+
+
 @include media(small) {
   html {
     font-size: 100%;
   }
-}
-
-body {
-  color: hsla(0, 0%, 0%, 0.8);
-  font-family: get-font("body");
-  font-weight: normal;
-  font-size: 16px;
 }
 
 img {
@@ -23,38 +24,66 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+hgroup {
+  @include no-space-text;
   font-family: get-font("header");
   line-height: 1.1;
-  margin-bottom: get-spacing();
+  font-weight: 700;
 }
 
 h1 {
   text-transform: uppercase;
-  margin: 0.67rem 0 1.45rem 0.67rem;
+  margin: 0.67rem 0 get-spacing() 0.67rem;
   font-size: 2.25rem;
 }
 
-h2 {
-  font-weight: bold;
-  font-size: 1.62671rem;
+h2 {font-size: 1.62671rem;}
+h3 {font-size: 1.38316rem;}
+h4 {font-size: 1rem; margin-bottom: get-spacing("small");}
+h5 {font-size: 1rem; font-style: italic; margin-bottom: get-spacing("small");}
+h6 {font-size: 0.78405rem; margin-bottom: get-spacing("small");}
+
+img {
+  @include no-space-text;
+  max-width: 100%;
 }
 
-h3 {
-  font-weight: bold;
-  font-size: 1.38316rem;
+ul, ol, dl, dd {
+  @include no-space-text;
+  margin-left: get-spacing();
+  
 }
 
-h4 {
+li {
+  margin-bottom: get-spacing("small");
+}
+
+p, figure, fieldset, form, iframe {
+  @include no-space-text;
+}
+
+table {
+  @include no-space-text;
   font-size: 1rem;
+  line-height: get-spacing();
+  border-collapse: collapse;
+  width: 100%;
 }
 
-h5 {
-  font-weight: bold;
-  font-size: 0.85028rem;
+blockquote {
+  margin: get-spacing();
+  padding: 0;
 }
 
-h6 {
-  font-weight: bold;
-  font-size: 0.78405rem;
+hr {
+  @include no-space;
+  margin-bottom: calc(1.45rem - 1px);
+  background: hsla(0, 0%, 0%, 0.2);
+  border: none;
+  height: 1px;
+}
+
+p > a {
+  @include body-link();
 }

@@ -5,24 +5,25 @@
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
 
-import React, {useState} from "react";
-import {Header} from "./header";
-import {Footer} from "./footer";
-import {StaticQuery, graphql} from "gatsby";
-import {Menu, MenuState, MenuTrigger, menuConfig} from './menu';
+import React, { useState } from "react"
+import { Header } from "./header"
+import { Footer } from "./footer"
+import { StaticQuery, graphql } from "gatsby"
+import { Menu, MenuState, MenuTrigger, menuConfig } from './menu'
 
-import styles from './styles/layout.module.scss';
-import "./styles/index.scss";
+import styles from './styles/layout.module.scss'
+import "normalize.css"
+import "./styles/index.scss"
 
 type Props = {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
-export const Layout = ({children}: Props) => {
-  const [menuOpen, setMenuState] = useState(false);
+export const Layout = ({ children }: Props) => {
+  const [menuOpen, setMenuState] = useState(false)
 
   const toggleMenu = () => {
-    setMenuState(!menuOpen);
+    setMenuState(!menuOpen)
   }
 
   const handleMenuChange = (state: MenuState) => {
@@ -30,8 +31,8 @@ export const Layout = ({children}: Props) => {
   }
 
   return (
-  <StaticQuery
-    query={graphql`
+    <StaticQuery
+      query={graphql`
       query SiteTitleQuery {
         site {
           siteMetadata {
@@ -40,21 +41,22 @@ export const Layout = ({children}: Props) => {
         }
       }
     `}
-    render={(data) => (
-      <div id={menuConfig.outerContainerId}>
-        <Menu isOpen={menuOpen} onMenuChange={handleMenuChange}/>
-        <div
-          className={styles.mainWraper}
-          id={menuConfig.pageWrapId}
-        >
-          <MenuTrigger onTrigger={toggleMenu} />
-          <Header siteTitle={data.site.siteMetadata.title} />
-          
-          <main
-          className={styles.mainContent}>{children}</main>
+      render={(data) => (
+        <div id={menuConfig.outerContainerId}>
+          <Menu isOpen={menuOpen} onMenuChange={handleMenuChange} />
+          <div
+            className={styles.mainWraper}
+            id={menuConfig.pageWrapId}
+          >
+            <MenuTrigger onTrigger={toggleMenu} />
+            <Header siteTitle={data.site.siteMetadata.title} />
+
+            <main
+              className={styles.mainContent}>{children}</main>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    )}
-  />
-)};
+      )}
+    />
+  )
+}
