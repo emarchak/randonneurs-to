@@ -62,7 +62,7 @@ const Page = () => {
         </p>
 
         <Callout>
-          <h3>The rules</h3>
+          <h2>The rules</h2>
           <ol>
             <li>
               Ride isolated, no stopping, no support. Maintain social distance.
@@ -82,7 +82,7 @@ const Page = () => {
           </p>
         </Callout>
 
-        <h3>Current ride</h3>
+        <h2>Current ride</h2>
 
         <p>We will be sharing new routes every two weeks.</p>
         {Routes.slice(0, 1).map((route, i) => (
@@ -90,14 +90,14 @@ const Page = () => {
         ))}
       </ContentWrapper>
       <LonelinessForm>
-        <h3>Join Club audax à distance</h3>
+        <h2>Join Club audax à distance</h2>
         <p>
           If you have completed the current rides and abided by the rules, we
           warmly invite you to join our club.
         </p>
       </LonelinessForm>
       <ContentWrapper>
-        <h3>Finishers</h3>
+        <h2>Finishers</h2>
         <table>
           <thead><tr>
             <th>Rider</th>
@@ -121,7 +121,7 @@ const Page = () => {
         – distance makes the heart grow stronger –
       </div>
       <ContentWrapper>
-        <h3>Previous rides</h3>
+        <h2>Previous rides</h2>
         {Routes.slice(1).map((route, i) => (
           <LonelinessRoute key={i} {...route} />
         ))}

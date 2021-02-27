@@ -2,21 +2,6 @@
 
 $footer-height: 4.3rem;
 
-@mixin body-link() {
-  a {
-    &,
-    &:visited {
-      color: get-color(secondary, darkest);
-      text-decoration: none;
-      border-bottom: 0.05em dashed get-color(secondary);
-    }
-    &:hover,
-    &:focus {
-      border-bottom-color: get-color(secondary, dark);
-    }
-  }
-}
-
 .content {
   @include max-width();
 }
@@ -37,8 +22,8 @@ $footer-height: 4.3rem;
 .footer {
   @include body-link();
   background: get-color(primary, desaturate);
-  height: $footer-height;
-  font-size: 0.7rem;
+  min-height: $footer-height;
+  font-size: 0.8rem;
 }
 
 .copyleft {

@@ -49,7 +49,7 @@ $theme-spacing: (
 $theme-font-size: (
   "large": 2.25rem,
   "medium": 1.62671rem,
-  "small": 0.7rem,
+  "small": 0.75rem,
   "normal": 1rem,
 );
 
@@ -58,10 +58,20 @@ $dropshadow: (
   "dark": 0.05rem 0.05rem 0.1rem transparentize(#333333, 0.5),
 );
 
+@mixin no-space {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+@mixin no-space-text {
+  margin: 0 0 map-get($theme-spacing, "normal") 0;
+  padding: 0 0 0 0;
+}
+
 @mixin max-width() {
   margin: 0 auto;
   max-width: 960px;
-  padding: 1.45rem 1.0875rem;
+  padding: map-get($theme-spacing, "normal") 1.0875rem;
 }
 
 @function get-font($name) {
@@ -93,6 +103,21 @@ $dropshadow: (
   } @else if $point == small {
     @media only screen and (max-width: 480px) {
       @content;
+    }
+  }
+}
+
+@mixin body-link() {
+  a {
+    &,
+    &:visited {
+      color: get-color(secondary, dark);
+      text-decoration: none;
+      border-bottom: 0.05em dashed get-color(secondary);
+    }
+    &:hover,
+    &:focus {
+      border-bottom-color: get-color(secondary, dark);
     }
   }
 }

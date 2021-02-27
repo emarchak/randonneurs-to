@@ -22,6 +22,7 @@
     "jshint": "^2.11.0",
     "netlify-cli": "^2.40.0",
     "node-sass": "^4.13.1",
+    "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-burger-menu": "^2.6.13",
