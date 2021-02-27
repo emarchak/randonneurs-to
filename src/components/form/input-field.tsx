@@ -94,11 +94,10 @@ export const Loading = () => (
 )
 
 type CheckboxFieldProps = Omit<FieldProps, 'label' | 'value'> & {
-    children: React.ReactChild,
+    children: React.ReactNode,
     value: boolean,
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
 }
-
 
 export const CheckboxField = ({ name, value, children, onChange, disabled, optional }: CheckboxFieldProps) => (
     <p>

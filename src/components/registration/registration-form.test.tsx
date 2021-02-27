@@ -9,21 +9,26 @@ jest.mock('isomorphic-unfetch', () => ({
     default: jest.fn().mockReturnValue({ ok: true })
 }))
 
-const route = {
-    id: 'route1',
-    chapter: 'Toronto',
-    distance: 200,
-    startLocation: 'Starbucks',
-    routeName: 'Urban 200'
-} as Route
-
-const routeB = {
-    id: 'route2',
-    chapter: 'Huron',
-    distance: 300,
-    startLocation: 'Careys House',
-    routeName: 'Golf 300'
-} as Route
+jest.mock('./hooks/useRoutes', () => ({
+    __esModule: true,
+    useRoutes: jest.fn().mockReturnValue({
+        routes:
+            [{
+                id: 'route1',
+                chapter: 'Toronto',
+                distance: 200,
+                startLocation: 'Starbucks',
+                routeName: 'Urban 200'
+            },
+            {
+                id: 'route2',
+                chapter: 'Huron',
+                distance: 300,
+                startLocation: 'Careys House',
+                routeName: 'Golf 300'
+            }]
+    }),
+}))
 
 jest.mock('./hooks/useBrevets', () => ({
     __esModule: true,
@@ -44,13 +49,12 @@ jest.mock('./hooks/useBrevets', () => ({
                 rwgps: 'https://rwgps.com',
                 unixtime: 1615734000
             }]
-    }
-    )
+    })
 }))
 
 describe('<RegistrationForm>', () => {
     it('renders all the required fields to the user', () => {
-        const mount = render(<RegistrationForm routes={[route]} />)
+        const mount = render(<RegistrationForm />)
         expect(() => {
             fireEvent.change(mount.getByLabelText(/name/i), {
                 target: { value: 'Foo' },
@@ -71,7 +75,7 @@ describe('<RegistrationForm>', () => {
     })
 
     it('shows routes when registering for permanents', () => {
-        const mount = render(<RegistrationForm routes={[route, routeB]} />)
+        const mount = render(<RegistrationForm />)
 
         fireEvent.change(mount.getByLabelText(/ride/i), {
             target: { value: 'permanent' },
@@ -84,7 +88,7 @@ describe('<RegistrationForm>', () => {
     })
 
     it('shows brevets when registering for brevet', () => {
-        const mount = render(<RegistrationForm routes={[route]} />)
+        const mount = render(<RegistrationForm />)
 
         fireEvent.change(mount.getByLabelText(/ride/i), {
             target: { value: 'brevet' },
@@ -101,7 +105,7 @@ describe('<RegistrationForm>', () => {
     it.skip('shows more brevets on click', () => { })
 
     it('requires email, rider name, randonneurs ontario consent and oca consent', () => {
-        const mount = render(<RegistrationForm routes={[route]} />)
+        const mount = render(<RegistrationForm />)
 
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'higgeldy-piggeldy' },
@@ -129,7 +133,7 @@ describe('<RegistrationForm>', () => {
 
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-        const mount = render(<RegistrationForm routes={[route]} />)
+        const mount = render(<RegistrationForm />)
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
         })
@@ -172,7 +176,7 @@ describe('<RegistrationForm>', () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
         fetchSpy.mockRejectedValueOnce({ ok: false })
 
-        const mount = render(<RegistrationForm routes={[route]} />)
+        const mount = render(<RegistrationForm />)
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
         })

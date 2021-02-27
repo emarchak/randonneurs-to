@@ -31,3 +31,16 @@
 .brevetRadio {
     margin-left: 1rem
 }
+
+.brevetsShowMoreWrapper {
+    padding: 0 0;
+}
+
+.brevetsShowMore {
+    padding: get-spacing('small');
+    width: 100%;
+
+    &:hover, &:focus {
+        background-color: get-color(primary, light);
+    }
+}

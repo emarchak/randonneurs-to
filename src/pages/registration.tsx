@@ -7,26 +7,6 @@ import { Callout } from "../components/callout"
 import { RegistrationForm, Route } from "../components/registration"
 
 const Registration = () => {
-  const { allGoogleRoutesSheet: { edges } } = useStaticQuery(
-    graphql`
-          query {
-            allGoogleRoutesSheet(filter: {ableToRide_: {eq: "Yes"}}, sort: {fields: chapter}) {
-                edges {
-                  node {
-                    id
-                    chapter
-                    distance
-                    routeName
-                    startLocation
-                  }
-                }
-            }
-          }
-        `
-  )
-
-  const routes = edges.map(edge => edge.node) as Route[]
-
   return (
     <Layout>
       <SEO title='Register for a ride' />
@@ -45,7 +25,7 @@ const Registration = () => {
 
       </ContentWrapper>
 
-      <RegistrationForm routes={routes} />
+      <RegistrationForm />
     </Layout>
   )
 }

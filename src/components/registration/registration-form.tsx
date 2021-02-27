@@ -1,16 +1,16 @@
-import React, { useState, ChangeEvent, useEffect } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import { ContentWrapper } from '../content-wrapper'
 import { SubmitButton } from '../form/buttons'
 import { ErrorsList } from '../form/errors-list'
 import { formSubmit } from '../form/helpers'
 import { InputField, SelectField, DateField, CheckboxField } from '../form/input-field'
 import { emailRegex } from '../form/regex'
-import { PermanentDescription } from './components/permanent-description'
 import { Route, RideType, Brevet } from './types'
-import { UpcomingBrevets } from './components/upcoming-brevets'
+import { SelectBrevets } from './components/select-brevets'
 
 import styles from '../styles/registration.module.scss'
 import { Aside } from '../callout'
+import { SelectPermanents } from './components/select-permanents'
 
 const formName = 'registration'
 
@@ -22,8 +22,8 @@ interface FormData {
     email: string
     rideType: RideType | ''
     route: Brevet['route']
-    scheduleDate?: Date
-    startDate: Date
+    scheduleTime?: Date
+    startTime: Date
     startLocation: string
     chapter: Brevet['chapter'] | '',
     distance: Brevet['distance'],
@@ -32,16 +32,12 @@ interface FormData {
     roConsent: boolean,
 }
 
-type Props = {
-    routes: Route[]
-}
-
 const defaultFormData: FormData = {
     name: '',
     email: '',
     rideType: '' as FormData["rideType"],
     route: '',
-    startDate: new Date(),
+    startTime: new Date(),
     startLocation: '',
     chapter: '',
     distance: '',
@@ -55,7 +51,7 @@ const fieldLabel = {
     email: 'Your email',
     rideType: 'Ride type',
     route: 'Route',
-    startDate: 'Starting time',
+    startTime: 'Starting time',
     startLocation: 'Starting location',
     notes: 'Notes for the organizer',
     ocaConsent: 'OCA risk awareness',
@@ -67,7 +63,7 @@ const requiredFields: Partial<keyof FormData>[] = [
     'email',
     'rideType',
     'route',
-    'startDate',
+    'startTime',
     'startLocation',
     'ocaConsent',
     'roConsent'
@@ -88,7 +84,7 @@ const checkForErrors = (fields: FormData) => (
 )
 
 
-export const RegistrationForm = ({ routes }: Props) => {
+export const RegistrationForm = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<String[]>([])
@@ -96,7 +92,6 @@ export const RegistrationForm = ({ routes }: Props) => {
     const isDirty = formState === "dirty"
     const hasError = Boolean(formErrors.length)
 
-    const routeOptions = routes.map(route => ({ value: route.id, label: `${route.chapter} - ${route.routeName}` }))
     const isPermanent = formData.rideType === 'permanent'
     const isBrevet = formData.rideType === 'brevet'
 
@@ -108,7 +103,7 @@ export const RegistrationForm = ({ routes }: Props) => {
         })
     }
 
-    const handleInputChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
         const { value = "", name } = evt.currentTarget
         dirtyForm({ [name]: value })
     }
@@ -118,16 +113,27 @@ export const RegistrationForm = ({ routes }: Props) => {
         dirtyForm({ [name]: !formData[name] })
     }
 
-    const handleDateChange = (startDate: Date) => {
-        dirtyForm({ startDate })
+    const handleDateChange = (startTime: Date) => {
+        dirtyForm({ startTime })
+    }
+
+    const handlePermanentChange = (permanent: Route) => {
+        console.log(permanent)
+        dirtyForm({
+            rideType: 'permanent',
+            route: permanent.routeName,
+            startLocation: permanent.startLocation,
+            chapter: permanent.chapter,
+            distance: String(permanent.distance)
+        })
     }
 
     const handleBrevetChange = (brevet: Brevet) => {
         dirtyForm({
             rideType: 'brevet',
             route: brevet.route,
-            startDate: new Date(brevet.unixtime * 1000),
-            scheduleDate: new Date(brevet.unixtime * 1000),
+            startTime: new Date(brevet.unixtime * 1000),
+            scheduleTime: new Date(brevet.unixtime * 1000),
             chapter: brevet.chapter,
             distance: brevet.distance,
             startLocation: brevet.startloc
@@ -165,7 +171,6 @@ export const RegistrationForm = ({ routes }: Props) => {
     }
 
     return (
-
         <form
             name={formName}
             method="post"
@@ -177,19 +182,18 @@ export const RegistrationForm = ({ routes }: Props) => {
                 <InputField label={fieldLabel['name']} name="name" value={formData.name} onChange={handleInputChange} />
                 <InputField label={fieldLabel['email']} name="email" type="email" value={formData.email} onChange={handleInputChange} />
                 <SelectField label={fieldLabel['rideType']} name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
-                {isBrevet && <UpcomingBrevets onBrevetChange={handleBrevetChange} />}
-                {isPermanent && <PermanentDescription />}
-                {isPermanent && <SelectField label={fieldLabel['route']} name="route" options={routeOptions} value={formData.route} onChange={handleInputChange} />}
-                <DateField label={fieldLabel['startDate']} name="startDate" value={formData.startDate} onChange={handleDateChange} />
+                {isBrevet && <SelectBrevets onChange={handleBrevetChange} />}
+                {isPermanent && <SelectPermanents onChange={handlePermanentChange} />}
+                <DateField label={fieldLabel['startTime']} name="startTime" value={formData.startTime} onChange={handleDateChange} />
                 <InputField label={fieldLabel['startLocation']} name="startLocation" value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
                 <InputField label={fieldLabel['notes']} name="notes" value={formData.notes} onChange={handleInputChange} optional />
                 <Aside>
                     <h2>COVID-19 risk awareness</h2>
                     <CheckboxField name="ocaConsent" value={formData.ocaConsent} onChange={handleCheckboxChange}>
-                        <p>I have read the <a href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">Ontario Cycling Association's Progressive Return</a> to Cycling Policy and understand the risks.</p>
+                        I have read the <a href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">Ontario Cycling Association's Progressive Return</a> to Cycling Policy and understand the risks.
                     </CheckboxField>
                     <CheckboxField name="roConsent" value={formData.roConsent} onChange={handleCheckboxChange}>
-                        <p>I have read <a href="http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf">Randonneurs Ontario's Club Risk Management Policy</a> and understand my responsibilities.</p>
+                        I have read <a href="http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf">Randonneurs Ontario's Club Risk Management Policy</a> and understand my responsibilities.
                     </CheckboxField>
                 </Aside>
                 <ErrorsList formErrors={formErrors} />
@@ -198,6 +202,5 @@ export const RegistrationForm = ({ routes }: Props) => {
             </SubmitButton>
             </ContentWrapper>
         </form >
-
     )
 }

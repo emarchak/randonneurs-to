@@ -57,17 +57,22 @@ const BrevetRow = ({ brevet, isSelected, handleChange }: { brevet: Brevet, isSel
 }
 
 type Props = {
-    onBrevetChange: (Brevet) => void
+    onChange: (Brevet) => void
 }
 
-export const UpcomingBrevets = ({ onBrevetChange }: Props) => {
+export const SelectBrevets = ({ onChange }: Props) => {
     const { loading, brevets } = useBrevets()
     const [displayBrevets, setDisplay] = useState<number>(minBrevet)
     const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['sched_id']>('')
 
-    const onChange = (brevet: Brevet) => {
-        onBrevetChange(brevet)
+    const handleChange = (brevet: Brevet) => {
+        onChange(brevet)
         setSelectedBrevetId(brevet.sched_id)
+    }
+
+    const handleShowMore = (evt) => {
+        evt.preventDefault()
+        setDisplay(displayBrevets + minBrevet)
     }
 
     if (loading) {
@@ -91,17 +96,16 @@ export const UpcomingBrevets = ({ onBrevetChange }: Props) => {
                 </tr></thead>
                 <tbody>
                     {brevets.slice(0, displayBrevets).map((brevet, i) => (
-                        <BrevetRow key={i} brevet={brevet} handleChange={onChange} isSelected={selectedBrevetId === brevet.sched_id} />
+                        <BrevetRow key={i} brevet={brevet} handleChange={handleChange} isSelected={selectedBrevetId === brevet.sched_id} />
                     ))}
                 </tbody>
                 <tfoot>
-                    <tr><td colSpan={6}>
+                    <tr><td colSpan={6} className={styles.brevetsShowMoreWrapper}>
                         <button
                             disabled={(displayBrevets > brevets.length)}
-                            onClick={(evt) => {
-                                evt.preventDefault()
-                                setDisplay(displayBrevets + minBrevet)
-                            }}>
+                            onClick={handleShowMore}
+                            className={styles.brevetsShowMore}
+                        >
                             Show more
                     </button>
                     </td></tr>
