@@ -2,17 +2,12 @@
 
 html {
   font-size: 16px;
-  line-height: 1.48em;
+  line-height: 1.78em;
   font-family: get-font("body");
   color: hsla(0, 0%, 0%, 0.8);
   text-rendering: optimizeLegibility;
   @include no-space;
 }
-
-body {
-  @include no-space;
-}
-
 
 @include media(small) {
   html {

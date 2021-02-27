@@ -22,7 +22,7 @@ $footer-height: 4.3rem;
 .footer {
   @include body-link();
   background: get-color(primary, desaturate);
-  height: $footer-height;
+  min-height: $footer-height;
   font-size: 0.8rem;
 }
 
