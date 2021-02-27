@@ -1,11 +1,11 @@
 import React, { useState, FormEvent } from 'react'
-import { Loading } from '../form/input-field'
-import { Fieldset } from '../form/fieldset'
-import { Brevet } from './types'
-import { useBrevets } from './hooks/useBrevets'
+import { Loading } from '../../form/input-field'
+import { Fieldset } from '../../form/fieldset'
+import { Brevet } from '../types'
+import { useBrevets } from '../hooks/useBrevets'
 import { BrevetDescription } from './brevet-description'
 
-import styles from '../styles/registration.module.scss'
+import styles from '../../styles/registration.module.scss'
 
 const minBrevet = 5
 const fieldSetID = 'upcoming_brevets'
@@ -49,7 +49,7 @@ const BrevetRow = ({ brevet, isSelected, handleChange }: { brevet: Brevet, isSel
                     <br />
                     <small>{brevet.startloc}</small>
                     <br />
-                    <small>(<a href={brevet.rwgps} target="_blank">View {brevet.route} ↗</a>)</small>
+                    <small>(<a href={brevet.rwgps} target="_blank">View {brevet.route} </a>)</small>
                 </label>
             </td>
         </tr>

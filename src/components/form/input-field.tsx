@@ -92,3 +92,31 @@ export const Loading = () => (
         <div className={styles.loading}><div></div><div></div><div></div><div></div></div>
     </div>
 )
+
+type CheckboxFieldProps = Omit<FieldProps, 'label' | 'value'> & {
+    children: React.ReactChild,
+    value: boolean,
+    onChange: (evt: ChangeEvent<HTMLInputElement>) => void
+}
+
+
+export const CheckboxField = ({ name, value, children, onChange, disabled, optional }: CheckboxFieldProps) => (
+    <p>
+        <label>
+            <input
+                type={'checkbox'}
+                name={name}
+                className={styles.checkbox}
+                checked={value}
+                onChange={onChange}
+                disabled={Boolean(disabled)}
+                required={!Boolean(optional)}
+            />
+
+            <span className={styles.checkboxLabel}>
+                {children}
+                {optional && ' (optional)'}
+            </span>
+        </label>
+    </p>
+)

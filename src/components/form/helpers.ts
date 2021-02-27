@@ -7,7 +7,6 @@ const formEncode = data => {
 }
 
 export const formSubmit = async (formName: string, formData: { [key: string]: any }) => {
-    console.log(formData)
     const body = formEncode({ "form-name": formName, ...formData })
     try {
         const response = await fetch(`/`, {

@@ -100,11 +100,9 @@ describe('<RegistrationForm>', () => {
 
     it.skip('shows more brevets on click', () => { })
 
-    it('requires email and rider name', () => {
+    it('requires email, rider name, randonneurs ontario consent and oca consent', () => {
         const mount = render(<RegistrationForm routes={[route]} />)
-        fireEvent.change(mount.getByLabelText(/name/i), {
-            target: { value: '' },
-        })
+
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'higgeldy-piggeldy' },
         })
@@ -115,8 +113,17 @@ describe('<RegistrationForm>', () => {
         expect(
             mount.getByText(/name is required/i)
         ).toBeTruthy()
+
         expect(
             mount.getByText(/higgeldy-piggeldy is not a valid email/i)
+        ).toBeTruthy()
+
+        expect(
+            mount.getByText(/OCA risk awareness is required/i)
+        ).toBeTruthy()
+
+        expect(
+            mount.getByText(/Randonneurs Ontario risk policy is required/i)
         ).toBeTruthy()
     })
 
@@ -129,12 +136,15 @@ describe('<RegistrationForm>', () => {
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'foo@bar.com' },
         })
+
         fireEvent.change(mount.getByLabelText(/ride/i), {
             target: { value: 'permanent' },
         })
+
         fireEvent.change(mount.getByLabelText(/route/i), {
             target: { value: 'route1' }
         })
+
         fireEvent.change(mount.getByLabelText(/starting time/i), {
             target: { value: new Date() },
         })
@@ -142,6 +152,10 @@ describe('<RegistrationForm>', () => {
         fireEvent.change(mount.getByLabelText(/starting location/i), {
             target: { value: 'Starbucks' },
         })
+
+        fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
+        fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
+
         fireEvent.change(mount.getByLabelText(/notes/i), {
             target: { value: 'notes' },
         })
@@ -154,12 +168,54 @@ describe('<RegistrationForm>', () => {
         })
     })
 
+    it('shows an error when unable to submit', async () => {
+        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+        fetchSpy.mockRejectedValueOnce({ ok: false })
+
+        const mount = render(<RegistrationForm routes={[route]} />)
+        fireEvent.change(mount.getByLabelText(/name/i), {
+            target: { value: 'Foo Bar' },
+        })
+
+        fireEvent.change(mount.getByLabelText(/email/i), {
+            target: { value: 'foo@bar.com' },
+        })
+
+        fireEvent.change(mount.getByLabelText(/ride/i), {
+            target: { value: 'permanent' },
+        })
+
+        fireEvent.change(mount.getByLabelText(/route/i), {
+            target: { value: 'route1' }
+        })
+
+        fireEvent.change(mount.getByLabelText(/starting time/i), {
+            target: { value: new Date() },
+        })
+
+        fireEvent.change(mount.getByLabelText(/starting location/i), {
+            target: { value: 'Starbucks' },
+        })
+
+        fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
+        fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
+
+        fireEvent.change(mount.getByLabelText(/notes/i), {
+            target: { value: 'notes' },
+        })
+
+        fireEvent.click(mount.getByText('Register'))
+
+        await waitFor(() => {
+            expect(fetchSpy).toHaveBeenCalled()
+            expect(mount.getByText(/Server error! Try again later/)).toBeTruthy()
+        })
+    })
+
     it.skip('requires rider to be registered with the OCA', () => { })
-    it.skip('requires rider to acknowledge all policies', () => { })
     it.skip('requires the start date to be > 1 week in the future', () => { })
     it.skip('requires brevet start date to be within -2 / +1 weeks from scheduled date', () => { })
     it.skip('limits registration to maximum of 10 riders per start time', () => { })
-    it.skip('records the registration when submitted', () => { })
     it.skip('notifies riders when submitted', () => { })
     it.skip('notifies rider organizers when submitted', () => { })
 })
