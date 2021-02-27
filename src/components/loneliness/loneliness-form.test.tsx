@@ -1,5 +1,4 @@
 import React from "react"
-import { act } from "react-dom/test-utils"
 import { render, fireEvent, waitFor } from "@testing-library/react"
 
 import { LonelinessForm } from "./loneliness-form"
