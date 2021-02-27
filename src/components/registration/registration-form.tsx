@@ -20,9 +20,11 @@ interface FormData {
     name: string
     email: string
     rideType: RideType | ''
-    route: string
+    route: Brevet['route']
     startDate: Date
     startLocation: string
+    chapter: Brevet['chapter'],
+    distance: Brevet['distance'],
     notes: string
 }
 
@@ -37,6 +39,8 @@ const defaultFormData = {
     route: '',
     startDate: new Date(),
     startLocation: '',
+    chapter: '',
+    distance: '',
     notes: '',
 }
 
@@ -47,6 +51,8 @@ const fieldLabel = {
     route: 'Route',
     startDate: 'Starting time',
     startLocation: 'Starting location',
+    chapter: 'Chapter',
+    distance: 'Distance',
     notes: 'Notes for the organizer',
 }
 
@@ -100,8 +106,10 @@ export const RegistrationForm = ({ routes }: Props) => {
         setFormData({
             ...formData,
             rideType: 'brevet',
-            route: `${brevet.route}`,
+            route: brevet.route,
             startDate: new Date(brevet.unixtime * 1000),
+            chapter: brevet.chapter,
+            distance: brevet.distance,
             startLocation: brevet.startloc
         })
     }
