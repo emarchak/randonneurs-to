@@ -148,7 +148,7 @@ button {
   }
 
   &:disabled {
-    opacity: 90%;
+    background: get-color(text, lightest);
     color: get-color(text, light);
   }
 
