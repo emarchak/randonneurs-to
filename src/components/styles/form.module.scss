@@ -23,6 +23,10 @@
     background: get-color(primary, light);
     transform: scale(0.99);
   }
+
+  &:disabled {
+    background: get-color(primary);
+  }
 }
 
 .fieldset {
