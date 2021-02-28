@@ -63,14 +63,6 @@ p, figure, fieldset, form, iframe {
   @include no-space-text;
 }
 
-table {
-  @include no-space-text;
-  font-size: 1rem;
-  line-height: get-spacing();
-  border-collapse: collapse;
-  width: 100%;
-}
-
 blockquote {
   margin: get-spacing();
   padding: 0;
@@ -88,11 +80,25 @@ p > a {
   @include body-link();
 }
 
+table {
+  @include no-space-text;
+  font-size: 1rem;
+  line-height: get-spacing();
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  padding: get-spacing()  get-spacing(small);
+}
+
 thead, tbody tr {
   border-bottom: 1px solid get-color(text, lightest);
 }
-td, th {
-  padding: get-spacing()  get-spacing(small);
+
+tfoot td {
+  border-bottom: none;
+  text-align: center;
 }
 
 @include media(small) {
