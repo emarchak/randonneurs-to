@@ -3,7 +3,7 @@ import { ContentWrapper } from '../content-wrapper'
 import { SubmitButton } from '../form/buttons'
 import { ErrorsList } from '../form/errors-list'
 import { formSubmit } from '../form/helpers'
-import { InputField, SelectField, DateField, CheckboxField } from '../form/input-field'
+import { InputField, SelectField, DateField, CheckboxField, HiddenField } from '../form/input-field'
 import { emailRegex } from '../form/regex'
 import { Route, RideType, Brevet } from './types'
 import { SelectBrevets } from './components/select-brevets'
@@ -208,6 +208,8 @@ export const RegistrationForm = () => {
                         I have read <a href="http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf">Randonneurs Ontario's Club Risk Management Policy</a> and understand my responsibilities.
                     </CheckboxField>
                 </Callout>
+                <HiddenField name='route' value={formData.route} />
+                <HiddenField name='scheduleTime' value={formData.scheduleTime?.toString()} />
                 <ErrorsList formErrors={formErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
                     Register

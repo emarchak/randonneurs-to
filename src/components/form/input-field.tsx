@@ -12,6 +12,15 @@ type FieldProps = {
     optional?: boolean
 }
 
+type HiddenFieldProps = {
+    name: string
+    value: string
+}
+
+export const HiddenField = ({ name, value }: HiddenFieldProps) => (
+    <input type="hidden" name={name} value={value} />
+)
+
 type InputFieldProps = FieldProps & {
     type?: 'text' | 'email'
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
@@ -76,13 +85,14 @@ type DateFieldProps = Omit<FieldProps, 'value'> & {
     options?: {}
 }
 
-export const DateField = ({ value, label, onChange, allowedRange, optional }: DateFieldProps) => (
+export const DateField = ({ value, name, label, onChange, allowedRange, optional }: DateFieldProps) => (
     <div className={styles.dateInput}>
         <label>
             <span className={styles.label}>
                 {label}
                 {optional && ' (optional)'}
             </span>
+            <HiddenField name={name} value={value.toString()} />
             <DatePicker
                 showTimeSelect
                 wrapperClassName={styles.dateInputOverrides}
@@ -127,3 +137,4 @@ export const CheckboxField = ({ name, value, children, onChange, disabled, optio
         </label>
     </p>
 )
+
