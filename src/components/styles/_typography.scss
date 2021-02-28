@@ -148,7 +148,8 @@ button {
   }
 
   &:disabled {
-    opacity: 66%;
+    opacity: 90%;
+    color: get-color(text, light);
   }
 
   @include media(large) {
