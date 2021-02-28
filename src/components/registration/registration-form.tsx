@@ -210,6 +210,8 @@ export const RegistrationForm = () => {
                     </CheckboxField>
                 </Callout>
                 <HiddenField name='route' value={formData.route} />
+                <HiddenField name='chapter' value={formData.chapter} />
+                <HiddenField name='distance' value={formData.distance} />
                 <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
                 <ErrorsList formErrors={formErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
