@@ -7,22 +7,12 @@
 }
 
 .submit {
-  box-shadow: get-dropshadow();
-  display: block;
-  border: none;
-  padding: get-spacing(small) get-spacing(medium);
   background: get-color(primary, dark);
-  text-align: center;
-  outline: 0.1rem solid get-color(primary, dark);
-  width: 100%;
-  transition: all 250ms ease-in-out, transform 150ms ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  outline-color: get-color(primary, dark);
 
   &:hover:enabled,
   &:focus:enabled {
-    cursor: pointer;
-    box-shadow: get-dropshadow("dark");
+    box-shadow: get-dropshadow(dark);
   }
 
   &:focus:enabled {
@@ -30,11 +20,8 @@
   }
 
   &:active {
+    background: get-color(primary, light);
     transform: scale(0.99);
-  }
-
-  @include media(large) {
-    width: auto;
   }
 }
 

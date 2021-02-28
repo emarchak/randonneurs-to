@@ -4,6 +4,7 @@ $theme-colors: (
   "primary": (
     "normal": #c5eada,
     "desaturate": desaturate(#c5eada, 90%),
+    "light": lighten(#c5eada, 10%),
     "dark": darken(#c5eada, 10%),
     "darkest": desaturate(darken(#c5eada, 20%), 10%),
   ),
@@ -23,6 +24,7 @@ $theme-colors: (
   "text": (
     "normal": #333333,
     "light": lighten(#333333, 20%),
+    "lighter": lighten(#333333, 60%),
     "lightest": lighten(#333333, 75%)
   ),
   "info": (
