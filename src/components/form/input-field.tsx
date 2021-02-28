@@ -42,7 +42,7 @@ type SelectFieldProps = FieldProps & {
         value: string
         label: string
     }[]
-    onChange: (evt: ChangeEvent<HTMLSelectElement>) => void
+    onChange: (evt: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void
 }
 
 export const SelectField = ({ name, options, value, label, onChange, disabled, optional }: SelectFieldProps) => (
@@ -72,17 +72,25 @@ export const SelectField = ({ name, options, value, label, onChange, disabled, o
 type DateFieldProps = Omit<FieldProps, 'value'> & {
     value: Date
     onChange: (date: Date) => void
+    allowedRange?: (date: Date) => boolean
     options?: {}
 }
 
-export const DateField = ({ value, label, onChange, optional }: DateFieldProps) => (
+export const DateField = ({ value, label, onChange, allowedRange, optional }: DateFieldProps) => (
     <div className={styles.dateInput}>
         <label>
             <span className={styles.label}>
                 {label}
                 {optional && ' (optional)'}
             </span>
-            <DatePicker showTimeSelect wrapperClassName={styles.dateInputOverrides} selected={value} onChange={onChange} className={styles.input} dateFormat="MMMM d HH:mm" />
+            <DatePicker
+                showTimeSelect
+                wrapperClassName={styles.dateInputOverrides}
+                selected={value}
+                onChange={onChange}
+                className={styles.input}
+                filterDate={allowedRange}
+                dateFormat="MMMM d HH:mm" />
         </label>
     </div>
 )

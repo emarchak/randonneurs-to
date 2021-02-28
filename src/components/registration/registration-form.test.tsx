@@ -110,6 +110,7 @@ describe('<RegistrationForm>', () => {
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'higgeldy-piggeldy' },
         })
+
         fireEvent.click(mount.getByText('Register'))
 
         expect(mount.getByText('Register')).toBeDisabled()
@@ -217,8 +218,6 @@ describe('<RegistrationForm>', () => {
     })
 
     it.skip('requires rider to be registered with the OCA', () => { })
-    it.skip('requires the start date to be > 1 week in the future', () => { })
-    it.skip('requires brevet start date to be within -2 / +1 weeks from scheduled date', () => { })
     it.skip('limits registration to maximum of 10 riders per start time', () => { })
     it.skip('notifies riders when submitted', () => { })
     it.skip('notifies rider organizers when submitted', () => { })

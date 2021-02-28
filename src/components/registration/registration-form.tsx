@@ -11,6 +11,7 @@ import { SelectBrevets } from './components/select-brevets'
 import styles from '../styles/registration.module.scss'
 import { Aside } from '../callout'
 import { SelectPermanents } from './components/select-permanents'
+import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
 
 const formName = 'registration'
 
@@ -88,12 +89,19 @@ export const RegistrationForm = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<String[]>([])
+    const { allowedStartTimes } = useAllowedStartTimes()
+
     const isSubmitted = formState === "submitted"
     const isDirty = formState === "dirty"
     const hasError = Boolean(formErrors.length)
 
     const isPermanent = formData.rideType === 'permanent'
     const isBrevet = formData.rideType === 'brevet'
+
+    const handleValidStartTimes = (requestedStartTime: Date) => {
+        const scheduleTime = isBrevet ? formData.scheduleTime : undefined
+        return allowedStartTimes(requestedStartTime, scheduleTime)
+    }
 
     const dirtyForm = (newFormData: Partial<FormData>) => {
         setFormState("dirty")
@@ -108,6 +116,11 @@ export const RegistrationForm = () => {
         dirtyForm({ [name]: value })
     }
 
+    const handleSelectChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+        const { value = "", name } = evt.currentTarget
+        dirtyForm({ [name]: value })
+    }
+
     const handleCheckboxChange = (evt: ChangeEvent<HTMLInputElement>) => {
         const { name } = evt.currentTarget
         dirtyForm({ [name]: !formData[name] })
@@ -118,7 +131,6 @@ export const RegistrationForm = () => {
     }
 
     const handlePermanentChange = (permanent: Route) => {
-        console.log(permanent)
         dirtyForm({
             rideType: 'permanent',
             route: permanent.routeName,
@@ -181,10 +193,10 @@ export const RegistrationForm = () => {
             <ContentWrapper>
                 <InputField label={fieldLabel['name']} name="name" value={formData.name} onChange={handleInputChange} />
                 <InputField label={fieldLabel['email']} name="email" type="email" value={formData.email} onChange={handleInputChange} />
-                <SelectField label={fieldLabel['rideType']} name="rideType" options={rideTypes} value={formData.rideType} onChange={handleInputChange} />
+                <SelectField label={fieldLabel['rideType']} name="rideType" options={rideTypes} value={formData.rideType} onChange={handleSelectChange} />
                 {isBrevet && <SelectBrevets onChange={handleBrevetChange} />}
                 {isPermanent && <SelectPermanents onChange={handlePermanentChange} />}
-                <DateField label={fieldLabel['startTime']} name="startTime" value={formData.startTime} onChange={handleDateChange} />
+                <DateField label={fieldLabel['startTime']} name="startTime" value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
                 <InputField label={fieldLabel['startLocation']} name="startLocation" value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
                 <InputField label={fieldLabel['notes']} name="notes" value={formData.notes} onChange={handleInputChange} optional />
                 <Aside>
