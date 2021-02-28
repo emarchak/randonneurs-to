@@ -27,7 +27,7 @@ export const InputField = ({ type = 'text', name, value, label, onChange, disabl
             <input
                 type={type}
                 name={name}
-                className={styles.input}
+                className={styles.input + ' ' + styles.inputText}
                 value={value}
                 onChange={onChange}
                 disabled={Boolean(disabled)}
