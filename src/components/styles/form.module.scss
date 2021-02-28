@@ -6,6 +6,45 @@
   background-color: get-color(secondary, light);
 }
 
+.button {
+  box-shadow: get-dropshadow();
+  display: inline-block;
+  border: none;
+  padding: get-spacing(small) get-spacing(medium);
+  color: get-color(text);
+  background: get-color(text, lighter);
+  text-align: center;
+  outline: 0.1rem solid get-color(text, lighter);
+  width: 100%;
+  transition: all 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  &:hover:enabled,
+  &:focus:enabled {
+    cursor: pointer;
+    box-shadow: get-dropshadow();
+  }
+  
+  &:active {
+    background: get-color(text, lightest);
+  }
+
+  &:focus:enabled{
+    outline-color: get-color(text, lighter);
+  }
+
+  &:disabled {
+    background: get-color(text, lightest);
+    color: get-color(text, light);
+  }
+
+  @include media(large) {
+    width: auto;
+  }
+}
+
+
 .submit {
   background: get-color(primary, dark);
   outline-color: get-color(primary, dark);
@@ -178,44 +217,5 @@
   }
   100% {
     transform: translate(24px, 0);
-  }
-}
-
-
-.button {
-  box-shadow: get-dropshadow();
-  display: inline-block;
-  border: none;
-  padding: get-spacing(small) get-spacing(medium);
-  color: get-color(text);
-  background: get-color(text, lighter);
-  text-align: center;
-  outline: 0.1rem solid get-color(text, lighter);
-  width: 100%;
-  transition: all 250ms ease-in-out, transform 150ms ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  &:hover:enabled,
-  &:focus:enabled {
-    cursor: pointer;
-    box-shadow: get-dropshadow();
-  }
-  
-  &:active {
-    background: get-color(text, lightest);
-  }
-
-  &:focus:enabled{
-    outline-color: get-color(text, lighter);
-  }
-
-  &:disabled {
-    background: get-color(text, lightest);
-    color: get-color(text, light);
-  }
-
-  @include media(large) {
-    width: auto;
   }
 }

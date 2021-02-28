@@ -10,7 +10,7 @@ type ButtonProps = {
 
 export const Button = ({ handleClick, disabled, className, children }: ButtonProps) => (
     <button
-        className={styles.button + ' ' + className}
+        className={className + ' ' + styles.button}
         disabled={disabled}
         onClick={handleClick}
     >
@@ -27,7 +27,7 @@ type SubmitButtonProps = {
 export const SubmitButton = ({ handleSubmit, disabled = false, children }: SubmitButtonProps) => (
     <button
         type="submit"
-        className={styles.button + ' ' + styles.submit}
+        className={styles.submit + ' ' + styles.button}
         disabled={disabled}
         onClick={handleSubmit}
     >
