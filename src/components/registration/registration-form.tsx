@@ -23,7 +23,7 @@ interface FormData {
     email: string
     rideType: RideType | ''
     route: Brevet['route']
-    scheduleTime?: Date
+    scheduleTime: Date
     startTime: Date
     startLocation: string
     chapter: Brevet['chapter'] | '',
@@ -39,6 +39,7 @@ const defaultFormData: FormData = {
     rideType: '' as FormData["rideType"],
     route: '',
     startTime: new Date(),
+    scheduleTime: new Date(),
     startLocation: '',
     chapter: '',
     distance: '',
@@ -209,7 +210,7 @@ export const RegistrationForm = () => {
                     </CheckboxField>
                 </Callout>
                 <HiddenField name='route' value={formData.route} />
-                <HiddenField name='scheduleTime' value={formData.scheduleTime?.toString()} />
+                <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
                 <ErrorsList formErrors={formErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
                     Register

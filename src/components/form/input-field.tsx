@@ -92,7 +92,6 @@ export const DateField = ({ value, name, label, onChange, allowedRange, optional
                 {label}
                 {optional && ' (optional)'}
             </span>
-            <HiddenField name={name} value={value.toString()} />
             <DatePicker
                 showTimeSelect
                 wrapperClassName={styles.dateInputOverrides}
@@ -102,6 +101,7 @@ export const DateField = ({ value, name, label, onChange, allowedRange, optional
                 filterDate={allowedRange}
                 dateFormat="MMMM d HH:mm" />
         </label>
+        <HiddenField name={name} value={value.toString()} />
     </div>
 )
 
