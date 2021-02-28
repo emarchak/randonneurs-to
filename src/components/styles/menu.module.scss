@@ -38,6 +38,9 @@
 .trigger-button {
   padding: get-spacing('small');
   color:  get-color(text);
+  border: none;
+  outline: none;
+  box-shadow: none;
   font-family: get-font('header');
   font-size: 1.2rem;
   font-weight: bold;

@@ -1,0 +1,49 @@
+
+@import "theme";
+
+.registrationForm {
+    background-color: get-color(secondary, light);
+}
+
+.brevetTable {
+    background-color: get-color(background);
+    @include media(small) {
+        margin: 0 -1.0875rem 0 -1.0875rem;
+        width: 100vw;
+    }
+}
+
+.brevetRow {
+  &:hover,
+  &:focus {
+      background-color: get-color(background, darken);
+      cursor: pointer;
+  }
+}
+
+.brevetRowSelected {
+    &, &:hover, &:focus {
+    background-color: get-color(primary);
+    outline: 1px solid get-color(primary, dark);
+  }
+}
+
+.brevetRadio {
+    @include media(large) {
+      margin-left: 1rem
+    }
+}
+
+.brevetsShowMoreWrapper {
+    padding: 0 0;
+}
+
+.brevetsShowMore {
+    margin: 0 0;
+    padding: get-spacing('small');
+    width: 100%;
+
+    &:hover, &:focus {
+        background-color: get-color(primary, light);
+    }
+}

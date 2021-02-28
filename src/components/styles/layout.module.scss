@@ -31,8 +31,19 @@ $footer-height: 4.3rem;
   transform: scale(-1, 1);
 }
 
-.callout {
-  padding: get-spacing() get-spacing(large);
-  background-color: get-color(secondary, light);
+.callout, .calloutAlternative, .aside {
+  padding: get-spacing() get-spacing(large) get-spacing(small);
   margin-bottom: get-spacing();
+}
+
+.callout {
+  background-color: get-color(secondary, light);
+}
+
+.calloutAlternative {
+  background-color: get-color(tertiary, light);
+}
+
+.aside {
+  background-color: get-color(primary, desaturate);
 }

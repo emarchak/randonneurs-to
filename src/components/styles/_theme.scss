@@ -4,6 +4,7 @@ $theme-colors: (
   "primary": (
     "normal": #c5eada,
     "desaturate": desaturate(#c5eada, 90%),
+    "light": lighten(#c5eada, 10%),
     "dark": darken(#c5eada, 10%),
     "darkest": desaturate(darken(#c5eada, 20%), 10%),
   ),
@@ -15,6 +16,7 @@ $theme-colors: (
   ),
   "tertiary": (
     "normal": #88b2b8,
+    "light": lighten(#88b2b8, 20%),
   ),
   "success": (
     "normal": #28a745,
@@ -22,6 +24,8 @@ $theme-colors: (
   "text": (
     "normal": #333333,
     "light": lighten(#333333, 20%),
+    "lighter": lighten(#333333, 60%),
+    "lightest": lighten(#333333, 75%)
   ),
   "info": (
     "normal": #17a2b8,
@@ -29,6 +33,10 @@ $theme-colors: (
   "warning": (
     "normal": #ffc107,
   ),
+  "background": (
+    "normal": #fff,
+    "darken": lighten(#333333, 75%),
+  )
 );
 
 $font-family-serif: "EB Garamond", serif;
@@ -49,7 +57,7 @@ $theme-spacing: (
 $theme-font-size: (
   "large": 2.25rem,
   "medium": 1.62671rem,
-  "small": 0.75rem,
+  "small": 0.85rem,
   "normal": 1rem,
 );
 

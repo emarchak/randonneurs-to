@@ -1,18 +1,13 @@
 import React, { useState, ChangeEvent } from "react"
 import { ContentWrapper } from "../content-wrapper"
+import { ErrorsList } from "../form/errors-list"
 import { InputField } from "../form/input-field"
+import { SubmitButton } from "../form/buttons"
+import { emailRegex, stravaRegex } from "../form/regex"
+import { formSubmit } from "../form/helpers"
 import styles from "../styles/form.module.scss"
 
 const formName = "clubaudaxadistance"
-
-const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-const stravaRegex = /^((?:https?:)?\/\/)?((?:www)\.)?((?:strava\.com))(\/activities\/)([\d\-]+)?$/
-
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&")
-}
 
 const checkForErrors = (fields: FormData) =>
   Object.entries(fields)
@@ -64,18 +59,12 @@ export const LonelinessForm = ({ children }: Props) => {
       setFormState(null)
       return
     }
-    try {
-      const body = encode({ "form-name": formName, ...formData })
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body,
-      })
 
-      if (response.ok) {
-        setFormState("submitted")
-      }
-    } catch (err) {
+    const success = await formSubmit(formName, { ...formData })
+
+    if (success) {
+      setFormState("submitted")
+    } else {
       setFormErrors(["Server error! Try again later."])
     }
   }
@@ -117,23 +106,13 @@ export const LonelinessForm = ({ children }: Props) => {
         <InputField name="name" label="Your name" value={formData.name} onChange={handleChange} />
         <InputField name="email" label="Your email" type="email" value={formData.email} onChange={handleChange} />
         <InputField name="strava" label="Strava activity url" value={formData.strava} onChange={handleChange} />
-        {hasError && (
-          <ul className={styles.errorList} aria-live="polite">
-            {formErrors.map((message, i) => (
-              <li className={styles.error} key={i}>
-                {message}
-              </li>
-            ))}
-          </ul>
-        )}
-        <button
-          type="submit"
-          className={styles.submit}
+        <ErrorsList formErrors={formErrors} />
+        <SubmitButton
           disabled={hasError && !isDirty}
-          onClick={handleSubmit}
+          handleSubmit={handleSubmit}
         >
           Share your journey
-        </button>
+        </SubmitButton>
       </ContentWrapper>
     </form>
   )
