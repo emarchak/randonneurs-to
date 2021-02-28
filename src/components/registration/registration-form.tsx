@@ -9,7 +9,7 @@ import { Route, RideType, Brevet } from './types'
 import { SelectBrevets } from './components/select-brevets'
 
 import styles from '../styles/registration.module.scss'
-import { Aside } from '../callout'
+import { Callout } from '../callout'
 import { SelectPermanents } from './components/select-permanents'
 import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
 
@@ -199,7 +199,7 @@ export const RegistrationForm = () => {
                 <DateField label={fieldLabel['startTime']} name="startTime" value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
                 <InputField label={fieldLabel['startLocation']} name="startLocation" value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
                 <InputField label={fieldLabel['notes']} name="notes" value={formData.notes} onChange={handleInputChange} optional />
-                <Aside>
+                <Callout alternative>
                     <h2>COVID-19 risk awareness</h2>
                     <CheckboxField name="ocaConsent" value={formData.ocaConsent} onChange={handleCheckboxChange}>
                         I have read the <a href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">Ontario Cycling Association's Progressive Return</a> to Cycling Policy and understand the risks.
@@ -207,11 +207,11 @@ export const RegistrationForm = () => {
                     <CheckboxField name="roConsent" value={formData.roConsent} onChange={handleCheckboxChange}>
                         I have read <a href="http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf">Randonneurs Ontario's Club Risk Management Policy</a> and understand my responsibilities.
                     </CheckboxField>
-                </Aside>
+                </Callout>
                 <ErrorsList formErrors={formErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
                     Register
-            </SubmitButton>
+                </SubmitButton>
             </ContentWrapper>
         </form >
     )

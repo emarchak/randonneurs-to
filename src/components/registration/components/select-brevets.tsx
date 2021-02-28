@@ -6,6 +6,7 @@ import { useBrevets } from '../hooks/useBrevets'
 import { BrevetDescription } from './brevet-description'
 
 import styles from '../../styles/registration.module.scss'
+import { Button } from '../../form/buttons'
 
 const minBrevet = 5
 const fieldSetID = 'upcoming_brevets'
@@ -20,7 +21,6 @@ const formatDate = (timestamp: number) => {
 
 const BrevetRow = ({ brevet, isSelected, handleChange }: { brevet: Brevet, isSelected: boolean, handleChange: (brevet) => void }) => {
     const onChange = (evt) => {
-        evt.preventDefault()
         handleChange(brevet)
     }
 
@@ -49,7 +49,7 @@ const BrevetRow = ({ brevet, isSelected, handleChange }: { brevet: Brevet, isSel
                     <br />
                     <small>{brevet.startloc}</small>
                     <br />
-                    <small>(<a href={brevet.rwgps} target="_blank">View {brevet.route} </a>)</small>
+                    {brevet.rwgps && <small>(<a href={brevet.rwgps} target="_blank">View {brevet.route} route</a>)</small>}
                 </label>
             </td>
         </tr>
@@ -101,13 +101,13 @@ export const SelectBrevets = ({ onChange }: Props) => {
                 </tbody>
                 <tfoot>
                     <tr><td colSpan={6} className={styles.brevetsShowMoreWrapper}>
-                        <button
+                        <Button
                             disabled={(displayBrevets > brevets.length)}
-                            onClick={handleShowMore}
+                            handleClick={handleShowMore}
                             className={styles.brevetsShowMore}
                         >
                             Show more
-                    </button>
+                    </Button>
                     </td></tr>
                 </tfoot>
 
