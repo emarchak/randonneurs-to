@@ -121,7 +121,7 @@ tfoot td {
 
 button {
   box-shadow: get-dropshadow();
-  display: block;
+  display: inline-block;
   border: none;
   padding: get-spacing(small) get-spacing(medium);
   color: get-color(text);

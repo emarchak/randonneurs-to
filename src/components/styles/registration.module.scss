@@ -29,7 +29,9 @@
 }
 
 .brevetRadio {
-    margin-left: 1rem
+    @include media(large) {
+      margin-left: 1rem
+    }
 }
 
 .brevetsShowMoreWrapper {
@@ -37,6 +39,7 @@
 }
 
 .brevetsShowMore {
+    margin: 0 0;
     padding: get-spacing('small');
     width: 100%;
 
