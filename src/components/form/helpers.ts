@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 
 const formEncode = data => {
     return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key].toString()))
         .join("&")
 }
 

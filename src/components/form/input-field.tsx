@@ -42,7 +42,7 @@ type SelectFieldProps = FieldProps & {
         value: string
         label: string
     }[]
-    onChange: (evt: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void
+    onChange: (evt: ChangeEvent<HTMLSelectElement>) => void
 }
 
 export const SelectField = ({ name, options, value, label, onChange, disabled, optional }: SelectFieldProps) => (
