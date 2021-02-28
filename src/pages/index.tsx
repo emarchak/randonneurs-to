@@ -40,10 +40,7 @@ const IndexPage = () => {
       <SEO title="Home" />
       <ContentWrapper>
         <Callout>
-          All official brevets, permanents and populaires are cancelled until
-          further notice. Please check the{" "}
-          <a href="http://randonneursontario.ca">Randonneurs Ontario website</a>{" "}
-          for updates.
+          <p>Sanctioned events are being approved on a case by case basis. <Link to="/registration">Register for upcoming events</Link>!</p>
         </Callout>
         <div className={styles.homeWrapper}>
           <section className={styles.updates}>
