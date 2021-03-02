@@ -12,7 +12,7 @@ const Registration = () => {
       <ContentWrapper>
         <h1>Register to ride</h1>
 
-        <p>For all sanctioned rides, we require riders to sign the OCA consent waiver and read their Progressive Return to Cycling Policy.</p>
+        <p>For all sanctioned rides, we require riders to have OCA membership and read the <a href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">Progressive Return to Cycling Policy</a>.</p>
 
         <p>Please <a href="https://www.ontariocycling.org">visit the OCA Website for the latest information</a> regarding permissible club/team and group riding activities. </p>
 

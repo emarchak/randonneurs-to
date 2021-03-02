@@ -1,29 +1,25 @@
 import { useAllowedStartTimes } from "./useAllowedStartTimes"
 
+const today = new Date('August 18 2019')
+const daysFromToday = (number: number) => new Date(new Date(today).setDate(today.getDate() + number))
+
 describe('useAllowedStartTimes', () => {
-    const today = new Date('August 18 2019')
     const { allowedStartTimes } = useAllowedStartTimes(today)
 
-    it('requires the start date to be > 1 week in the future', () => {
-        expect(allowedStartTimes(new Date('August 11 2019'))).toBeFalsy()
-        expect(allowedStartTimes(new Date('August 26 2019'))).toBeTruthy()
+    it('requires the start date to be > 2 weeks in the future for unscheduled events', () => {
+        expect(allowedStartTimes(daysFromToday(8))).toBeFalsy()
+        expect(allowedStartTimes(daysFromToday(14))).toBeTruthy()
     })
 
-    it('requires start date to be within -2 / +1 weeks from scheduled date', () => {
-        const scheduledDate = new Date('October 1 2019')
+    it('requires start date to be on scheduled date', () => {
+        const notAllowed = daysFromToday(2)
 
-        expect(allowedStartTimes(new Date('September 14 2019'), scheduledDate)).toBeFalsy()
-        expect(allowedStartTimes(new Date('September 17 2019'), scheduledDate)).toBeTruthy()
+        expect(allowedStartTimes(daysFromToday(2), notAllowed)).toBeFalsy()
+        expect(allowedStartTimes(daysFromToday(7), notAllowed)).toBeFalsy()
 
-        expect(allowedStartTimes(new Date('October 31 2019'), scheduledDate)).toBeFalsy()
-        expect(allowedStartTimes(new Date('October 8 2019'), scheduledDate)).toBeTruthy()
-    })
-
-    it('requires start date to be > 1 week in the future and +1 week from scheduled date', () => {
-        const scheduledDate = new Date('August 20 2019')
-
-        expect(allowedStartTimes(new Date('August 21 2019'), scheduledDate)).toBeFalsy()
-        expect(allowedStartTimes(new Date('August 27 2019'), scheduledDate)).toBeTruthy()
-        expect(allowedStartTimes(new Date('October 1 2019'), scheduledDate)).toBeFalsy()
+        const allowed = daysFromToday(8)
+        expect(allowedStartTimes(daysFromToday(7), allowed)).toBeFalsy()
+        expect(allowedStartTimes(daysFromToday(9), allowed)).toBeFalsy()
+        expect(allowedStartTimes(daysFromToday(8), allowed)).toBeTruthy()
     })
 })
