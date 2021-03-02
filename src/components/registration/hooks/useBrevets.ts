@@ -11,6 +11,8 @@ type Response = {
 
 const lowercaseKeys = (o) => Object.keys(o).reduce((c, k) => (c[k.toLowerCase()] = o[k], c), {})
 
+const hotFix2021RougeRamble = (event) => ({ ...event, Unixtime: event.Unixtime === 1615734000 ? 1615730400 : event.Unixtime })
+
 export const useBrevets = (date = today) => {
     const [response, setResponse] = useState<Response>({
         loading: true,
@@ -27,7 +29,7 @@ export const useBrevets = (date = today) => {
                 if (body.status === 'ok') {
                     setResponse({
                         loading: false,
-                        brevets: body.schedule.map(lowercaseKeys) as Brevet[]
+                        brevets: body.schedule.map(hotFix2021RougeRamble).map(lowercaseKeys) as Brevet[]
                     })
                 }
             }
