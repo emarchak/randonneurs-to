@@ -15,7 +15,7 @@ import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
 
 const formName = 'registration'
 
-const rideTypes = [{ value: 'brevet', label: 'Brevet' }, { value: 'permanent', label: 'Permanent' }]
+const rideTypes = [{ value: 'brevet', label: 'Brevet or populaire' }, { value: 'permanent', label: 'Permanent' }]
 
 type FormState = "submitted" | "dirty" | null
 interface FormData {
