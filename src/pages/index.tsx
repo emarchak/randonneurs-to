@@ -1,19 +1,34 @@
-import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
-import Img from "gatsby-image"
-import { Layout } from "../components/layout"
-import { SEO } from "../components/seo"
-import { ContentWrapper } from "../components/content-wrapper"
-import { Callout } from "../components/callout"
-import ClubAudax from "./assets/ClubAudax.svg"
-import styles from "./styles/index.module.scss"
+import React from 'react'
+import { Link, graphql, useStaticQuery } from 'gatsby'
+import { getDateTimeLong } from '../helpers'
+import Img from 'gatsby-image'
+import { Layout } from '../components/layout'
+import { SEO } from '../components/seo'
+import { ContentWrapper } from '../components/content-wrapper'
+import { Callout } from '../components/callout'
+import ClubAudax from './assets/ClubAudax.svg'
+import styles from './styles/index.module.scss'
+
+const today = new Date(Date.now())
 
 const IndexPage = () => {
   const {
     allFile: { nodes: images },
+    allEvent: { nodes: events }
   } = useStaticQuery(
     graphql`
       query {
+        allEvent(filter: {season: {gte:2021}, chapter: {eq: "Toronto"}}) {
+          nodes {
+            id
+            route
+            distance
+            event
+            rwgps
+            startloc
+            time
+          }
+        }
         allFile(
           filter: {
             extension: { regex: "/(jpg|JPG|jpeg)/" }
@@ -35,26 +50,49 @@ const IndexPage = () => {
     `
   )
 
+
+  const futureEvents = events.filter(event => new Date(event.time) > today)
+
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title='Home' />
       <ContentWrapper>
         <Callout>
           <p>Sanctioned events are being approved on a case by case basis. <Link to="/registration">Register for upcoming events</Link>!</p>
         </Callout>
         <div className={styles.homeWrapper}>
           <section className={styles.updates}>
+            <h3>Upcoming events</h3>
+            <ul className={styles.eventWrapper}>
+              {futureEvents.slice(0, 2).map(event => (
+                <li key={event.id} className={styles.eventRow}>
+
+                  <strong>{event.route} {event.distance} </strong><br />
+                  <small>
+                    {getDateTimeLong(new Date(event.time))}<br />
+                    {event.startloc}<br />
+                    {event.rwgps && (<a href={event.rwgps} target="_blank">View {event.route} route</a>)}
+                  </small>
+                </li>
+              ))}
+            </ul>
+            <footer className={styles.eventFooter}>
+              <Link className={styles.eventCta} to='/registration'>Register</Link>
+            </footer>
+          </section>
+
+          <section className={styles.updates}>
             <p>
               <Link
-                style={{ borderBottomWidth: 0, display: "block" }}
-                to="/loneliness"
+                style={{ borderBottomWidth: 0, display: 'block' }}
+                to='/loneliness'
               >
-                <ClubAudax alt={"Club audax à distance"} />
+                <ClubAudax alt={'Club audax à distance'} />
               </Link>
             </p>
             <p>
               If we must be alone in these tough times, let us be alone
-              together. <Link to="/loneliness">Learn more.</Link>
+              together. <Link to='/loneliness'>Learn more.</Link>
             </p>
           </section>
 
