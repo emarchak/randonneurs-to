@@ -1,5 +1,3 @@
-declare module '*.scss'
-
 declare module "*.svg" {
   export const content: React.ReactType
 }
