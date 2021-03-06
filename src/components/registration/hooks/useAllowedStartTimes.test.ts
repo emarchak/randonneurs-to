@@ -1,17 +1,29 @@
+import { advanceTo, clear } from 'jest-date-mock'
 import { useAllowedStartTimes } from "./useAllowedStartTimes"
 
-const today = new Date('August 18 2019')
-const daysFromToday = (number: number) => new Date(new Date(today).setDate(today.getDate() + number))
+const daysFromToday = (number: number) => {
+    const today = new Date(Date.now())
+    return new Date(today.setDate(today.getDate() + number))
+}
 
 describe('useAllowedStartTimes', () => {
-    const { allowedStartTimes } = useAllowedStartTimes(today)
+    beforeEach(() => {
+        advanceTo(new Date('August 18 2019'))
+    })
+
+    afterEach(() => {
+        clear()
+    })
 
     it('requires the start date to be > 2 weeks in the future for unscheduled events', () => {
+        const { allowedStartTimes } = useAllowedStartTimes()
+
         expect(allowedStartTimes(daysFromToday(8))).toBeFalsy()
         expect(allowedStartTimes(daysFromToday(14))).toBeTruthy()
     })
 
     it('requires start date to be on scheduled date', () => {
+        const { allowedStartTimes } = useAllowedStartTimes()
         const notAllowed = daysFromToday(2)
 
         expect(allowedStartTimes(daysFromToday(2), notAllowed)).toBeFalsy()
