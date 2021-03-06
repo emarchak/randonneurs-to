@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'React'
+import React, { ChangeEvent, useState } from 'react'
 import { SelectField } from '../../form/input-field'
 import { PermanentDescription } from './permanent-description'
 import { graphql } from 'gatsby'
