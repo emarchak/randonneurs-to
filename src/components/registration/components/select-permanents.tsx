@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState } from 'React'
 import { SelectField } from '../../form/input-field'
 import { PermanentDescription } from './permanent-description'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import { Route } from '../types'
 import { useRoutes } from '../hooks/useRoutes'
 
