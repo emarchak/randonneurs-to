@@ -18,7 +18,6 @@
     "gatsby-source-filesystem": "^2.0.36",
     "gatsby-source-google-spreadsheets": "^3.0.5",
     "gatsby-transformer-sharp": "^2.1.19",
-    "gatsby-transformer-typescript-css-modules": "^1.0.14",
     "isomorphic-unfetch": "^3.0.0",
     "jshint": "^2.11.0",
     "netlify-cli": "^2.40.0",
@@ -29,7 +28,6 @@
     "react-burger-menu": "^2.6.13",
     "react-datepicker": "^3.3.0",
     "react-dom": "^16.8.6",
-    "react-flatpickr": "^3.10.6",
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
@@ -43,7 +41,8 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.4.0",
     "jest-date-mock": "^1.0.8",
-    "prettier": "^1.17.1"
+    "prettier": "^1.17.1",
+    "typed-scss-modules": "^4.1.0"
   },
   "keywords": [
     "gatsby"
@@ -52,7 +51,8 @@
   "scripts": {
     "build": "gatsby build",
     "build:production": "jest && gatsby build",
-    "develop": "gatsby develop",
+    "develop": "gatsby develop & ./node_modules/.bin/tsm src -w",
+    "develop:style": "./node_modules/.bin/tsm src",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "serve": "gatsby serve",
     "test": "jest",
