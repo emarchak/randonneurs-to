@@ -21,7 +21,6 @@
     "isomorphic-unfetch": "^3.0.0",
     "jshint": "^2.11.0",
     "netlify-cli": "^3.10.6",
-    "node-sass": "^5.0.0",
     "postcss": "^8.2.7",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -38,8 +37,10 @@
     "babel-preset-gatsby": "^1.0.0",
     "eslint": "^7.21.0",
     "eslint-plugin-shopify": "^35.0.0",
+    "gatsby-plugin-scss-typescript": "^4.0.13",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.4.0",
+    "node-sass": "^4.14.1",
     "prettier": "^1.17.1"
   },
   "keywords": [

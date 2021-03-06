@@ -5,7 +5,7 @@ import { Brevet } from '../types'
 import { useBrevets } from '../hooks/useBrevets'
 import { BrevetDescription } from './brevet-description'
 
-import styles from '../../styles/registration.module.scss'
+import * as styles from '../../styles/registration.module.scss'
 import { Button } from '../../form/buttons'
 
 const minBrevet = 5

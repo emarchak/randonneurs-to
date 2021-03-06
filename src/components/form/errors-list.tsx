@@ -1,6 +1,6 @@
 import React from "react"
 
-import styles from "../styles/form.module.scss"
+import * as styles from "../styles/form.module.scss"
 
 type Props = {
     formErrors: String[]

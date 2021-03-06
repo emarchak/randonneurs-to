@@ -6,7 +6,7 @@ import { SEO } from "../components/seo"
 import { ContentWrapper } from "../components/content-wrapper"
 import { Callout } from "../components/callout"
 import ClubAudax from "./assets/ClubAudax.svg"
-import styles from "./styles/index.module.scss"
+import * as styles from "./styles/index.module.scss"
 
 const IndexPage = () => {
   const {

@@ -10,7 +10,7 @@ import { LonelinessForm, LonelinessRoute } from "../components/loneliness"
 import Routes from "../data/loneliness-routes.yaml"
 import Riders from "../data/loneliness-riders.yaml"
 import Logo from "./assets/ClubAudax.svg"
-import style from "./styles/loneliness.module.scss"
+import * as style from "./styles/loneliness.module.scss"
 
 const Page = () => {
   const {

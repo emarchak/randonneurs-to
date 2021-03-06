@@ -1,7 +1,7 @@
 import React from "react"
 
 import { getDateString } from "../../helpers"
-import style from "../styles/loneliness-route.module.scss"
+import * as style from "../styles/loneliness-route.module.scss"
 
 type Props = {
   name: string

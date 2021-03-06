@@ -5,7 +5,7 @@ import { InputField } from "../form/input-field"
 import { SubmitButton } from "../form/buttons"
 import { emailRegex, stravaRegex } from "../form/regex"
 import { formSubmit } from "../form/helpers"
-import styles from "../styles/form.module.scss"
+import * as styles from "../styles/form.module.scss"
 
 const formName = "clubaudaxadistance"
 

@@ -8,7 +8,7 @@ import { emailRegex } from '../form/regex'
 import { Route, RideType, Brevet } from './types'
 import { SelectBrevets } from './components/select-brevets'
 
-import styles from '../styles/registration.module.scss'
+import * as styles from '../styles/registration.module.scss'
 import { Callout } from '../callout'
 import { SelectPermanents } from './components/select-permanents'
 import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
