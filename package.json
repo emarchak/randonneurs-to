@@ -57,7 +57,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "build:production": "jest && gatsby build",
+    "build:production": "jest && gatsby clean && gatsby build",
     "develop": "gatsby develop & ./node_modules/.bin/tsm src -w",
     "develop:style": "./node_modules/.bin/tsm src",
     "format": "prettier --write src/**/*.{ts,tsx}",
