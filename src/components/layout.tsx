@@ -45,7 +45,6 @@ export const Layout = ({ children }: Props) => {
         <div id={menuConfig.outerContainerId}>
           <Menu isOpen={menuOpen} onMenuChange={handleMenuChange} />
           <div
-            className={styles.mainWraper}
             id={menuConfig.pageWrapId}
           >
             <MenuTrigger onTrigger={toggleMenu} />
