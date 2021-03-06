@@ -11,7 +11,7 @@ import { Footer } from "./footer"
 import { StaticQuery, graphql } from "gatsby"
 import { Menu, MenuState, MenuTrigger, menuConfig } from './menu'
 
-// import "normalize.css"
+import "normalize.css"
 import * as styles from './styles/layout.module.scss'
 import "./styles/index.scss"
 

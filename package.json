@@ -21,6 +21,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "jshint": "^2.11.0",
     "netlify-cli": "^3.10.6",
+    "normalize.css": "^8.0.1",
     "postcss": "^8.2.7",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
