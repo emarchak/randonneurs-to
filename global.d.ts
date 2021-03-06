@@ -1,10 +1,5 @@
-declare module "*.scss" {
-  const content: { [className: string]: string }
-  export default content
-}
-
 declare module "*.svg" {
-  export const content: React.ReactType
+  export const content: React.ElementType
 }
 
 declare namespace NodeJS {

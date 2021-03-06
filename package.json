@@ -43,7 +43,8 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.4.0",
     "jest-date-mock": "^1.0.8",
-    "prettier": "^1.17.1"
+    "prettier": "^1.17.1",
+    "typed-scss-modules": "^4.1.0"
   },
   "keywords": [
     "gatsby"
@@ -51,8 +52,9 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "build:production": "jest && gatsby build",
-    "develop": "gatsby develop",
+    "build:production": "jest && ./node_modules/.bin/tsm src && gatsby build",
+    "develop": "gatsby develop & ./node_modules/.bin/tsm src -w",
+    "develop:style": "./node_modules/.bin/tsm src",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "serve": "gatsby serve",
     "test": "jest",
