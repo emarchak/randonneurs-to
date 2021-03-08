@@ -33,26 +33,21 @@ describe('gatsby-source-ro', () => {
 
         expect(createNodeId).toHaveBeenCalledWith('event-884')
         expect(createNode).toHaveBeenCalledWith(expect.objectContaining({
-            'time': '2021-10-09T12:00:00.000Z',
+            'date': '2021-10-09T12:00:00.000Z',
             'rwgpsId': '25673993',
             'season': 2021,
         }))
-        expect(createContentDigest).toHaveBeenCalledWith({
+        expect(createContentDigest).toHaveBeenCalledWith(expect.objectContaining({
             'chapter': 'Toronto',
-            'contact': 'http://randonneurs.to/registration',
-            'date': '2021-10-09',
-            'distance': '200',
+            'distance': 200,
             'event': 'Brevet',
-            'organizer': 'Register',
             'route': 'Castle',
-            'rwgps': 'https://ridewithgps.com/routes/25673993',
+            'rwgpsUrl': 'https://ridewithgps.com/routes/25673993',
             'rwgpsId': '25673993',
-            'sched_id': '884',
             'season': 2021,
-            'startloc': 'Grimsby Information Center, 424 S Service Rd, Grimsby',
-            'stime': '08:00:00',
-            'time': '2021-10-09T12:00:00.000Z',
-            'unixtime': 1633780800,
-        })
+            'startLocation': 'Grimsby Information Center, 424 S Service Rd, Grimsby',
+            'date': '2021-10-09T12:00:00.000Z',
+
+        }))
     })
 })

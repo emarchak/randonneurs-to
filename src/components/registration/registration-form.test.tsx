@@ -38,15 +38,12 @@ jest.mock('../../hooks/useBrevets', () => ({
                 chapter: 'Toronto',
                 event: 'populaire',
                 distance: '60',
-                date: '2021-03-14',
+                date: '2021-10-09T12:00:00.000Z',
                 route: 'Rouge Ramble 60',
-                startloc: 'Second Cup, 355 Danforth Ave, Toronto',
-                stime: '10:00:00',
-                organizer: 'Register',
-                sched_id: 1,
-                contact: 'https://example.com',
-                rwgps: 'https://rwgps.com',
-                unixtime: 1615734000
+                startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
+                id: 1,
+                rwgpsUrl: 'https://rwgps.com',
+
             }]
     })
 }))
