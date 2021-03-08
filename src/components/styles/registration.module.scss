@@ -7,10 +7,6 @@
 
 .brevetTable {
     background-color: get-color(background);
-    // @include media(small) {
-    //     margin: 0 -1.0875rem 0 -1.0875rem;
-    //     width: 100vw;
-    // }
 
     @include media(small) {
         thead, tbody, th, td, tr { 

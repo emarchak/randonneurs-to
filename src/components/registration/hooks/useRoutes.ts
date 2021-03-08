@@ -1,8 +1,15 @@
 
 import { graphql, useStaticQuery } from 'gatsby'
 import { useMemo } from 'react'
-import { Route } from '../../../hooks/useBrevets'
+import { Chapter } from '../../../hooks/useBrevets'
 
+export type Route = {
+  chapter: Chapter
+  distance: number
+  startLocation: string
+  routeName: string
+  id: string
+}
 
 export const useRoutes = () => {
   const { allGoogleRoutesSheet: { edges } } = useStaticQuery(graphql`
