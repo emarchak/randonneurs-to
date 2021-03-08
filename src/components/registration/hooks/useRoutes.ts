@@ -1,7 +1,7 @@
 
 import { graphql, useStaticQuery } from 'gatsby'
 import { useMemo } from 'react'
-import { Route } from '../types'
+import { Route } from '../../../hooks/useBrevets'
 
 
 export const useRoutes = () => {

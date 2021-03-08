@@ -8,7 +8,7 @@ import { ContentWrapper } from '../components/content-wrapper'
 import { Callout } from '../components/callout'
 import ClubAudax from './assets/ClubAudax.svg'
 import styles from './styles/index.module.scss'
-import { useBrevets } from '../components/registration/hooks/useBrevets'
+import { useBrevets } from '../hooks/useBrevets'
 
 const pageQuery = graphql`
 query {

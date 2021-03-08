@@ -1,7 +1,6 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationForm } from './registration-form'
-import { Route } from './types'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 
 jest.mock('isomorphic-unfetch', () => ({
@@ -30,7 +29,7 @@ jest.mock('./hooks/useRoutes', () => ({
     }),
 }))
 
-jest.mock('./hooks/useBrevets', () => ({
+jest.mock('../../hooks/useBrevets', () => ({
     __esModule: true,
     useBrevets: jest.fn().mockReturnValue({
         loading: false,
