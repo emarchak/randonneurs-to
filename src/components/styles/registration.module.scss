@@ -7,9 +7,27 @@
 
 .brevetTable {
     background-color: get-color(background);
+    // @include media(small) {
+    //     margin: 0 -1.0875rem 0 -1.0875rem;
+    //     width: 100vw;
+    // }
+
     @include media(small) {
-        margin: 0 -1.0875rem 0 -1.0875rem;
-        width: 100vw;
+        thead, tbody, th, td, tr { 
+            display: block; 
+        }
+        
+        thead tr { 
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        td {
+          position: relative; 
+          padding: 0 get-spacing(small);
+        }
+        td:first-child {padding-top: get-spacing(small)}
+        td:last-child {padding-bottom: get-spacing(small)}
     }
 }
 
@@ -35,7 +53,7 @@
 }
 
 .brevetsShowMoreWrapper {
-    padding: 0 0;
+    padding: 0 !important;
 }
 
 .brevetsShowMore {

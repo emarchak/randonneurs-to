@@ -11,23 +11,22 @@ import { Button } from '../../form/buttons'
 const minBrevet = 5
 const fieldSetID = 'upcoming_brevets'
 
-
 const BrevetRow = ({ brevet, isSelected, handleChange }: { brevet: Brevet, isSelected: boolean, handleChange: (brevet) => void }) => {
-    const onChange = (evt) => {
+    const onChange = () => {
         handleChange(brevet)
     }
 
-    const id = `brevet${brevet.sched_id}`
     const classNames = `${styles.brevetRow} ${isSelected ? styles.brevetRowSelected : ''}`
-    const date = new Date(brevet.unixtime * 1000)
+    const date = new Date(brevet.date)
+
     return (
         <tr className={classNames} onClick={onChange} >
             <td>
                 <input
                     type="radio"
-                    aria-labelledby={id}
+                    aria-labelledby={brevet.id}
                     name={fieldSetID}
-                    value={brevet.sched_id}
+                    value={brevet.id}
                     onChange={onChange}
                     checked={isSelected}
                     className={styles.brevetRadio}
@@ -38,11 +37,13 @@ const BrevetRow = ({ brevet, isSelected, handleChange }: { brevet: Brevet, isSel
             <td>{brevet.chapter}</td>
             <td>{brevet.distance}{' '}{brevet.event}</td>
             <td>
-                <label id={id} htmlFor={brevet.sched_id}><strong>{brevet.route}</strong>
+                <label id={brevet.id} htmlFor={brevet.id}><strong>{brevet.route}</strong>
                     <br />
-                    <small>{brevet.startloc}</small>
-                    <br />
-                    {brevet.rwgps && <small>(<a href={brevet.rwgps} target="_blank">View {brevet.route} route</a>)</small>}
+                    <small>{brevet.startLocation}</small>
+                    {brevet.rwgpsUrl && <>
+                        <br />
+                        <small>(<a href={brevet.rwgpsUrl} target="_blank">View {brevet.route} route</a>)</small>
+                    </>}
                 </label>
             </td>
         </tr>
@@ -54,13 +55,13 @@ type Props = {
 }
 
 export const SelectBrevets = ({ onChange }: Props) => {
-    const { loading, brevets } = useBrevets()
+    const { loading, brevets } = useBrevets({})
     const [displayBrevets, setDisplay] = useState<number>(minBrevet)
-    const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['sched_id']>('')
+    const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['id']>('')
 
     const handleChange = (brevet: Brevet) => {
         onChange(brevet)
-        setSelectedBrevetId(brevet.sched_id)
+        setSelectedBrevetId(brevet.id)
     }
 
     const handleShowMore = (evt) => {
@@ -89,7 +90,7 @@ export const SelectBrevets = ({ onChange }: Props) => {
                 </tr></thead>
                 <tbody>
                     {brevets.slice(0, displayBrevets).map((brevet, i) => (
-                        <BrevetRow key={i} brevet={brevet} handleChange={handleChange} isSelected={selectedBrevetId === brevet.sched_id} />
+                        <BrevetRow key={i} brevet={brevet} handleChange={handleChange} isSelected={selectedBrevetId === brevet.id} />
                     ))}
                 </tbody>
                 <tfoot>

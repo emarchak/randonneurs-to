@@ -12,15 +12,14 @@ export type Route = {
 
 export type Brevet = {
     chapter: Chapter
-    contact: string
-    date: string
-    distance: string
+    distance: number
     event: RideType
+    id: string
     organizer: string
     route: string
-    rwgps: string
-    startloc: string
-    sched_id: string
-    stime: string
-    unixtime: number
+    rwgpsUrl: string
+    rwgpsId: number
+    season: number
+    startLocation: string
+    date: Date
 }

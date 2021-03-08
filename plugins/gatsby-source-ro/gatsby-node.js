@@ -22,7 +22,6 @@ exports.sourceNodes = async ({
 
     try {
         const response = await fetch(RO_ENDPOINT)
-
         const data = await response.json()
 
         if (data.status !== 'ok') {
@@ -33,8 +32,11 @@ exports.sourceNodes = async ({
             const eventDate = new Date(rawEvent.unixtime * 1000)
             const event = {
                 ...rawEvent,
+                distance: parseInt(rawEvent.distance),
+                rwgpsUrl: rawEvent.rwgps,
                 rwgpsId: rawEvent.rwgps.match(rwgpsRegex)?.pop() || '',
-                time: eventDate.toISOString(),
+                startLocation: rawEvent.startloc,
+                date: eventDate.toISOString(),
                 season: eventDate.getFullYear()
             }
 
@@ -64,12 +66,13 @@ exports.createSchemaCustomization = ({ actions }) => {
             Simcoe
         }
         enum RideType {
-            Brevet
-            Permanent
-            Fleche
-            Populaire
+            brevet
+            permanent
+            fleche
+            populaire
         }
         type Event implements Node {
+            rwgpsId: Int
             chapter: Chapter
             event: RideType
         }

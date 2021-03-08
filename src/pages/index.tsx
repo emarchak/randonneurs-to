@@ -8,50 +8,35 @@ import { ContentWrapper } from '../components/content-wrapper'
 import { Callout } from '../components/callout'
 import ClubAudax from './assets/ClubAudax.svg'
 import styles from './styles/index.module.scss'
+import { useBrevets } from '../components/registration/hooks/useBrevets'
 
-const today = new Date(Date.now())
+const pageQuery = graphql`
+query {
+  allFile(
+    filter: {
+      extension: { regex: "/(jpg|JPG|jpeg)/" }
+      relativeDirectory: { eq: "gallery" }
+    }
+    limit: 9
+  ) {
+    nodes {
+      name
+      childImageSharp {
+        fluid(maxWidth: 150, maxHeight: 150, quality: 100) {
+          ...GatsbyImageSharpFluid
+          presentationWidth
+        }
+      }
+    }
+  }
+}
+`
 
 const IndexPage = () => {
   const {
     allFile: { nodes: images },
-    allEvent: { nodes: events }
-  } = useStaticQuery(
-    graphql`
-      query {
-        allEvent(filter: {season: {gte:2021}, chapter: {eq: "Toronto"}}) {
-          nodes {
-            id
-            route
-            distance
-            event
-            rwgps
-            startloc
-            time
-          }
-        }
-        allFile(
-          filter: {
-            extension: { regex: "/(jpg|JPG|jpeg)/" }
-            relativeDirectory: { eq: "gallery" }
-          }
-          limit: 9
-        ) {
-          nodes {
-            name
-            childImageSharp {
-              fluid(maxWidth: 150, maxHeight: 150, quality: 100) {
-                ...GatsbyImageSharpFluid
-                presentationWidth
-              }
-            }
-          }
-        }
-      }
-    `
-  )
-
-
-  const futureEvents = events.filter(event => new Date(event.time) > today)
+  } = useStaticQuery(pageQuery)
+  const { brevets } = useBrevets({ chapter: 'Toronto' })
 
   return (
     <Layout>
@@ -64,14 +49,13 @@ const IndexPage = () => {
           <section className={styles.updates}>
             <h3>Upcoming events</h3>
             <ul className={styles.eventWrapper}>
-              {futureEvents.slice(0, 2).map(event => (
+              {brevets.slice(0, 2).map(event => (
                 <li key={event.id} className={styles.eventRow}>
-
-                  <strong>{event.route} {event.distance} </strong><br />
+                  <strong>{event.route} {event.distance}</strong><br />
                   <small>
-                    {getDateTimeLong(new Date(event.time))}<br />
-                    {event.startloc}<br />
-                    {event.rwgps && (<a href={event.rwgps} target="_blank">View {event.route} route</a>)}
+                    {getDateTimeLong(new Date(event.date))}<br />
+                    {event.startLocation}<br />
+                    {event.rwgpsUrl && (<a href={event.rwgpsUrl} target="_blank">View {event.route} route</a>)}
                   </small>
                 </li>
               ))}
