@@ -30,11 +30,12 @@ exports.sourceNodes = async ({
 
         data.schedule.map(hotFix2021RougeRamble).map(lowercaseKeys).forEach((rawEvent) => {
             const eventDate = new Date(rawEvent.unixtime * 1000)
+            const rwgps = rawEvent.rwgps.match(rwgpsRegex) || [''];
             const event = {
                 ...rawEvent,
                 distance: parseInt(rawEvent.distance),
                 rwgpsUrl: rawEvent.rwgps,
-                rwgpsId: rawEvent.rwgps.match(rwgpsRegex)?.pop() || '',
+                rwgpsId: rwgps.pop(),
                 startLocation: rawEvent.startloc,
                 date: eventDate.toISOString(),
                 season: eventDate.getFullYear()
