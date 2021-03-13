@@ -19,7 +19,7 @@ const Registration = () => {
         <p>If you have any questions, <a href="http://randonneursontario.ca/who/board.html">please contact your chapter VP</a>.</p>
 
         <Callout alternative>
-          <p>All rides must be submitted at least a week prior to the start date, and are not approved until the chapter VP has confirmed with the rider.</p>
+          <p>Rides are not approved until the chapter VP has confirmed with the rider.</p>
         </Callout>
 
       </ContentWrapper>

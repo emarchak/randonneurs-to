@@ -10,5 +10,9 @@ export const useAllowedStartTimes = () => {
         }
         return inFuture(time, addDays(today, 13))
     }
-    return { allowedStartTimes }
+
+    const allowedToRegister = (scheduleTime: Date) => {
+        return inFuture(scheduleTime, addDays(today, 2))
+    }
+    return { allowedToRegister, allowedStartTimes }
 }
