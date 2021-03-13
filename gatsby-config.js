@@ -12,6 +12,7 @@ module.exports = {
     siteURL: "https://randonneurs.to",
   },
   plugins: [
+    "gatsby-source-ro",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-typescript",
     "gatsby-transformer-sharp",

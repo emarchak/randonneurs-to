@@ -5,9 +5,8 @@ import { ErrorsList } from '../form/errors-list'
 import { formSubmit } from '../form/helpers'
 import { InputField, SelectField, DateField, CheckboxField, HiddenField } from '../form/input-field'
 import { emailRegex } from '../form/regex'
-import { Route, RideType, Brevet } from './types'
+import { Route, RideType, Brevet } from '../../hooks/useBrevets'
 import { SelectBrevets } from './components/select-brevets'
-
 import styles from '../styles/registration.module.scss'
 import { Callout } from '../callout'
 import { SelectPermanents } from './components/select-permanents'
@@ -42,7 +41,7 @@ const defaultFormData: FormData = {
     scheduleTime: new Date(),
     startLocation: '',
     chapter: '',
-    distance: '',
+    distance: 0,
     notes: '',
     ocaConsent: false,
     roConsent: false,
@@ -137,19 +136,20 @@ export const RegistrationForm = () => {
             route: permanent.routeName,
             startLocation: permanent.startLocation,
             chapter: permanent.chapter,
-            distance: String(permanent.distance)
+            distance: permanent.distance
         })
     }
 
     const handleBrevetChange = (brevet: Brevet) => {
+        const time = new Date(brevet.date)
         dirtyForm({
             rideType: 'brevet',
             route: brevet.route,
-            startTime: new Date(brevet.unixtime * 1000),
-            scheduleTime: new Date(brevet.unixtime * 1000),
+            startTime: time,
+            scheduleTime: time,
             chapter: brevet.chapter,
             distance: brevet.distance,
-            startLocation: brevet.startloc
+            startLocation: brevet.startLocation
         })
     }
 
@@ -211,7 +211,7 @@ export const RegistrationForm = () => {
                 </Callout>
                 <HiddenField name='route' value={formData.route} />
                 <HiddenField name='chapter' value={formData.chapter} />
-                <HiddenField name='distance' value={formData.distance} />
+                <HiddenField name='distance' value={formData.distance.toString()} />
                 <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
                 <ErrorsList formErrors={formErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>

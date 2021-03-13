@@ -32,3 +32,27 @@
   width: 33%;
   float: right;
 }
+
+.event-wrapper {
+  @include no-space;
+}
+
+.event-row {
+  list-style: none;
+  margin-bottom: 0;
+  padding: get-spacing(small) 0;
+  border-top: 1px solid get-color(text, lightest);
+}
+
+.event-footer {
+  .event-cta,
+  .event-cta:visited {
+    display: block;
+    text-decoration: none;
+    border-bottom-width: 0;
+    color: get-color(text);
+    text-align: center;
+    line-height: 2.5em;
+    background-color: get-color(primary);
+  }
+}

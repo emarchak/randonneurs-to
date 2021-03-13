@@ -94,6 +94,7 @@ td, th {
 
 thead, tbody tr {
   border-bottom: 1px solid get-color(text, lightest);
+  text-align: left;
 }
 
 tfoot td {
@@ -115,6 +116,6 @@ tfoot td {
     position: relative; 
     padding: 0 get-spacing(small);
   }
-  td:first-child {padding-top: get-spacing() ;}
-  td:last-child {padding-bottom: get-spacing() ;}
+  td:first-child {padding-top: get-spacing(small)}
+  td:last-child {padding-bottom: get-spacing(small)}
 }

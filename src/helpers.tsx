@@ -1,4 +1,8 @@
-const months = [
+
+
+const dayShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const monthsLong = [
   "January",
   "February",
   "March",
@@ -13,14 +17,17 @@ const months = [
   "December",
 ]
 
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+const pad = (n) => (n < 10 ? '0' + n : n)
 
-export const getDateString = (d: Date) => {
-  const date = d.getDate()
-  const year = d.getFullYear()
+export const getTime = (d: Date) =>
+  `${pad(d.getHours())}:${pad(d.getUTCMinutes())}`
 
-  const monthName = months[d.getMonth()]
-  const dayName = days[d.getDay()]
+export const getDateString = (d: Date) =>
+  `${dayShort[d.getDay()]} ${d.getDate()} ${monthsLong[d.getMonth()]}, ${d.getFullYear()}`
 
-  return `${dayName} ${date} ${monthName}, ${year}`
-}
+
+export const getDateLong = (d: Date) =>
+  `${dayShort[d.getDay()]} ${monthShort[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
+
+export const getDateTimeLong = (d: Date) =>
+  `${dayShort[d.getDay()]} ${monthShort[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${getTime(d)}`
