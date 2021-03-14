@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: [
     "gatsby-source-ro",
+    "gatsby-source-ccn",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-typescript",
     "gatsby-transformer-sharp",
