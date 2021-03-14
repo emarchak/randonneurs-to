@@ -2,6 +2,7 @@ import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationForm } from './registration-form'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as  useAllowedStartTimes from './hooks/useAllowedStartTimes'
 
 jest.mock('isomorphic-unfetch', () => ({
     __esModule: true,
@@ -213,8 +214,26 @@ describe('<RegistrationForm>', () => {
         })
     })
 
+    it('disables registrations for events that are not allowedToRegister', () => {
+        const useAllowedStartTimesSpy = jest.spyOn(useAllowedStartTimes, 'useAllowedStartTimes')
+        useAllowedStartTimesSpy.mockReturnValue({
+            allowedStartTimes: jest.fn(),
+            allowedToRegister: jest.fn().mockReturnValue(false),
+        })
+
+        const mount = render(<RegistrationForm />)
+
+        fireEvent.change(mount.getByLabelText(/ride/i), {
+            target: { value: 'brevet' },
+        })
+        expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
+        expect(mount.baseElement).toHaveTextContent(/Rouge Ramble 60/i)
+
+        expect(mount.queryByLabelText(/Rouge Ramble 60/i)).toBeNull()
+        expect(mount.getByRole('textbox', { name: 'Starting location' })).not.toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
+        useAllowedStartTimesSpy.mockRestore()
+    })
+
     it.skip('requires rider to be registered with the OCA', () => { })
     it.skip('limits registration to maximum of 10 riders per start time', () => { })
-    it.skip('notifies riders when submitted', () => { })
-    it.skip('notifies rider organizers when submitted', () => { })
 })
