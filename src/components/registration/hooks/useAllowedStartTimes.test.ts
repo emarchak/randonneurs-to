@@ -34,4 +34,14 @@ describe('useAllowedStartTimes', () => {
         expect(allowedStartTimes(daysFromToday(9), allowed)).toBeFalsy()
         expect(allowedStartTimes(daysFromToday(8), allowed)).toBeTruthy()
     })
+
+    it('allows riders to register up to three days before scheduled date', () => {
+        const { allowedToRegister } = useAllowedStartTimes()
+
+        const allowed = daysFromToday(8)
+        expect(allowedToRegister(allowed)).toBeTruthy()
+
+        const notAllowed = daysFromToday(2)
+        expect(allowedToRegister(notAllowed)).toBeFalsy()
+    })
 })
