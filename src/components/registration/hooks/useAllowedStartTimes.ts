@@ -8,7 +8,7 @@ export const useAllowedStartTimes = () => {
         if (scheduleTime) {
             return onDate(time, scheduleTime) && inFuture(time, addDays(6))
         }
-        return inFuture(time, addDays(1))
+        return inFuture(time, today)
     }
 
     const allowedToRegister = (scheduleTime: Date) => {
