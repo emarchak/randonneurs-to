@@ -35,7 +35,7 @@ hgroup {
 
 h1 {
   text-transform: uppercase;
-  margin: 0.67rem 0 get-spacing() 0.67rem;
+  margin: 0.67rem 0 get-spacing() 0;
   font-size: 2.25rem;
 }
 
@@ -43,6 +43,10 @@ h2 {font-size: 1.62671rem; font-weight: 800; text-transform: uppercase;}
 h3 {font-size: 1.38316rem; font-weight: 800; margin-bottom: get-spacing("small");}
 h4 {font-size: 1.1rem; font-style: italic; margin-bottom: get-spacing("small");}
 h5 {font-size: 1rem; margin-bottom: get-spacing("small");}
+
+h1 + h2 {
+  margin-top: -#{get-spacing()};
+}
 
 img {
   @include no-space-text;
