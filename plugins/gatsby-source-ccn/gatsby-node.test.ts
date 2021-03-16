@@ -46,13 +46,20 @@ jest.mock('isomorphic-unfetch', () => jest.fn()
     })
 )
 
+
+const joiArg = (arg) => ({ ...arg, required: jest.fn().mockReturnValue({ description: jest.fn() }) })
+const Joi = {
+    object: joiArg,
+    string: joiArg
+}
+
 describe('gatsby-source-ccn', () => {
     it('processes input', async () => {
         const createNode = jest.fn()
         const createContentDigest = jest.fn()
         const createNodeId = jest.fn()
-
-        await gatsbySourceCcn.sourceNodes({ actions: { createNode }, createContentDigest, createNodeId })
+        const options = gatsbySourceCcn.pluginOptionsSchema({ Joi })
+        await gatsbySourceCcn.sourceNodes({ actions: { createNode }, createContentDigest, createNodeId }, options)
 
         expect(createNodeId).toHaveBeenCalledTimes(3)
         expect(createNodeId).toHaveBeenCalledWith('rider-1')
