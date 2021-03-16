@@ -5,16 +5,18 @@ import { ErrorsList } from '../form/errors-list'
 import { formSubmit } from '../form/helpers'
 import { InputField, SelectField, DateField, CheckboxField, HiddenField } from '../form/input-field'
 import { emailRegex } from '../form/regex'
-import { Route, RideType, Brevet } from '../../hooks/useBrevets'
+import { RideType, Brevet } from '../../hooks/useBrevets'
 import { SelectBrevets } from './components/select-brevets'
 import styles from '../styles/registration.module.scss'
 import { Callout } from '../callout'
 import { SelectPermanents } from './components/select-permanents'
-import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
+import { useAllowedStartTimes, addDays } from './hooks/useAllowedStartTimes'
+import { Route } from './hooks/useRoutes'
 
 const formName = 'registration'
 
 const rideTypes = [{ value: 'brevet', label: 'Brevet or populaire' }, { value: 'permanent', label: 'Permanent' }]
+const twoDaysFromToday = addDays(2)
 
 type FormState = "submitted" | "dirty" | null
 interface FormData {
@@ -37,8 +39,8 @@ const defaultFormData: FormData = {
     email: '',
     rideType: '' as FormData["rideType"],
     route: '',
-    startTime: new Date(),
-    scheduleTime: new Date(),
+    startTime: twoDaysFromToday,
+    scheduleTime: twoDaysFromToday,
     startLocation: '',
     chapter: '',
     distance: 0,

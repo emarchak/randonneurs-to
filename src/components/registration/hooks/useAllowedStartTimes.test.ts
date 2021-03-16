@@ -1,10 +1,5 @@
 import { advanceTo, clear } from 'jest-date-mock'
-import { useAllowedStartTimes } from "./useAllowedStartTimes"
-
-const daysFromToday = (number: number) => {
-    const today = new Date(Date.now())
-    return new Date(today.setDate(today.getDate() + number))
-}
+import { useAllowedStartTimes, addDays } from "./useAllowedStartTimes"
 
 describe('useAllowedStartTimes', () => {
     beforeEach(() => {
@@ -15,33 +10,33 @@ describe('useAllowedStartTimes', () => {
         clear()
     })
 
-    it('requires the start date to be > 2 weeks in the future for unscheduled events', () => {
-        const { allowedStartTimes } = useAllowedStartTimes()
+    it('requires the start date to be a day in the future for unscheduled events', () => {
+        const { allowedStartTimes, } = useAllowedStartTimes()
 
-        expect(allowedStartTimes(daysFromToday(8))).toBeFalsy()
-        expect(allowedStartTimes(daysFromToday(14))).toBeTruthy()
+        expect(allowedStartTimes(addDays(0))).toBeFalsy()
+        expect(allowedStartTimes(addDays(1))).toBeTruthy()
     })
 
     it('requires start date to be on scheduled date', () => {
         const { allowedStartTimes } = useAllowedStartTimes()
-        const notAllowed = daysFromToday(2)
+        const notAllowed = addDays(2)
 
-        expect(allowedStartTimes(daysFromToday(2), notAllowed)).toBeFalsy()
-        expect(allowedStartTimes(daysFromToday(7), notAllowed)).toBeFalsy()
+        expect(allowedStartTimes(addDays(2), notAllowed)).toBeFalsy()
+        expect(allowedStartTimes(addDays(7), notAllowed)).toBeFalsy()
 
-        const allowed = daysFromToday(8)
-        expect(allowedStartTimes(daysFromToday(7), allowed)).toBeFalsy()
-        expect(allowedStartTimes(daysFromToday(9), allowed)).toBeFalsy()
-        expect(allowedStartTimes(daysFromToday(8), allowed)).toBeTruthy()
+        const allowed = addDays(8)
+        expect(allowedStartTimes(addDays(7), allowed)).toBeFalsy()
+        expect(allowedStartTimes(addDays(9), allowed)).toBeFalsy()
+        expect(allowedStartTimes(addDays(8), allowed)).toBeTruthy()
     })
 
     it('allows riders to register up to three days before scheduled date', () => {
         const { allowedToRegister } = useAllowedStartTimes()
 
-        const allowed = daysFromToday(8)
+        const allowed = addDays(8)
         expect(allowedToRegister(allowed)).toBeTruthy()
 
-        const notAllowed = daysFromToday(2)
+        const notAllowed = addDays(2)
         expect(allowedToRegister(notAllowed)).toBeFalsy()
     })
 })
