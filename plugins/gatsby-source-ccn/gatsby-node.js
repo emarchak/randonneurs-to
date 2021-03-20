@@ -6,7 +6,12 @@
 const fetch = require('isomorphic-unfetch')
 
 const RIDER_NODE_TYPE = 'rider'
-const CCN_ENDPOINT = ''
+const TypeCategory = {
+    'Individual Membership': 'Individual',
+    'Family Membership > PRIMARY FAMILY MEMBER': 'Family',
+    'Additional Family Member': 'Family',
+    'Trial Member': 'Trial',
+}
 
 const snakeToCamel = (str) => str.replace(/([-_][a-z])/g, (group) => group.toUpperCase().replace('_', ''))
 const snakeToCamelKeys = (o) => Object.keys(o).reduce((c, k) => (c[snakeToCamel(k)] = o[k], c), {})
@@ -45,7 +50,16 @@ exports.sourceNodes = async (api, pluginOptions) => {
 
     try {
         const response = await fetchPaginatedQuery(pluginOptions.ccnEndpoint)
-        response.map(snakeToCamelKeys).forEach((rider) => {
+        response.map(snakeToCamelKeys).forEach((data) => {
+            const rider = {
+                id: data.id,
+                city: data.city,
+                country: data.country,
+                fullName: data.fullName,
+                category: TypeCategory[data.registrationCategory] || TypeCategory['Individual Membership'],
+                seasons: [Number(data.event.replace(/\D/g, ''))]
+            }
+
             createNode({
                 ...rider,
                 id: createNodeId(`${RIDER_NODE_TYPE}-${rider.id}`),
@@ -56,6 +70,7 @@ exports.sourceNodes = async (api, pluginOptions) => {
                 },
             })
         })
+        console.log(`gatsby-source-ccn result Created ${response.length} riders`)
     } catch (error) {
         console.error(error)
     }
@@ -65,15 +80,14 @@ exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
 
     const riderTypes = `
-        enum RegistrationCategory {
-            Individual Membership
-            "Family Membership > PRIMARY FAMILY MEMBER"
-            Additional Family Member
-            Trial Member
+        enum Category {
+            Individual
+            Family
+            Trial
         }
 
         type ${RIDER_NODE_TYPE} implements Node {
-            registrationCategory: RegistrationCategory
+            category: Category
         }
     `
     createTypes(riderTypes)
