@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, useMemo, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from '../content-wrapper'
 import { SubmitButton } from '../form/buttons'
 import { ErrorsList } from '../form/errors-list'
@@ -11,6 +11,8 @@ import styles from '../styles/registration.module.scss'
 import { Callout } from '../callout'
 import { SelectPermanents } from './components/select-permanents'
 import { useAllowedStartTimes, addDays } from './hooks/useAllowedStartTimes'
+import { useCheckRiderMembership, Rider } from '../../hooks/useCheckMembership'
+import { MissingMembership } from './components/missing-membership'
 import { Route } from './hooks/useRoutes'
 
 const formName = 'registration'
@@ -22,6 +24,7 @@ type FormState = "submitted" | "dirty" | null
 interface FormData {
     name: string
     email: string
+    category: Rider['category'] | 'missing' | ''
     rideType: RideType | ''
     route: Brevet['route']
     scheduleTime: Date
@@ -37,6 +40,7 @@ interface FormData {
 const defaultFormData: FormData = {
     name: '',
     email: '',
+    category: '',
     rideType: '' as FormData["rideType"],
     route: '',
     startTime: twoDaysFromToday,
@@ -90,7 +94,9 @@ const checkForErrors = (fields: FormData) => (
 export const RegistrationForm = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
-    const [formErrors, setFormErrors] = useState<String[]>([])
+    const [formErrors, setFormErrors] = useState<ReactChild[]>([])
+
+    const { checkMembership } = useCheckRiderMembership()
     const { allowedStartTimes } = useAllowedStartTimes()
 
     const isSubmitted = formState === "submitted"
@@ -99,6 +105,11 @@ export const RegistrationForm = () => {
 
     const isPermanent = formData.rideType === 'permanent'
     const isBrevet = formData.rideType === 'brevet'
+
+    const visibleFormErrors = useMemo(() => ([
+        ...[formData.category === 'missing' ? <MissingMembership fullName={formData.name} /> : null],
+        ...formErrors
+    ].filter(Boolean)), [formErrors])
 
     const handleValidStartTimes = (requestedStartTime: Date) => {
         const scheduleTime = isBrevet ? formData.scheduleTime : undefined
@@ -159,6 +170,8 @@ export const RegistrationForm = () => {
         evt.preventDefault()
 
         const errors = checkForErrors(formData)
+        const riderData = checkMembership({ fullName: formData.name })
+        setFormData({ ...formData, category: riderData?.category || 'missing' })
         if (errors.length) {
             setFormErrors(errors)
             setFormState(null)
@@ -194,7 +207,7 @@ export const RegistrationForm = () => {
             className={styles.registrationForm}
         >
             <ContentWrapper>
-                <InputField label={fieldLabel['name']} name="name" value={formData.name} onChange={handleInputChange} />
+                <InputField label={fieldLabel['name']} name="name" value={formData.name} onChange={handleInputChange} help='Must match what you used to register with the OCA' />
                 <InputField label={fieldLabel['email']} name="email" type="email" value={formData.email} onChange={handleInputChange} />
                 <SelectField label={fieldLabel['rideType']} name="rideType" options={rideTypes} value={formData.rideType} onChange={handleSelectChange} />
                 {isBrevet && <SelectBrevets onChange={handleBrevetChange} />}
@@ -215,7 +228,8 @@ export const RegistrationForm = () => {
                 <HiddenField name='chapter' value={formData.chapter} />
                 <HiddenField name='distance' value={formData.distance.toString()} />
                 <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
-                <ErrorsList formErrors={formErrors} />
+                <HiddenField name='membership' value={formData.category} />
+                <ErrorsList formErrors={visibleFormErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
                     Register
                 </SubmitButton>

@@ -23,6 +23,7 @@ $theme-colors: (
   ),
   "text": (
     "normal": #333333,
+    "subtle": lighten(#333333, 10%),
     "light": lighten(#333333, 20%),
     "lighter": lighten(#333333, 60%),
     "lightest": lighten(#333333, 75%)

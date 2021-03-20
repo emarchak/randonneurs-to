@@ -1,9 +1,9 @@
-import React from "react"
+import React, { ReactChild } from "react"
 
 import styles from "../styles/form.module.scss"
 
 type Props = {
-    formErrors: String[]
+    formErrors: ReactChild[]
 }
 
 export const ErrorsList = ({ formErrors }: Props) => {

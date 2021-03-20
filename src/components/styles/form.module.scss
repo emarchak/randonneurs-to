@@ -126,6 +126,13 @@
   font-size: get-font-size(small);
 }
 
+.help {
+  display: block;
+  font-size: get-font-size(small);
+  color: get-color(text, subtle);
+  font-size: italic;
+}
+
 .error-list {
   list-style: none;
   margin-bottom: get-spacing();
