@@ -30,9 +30,10 @@ export const HiddenField = ({ name, value }: HiddenFieldProps) => (
 type InputFieldProps = FieldProps & {
     type?: 'text' | 'email'
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
+    onBlur?: (evt: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const InputField = ({ type = 'text', name, value, label, onChange, disabled, optional, help }: InputFieldProps) => (
+export const InputField = ({ type = 'text', name, value, label, onChange, onBlur, disabled, optional, help }: InputFieldProps) => (
     <p>
         <label>
             <span className={styles.label}>
@@ -45,6 +46,7 @@ export const InputField = ({ type = 'text', name, value, label, onChange, disabl
                 className={styles.input + ' ' + styles.inputText}
                 value={value}
                 onChange={onChange}
+                onBlur={onBlur}
                 disabled={Boolean(disabled)}
                 required={!Boolean(optional)}
             />

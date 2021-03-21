@@ -11,7 +11,7 @@ import styles from '../styles/registration.module.scss'
 import { Callout } from '../callout'
 import { SelectPermanents } from './components/select-permanents'
 import { useAllowedStartTimes, addDays } from './hooks/useAllowedStartTimes'
-import { useCheckRiderMembership, Rider } from '../../hooks/useCheckMembership'
+import { useCheckRiderMembership, Rider } from '../../hooks/useCheckRiderMembership'
 import { MissingMembership } from './components/missing-membership'
 import { Route } from './hooks/useRoutes'
 
@@ -20,7 +20,7 @@ const formName = 'registration'
 const rideTypes = [{ value: 'brevet', label: 'Brevet or populaire' }, { value: 'permanent', label: 'Permanent' }]
 const twoDaysFromToday = addDays(2)
 
-type FormState = "submitted" | "dirty" | null
+type FormState = 'submitted' | 'dirty' | null
 interface FormData {
     name: string
     email: string
@@ -41,7 +41,7 @@ const defaultFormData: FormData = {
     name: '',
     email: '',
     category: '',
-    rideType: '' as FormData["rideType"],
+    rideType: '' as FormData['rideType'],
     route: '',
     startTime: twoDaysFromToday,
     scheduleTime: twoDaysFromToday,
@@ -83,7 +83,7 @@ const checkForErrors = (fields: FormData) => (
                 return `${fieldLabel[field]} is required`
             }
 
-            if (field === "email" && !emailRegex.test(value)) {
+            if (field === 'email' && !emailRegex.test(value)) {
                 return `${value} is not a valid email`
             }
         })
@@ -99,17 +99,17 @@ export const RegistrationForm = () => {
     const { checkMembership } = useCheckRiderMembership()
     const { allowedStartTimes } = useAllowedStartTimes()
 
-    const isSubmitted = formState === "submitted"
-    const isDirty = formState === "dirty"
+    const isSubmitted = formState === 'submitted'
+    const isDirty = formState === 'dirty'
     const hasError = Boolean(formErrors.length)
 
     const isPermanent = formData.rideType === 'permanent'
     const isBrevet = formData.rideType === 'brevet'
+    const isMissingMembership = formData.category === 'missing'
 
-    const visibleFormErrors = useMemo(() => ([
-        ...[formData.category === 'missing' ? <MissingMembership fullName={formData.name} /> : null],
-        ...formErrors
-    ].filter(Boolean)), [formErrors])
+    const NameHelp = isMissingMembership
+        ? <MissingMembership />
+        : 'Must match what you used to register with the OCA'
 
     const handleValidStartTimes = (requestedStartTime: Date) => {
         const scheduleTime = isBrevet ? formData.scheduleTime : undefined
@@ -117,7 +117,7 @@ export const RegistrationForm = () => {
     }
 
     const dirtyForm = (newFormData: Partial<FormData>) => {
-        setFormState("dirty")
+        setFormState('dirty')
         setFormData({
             ...formData,
             ...newFormData
@@ -125,12 +125,12 @@ export const RegistrationForm = () => {
     }
 
     const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { value = "", name } = evt.currentTarget
+        const { value = '', name } = evt.currentTarget
         dirtyForm({ [name]: value })
     }
 
     const handleSelectChange = (evt: ChangeEvent<HTMLSelectElement>) => {
-        const { value = "", name } = evt.currentTarget
+        const { value = '', name } = evt.currentTarget
         dirtyForm({ [name]: value })
     }
 
@@ -166,12 +166,16 @@ export const RegistrationForm = () => {
         })
     }
 
+    const handleNameBlur = (evt: ChangeEvent<HTMLInputElement>) => {
+        const { value = "", name } = evt.currentTarget
+        const riderData = checkMembership({ fullName: value })
+        setFormData({ ...formData, category: riderData?.category || 'missing' })
+    }
+
     const handleSubmit = async evt => {
         evt.preventDefault()
 
         const errors = checkForErrors(formData)
-        const riderData = checkMembership({ fullName: formData.name })
-        setFormData({ ...formData, category: riderData?.category || 'missing' })
         if (errors.length) {
             setFormErrors(errors)
             setFormState(null)
@@ -180,16 +184,16 @@ export const RegistrationForm = () => {
         const success = await formSubmit(formName, { ...formData })
 
         if (success) {
-            setFormState("submitted")
+            setFormState('submitted')
         } else {
-            setFormErrors(["Server error! Try again later."])
+            setFormErrors(['Server error! Try again later.'])
         }
     }
 
     if (isSubmitted) {
         return (
             <ContentWrapper>
-                <p aria-live="polite">
+                <p aria-live='polite'>
                     <strong>Thank you for registering to ride with us.</strong><br />
                     A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration.
                     Refresh the page to submit again.
@@ -201,27 +205,27 @@ export const RegistrationForm = () => {
     return (
         <form
             name={formName}
-            method="post"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
+            method='post'
+            data-netlify='true'
+            data-netlify-honeypot='bot-field'
             className={styles.registrationForm}
         >
             <ContentWrapper>
-                <InputField label={fieldLabel['name']} name="name" value={formData.name} onChange={handleInputChange} help='Must match what you used to register with the OCA' />
-                <InputField label={fieldLabel['email']} name="email" type="email" value={formData.email} onChange={handleInputChange} />
-                <SelectField label={fieldLabel['rideType']} name="rideType" options={rideTypes} value={formData.rideType} onChange={handleSelectChange} />
+                <InputField label={fieldLabel['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
+                <InputField label={fieldLabel['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
+                <SelectField label={fieldLabel['rideType']} name='rideType' options={rideTypes} value={formData.rideType} onChange={handleSelectChange} />
                 {isBrevet && <SelectBrevets onChange={handleBrevetChange} />}
                 {isPermanent && <SelectPermanents onChange={handlePermanentChange} />}
-                <DateField label={fieldLabel['startTime']} name="startTime" value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
-                <InputField label={fieldLabel['startLocation']} name="startLocation" value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
-                <InputField label={fieldLabel['notes']} name="notes" value={formData.notes} onChange={handleInputChange} optional />
+                <DateField label={fieldLabel['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
+                <InputField label={fieldLabel['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
+                <InputField label={fieldLabel['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>
                     <h2>COVID-19 risk awareness</h2>
-                    <CheckboxField name="ocaConsent" value={formData.ocaConsent} onChange={handleCheckboxChange}>
-                        I have read the <a href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">Ontario Cycling Association's Progressive Return to Cycling Policy</a> and understand the risks.
+                    <CheckboxField name='ocaConsent' value={formData.ocaConsent} onChange={handleCheckboxChange}>
+                        I have read the <a href='https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/'>Ontario Cycling Association's Progressive Return to Cycling Policy</a> and understand the risks.
                     </CheckboxField>
-                    <CheckboxField name="roConsent" value={formData.roConsent} onChange={handleCheckboxChange}>
-                        I have read <a href="http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf">Randonneurs Ontario's Club Risk Management Policy</a> and understand my responsibilities.
+                    <CheckboxField name='roConsent' value={formData.roConsent} onChange={handleCheckboxChange}>
+                        I have read <a href='http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf'>Randonneurs Ontario's Club Risk Management Policy</a> and understand my responsibilities.
                     </CheckboxField>
                 </Callout>
                 <HiddenField name='route' value={formData.route} />
@@ -229,7 +233,7 @@ export const RegistrationForm = () => {
                 <HiddenField name='distance' value={formData.distance.toString()} />
                 <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
                 <HiddenField name='membership' value={formData.category} />
-                <ErrorsList formErrors={visibleFormErrors} />
+                <ErrorsList formErrors={formErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
                     Register
                 </SubmitButton>

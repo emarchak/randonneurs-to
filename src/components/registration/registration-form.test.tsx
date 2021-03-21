@@ -2,7 +2,8 @@ import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationForm } from './registration-form'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as  useAllowedStartTimes from './hooks/useAllowedStartTimes'
+import * as useAllowedStartTimes from './hooks/useAllowedStartTimes'
+import * as useCheckRiderMembership from '../../hooks/useCheckRiderMembership'
 
 jest.mock('isomorphic-unfetch', () => ({
     __esModule: true,
@@ -46,6 +47,19 @@ jest.mock('../../hooks/useBrevets', () => ({
                 rwgpsUrl: 'https://rwgps.com',
 
             }]
+    })
+}))
+
+jest.mock('../../hooks/useCheckRiderMembership', () => ({
+    __esModule: true,
+    useCheckRiderMembership: jest.fn().mockReturnValue({
+        checkMembership: jest.fn().mockImplementation((fullName) => ({
+            fullName,
+            city: 'Toronto',
+            country: 'Canada',
+            seasons: [2021],
+            category: 'Individual',
+        }))
     })
 }))
 
@@ -234,6 +248,28 @@ describe('<RegistrationForm>', () => {
         useAllowedStartTimesSpy.mockRestore()
     })
 
-    it.skip('requires rider to be registered with the OCA', () => { })
+    it('warns riders if they are not registered', () => {
+        const checkMembershipMock = jest.fn()
+            .mockReturnValueOnce(null)
+            .mockReturnValueOnce({ category: 'Trial' })
+        const useCheckRiderMembershipSpy = jest.spyOn(useCheckRiderMembership, 'useCheckRiderMembership')
+        useCheckRiderMembershipSpy.mockReturnValue({ checkMembership: checkMembershipMock })
+
+        const mount = render(<RegistrationForm />)
+
+        fireEvent.blur(mount.getByLabelText(/name/i),
+            { target: { value: 'Foo Bar' } }
+        )
+        expect(checkMembershipMock).toHaveBeenCalledTimes(1)
+        expect(checkMembershipMock).toHaveBeenCalledWith({ 'fullName': 'Foo Bar' })
+        expect(mount.getByText(/We can't find your name/)).toBeTruthy()
+
+        fireEvent.blur(mount.getByLabelText(/name/i))
+        expect(checkMembershipMock).toHaveBeenCalledTimes(2)
+        expect(mount.queryByText(/We can't find your name/)).toBeFalsy()
+
+        useCheckRiderMembershipSpy.mockRestore()
+    })
+
     it.skip('limits registration to maximum of 10 riders per start time', () => { })
 })
