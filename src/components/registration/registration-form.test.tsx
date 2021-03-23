@@ -146,9 +146,15 @@ describe('<RegistrationForm>', () => {
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
         const mount = render(<RegistrationForm />)
+        const rideDate = new Date()
+
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
         })
+        fireEvent.blur(mount.getByLabelText(/name/i), {
+            target: { value: 'Foo Bar' }
+        })
+
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'foo@bar.com' },
         })
@@ -162,7 +168,7 @@ describe('<RegistrationForm>', () => {
         })
 
         fireEvent.change(mount.getByLabelText(/starting time/i), {
-            target: { value: new Date() },
+            target: { value: rideDate },
         })
 
         fireEvent.change(mount.getByLabelText(/starting location/i), {
@@ -179,7 +185,27 @@ describe('<RegistrationForm>', () => {
         fireEvent.click(mount.getByText('Register'))
 
         await waitFor(() => {
+            const fetchBody = fetchSpy.mock.calls[0][1]?.body
+            const expectedFields = {
+                'form-name': 'registration',
+                name: 'Foo Bar',
+                email: 'foo@bar.com',
+                category: 'Individual',
+                rideType: 'permanent',
+                route: 'Urban 200',
+                startTime: rideDate.toString(),
+                scheduleTime: rideDate.toString(),
+                startLocation: 'Starbucks',
+                chapter: 'Toronto',
+                distance: 200,
+                notes: 'notes',
+                ocaConsent: true,
+                roConsent: true,
+            }
             expect(fetchSpy).toHaveBeenCalled()
+            Object.keys(expectedFields).forEach((label) => {
+                expect(fetchBody).toMatch(`${label}=${encodeURIComponent(expectedFields[label])}`)
+            })
             expect(mount.getByText(/Thank you for registering to ride/)).toBeTruthy()
         })
     })
