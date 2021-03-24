@@ -3,9 +3,6 @@ on:
   schedule:
     - cron: '0 */12 * * *'
 jobs:
-  defaults:
-    run:
-      shell: bash
   build:
     name: Request Netlify build
     runs-on: ubuntu-latest
@@ -13,4 +10,5 @@ jobs:
       NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
     steps:
       - name: Curl request
+        shell: bash
         run: curl -X POST -d {} $NETLIFY_BUILD_HOOK
