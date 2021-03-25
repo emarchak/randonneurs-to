@@ -6,9 +6,8 @@ jobs:
   build:
     name: Request Netlify build
     runs-on: ubuntu-latest
-    env:
-      NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
     steps:
-      - name: Curl request
-        shell: bash
-        run: curl -X POST -d {} $NETLIFY_BUILD_HOOK
+      - name: Post webhook 
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: curl -X POST -d {} NETLIFY_BUILD_HOOK
