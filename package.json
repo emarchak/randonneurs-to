@@ -5,6 +5,8 @@
   "version": "0.1.0",
   "author": "Erin Marchak <erin@emarchak.com>",
   "dependencies": {
+    "@bugsnag/js": "^7.9.0",
+    "@bugsnag/plugin-react": "^7.9.0",
     "gatsby": "^2.5.5",
     "gatsby-image": "^2.3.2",
     "gatsby-plugin-manifest": "^2.1.1",

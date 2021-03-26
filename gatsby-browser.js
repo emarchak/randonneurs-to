@@ -1,7 +1,16 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+const React = require('react')
+const Bugsnag = require('@bugsnag/js').default
+const BugsnagPluginReact = require('@bugsnag/plugin-react').default
 
-// You can delete this file if you're not using it
+if (process.env.NODE_ENV === 'production') {
+    Bugsnag.start({
+        apiKey: process.env.BUGSNAG_API_KEY,
+        plugins: [new BugsnagPluginReact()],
+    })
+
+    const ErrorBoundary = Bugsnag.getPlugin('react').createErrorBoundary(React)
+
+    exports.wrapRootElement = ({ element }) => (
+        <ErrorBoundary>{element}</ErrorBoundary>
+    )
+}
