@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import { getDateTimeLong } from '../helpers'
+import { getDateTimeLong } from 'utils'
 import Img from 'gatsby-image'
 import { Layout } from '../components/layout'
 import { SEO } from '../components/seo'
