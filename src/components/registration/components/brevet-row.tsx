@@ -1,6 +1,6 @@
 import React from 'react'
 import { Brevet } from '../../../hooks/useBrevets'
-import { getDateLong, getTime } from '../utils'
+import { getDateLong, getTime } from '../../../utils'
 import styles from '../../styles/registration.module.scss'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 

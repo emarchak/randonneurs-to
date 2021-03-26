@@ -1,6 +1,6 @@
 import React from "react"
 
-import { getDateString } from "utils"
+import { getDateString } from "../../utils"
 import style from "../styles/loneliness-route.module.scss"
 
 type Props = {
