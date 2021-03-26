@@ -1,18 +1,18 @@
-import React from 'react';
-import { slide as Burger } from 'react-burger-menu';
-import { Link } from 'gatsby';
+import React from 'react'
+import { slide as Burger } from 'react-burger-menu'
+import { Link } from 'gatsby'
 
 export const menuConfig = {
   pageWrapId: 'pageWrap', outerContainerId: 'outerContainer',
 }
-import styles from './styles/menu.module.scss';
+import styles from './styles/menu.module.scss'
 
 const spacing = {
   large: '2.25rem',
   normal: '1.45rem'
 }
 
-const crossButtonHeight = '0.25rem';
+const crossButtonHeight = '0.25rem'
 
 var menuStyles = {
   bmBurgerBarsHover: {
@@ -39,12 +39,12 @@ var menuStyles = {
   }
 }
 export type MenuState = {
-  isOpen: boolean;
+  isOpen: boolean
 }
 
 type MenuProps = {
   isOpen: boolean,
-  onMenuChange?({ }: MenuState): void;
+  onMenuChange?({ }: MenuState): void
 }
 
 export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
@@ -66,7 +66,7 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
 )
 
 type MenuTriggerProps = {
-  onTrigger(): void;
+  onTrigger(): void
 }
 
 export const MenuTrigger = ({ onTrigger }: MenuTriggerProps) => (
