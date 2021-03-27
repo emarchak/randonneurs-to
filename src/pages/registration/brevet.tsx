@@ -3,7 +3,7 @@ import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { ContentWrapper } from "src/components/content-wrapper"
 import { Callout } from "src/components/callout"
-import { RegistrationForm } from "src/components/registration"
+import { RegistrationForm } from "./components/registration-form"
 
 export const BrevetRegistration = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react'
-import { SelectField } from '../../form/input-field'
+import { SelectField } from 'src/components/form/input-field'
 import { PermanentDescription } from './permanent-description'
 import { useRoutes, Route } from '../hooks/useRoutes'
 
