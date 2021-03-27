@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react"
+import React, { ChangeEvent, ReactChild } from "react"
 import DatePicker from "react-datepicker"
 
 import styles from "../styles/form.module.scss"
@@ -10,7 +10,13 @@ type FieldProps = {
     label: string
     disabled?: boolean
     optional?: boolean
+    help?: ReactChild
 }
+
+const Help = ({ children }: { children: ReactChild }) => (
+    <span className={styles.help}>{children}</span>
+)
+
 
 type HiddenFieldProps = {
     name: string
@@ -24,9 +30,10 @@ export const HiddenField = ({ name, value }: HiddenFieldProps) => (
 type InputFieldProps = FieldProps & {
     type?: 'text' | 'email'
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
+    onBlur?: (evt: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const InputField = ({ type = 'text', name, value, label, onChange, disabled, optional }: InputFieldProps) => (
+export const InputField = ({ type = 'text', name, value, label, onChange, onBlur, disabled, optional, help }: InputFieldProps) => (
     <p>
         <label>
             <span className={styles.label}>
@@ -39,10 +46,12 @@ export const InputField = ({ type = 'text', name, value, label, onChange, disabl
                 className={styles.input + ' ' + styles.inputText}
                 value={value}
                 onChange={onChange}
+                onBlur={onBlur}
                 disabled={Boolean(disabled)}
                 required={!Boolean(optional)}
             />
         </label>
+        {help && <Help>{help}</Help>}
     </p>
 )
 
@@ -54,7 +63,7 @@ type SelectFieldProps = FieldProps & {
     onChange: (evt: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const SelectField = ({ name, options, value, label, onChange, disabled, optional }: SelectFieldProps) => (
+export const SelectField = ({ name, options, value, label, onChange, disabled, optional, help }: SelectFieldProps) => (
     <p>
         <label>
             <span className={styles.label}>
@@ -75,6 +84,7 @@ export const SelectField = ({ name, options, value, label, onChange, disabled, o
                 })}
             </select>
         </label>
+        {help && <Help>{help}</Help>}
     </p >
 )
 
@@ -85,7 +95,7 @@ type DateFieldProps = Omit<FieldProps, 'value'> & {
     options?: {}
 }
 
-export const DateField = ({ value, name, label, onChange, allowedRange, optional }: DateFieldProps) => (
+export const DateField = ({ value, name, label, onChange, allowedRange, optional, help }: DateFieldProps) => (
     <div className={styles.dateInput}>
         <label>
             <span className={styles.label}>
@@ -101,6 +111,7 @@ export const DateField = ({ value, name, label, onChange, allowedRange, optional
                 filterDate={allowedRange}
                 dateFormat="MMMM d HH:mm" />
         </label>
+        {help && <Help>{help}</Help>}
         <HiddenField name={name} value={value.toString()} />
     </div>
 )
@@ -117,7 +128,7 @@ type CheckboxFieldProps = Omit<FieldProps, 'label' | 'value'> & {
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const CheckboxField = ({ name, value, children, onChange, disabled, optional }: CheckboxFieldProps) => (
+export const CheckboxField = ({ name, value, children, onChange, disabled, optional, help }: CheckboxFieldProps) => (
     <p>
         <label>
             <input
@@ -135,6 +146,7 @@ export const CheckboxField = ({ name, value, children, onChange, disabled, optio
                 {optional && ' (optional)'}
             </span>
         </label>
+        {help && <Help>{help}</Help>}
     </p>
 )
 

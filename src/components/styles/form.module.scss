@@ -88,6 +88,13 @@
   }
 }
 
+.help {
+  display: block;
+  font-size: get-font-size(small);
+  color: get-color(text, subtle);
+}
+
+.help,
 .inputText {
   width: calc(100% - #{get-spacing(small) * 2});
   @include media(large) {

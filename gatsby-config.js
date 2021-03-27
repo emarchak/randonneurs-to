@@ -13,6 +13,12 @@ module.exports = {
   },
   plugins: [
     "gatsby-source-ro",
+    {
+      resolve: "gatsby-source-ccn",
+      options: {
+        ccnEndpoint: process.env.CCN_ENDPOINT,
+      }
+    },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-typescript",
     "gatsby-transformer-sharp",

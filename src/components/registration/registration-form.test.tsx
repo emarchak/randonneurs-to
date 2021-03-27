@@ -2,7 +2,8 @@ import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationForm } from './registration-form'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as  useAllowedStartTimes from './hooks/useAllowedStartTimes'
+import * as useAllowedStartTimes from './hooks/useAllowedStartTimes'
+import * as useCheckRiderMembership from '../../hooks/useCheckRiderMembership'
 
 jest.mock('isomorphic-unfetch', () => ({
     __esModule: true,
@@ -46,6 +47,19 @@ jest.mock('../../hooks/useBrevets', () => ({
                 rwgpsUrl: 'https://rwgps.com',
 
             }]
+    })
+}))
+
+jest.mock('../../hooks/useCheckRiderMembership', () => ({
+    __esModule: true,
+    useCheckRiderMembership: jest.fn().mockReturnValue({
+        checkMembership: jest.fn().mockImplementation((fullName) => ({
+            fullName,
+            city: 'Toronto',
+            country: 'Canada',
+            seasons: [2021],
+            membership: 'Individual',
+        }))
     })
 }))
 
@@ -132,28 +146,24 @@ describe('<RegistrationForm>', () => {
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
         const mount = render(<RegistrationForm />)
+        const rideDate = new Date('2021-10-09T12:00:00.000Z')
+
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
         })
+        fireEvent.blur(mount.getByLabelText(/name/i), {
+            target: { value: 'Foo Bar' }
+        })
+
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'foo@bar.com' },
         })
 
         fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: 'permanent' },
+            target: { value: 'brevet' },
         })
 
-        fireEvent.change(mount.getByLabelText(/route/i), {
-            target: { value: 'route1' }
-        })
-
-        fireEvent.change(mount.getByLabelText(/starting time/i), {
-            target: { value: new Date() },
-        })
-
-        fireEvent.change(mount.getByLabelText(/starting location/i), {
-            target: { value: 'Starbucks' },
-        })
+        fireEvent.click(mount.getByLabelText(/Rouge Ramble 60/i))
 
         fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
         fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
@@ -165,7 +175,27 @@ describe('<RegistrationForm>', () => {
         fireEvent.click(mount.getByText('Register'))
 
         await waitFor(() => {
+            const fetchBody = fetchSpy.mock.calls[0][1]?.body
+            const expectedFields = {
+                'form-name': 'registration',
+                name: 'Foo Bar',
+                email: 'foo@bar.com',
+                membership: 'Individual',
+                rideType: 'brevet',
+                route: 'Rouge Ramble 60',
+                startTime: rideDate.toString(),
+                scheduleTime: rideDate.toString(),
+                startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
+                chapter: 'Toronto',
+                distance: 60,
+                notes: 'notes',
+                ocaConsent: true,
+                roConsent: true,
+            }
             expect(fetchSpy).toHaveBeenCalled()
+            Object.keys(expectedFields).forEach((label) => {
+                expect(fetchBody).toMatch(`${label}=${encodeURIComponent(expectedFields[label])}`)
+            })
             expect(mount.getByText(/Thank you for registering to ride/)).toBeTruthy()
         })
     })
@@ -234,6 +264,28 @@ describe('<RegistrationForm>', () => {
         useAllowedStartTimesSpy.mockRestore()
     })
 
-    it.skip('requires rider to be registered with the OCA', () => { })
+    it('warns riders if they are not registered', () => {
+        const checkMembershipMock = jest.fn()
+            .mockReturnValueOnce(null)
+            .mockReturnValueOnce({ membership: 'Trial' })
+        const useCheckRiderMembershipSpy = jest.spyOn(useCheckRiderMembership, 'useCheckRiderMembership')
+        useCheckRiderMembershipSpy.mockReturnValue({ checkMembership: checkMembershipMock })
+
+        const mount = render(<RegistrationForm />)
+
+        fireEvent.blur(mount.getByLabelText(/name/i),
+            { target: { value: 'Foo Bar' } }
+        )
+        expect(checkMembershipMock).toHaveBeenCalledTimes(1)
+        expect(checkMembershipMock).toHaveBeenCalledWith({ 'fullName': 'Foo Bar' })
+        expect(mount.getByText(/We can't find your name/)).toBeTruthy()
+
+        fireEvent.blur(mount.getByLabelText(/name/i))
+        expect(checkMembershipMock).toHaveBeenCalledTimes(2)
+        expect(mount.queryByText(/We can't find your name/)).toBeFalsy()
+
+        useCheckRiderMembershipSpy.mockRestore()
+    })
+
     it.skip('limits registration to maximum of 10 riders per start time', () => { })
 })
