@@ -146,7 +146,7 @@ describe('<RegistrationForm>', () => {
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
         const mount = render(<RegistrationForm />)
-        const rideDate = new Date()
+        const rideDate = new Date('2021-10-09T12:00:00.000Z')
 
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
@@ -160,20 +160,10 @@ describe('<RegistrationForm>', () => {
         })
 
         fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: 'permanent' },
+            target: { value: 'brevet' },
         })
 
-        fireEvent.change(mount.getByLabelText(/route/i), {
-            target: { value: 'route1' }
-        })
-
-        fireEvent.change(mount.getByLabelText(/starting time/i), {
-            target: { value: rideDate },
-        })
-
-        fireEvent.change(mount.getByLabelText(/starting location/i), {
-            target: { value: 'Starbucks' },
-        })
+        fireEvent.click(mount.getByLabelText(/Rouge Ramble 60/i))
 
         fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
         fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
@@ -191,13 +181,13 @@ describe('<RegistrationForm>', () => {
                 name: 'Foo Bar',
                 email: 'foo@bar.com',
                 category: 'Individual',
-                rideType: 'permanent',
-                route: 'Urban 200',
+                rideType: 'brevet',
+                route: 'Rouge Ramble 60',
                 startTime: rideDate.toString(),
                 scheduleTime: rideDate.toString(),
-                startLocation: 'Starbucks',
+                startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
                 chapter: 'Toronto',
-                distance: 200,
+                distance: 60,
                 notes: 'notes',
                 ocaConsent: true,
                 roConsent: true,
