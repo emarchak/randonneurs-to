@@ -6,7 +6,7 @@
 const fetch = require('isomorphic-unfetch')
 
 const RIDER_NODE_TYPE = 'rider'
-const TypeCategory = {
+const TypeMembership = {
     'Individual Membership': 'Individual',
     'Family Membership > PRIMARY FAMILY MEMBER': 'Family',
     'Additional Family Member': 'Family',
@@ -56,7 +56,7 @@ exports.sourceNodes = async (api, pluginOptions) => {
                 city: data.city,
                 country: data.country,
                 fullName: data.fullName,
-                category: TypeCategory[data.registrationCategory] || TypeCategory['Individual Membership'],
+                membership: TypeMembership[data.registrationCategory] || TypeMembership['Individual Membership'],
                 seasons: [Number(data.event.replace(/\D/g, ''))]
             }
 
@@ -80,14 +80,14 @@ exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
 
     const riderTypes = `
-        enum Category {
+        enum Membership {
             Individual
             Family
             Trial
         }
 
         type ${RIDER_NODE_TYPE} implements Node {
-            category: Category
+            membership: Membership
         }
     `
     createTypes(riderTypes)

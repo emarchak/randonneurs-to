@@ -1,13 +1,12 @@
-
 import { graphql, useStaticQuery } from 'gatsby'
 
-type MemberCategory = 'Individual' | 'Family' | 'Trial'
+type MemberType = 'Individual' | 'Family' | 'Trial'
 export type Rider = {
   id: string,
   city: string,
   country: string,
   fullName: string,
-  category: MemberCategory,
+  membership: MemberType,
   seasons: Number[]
 }
 
@@ -21,7 +20,7 @@ export const useCheckRiderMembership = () => {
           city
           country
           id
-          category
+          membership
           seasons
           fullName
         }

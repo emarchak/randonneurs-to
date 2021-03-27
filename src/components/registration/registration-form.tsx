@@ -17,14 +17,14 @@ import { Route } from './hooks/useRoutes'
 
 const formName = 'registration'
 
-const rideTypes = [{ value: 'brevet', label: 'Brevet or populaire' }, { value: 'permanent', label: 'Permanent' }]
+const rideTypes = [{ value: 'brevet', label: 'Scheduled (brevet or populaire)' }, { value: 'permanent', label: 'Permanent' }]
 const twoDaysFromToday = addDays(2)
 
 type FormState = 'submitted' | 'dirty' | null
 interface FormData {
     name: string
     email: string
-    category: Rider['category'] | 'missing' | ''
+    membership: Rider['membership'] | 'missing' | ''
     rideType: RideType | ''
     route: Brevet['route']
     scheduleTime: Date
@@ -40,7 +40,7 @@ interface FormData {
 const defaultFormData: FormData = {
     name: '',
     email: '',
-    category: '',
+    membership: '',
     rideType: '' as FormData['rideType'],
     route: '',
     startTime: twoDaysFromToday,
@@ -105,7 +105,7 @@ export const RegistrationForm = () => {
 
     const isPermanent = formData.rideType === 'permanent'
     const isBrevet = formData.rideType === 'brevet'
-    const isMissingMembership = formData.category === 'missing'
+    const isMissingMembership = formData.membership === 'missing'
 
     const NameHelp = isMissingMembership
         ? <MissingMembership />
@@ -167,9 +167,9 @@ export const RegistrationForm = () => {
     }
 
     const handleNameBlur = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { value = "", name } = evt.currentTarget
+        const { value = '' } = evt.currentTarget
         const riderData = checkMembership({ fullName: value })
-        setFormData({ ...formData, category: riderData?.category || 'missing' })
+        setFormData({ ...formData, membership: riderData?.membership || 'missing' })
     }
 
     const handleSubmit = async evt => {
@@ -232,7 +232,7 @@ export const RegistrationForm = () => {
                 <HiddenField name='chapter' value={formData.chapter} />
                 <HiddenField name='distance' value={formData.distance.toString()} />
                 <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
-                <HiddenField name='membership' value={formData.category} />
+                <HiddenField name='membership' value={formData.membership} />
                 <ErrorsList formErrors={formErrors} />
                 <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
                     Register

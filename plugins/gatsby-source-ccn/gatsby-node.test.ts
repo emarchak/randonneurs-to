@@ -78,21 +78,21 @@ describe('gatsby-source-ccn', () => {
             country: 'Canada',
             seasons: [2021],
             fullName: 'Baz Boo',
-            category: 'Individual',
+            membership: 'Individual',
         }))
         expect(createNode).toHaveBeenCalledWith(expect.objectContaining({
             city: 'Toronto',
             country: 'Canada',
             seasons: [2021],
             fullName: 'Brill Bruiser',
-            category: 'Individual',
+            membership: 'Individual',
         }))
         expect(createContentDigest).toHaveBeenCalledWith(expect.objectContaining({
             city: 'Toronto',
             country: 'Canada',
             seasons: [2021],
             fullName: 'Bil Bar',
-            category: 'Family',
+            membership: 'Family',
         }))
     })
 })

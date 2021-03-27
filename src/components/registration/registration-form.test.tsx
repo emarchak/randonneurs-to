@@ -58,7 +58,7 @@ jest.mock('../../hooks/useCheckRiderMembership', () => ({
             city: 'Toronto',
             country: 'Canada',
             seasons: [2021],
-            category: 'Individual',
+            membership: 'Individual',
         }))
     })
 }))
@@ -180,7 +180,7 @@ describe('<RegistrationForm>', () => {
                 'form-name': 'registration',
                 name: 'Foo Bar',
                 email: 'foo@bar.com',
-                category: 'Individual',
+                membership: 'Individual',
                 rideType: 'brevet',
                 route: 'Rouge Ramble 60',
                 startTime: rideDate.toString(),
@@ -267,7 +267,7 @@ describe('<RegistrationForm>', () => {
     it('warns riders if they are not registered', () => {
         const checkMembershipMock = jest.fn()
             .mockReturnValueOnce(null)
-            .mockReturnValueOnce({ category: 'Trial' })
+            .mockReturnValueOnce({ membership: 'Trial' })
         const useCheckRiderMembershipSpy = jest.spyOn(useCheckRiderMembership, 'useCheckRiderMembership')
         useCheckRiderMembershipSpy.mockReturnValue({ checkMembership: checkMembershipMock })
 
