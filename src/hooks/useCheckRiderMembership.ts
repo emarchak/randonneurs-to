@@ -11,7 +11,7 @@ export type Rider = {
   seasons: Number[]
 }
 
-const normalize = str => str.toLowerCase().replace(' ', '')
+const normalize = str => str.toLowerCase().replace(/\s|-|(\(.*\))/g, '')
 
 export const useCheckRiderMembership = () => {
   const { allRider: { nodes: riders } } = useStaticQuery(graphql`
