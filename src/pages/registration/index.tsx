@@ -1,3 +1,3 @@
-import { BrevetRegistration } from './brevet'
+import { BrevetRegistration } from './components/brevet'
 
 export default BrevetRegistration
