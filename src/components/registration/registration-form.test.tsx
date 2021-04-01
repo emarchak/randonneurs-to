@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationForm } from './registration-form'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as useAllowedStartTimes from '../hooks/useAllowedStartTimes'
+import * as useAllowedStartTimes from './hooks/useAllowedStartTimes'
 import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
 
 jest.mock('isomorphic-unfetch', () => ({

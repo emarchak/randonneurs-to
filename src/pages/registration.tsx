@@ -1,11 +1,11 @@
 import React from 'react'
-import { Layout } from 'src/components/layout'
-import { SEO } from 'src/components/seo'
-import { ContentWrapper } from "src/components/content-wrapper"
-import { Callout } from "src/components/callout"
-import { RegistrationForm } from "./components/registration-form"
+import { Layout } from '../components/layout'
+import { SEO } from '../components/seo'
+import { ContentWrapper } from "../components/content-wrapper"
+import { Callout } from "../components/callout"
+import { RegistrationForm } from "src/components/registration/registration-form"
 
-export const BrevetRegistration = () => {
+const Registration = () => {
   return (
     <Layout>
       <SEO title='Register for a ride' />
@@ -28,3 +28,5 @@ export const BrevetRegistration = () => {
     </Layout>
   )
 }
+
+export default Registration

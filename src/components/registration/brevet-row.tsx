@@ -2,7 +2,7 @@ import React from 'react'
 import { Brevet } from 'src/hooks/useBrevets'
 import { getDateLong, getTime } from 'src/utils'
 import styles from 'src/components/styles/registration.module.scss'
-import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
+import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
 
 
 type Props = { brevet: Brevet, isSelected: boolean, fieldsetID: string, handleChange: (brevet) => void }
