@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import Client from 'shopify-buy'
 import ShopifyBuy from '@shopify/buy-button-js'
+import Loadable from "@loadable/component"
 
 const bbOptions = {
     'product': {
@@ -42,20 +43,22 @@ const bbOptions = {
 
 type Props = {
     productId: number,
-    img: boolean,
-    button: boolean,
-    buttonWithQuantity: boolean,
-    title: boolean,
-    price: boolean
+    img?: boolean,
+    button?: boolean,
+    buttonWithQuantity?: boolean,
+    title?: boolean,
+    price?: boolean
 }
 
-export const BuyButton = ({ productId,
+const BuyButtonComponent = ({ productId,
     img = false,
     button = false,
-    buttonWithQuantity = true,
+    buttonWithQuantity = false,
     title = false,
-    price = true }: Props) => {
+    price = false }: Props) => {
     const buttonId = `product-component-${productId}`
+
+    bbOptions.product.contents = { img, button, buttonWithQuantity, title, price }
 
     useEffect(() => {
         const client = Client.buildClient({
@@ -73,4 +76,6 @@ export const BuyButton = ({ productId,
     return <div id={buttonId}></div>
 }
 
-export default BuyButton
+export default BuyButtonComponent
+
+export const BuyButton: typeof BuyButtonComponent = Loadable(() => import('src/components/buybutton'))

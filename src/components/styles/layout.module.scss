@@ -6,6 +6,24 @@ $footer-height: 4.3rem;
   @include max-width();
 }
 
+.contentContainer {
+  @include media(large) {
+    display: flex;
+  }
+}
+
+.contentContainerChild {
+  @include media(large) {
+    flex: 1
+  }
+}
+
+.contentContainerChild + .contentContainerChild {
+  @include media(large) {
+    padding-left: get-spacing("large");
+  }
+}
+
 .header {
   border-bottom: get-spacing("large") solid get-color(primary);
   text-align: center;
