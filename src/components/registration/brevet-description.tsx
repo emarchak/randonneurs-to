@@ -1,5 +1,5 @@
 import React from 'react'
-import { Aside } from '../../callout'
+import { Aside } from '../callout'
 
 export const BrevetDescription = () => (
     <Aside>

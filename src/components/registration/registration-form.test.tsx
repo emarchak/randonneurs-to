@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationForm } from './registration-form'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useAllowedStartTimes from './hooks/useAllowedStartTimes'
-import * as useCheckRiderMembership from '../../hooks/useCheckRiderMembership'
+import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
 
 jest.mock('isomorphic-unfetch', () => ({
     __esModule: true,
@@ -31,7 +31,7 @@ jest.mock('./hooks/useRoutes', () => ({
     }),
 }))
 
-jest.mock('../../hooks/useBrevets', () => ({
+jest.mock('src/hooks/useBrevets', () => ({
     __esModule: true,
     useBrevets: jest.fn().mockReturnValue({
         loading: false,
@@ -50,7 +50,7 @@ jest.mock('../../hooks/useBrevets', () => ({
     })
 }))
 
-jest.mock('../../hooks/useCheckRiderMembership', () => ({
+jest.mock('src/hooks/useCheckRiderMembership', () => ({
     __esModule: true,
     useCheckRiderMembership: jest.fn().mockReturnValue({
         checkMembership: jest.fn().mockImplementation((fullName) => ({

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "paths": {
+            "components": [
+                "src/components"
+            ]
+        }
+    }
+}
