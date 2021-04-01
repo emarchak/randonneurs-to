@@ -10,7 +10,7 @@ jest.mock('isomorphic-unfetch', () => ({
     default: jest.fn().mockReturnValue({ ok: true })
 }))
 
-jest.mock('../hooks/useRoutes', () => ({
+jest.mock('./hooks/useRoutes', () => ({
     __esModule: true,
     useRoutes: jest.fn().mockReturnValue({
         routes:
