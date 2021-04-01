@@ -1,0 +1,23 @@
+name: Changelog
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  generate_changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Update Changelog
+        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+        with:
+          pullRequests: true
+          prWoLabels: true
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update Changelog
+          file_pattern: CHANGELOG.md
