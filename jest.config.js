@@ -1,11 +1,10 @@
-const path = require("path")
 
 module.exports = {
   transform: {
-    "^.+\\.(tsx?|jsx?)$": `<rootDir>/jest/jest-preprocess.js`,
+    '^.+\\.(tsx?|jsx?)$': `<rootDir>/jest/jest-preprocess.js`,
   },
   moduleNameMapper: {
-    ".+\\.(scss|css)$": `identity-obj-proxy`,
+    '.+\\.(scss|css)$': `identity-obj-proxy`,
     '^src/(.*)$': '<rootDir>/src/$1'
   },
   testPathIgnorePatterns: [`node_modules`, `\\.cache`, `<rootDir>.*/public`],
@@ -13,10 +12,14 @@ module.exports = {
   globals: {
     __PATH_PREFIX__: ``,
   },
-  moduleFileExtensions: ["ts", "tsx", "js"],
+  moduleFileExtensions: ['ts', 'tsx', 'js'],
   collectCoverage: true,
-  coverageReporters: ["lcov", "text"],
+  coverageReporters: ['lcov', 'text'],
   testURL: `http://localhost`,
-  setupFiles: [`<rootDir>/jest/loadershim.js`],
-  setupFilesAfterEnv: ["<rootDir>/jest/setup-test-env.js"],
+  globalSetup: `<rootDir>/jest/globalSetup.js`,
+  setupFiles: [
+    `<rootDir>/jest/setupFiles.js`,
+    'jest-date-mock'
+  ],
+  setupFilesAfterEnv: ['<rootDir>/jest/setupFilesAfterEnv.js'],
 }

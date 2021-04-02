@@ -17,8 +17,16 @@ const monthsLong = [
 
 const pad = (n) => (n < 10 ? '0' + n : n)
 
-export const getTime = (d: Date) =>
-    `${pad(d.getHours())}:${pad(d.getUTCMinutes())}`
+const timeZone = 'America/Toronto'
+export const getTime = (d: Date) => {
+    const matches = d.toLocaleTimeString('en-US', { timeZone }).match(/(\d+):(\d{2}):(\d{2}) (AM|PM)/i)
+    const inMorning = matches[4] === 'AM'
+
+    const hours = inMorning ? Number(matches[1]) : Number(matches[1]) + 12
+    const minutes = Number(matches[2])
+
+    return `${pad(hours)}:${pad(minutes)}`
+}
 
 export const getDateString = (d: Date) =>
     `${dayShort[d.getDay()]} ${d.getDate()} ${monthsLong[d.getMonth()]}, ${d.getFullYear()}`
