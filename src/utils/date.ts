@@ -25,6 +25,7 @@ export const getTime = (d: Date) => {
     const hours = inMorning ? Number(matches[1]) : Number(matches[1]) + 12
     const minutes = Number(matches[2])
 
+    console.log(d.toString())
     return `${pad(hours)}:${pad(minutes)}`
 }
 
