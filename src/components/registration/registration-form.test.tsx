@@ -40,7 +40,7 @@ jest.mock('src/hooks/useBrevets', () => ({
                 chapter: 'Toronto',
                 event: 'populaire',
                 distance: '60',
-                date: '2021-10-09T12:00:00.000Z',
+                date: new Date('2021-10-09T12:00:00.000Z'),
                 route: 'Rouge Ramble 60',
                 startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
                 id: 1,
