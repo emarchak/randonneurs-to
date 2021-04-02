@@ -23,7 +23,7 @@ describe('useAllowedStartTimes', () => {
 
     describe('allowedStartTimes()', () => {
         it('requires the start date to be a day in the future for unscheduled events', () => {
-            advanceTo(new Date('August 18 2021'))
+            advanceTo(new Date('August 18 2021  19:59:30 EDT'))
             const { allowedStartTimes } = useAllowedStartTimes()
 
             expect(allowedStartTimes(new Date('August 18 2021'))).toBeFalsy()
@@ -31,15 +31,15 @@ describe('useAllowedStartTimes', () => {
         })
 
         it('requires start date to be on scheduled date', () => {
-            advanceTo(new Date('August 1 2021'))
+            advanceTo(new Date('August 1 2021 19:59:30 EDT'))
 
             const { allowedStartTimes } = useAllowedStartTimes()
 
-            const scheduledDate = new Date('August 20 2021')
-            expect(allowedStartTimes(new Date('August 17 2021'), scheduledDate)).toBeFalsy()
-            expect(allowedStartTimes(new Date('August 19 2021'), scheduledDate)).toBeFalsy()
-            expect(allowedStartTimes(new Date('August 26 2021'), scheduledDate)).toBeFalsy()
-            expect(allowedStartTimes(new Date('August 20 2021'), scheduledDate)).toBeTruthy()
+            const scheduledDate = new Date('August 20 2021 09:20:00 EDT')
+            expect(allowedStartTimes(new Date('August 17 2021 09:20:00 EDT'), scheduledDate)).toBeFalsy()
+            expect(allowedStartTimes(new Date('August 19 2021 09:20:00 EDT'), scheduledDate)).toBeFalsy()
+            expect(allowedStartTimes(new Date('August 26 2021 09:20:00 EDT'), scheduledDate)).toBeFalsy()
+            expect(allowedStartTimes(new Date('August 20 2021 09:20:00 EDT'), scheduledDate)).toBeTruthy()
         })
     })
 
@@ -49,7 +49,7 @@ describe('useAllowedStartTimes', () => {
         it('allows riders to register three days before scheduled date', () => {
             const { allowedToRegister } = useAllowedStartTimes()
 
-            advanceTo(new Date('Wed April 7 2021 19:59:30 EDT'))
+            advanceTo(new Date('Wed April 7 2021 12:59:30 EDT'))
             const rideOnSaturday = new Date('Sat April 10 2021 09:20:00 EDT')
             expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeTruthy()
 
@@ -63,7 +63,7 @@ describe('useAllowedStartTimes', () => {
         it('allows Ottawa riders to register before Friday at 6pm ET before scheduled date', () => {
             const { allowedToRegister } = useAllowedStartTimes()
 
-            advanceTo(new Date('Fri April 2 2021 17:59:30 EDT'))
+            advanceTo(new Date('Fri April 2 2021 7:59:30 EDT'))
             const rideOnSaturday = new Date('Sat April 3 2021 09:20:00 EDT')
             expect(allowedToRegister({ ...ottawaBrevet, date: rideOnSaturday })).toBeTruthy()
 

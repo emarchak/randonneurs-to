@@ -47,7 +47,6 @@ export const useAllowedStartTimes = () => {
     const allowedToRegister = (brevet: Brevet) => {
         const now = new Date(Date.now())
         const registrationDeadline = getBrevetRegistrationDeadline(brevet)
-
         return now < registrationDeadline
     }
     return { allowedToRegister, allowedStartTimes, getBrevetRegistrationDeadline }
