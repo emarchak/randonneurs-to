@@ -5,15 +5,13 @@ import { ErrorsList } from 'src/components/form/errors-list'
 import { formSubmit } from 'src/components/form/helpers'
 import { InputField, SelectField, DateField, CheckboxField, HiddenField } from 'src/components/form/input-field'
 import { emailRegex } from 'src/components/form/regex'
-import { RideType, Brevet } from 'src/hooks/useBrevets'
+import { Brevet } from 'src/hooks/useBrevets'
 import { SelectBrevets } from './select-brevets'
 import styles from 'src/components/styles/registration.module.scss'
 import { Callout } from 'src/components/callout'
-import { SelectPermanents } from './select-permanents'
 import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
 import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembership'
 import { MissingMembership } from './missing-membership'
-import { Route } from './hooks/useRoutes'
 const formName = 'registration'
 
 const rideTypes = [{ value: 'brevet', label: 'Scheduled (brevet or populaire)' }, { value: 'permanent', label: 'Permanent' }]
@@ -25,7 +23,6 @@ interface FormData {
     name: string
     email: string
     membership: Rider['membership'] | 'missing' | ''
-    rideType: RideType | ''
     route: Brevet['route']
     scheduleTime: Date
     startTime: Date
@@ -41,7 +38,6 @@ const defaultFormData: FormData = {
     name: '',
     email: '',
     membership: '',
-    rideType: '' as FormData['rideType'],
     route: '',
     startTime: twoDaysFromToday,
     scheduleTime: twoDaysFromToday,
@@ -56,7 +52,6 @@ const defaultFormData: FormData = {
 const fieldLabel = {
     name: 'Your name',
     email: 'Your email',
-    rideType: 'Ride type',
     route: 'Route',
     startTime: 'Starting time',
     startLocation: 'Starting location',
@@ -68,7 +63,6 @@ const fieldLabel = {
 const requiredFields: Partial<keyof FormData>[] = [
     'name',
     'email',
-    'rideType',
     'route',
     'startTime',
     'startLocation',
@@ -103,18 +97,14 @@ export const RegistrationForm = () => {
     const isDirty = formState === 'dirty'
     const hasError = Boolean(formErrors.length)
 
-    const isPermanent = formData.rideType === 'permanent'
-    const isBrevet = formData.rideType === 'brevet'
     const isMissingMembership = formData.membership === 'missing'
 
     const NameHelp = isMissingMembership
         ? <MissingMembership />
         : 'Must match what you used to register with the OCA'
 
-    const handleValidStartTimes = (requestedStartTime: Date) => {
-        const scheduleTime = isBrevet ? formData.scheduleTime : undefined
-        return allowedStartTimes(requestedStartTime, scheduleTime)
-    }
+    const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime)
+
 
     const dirtyForm = (newFormData: Partial<FormData>) => {
         setFormState('dirty')
@@ -143,20 +133,9 @@ export const RegistrationForm = () => {
         dirtyForm({ startTime })
     }
 
-    const handlePermanentChange = (permanent: Route) => {
-        dirtyForm({
-            rideType: 'permanent',
-            route: permanent.routeName,
-            startLocation: permanent.startLocation,
-            chapter: permanent.chapter,
-            distance: permanent.distance
-        })
-    }
-
     const handleBrevetChange = (brevet: Brevet) => {
         const time = new Date(brevet.date)
         dirtyForm({
-            rideType: 'brevet',
             route: brevet.route,
             startTime: time,
             scheduleTime: time,
@@ -213,11 +192,9 @@ export const RegistrationForm = () => {
             <ContentWrapper>
                 <InputField label={fieldLabel['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
                 <InputField label={fieldLabel['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
-                <SelectField label={fieldLabel['rideType']} name='rideType' options={rideTypes} value={formData.rideType} onChange={handleSelectChange} />
-                {isBrevet && <SelectBrevets onChange={handleBrevetChange} />}
-                {isPermanent && <SelectPermanents onChange={handlePermanentChange} />}
+                <SelectBrevets onChange={handleBrevetChange} />
                 <DateField label={fieldLabel['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
-                <InputField label={fieldLabel['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled={isBrevet} />
+                <InputField label={fieldLabel['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled={true} />
                 <InputField label={fieldLabel['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>
                     <h2>COVID-19 risk awareness</h2>
