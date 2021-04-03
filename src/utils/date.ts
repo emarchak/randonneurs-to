@@ -25,7 +25,6 @@ export const getTime = (d: Date) => {
     const hours = inMorning ? Number(matches[1]) : Number(matches[1]) + 12
     const minutes = Number(matches[2])
 
-    console.log(d.toString())
     return `${pad(hours)}:${pad(minutes)}`
 }
 
@@ -39,4 +38,4 @@ export const getDateTimeLong = (d: Date) =>
     `${dayShort[d.getDay()]} ${monthsLong[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${getTime(d)}`
 
 export const getDateTimeShort = (d: Date) =>
-    `${dayShort[d.getDay()]} ${monthsShort[d.getMonth()]} ${d.getDate()}, ${getTime(d)}`
+    `${dayShort[d.getDay()]} ${monthsShort[d.getMonth()]} ${d.getDate()} ${getTime(d)}`
