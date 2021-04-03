@@ -8,16 +8,10 @@ type Props = {
 }
 
 export const Header = ({ siteTitle = '' }: Props) => (
-  <header
-    className={styles.header}
-  >
-    <ContentWrapper
-    >
+  <header className={styles.header}>
+    <ContentWrapper>
       <h1 className={styles.headerTitle}>
-        <Link
-          to='/'
-          className={styles.headerLink}
-        >
+        <Link to='/' className={styles.headerLink}>
           {siteTitle}
         </Link>
       </h1>
