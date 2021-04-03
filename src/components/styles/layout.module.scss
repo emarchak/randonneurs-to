@@ -1,7 +1,7 @@
 @import "theme";
 
 $footer-height: 4.3rem;
-
+@include body-link();
 .content {
   @include max-width();
 }
@@ -15,9 +15,6 @@ $footer-height: 4.3rem;
   min-height: calc(100vh - #{$footer-height});
 }
 
-.main-content {
-  @include body-link();
-}
 
 .footer {
   @include body-link();

@@ -4,13 +4,16 @@ import { SEO } from 'src/components/seo'
 import { ContentWrapper } from "src/components/content-wrapper"
 import { RegistrationFormPermanent } from 'src/components/registration'
 import { Aside } from 'src/components/callout'
+import { registrationRoutes } from '.'
+import { TabMenu } from 'src/components/tabmenu'
 
 export const PermanentRegistration = () => {
   return (
     <Layout>
       <SEO title='Register for a permanent' />
       <ContentWrapper>
-        <h1>Register to a permanent</h1><h2>with Randonneurs Ontario</h2>
+        <TabMenu tabs={registrationRoutes} />
+        <h1>Register for a permanent</h1><h2>with Randonneurs Ontario</h2>
 
         <p>For all sanctioned rides, we require riders to have OCA membership and read the <a href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">Progressive Return to Cycling Policy</a>.</p>
 

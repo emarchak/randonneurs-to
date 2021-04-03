@@ -4,12 +4,20 @@ import { SEO } from 'src/components/seo'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { Callout } from 'src/components/callout'
 import { RegistrationFormBrevet } from 'src/components/registration'
+import { TabMenu } from 'src/components/tabmenu'
 
-export const BrevetRegistration = () => {
+export const registrationRoutes = [
+  { label: 'Memberships', route: '/registration/membership/' },
+  { label: 'Rides', route: '/registration/' },
+  { label: 'Permanents', route: '/registration/permanent/' },
+]
+
+const BrevetRegistration = () => {
   return (
-    <Layout>
+    <Layout hideHeader>
       <SEO title='Register for a ride' />
       <ContentWrapper>
+        <TabMenu tabs={registrationRoutes} />
         <h1>Register to ride</h1><h2>with Randonneurs Ontario</h2>
 
         <p>For all sanctioned rides, we require riders to have OCA membership and read the <a href='https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/'>Progressive Return to Cycling Policy</a>.</p>

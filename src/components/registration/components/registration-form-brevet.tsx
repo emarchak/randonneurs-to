@@ -92,7 +92,7 @@ export const RegistrationFormBrevet = () => {
     const { checkMembership } = useCheckRiderMembership()
     const { allowedStartTimes } = useAllowedStartTimes()
 
-    const isSubmitted = true
+    const isSubmitted = formState === 'submitted'
     const isDirty = formState === 'dirty'
     const hasError = Boolean(formErrors.length)
 
