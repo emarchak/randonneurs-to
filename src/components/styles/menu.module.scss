@@ -7,6 +7,7 @@
   color: get-color('text');
   text-decoration: none;
   display: block;
+  border-bottom: 1px solid transparent;
   &:hover, &:focus {
     background-color: get-color('primary', 'desaturate');
     border-bottom-color: get-color('text');
@@ -31,6 +32,7 @@
   padding-left: get-spacing();
   text-decoration: none;
   color: get-color('text');
+  border-bottom: 1px solid transparent;
   &:hover, &:focus {
     text-decoration: underline;
   }

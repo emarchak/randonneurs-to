@@ -9,7 +9,7 @@ import { TabMenu } from 'src/components/tabmenu'
 
 export const PermanentRegistration = () => {
   return (
-    <Layout>
+    <Layout hideHeader>
       <SEO title='Register for a permanent' />
       <ContentWrapper>
         <TabMenu tabs={registrationRoutes} />
@@ -18,8 +18,6 @@ export const PermanentRegistration = () => {
         <p>For all sanctioned rides, we require riders to have OCA membership and read the <a href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">Progressive Return to Cycling Policy</a>.</p>
 
         <p>Please <a href="https://www.ontariocycling.org">visit the OCA Website for the latest information</a> regarding permissible club/team and group riding activities. </p>
-
-        <p>If you have any questions, <a href="http://randonneursontario.ca/who/board.html">please contact your chapter VP</a>.</p>
 
         <Aside>
           <p><strong>A Permanent ride</strong> is one of the existing Randonneurs Ontario brevet routes ridden outside of the normal Brevet schedule. Any current Randonneurs Ontario member may propose riding a Permanent, with at least two weeks in advance of the proposed date. Once approved, there can be no changes to the request, except at the discretion of the Chapter VP and Treasurer.</p>

@@ -13,17 +13,23 @@ const MemberRegistration = () => (
             <TabMenu tabs={registrationRoutes} />
             <h1>Become a member</h1><h2>of Randonneurs Ontario</h2>
 
-            <p>For all sanctioned rides, we require riders to have OCA membership and read the <a href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">Progressive Return to Cycling Policy</a>.</p>
+            <p>For all sanctioned rides, we require riders to have Ontario Cycling Association (OCA) membership. If you're not an OCA member, you can purchase a membership during registration.</p>
 
-            <p>Please <a href="https://www.ontariocycling.org">visit the OCA Website for the latest information</a> regarding permissible club/team and group riding activities. </p>
+            <h3>Individual Membership</h3>
+            <h4><strong>$40.00 CDN</strong> + OCA Membership </h4>
+            <p>Full members may register for all standard rides throughout the season at no additional cost, can vote at the Annual General Meeting, and are invited to the Annual Awards dinner.</p>
+            <p><a href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2021" target="_blank">Click here to join</a> </p>
 
-            <p>If you have any questions, <a href="http://randonneursontario.ca/who/board.html">please contact your chapter VP</a>.</p>
+            <h3>Family Membership</h3>
+            <h4><strong>$40.00 CDN</strong> + OCA Membership <strong>per family member</strong>.</h4>
+            <p>The Family Membership receives all of the benefits of individual memberships, and is for a family living at the same address.</p>
+            <p><a href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2021" target="_blank">Click here to join</a></p>
 
-            <Aside>
-                <p><strong>A Permanent ride</strong> is one of the existing Randonneurs Ontario brevet routes ridden outside of the normal Brevet schedule. Any current Randonneurs Ontario member may propose riding a Permanent, with at least two weeks in advance of the proposed date. Once approved, there can be no changes to the request, except at the discretion of the Chapter VP and Treasurer.</p>
-                <p>Standard brevet rules apply for Permanents. Control cards must be completed during the ride, including start and end. Permanents do not take the place of brevets for the ACP Super Randonneur award, nor will they count for qualification for PBP.</p>
-                <p><a href="http://randonneursontario.ca/Permanents/Permanents.html">Learn more about our permanents program.</a></p>
-            </Aside>
+            <h3>Trial Member</h3>
+            <h4><strong>FREE</strong> + OCA Membership</h4>
+            <p>There is no charge for rider for their first event, no matter the distance. First time riders must have an OCA Membership through Randonneurs Ontario or another OCA affiliated club.</p>
+            <p></p>
+            <p><a href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2021" target="_blank">Click here to join</a></p>
 
         </ContentWrapper>
 

@@ -11,6 +11,19 @@ $footer-height: 4.3rem;
   text-align: center;
 }
 
+.headerTitle {
+  @include no-space;
+  @include media(small) {
+    font-size: get-font-size(medium);
+  }
+}
+
+.headerLink {
+    color: get-color(text);
+    text-decoration: 'none';
+    border-bottom-width: 0;
+}
+
 .main-wrapper {
   min-height: calc(100vh - #{$footer-height});
 }

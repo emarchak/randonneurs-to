@@ -14,7 +14,7 @@ const spacing = {
 
 const crossButtonHeight = '0.25rem'
 
-var menuStyles = {
+const menuStyles = {
   bmBurgerBarsHover: {
     background: 'hsla(0, 0%, 0%, 0.5)',
   },
@@ -38,6 +38,7 @@ var menuStyles = {
     background: 'hsla(0, 0%, 0%, 0.3)',
   }
 }
+
 export type MenuState = {
   isOpen: boolean
 }
