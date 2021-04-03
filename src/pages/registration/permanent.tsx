@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { ContentWrapper } from "src/components/content-wrapper"
-import { RegistrationFormPermanent } from './components/registration-form-permanent'
+import { RegistrationFormPermanent } from 'src/components/registration'
 import { Aside } from 'src/components/callout'
 
 export const PermanentRegistration = () => {

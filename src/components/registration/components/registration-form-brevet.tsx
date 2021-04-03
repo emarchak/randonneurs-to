@@ -3,18 +3,17 @@ import { ContentWrapper } from 'src/components/content-wrapper'
 import { SubmitButton } from 'src/components/form/buttons'
 import { ErrorsList } from 'src/components/form/errors-list'
 import { formSubmit } from 'src/components/form/helpers'
-import { InputField, SelectField, DateField, CheckboxField, HiddenField } from 'src/components/form/input-field'
+import { InputField, DateField, CheckboxField, HiddenField } from 'src/components/form/input-field'
 import { emailRegex } from 'src/components/form/regex'
 import { Brevet } from 'src/hooks/useBrevets'
 import { SelectBrevets } from './select-brevets'
 import styles from 'src/components/styles/registration.module.scss'
-import { Callout } from 'src/components/callout'
-import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
+import { Aside, Callout } from 'src/components/callout'
+import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembership'
 import { MissingMembership } from './missing-membership'
 const formName = 'registration'
 
-const rideTypes = [{ value: 'brevet', label: 'Scheduled (brevet or populaire)' }, { value: 'permanent', label: 'Permanent' }]
 const twoDaysFromToday = new Date(Date.now())
 twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
 
@@ -85,7 +84,7 @@ const checkForErrors = (fields: FormData) => (
 )
 
 
-export const RegistrationForm = () => {
+export const RegistrationFormBrevet = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
@@ -93,7 +92,7 @@ export const RegistrationForm = () => {
     const { checkMembership } = useCheckRiderMembership()
     const { allowedStartTimes } = useAllowedStartTimes()
 
-    const isSubmitted = formState === 'submitted'
+    const isSubmitted = true
     const isDirty = formState === 'dirty'
     const hasError = Boolean(formErrors.length)
 
@@ -105,7 +104,6 @@ export const RegistrationForm = () => {
 
     const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime)
 
-
     const dirtyForm = (newFormData: Partial<FormData>) => {
         setFormState('dirty')
         setFormData({
@@ -115,11 +113,6 @@ export const RegistrationForm = () => {
     }
 
     const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { value = '', name } = evt.currentTarget
-        dirtyForm({ [name]: value })
-    }
-
-    const handleSelectChange = (evt: ChangeEvent<HTMLSelectElement>) => {
         const { value = '', name } = evt.currentTarget
         dirtyForm({ [name]: value })
     }
@@ -169,18 +162,6 @@ export const RegistrationForm = () => {
         }
     }
 
-    if (isSubmitted) {
-        return (
-            <ContentWrapper>
-                <p aria-live='polite'>
-                    <strong>Thank you for registering to ride with us.</strong><br />
-                    A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration.
-                    Refresh the page to submit again.
-              </p>
-            </ContentWrapper>
-        )
-    }
-
     return (
         <form
             name={formName}
@@ -192,6 +173,13 @@ export const RegistrationForm = () => {
             <ContentWrapper>
                 <InputField label={fieldLabel['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
                 <InputField label={fieldLabel['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
+                <Aside>
+                    <p>To encourage social distancing, riders may schedule their own start times on the scheduled date.</p>
+
+                    <p>Brevets cards will be emailed out for each ride. Submit the brevet cards, photos, and recorded activity (strava, ridewgps, garmin, etc.) to your chapter VP when you're done.</p>
+
+                    <p><a href="http://randonneursontario.ca/who/whatis.html#COVID" target="_blank">Learn more about riding brevets and our COVID-19 guidelines.</a></p>
+                </Aside>
                 <SelectBrevets onChange={handleBrevetChange} />
                 <DateField label={fieldLabel['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
                 <InputField label={fieldLabel['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled={true} />
@@ -211,9 +199,13 @@ export const RegistrationForm = () => {
                 <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
                 <HiddenField name='membership' value={formData.membership} />
                 <ErrorsList formErrors={formErrors} />
-                <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
-                    Register
-                </SubmitButton>
+                {isSubmitted ?
+                    <p aria-live='polite'>
+                        <strong>Thank you for registering to ride with us.</strong><br />
+                        <>A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration. </>
+                        <>Refresh the page to submit again.</>
+                    </p>
+                    : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>Register</SubmitButton>}
             </ContentWrapper>
         </form >
     )

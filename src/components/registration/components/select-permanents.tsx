@@ -21,7 +21,7 @@ export const SelectPermanents = ({ onChange }: Props) => {
   }
 
   return (
-
-    <SelectField label={'Routes'} name="route" options={options} value={selectedRouteId} onChange={handleChange} />
-  )
+    <>
+      <SelectField label={'Routes'} name="route" options={options} value={selectedRouteId} onChange={handleChange} />
+    </>)
 }

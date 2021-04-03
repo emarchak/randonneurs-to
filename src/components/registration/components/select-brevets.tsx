@@ -2,7 +2,6 @@ import React, { useState, FormEvent } from 'react'
 import { Loading } from 'src/components/form/input-field'
 import { Fieldset } from 'src/components/form/fieldset'
 import { useBrevets, Brevet } from 'src/hooks/useBrevets'
-import { BrevetDescription } from './brevet-description'
 import { BrevetRow } from './brevet-row'
 import styles from 'src/components/styles/registration.module.scss'
 import { Button } from 'src/components/form/buttons'
@@ -35,8 +34,7 @@ export const SelectBrevets = ({ onChange }: Props) => {
     if (!Boolean(brevets.length)) {
         return <h2>No upcoming brevets</h2>
     }
-    return (<>
-        <BrevetDescription />
+    return (
         <Fieldset id={fieldSetID}><>
             <h2>Upcoming Brevets</h2>
 
@@ -67,6 +65,5 @@ export const SelectBrevets = ({ onChange }: Props) => {
 
             </table>
         </></Fieldset>
-    </>
     )
 }

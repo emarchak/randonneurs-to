@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { RegistrationForm } from './registration-form'
+import { advanceTo, clear } from 'jest-date-mock'
+import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as useAllowedStartTimes from '../hooks/useAllowedStartTimes'
 import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
 
 jest.mock('isomorphic-unfetch', () => ({
@@ -44,7 +44,7 @@ jest.mock('src/hooks/useCheckRiderMembership', () => ({
 
 describe('<RegistrationForm>', () => {
     it('renders all the required fields to the user', () => {
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormBrevet />)
         expect(() => {
             fireEvent.change(mount.getByLabelText(/name/i), {
                 target: { value: 'Foo' },
@@ -72,7 +72,7 @@ describe('<RegistrationForm>', () => {
     it.skip('shows more brevets on click', () => { })
 
     it('requires email, rider name, randonneurs ontario consent and oca consent', () => {
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormBrevet />)
 
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'higgeldy-piggeldy' },
@@ -101,7 +101,7 @@ describe('<RegistrationForm>', () => {
 
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormBrevet />)
         const rideDate = new Date('Sat April 10 2021 09:20:00 EDT')
 
         fireEvent.change(mount.getByLabelText(/name/i), {
@@ -155,7 +155,7 @@ describe('<RegistrationForm>', () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
         fetchSpy.mockRejectedValueOnce({ ok: false })
 
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormBrevet />)
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
         })
@@ -184,7 +184,7 @@ describe('<RegistrationForm>', () => {
     it('disables registrations for events that are not allowedToRegister', () => {
         advanceTo(new Date('Fri April 10 2021 17:20:00 EDT'))
 
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormBrevet />)
 
         expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
         expect(mount.baseElement).toHaveTextContent(/Rouge Ramble 60/i)
@@ -202,7 +202,7 @@ describe('<RegistrationForm>', () => {
         const useCheckRiderMembershipSpy = jest.spyOn(useCheckRiderMembership, 'useCheckRiderMembership')
         useCheckRiderMembershipSpy.mockReturnValue({ checkMembership: checkMembershipMock })
 
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormBrevet />)
 
         fireEvent.blur(mount.getByLabelText(/name/i),
             { target: { value: 'Foo Bar' } }
