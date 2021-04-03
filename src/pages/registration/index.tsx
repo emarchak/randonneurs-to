@@ -7,7 +7,6 @@ import { RegistrationFormBrevet } from 'src/components/registration'
 import { TabMenu } from 'src/components/tabmenu'
 
 export const registrationRoutes = [
-  { label: 'Memberships', route: '/registration/membership/' },
   { label: 'Rides', route: '/registration/' },
   { label: 'Permanents', route: '/registration/permanent/' },
 ]
