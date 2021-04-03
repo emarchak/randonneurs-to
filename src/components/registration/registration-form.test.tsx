@@ -4,6 +4,7 @@ import { RegistrationForm } from './registration-form'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useAllowedStartTimes from './hooks/useAllowedStartTimes'
 import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
+import { advanceTo, clear } from 'jest-date-mock'
 
 jest.mock('isomorphic-unfetch', () => ({
     __esModule: true,
@@ -40,7 +41,7 @@ jest.mock('src/hooks/useBrevets', () => ({
                 chapter: 'Toronto',
                 event: 'populaire',
                 distance: '60',
-                date: '2021-10-09T12:00:00.000Z',
+                date: new Date('Sat April 10 2021 09:20:00 EDT'),
                 route: 'Rouge Ramble 60',
                 startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
                 id: 1,
@@ -146,7 +147,7 @@ describe('<RegistrationForm>', () => {
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
         const mount = render(<RegistrationForm />)
-        const rideDate = new Date('2021-10-09T12:00:00.000Z')
+        const rideDate = new Date('Sat April 10 2021 09:20:00 EDT')
 
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
@@ -245,11 +246,7 @@ describe('<RegistrationForm>', () => {
     })
 
     it('disables registrations for events that are not allowedToRegister', () => {
-        const useAllowedStartTimesSpy = jest.spyOn(useAllowedStartTimes, 'useAllowedStartTimes')
-        useAllowedStartTimesSpy.mockReturnValue({
-            allowedStartTimes: jest.fn(),
-            allowedToRegister: jest.fn().mockReturnValue(false),
-        })
+        advanceTo(new Date('Fri April 10 2021 17:20:00 EDT'))
 
         const mount = render(<RegistrationForm />)
 
@@ -261,7 +258,8 @@ describe('<RegistrationForm>', () => {
 
         expect(mount.queryByLabelText(/Rouge Ramble 60/i)).toBeNull()
         expect(mount.getByRole('textbox', { name: 'Starting location' })).not.toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
-        useAllowedStartTimesSpy.mockRestore()
+
+        clear()
     })
 
     it('warns riders if they are not registered', () => {

@@ -61,10 +61,5 @@
     "test": "jest",
     "test:dev": "jest --watch",
     "deploy": "gatsby build && gh-pages -d public"
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-date-mock"
-    ]
   }
 }

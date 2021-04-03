@@ -10,14 +10,15 @@ import { SelectBrevets } from './select-brevets'
 import styles from 'src/components/styles/registration.module.scss'
 import { Callout } from 'src/components/callout'
 import { SelectPermanents } from './select-permanents'
-import { useAllowedStartTimes, addDays } from './hooks/useAllowedStartTimes'
+import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
 import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembership'
 import { MissingMembership } from './missing-membership'
 import { Route } from './hooks/useRoutes'
 const formName = 'registration'
 
 const rideTypes = [{ value: 'brevet', label: 'Scheduled (brevet or populaire)' }, { value: 'permanent', label: 'Permanent' }]
-const twoDaysFromToday = addDays(2)
+const twoDaysFromToday = new Date(Date.now())
+twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
 
 type FormState = 'submitted' | 'dirty' | null
 interface FormData {

@@ -50,7 +50,12 @@ export const useBrevets = ({ chapter, before = today }: UseBrevetFilters) => {
     allEvent: { nodes: events }
   } = useStaticQuery(brevetQuery)
 
-  const filteredEvents: Brevet[] = useMemo(() => events.filter((event: Brevet) => {
+  const filteredEvents: Brevet[] = useMemo(() => events.map((event: Brevet) => {
+    return {
+      ...event,
+      date: new Date(event.date)
+    }
+  }).filter((event: Brevet) => {
     const matchDate = new Date(event.date) > before
     const matchChapter = chapter ? event.chapter === chapter : true
     return matchDate && matchChapter
