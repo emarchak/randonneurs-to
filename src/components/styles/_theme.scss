@@ -97,6 +97,11 @@ $dropshadow: (
   @return map-get($color, $variant);
 }
 
+@function get-outline-color($name, $variant: "normal") {
+  $color: map-get($theme-colors, $name);
+  @return darken(map-get($color, $variant), 20%)
+}
+
 @function get-spacing($name: "normal") {
   @return map-get($theme-spacing, $name);
 }

@@ -13,8 +13,11 @@
   padding: get-spacing(small) get-spacing(medium);
   color: get-color(text);
   background: get-color(text, lighter);
+  outline: 0.1rem solid get-outline-color(text, lighter);
+  box-shadow: get-dropshadow();
+
   text-align: center;
-  outline: 0.1rem solid get-color(text, lighter);
+  
   width: 100%;
   transition: all 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
@@ -23,11 +26,11 @@
   &:hover:enabled,
   &:focus:enabled {
     cursor: pointer;
-    box-shadow: get-dropshadow();
+    background: get-color(text, light);
   }
   
   &:active {
-    background: get-color(text, lightest);
+    outline-width: 0.2rem;
   }
 
   &:focus:enabled{
@@ -35,8 +38,7 @@
   }
 
   &:disabled {
-    background: get-color(text, lightest);
-    color: get-color(text, light);
+    opacity: 75%;
   }
 
   @include media(large) {
@@ -45,28 +47,28 @@
 }
 
 
-.submit {
-  background: get-color(primary, dark);
-  outline-color: get-color(primary, dark);
+// .submit {
+//   background: get-color(primary, dark);
+//   outline-color: get-color(primary, dark);
 
-  &:hover:enabled,
-  &:focus:enabled {
-    box-shadow: get-dropshadow(dark);
-  }
+//   &:hover:enabled,
+//   &:focus:enabled {
+//     box-shadow: get-dropshadow(dark);
+//   }
 
-  &:focus:enabled {
-    outline-color: get-color(primary, darkest);
-  }
+//   &:focus:enabled {
+//     outline-color: get-color(primary, darkest);
+//   }
 
-  &:active {
-    background: get-color(primary, light);
-    transform: scale(0.99);
-  }
+//   &:active {
+//     background: get-color(primary, light);
+//     transform: scale(0.99);
+//   }
 
-  &:disabled {
-    background: get-color(primary);
-  }
-}
+//   &:disabled {
+//     background: get-color(primary);
+//   }
+// }
 
 .fieldset {
   border: 0;
@@ -76,15 +78,14 @@
 
 .input {
   border-radius: 0 0 0;
-  background-color: #fff;
+  background-color: get-color(background);
   height: get-font-size(large);
   padding: 0 get-spacing(small);
-  outline: 0.1rem solid get-color(secondary, light);
+  outline: 0.1rem solid get-outline-color(background);
   border: 0;
 
   &:focus {
-    outline-offset: 0;
-    outline-color: get-color(secondary);
+    outline-width: 0.2rem ;
   }
 }
 
