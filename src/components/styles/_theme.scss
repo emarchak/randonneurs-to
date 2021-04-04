@@ -64,8 +64,9 @@ $theme-font-size: (
 );
 
 $dropshadow: (
-  "normal": 0 0 0.1rem transparentize(#333333, 0.75),
-  "dark": 0.05rem 0.05rem 0.1rem transparentize(#333333, 0.5),
+  "pressed": 0.05rem 0.05rem 0rem transparentize(#333333, 0.75),
+  "normal":  0.05rem 0.05rem 0.25rem transparentize(#333333, 0.75),
+  "dark": 0.05rem 0.05rem 0.25rem transparentize(#333333, 0.5),
 );
 
 @mixin no-space {
@@ -99,7 +100,7 @@ $dropshadow: (
 
 @function get-outline-color($name, $variant: "normal") {
   $color: map-get($theme-colors, $name);
-  @return darken(map-get($color, $variant), 20%)
+  @return darken(map-get($color, $variant), 10%)
 }
 
 @function get-spacing($name: "normal") {
@@ -126,4 +127,10 @@ $dropshadow: (
   a {
     color: get-color(secondary, dark);
   }
+}
+
+@mixin border-radius() {
+  -webkit-border-radius: .3rem;
+  -moz-border-radius: .3rem;
+  border-radius: .3rem;
 }
