@@ -14,7 +14,7 @@ const spacing = {
 
 const crossButtonHeight = '0.25rem'
 
-var menuStyles = {
+const menuStyles = {
   bmBurgerBarsHover: {
     background: 'hsla(0, 0%, 0%, 0.5)',
   },
@@ -38,6 +38,7 @@ var menuStyles = {
     background: 'hsla(0, 0%, 0%, 0.3)',
   }
 }
+
 export type MenuState = {
   isOpen: boolean
 }
@@ -51,8 +52,15 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
   <Burger {...menuConfig} styles={menuStyles} isOpen={isOpen} onStateChange={onMenuChange} customBurgerIcon={false} right>
     <ul className={styles.list}>
       <li className={styles.listItem}><Link className={styles.link} to='/'>Home</Link></li>
-      <li className={styles.listItem}><Link className={styles.link} to='/registration'>Register for a ride</Link></li>
-      <li className={styles.listItem}><Link className={styles.link} to='/loneliness'>Club audax à distance</Link></li>
+      <li className={styles.listItem}>
+        <Link className={styles.link} to='/registration/'>Register for a ride</Link>
+        <ul className={styles.list}>
+          <li><a className={styles.linkSecondary} href='http://randonneursontario.ca/who/how.html'>Become a member</a></li>
+          <li><Link className={styles.linkSecondary} to='/registration/'>Scheduled rides</Link></li>
+          <li><Link className={styles.linkSecondary} to='/registration/permanent/'>Permanents</Link></li>
+        </ul>
+      </li>
+      <li className={styles.listItem}><Link className={styles.link} to='/loneliness/'>Club audax à distance</Link></li>
       <li className={styles.listItem}>
         <a className={styles.link} href='http://randonneursontario.ca'>Randonneurs Ontario</a>
         <ul className={styles.list}>

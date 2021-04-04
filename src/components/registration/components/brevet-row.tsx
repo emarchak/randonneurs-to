@@ -2,7 +2,7 @@ import React from 'react'
 import { Brevet } from 'src/hooks/useBrevets'
 import { getDateLong, getTime, getDateTimeShort } from 'src/utils'
 import styles from 'src/components/styles/registration.module.scss'
-import { useAllowedStartTimes } from './hooks/useAllowedStartTimes'
+import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 
 
 type Props = { brevet: Brevet, isSelected: boolean, fieldsetID: string, handleChange: (brevet) => void }
@@ -21,7 +21,7 @@ export const BrevetRow = ({ brevet, isSelected, fieldsetID, handleChange }: Prop
 
     return (
         <tr className={classNames} onClick={canRegister ? onChange : null} >
-            <td>
+            <td className={styles.brevetCellSelector}>
                 {canRegister && <input
                     type="radio"
                     aria-labelledby={brevet.id}
@@ -34,10 +34,6 @@ export const BrevetRow = ({ brevet, isSelected, fieldsetID, handleChange }: Prop
             </td>
             <td>
                 {getDateLong(brevet.date)}
-                <small><br />
-                    {canRegister && 'Registration deadline: ' + getDateTimeShort(registrationDeadline)}
-                    {!canRegister && 'Registration closed'}
-                </small>
             </td>
             <td>{getTime(brevet.date)}</td>
             <td>{brevet.chapter}</td>
@@ -51,6 +47,10 @@ export const BrevetRow = ({ brevet, isSelected, fieldsetID, handleChange }: Prop
                         <small>(<a href={brevet.rwgpsUrl} target="_blank">View {brevet.route} route</a>)</small>
                     </>}
                 </label>
+                <small><br />
+                    {canRegister && 'Registration deadline: ' + getDateTimeShort(registrationDeadline)}
+                    {!canRegister && 'Registration closed'}
+                </small>
             </td>
         </tr>
     )

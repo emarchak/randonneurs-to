@@ -1,17 +1,16 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { RegistrationForm } from './registration-form'
+import { RegistrationFormPermanent } from './registration-form-permanent'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as useAllowedStartTimes from './hooks/useAllowedStartTimes'
+import * as useAllowedStartTimes from '../../../pages/registration/hooks/useAllowedStartTimes'
 import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
-import { advanceTo, clear } from 'jest-date-mock'
 
 jest.mock('isomorphic-unfetch', () => ({
     __esModule: true,
     default: jest.fn().mockReturnValue({ ok: true })
 }))
 
-jest.mock('./hooks/useRoutes', () => ({
+jest.mock('../hooks/useRoutes', () => ({
     __esModule: true,
     useRoutes: jest.fn().mockReturnValue({
         routes:
@@ -32,25 +31,6 @@ jest.mock('./hooks/useRoutes', () => ({
     }),
 }))
 
-jest.mock('src/hooks/useBrevets', () => ({
-    __esModule: true,
-    useBrevets: jest.fn().mockReturnValue({
-        loading: false,
-        brevets:
-            [{
-                chapter: 'Toronto',
-                event: 'populaire',
-                distance: '60',
-                date: new Date('Sat April 10 2021 09:20:00 EDT'),
-                route: 'Rouge Ramble 60',
-                startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
-                id: 1,
-                rwgpsUrl: 'https://rwgps.com',
-
-            }]
-    })
-}))
-
 jest.mock('src/hooks/useCheckRiderMembership', () => ({
     __esModule: true,
     useCheckRiderMembership: jest.fn().mockReturnValue({
@@ -64,9 +44,9 @@ jest.mock('src/hooks/useCheckRiderMembership', () => ({
     })
 }))
 
-describe('<RegistrationForm>', () => {
+describe('<RegistrationFormPermanent>', () => {
     it('renders all the required fields to the user', () => {
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormPermanent />)
         expect(() => {
             fireEvent.change(mount.getByLabelText(/name/i), {
                 target: { value: 'Foo' },
@@ -74,9 +54,11 @@ describe('<RegistrationForm>', () => {
             fireEvent.change(mount.getByLabelText(/email/i), {
                 target: { value: 'foo@bar.com' },
             })
-            fireEvent.change(mount.getByLabelText(/ride/i), {
-                target: { value: 'permanent' },
-            })
+            const RouteSelector = mount.getByLabelText(/route/i)
+
+            expect(RouteSelector).toHaveTextContent(/Toronto - Urban 200/i)
+            expect(RouteSelector).toHaveTextContent(/Huron - Golf 300/i)
+
             fireEvent.change(mount.getByLabelText(/starting time/i), {
                 target: { value: new Date() },
             })
@@ -86,38 +68,8 @@ describe('<RegistrationForm>', () => {
         }).not.toThrow()
     })
 
-    it('shows routes when registering for permanents', () => {
-        const mount = render(<RegistrationForm />)
-
-        fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: 'permanent' },
-        })
-
-        const RouteSelector = mount.getByLabelText(/route/i)
-        expect(mount.baseElement).toHaveTextContent(/A Permanent ride is one of the existing Randonneurs Ontario brevet route/i)
-        expect(RouteSelector).toHaveTextContent(/Toronto - Urban 200/i)
-        expect(RouteSelector).toHaveTextContent(/Huron - Golf 300/i)
-    })
-
-    it('shows brevets when registering for brevet', () => {
-        const mount = render(<RegistrationForm />)
-
-        fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: 'brevet' },
-        })
-        expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
-        expect(mount.baseElement).toHaveTextContent(/Rouge Ramble 60/i)
-
-        fireEvent.click(mount.getByLabelText(/Rouge Ramble 60/i))
-
-        expect(mount.getByRole('textbox', { name: 'Starting location' })).toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
-        expect(mount.getByRole('textbox', { name: 'Starting location' })).toHaveAttribute('disabled')
-    })
-
-    it.skip('shows more brevets on click', () => { })
-
     it('requires email, rider name, randonneurs ontario consent and oca consent', () => {
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormPermanent />)
 
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'higgeldy-piggeldy' },
@@ -146,8 +98,8 @@ describe('<RegistrationForm>', () => {
 
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-        const mount = render(<RegistrationForm />)
-        const rideDate = new Date('Sat April 10 2021 09:20:00 EDT')
+        const mount = render(<RegistrationFormPermanent />)
+        const rideDate = new Date('2021-10-09T12:00:00.000Z')
 
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
@@ -160,11 +112,13 @@ describe('<RegistrationForm>', () => {
             target: { value: 'foo@bar.com' },
         })
 
-        fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: 'brevet' },
+        fireEvent.change(mount.getByLabelText(/Routes/i), {
+            target: { value: 'route1' }
         })
 
-        fireEvent.click(mount.getByLabelText(/Rouge Ramble 60/i))
+        fireEvent.change(mount.getByLabelText(/starting time/i), {
+            target: { value: rideDate },
+        })
 
         fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
         fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
@@ -182,13 +136,11 @@ describe('<RegistrationForm>', () => {
                 name: 'Foo Bar',
                 email: 'foo@bar.com',
                 membership: 'Individual',
-                rideType: 'brevet',
-                route: 'Rouge Ramble 60',
+                route: 'Urban 200',
                 startTime: rideDate.toString(),
-                scheduleTime: rideDate.toString(),
-                startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
+                startLocation: 'Starbucks',
                 chapter: 'Toronto',
-                distance: 60,
+                distance: 200,
                 notes: 'notes',
                 ocaConsent: true,
                 roConsent: true,
@@ -205,17 +157,13 @@ describe('<RegistrationForm>', () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
         fetchSpy.mockRejectedValueOnce({ ok: false })
 
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormPermanent />)
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
         })
 
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'foo@bar.com' },
-        })
-
-        fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: 'permanent' },
         })
 
         fireEvent.change(mount.getByLabelText(/route/i), {
@@ -245,31 +193,14 @@ describe('<RegistrationForm>', () => {
         })
     })
 
-    it('disables registrations for events that are not allowedToRegister', () => {
-        advanceTo(new Date('Fri April 10 2021 17:20:00 EDT'))
-
-        const mount = render(<RegistrationForm />)
-
-        fireEvent.change(mount.getByLabelText(/ride/i), {
-            target: { value: 'brevet' },
-        })
-        expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
-        expect(mount.baseElement).toHaveTextContent(/Rouge Ramble 60/i)
-
-        expect(mount.queryByLabelText(/Rouge Ramble 60/i)).toBeNull()
-        expect(mount.getByRole('textbox', { name: 'Starting location' })).not.toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
-
-        clear()
-    })
-
-    it('warns riders if they are not registered', () => {
+    it('warns riders if they are not a member', () => {
         const checkMembershipMock = jest.fn()
             .mockReturnValueOnce(null)
             .mockReturnValueOnce({ membership: 'Trial' })
         const useCheckRiderMembershipSpy = jest.spyOn(useCheckRiderMembership, 'useCheckRiderMembership')
         useCheckRiderMembershipSpy.mockReturnValue({ checkMembership: checkMembershipMock })
 
-        const mount = render(<RegistrationForm />)
+        const mount = render(<RegistrationFormPermanent />)
 
         fireEvent.blur(mount.getByLabelText(/name/i),
             { target: { value: 'Foo Bar' } }
@@ -284,6 +215,4 @@ describe('<RegistrationForm>', () => {
 
         useCheckRiderMembershipSpy.mockRestore()
     })
-
-    it.skip('limits registration to maximum of 10 riders per start time', () => { })
 })

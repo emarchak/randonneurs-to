@@ -16,10 +16,11 @@ import styles from './styles/layout.module.scss'
 import "./styles/index.scss"
 
 type Props = {
+  hideHeader?: boolean
   children: React.ReactNode
 }
 
-export const Layout = ({ children }: Props) => {
+export const Layout = ({ hideHeader = false, children }: Props) => {
   const [menuOpen, setMenuState] = useState(false)
 
   const toggleMenu = () => {
@@ -49,7 +50,7 @@ export const Layout = ({ children }: Props) => {
             id={menuConfig.pageWrapId}
           >
             <MenuTrigger onTrigger={toggleMenu} />
-            <Header siteTitle={data.site.siteMetadata.title} />
+            {!hideHeader && <Header siteTitle={data.site.siteMetadata.title} />}
 
             <main className={styles.mainContent}>
               {children}

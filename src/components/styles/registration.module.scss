@@ -9,24 +9,33 @@
     background-color: get-color(background);
 
     @include media(small) {
-        thead, tbody, th, td, tr { 
-            display: block; 
-        }
-        
         thead tr { 
             position: absolute;
             top: -9999px;
             left: -9999px;
         }
-        td {
-          position: relative; 
-          padding: 0 get-spacing(small);
+
+        .brevetCellSelector {
+            position: absolute;
+            
+            padding-left: 0;
+            width: get-spacing(large);
         }
-        td:first-child {padding-top: get-spacing(small)}
+
+        td {
+            position: relative; 
+            padding: 0 get-spacing(small) 0 get-spacing(large);
+        }
+
+        td:first-child,
+        .brevetCellSelector + td {padding-top: get-spacing(small)}
         td:last-child {padding-bottom: get-spacing(small)}
     }
 }
 
+.brevetCellSelector {
+    text-align: center;
+}
 .brevetRow {
   &:hover,
   &:focus {

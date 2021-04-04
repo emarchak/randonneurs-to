@@ -1,0 +1,48 @@
+@import 'theme';
+
+.tabmenu {
+    padding: 0 0 0 0;
+    margin: 0 0 get-spacing() 0;
+    border-bottom: 1px solid get-color(text, lighter)
+}
+
+.tabmenuList {
+    @include no-space();
+}
+
+.tabmenuListItem {
+    @include no-space();
+    display: inline-block;
+    margin: 0 get-spacing(small);
+
+    @include media(large) {
+        margin: 0 get-spacing();
+    }
+}
+
+.tabmenuListItem:first-child {
+    margin-left: 0;
+}
+
+.tabmenuLink {
+    font-family: get-font(header);
+    font-size: get-font-size(subheader);
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+    display: block;
+    position: relative;
+    bottom: -2px;
+    color: get-color(text, light) ;
+    border-color: transparent;
+    transition: border-color 0.5s ease;
+
+    &:focus,
+    &:hover {
+        border-bottom: 3px solid get-color(text, light);
+    }
+}
+
+.tabmenuLinkActive {
+    color: get-color(text) ;
+    border-bottom: 3px solid get-color(text);
+}

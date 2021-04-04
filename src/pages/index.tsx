@@ -61,7 +61,7 @@ const IndexPage = () => {
               ))}
             </ul>
             <footer className={styles.eventFooter}>
-              <Link className={styles.eventCta} to='/registration'>Register</Link>
+              <Link className={styles.eventCta} to='/registration/'>Register to ride</Link>
             </footer>
           </section>
 

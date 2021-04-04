@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import { SelectField } from 'src/components/form/input-field'
-import { PermanentDescription } from './permanent-description'
-import { useRoutes, Route } from './hooks/useRoutes'
+import { useRoutes, Route } from '../hooks/useRoutes'
 
 
 type Props = {
@@ -23,7 +22,6 @@ export const SelectPermanents = ({ onChange }: Props) => {
 
   return (
     <>
-      <PermanentDescription />
       <SelectField label={'Routes'} name="route" options={options} value={selectedRouteId} onChange={handleChange} />
     </>)
 }

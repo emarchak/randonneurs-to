@@ -1,30 +1,27 @@
-import {Link} from 'gatsby';
-import React from 'react';
-import {ContentWrapper} from './content-wrapper';
-import styles from './styles/layout.module.scss';
+import { Link } from 'gatsby'
+import React from 'react'
+import { ContentWrapper } from './content-wrapper'
+import styles from './styles/layout.module.scss'
 
 type Props = {
-  siteTitle: string;
+  siteTitle: string
 }
 
-export const Header = ({siteTitle = ''}: Props) => (
+export const Header = ({ siteTitle = '' }: Props) => (
   <header
     className={styles.header}
   >
     <ContentWrapper
     >
-      <h1 style={{margin: 0}}>
+      <h1 className={styles.headerTitle}>
         <Link
           to='/'
-          style={{
-            color: '#333',
-            textDecoration: 'none',
-          }}
+          className={styles.headerLink}
         >
           {siteTitle}
         </Link>
       </h1>
     </ContentWrapper>
   </header>
-);
+)
 

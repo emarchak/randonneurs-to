@@ -58,8 +58,9 @@ $theme-spacing: (
 $theme-font-size: (
   "large": 2.25rem,
   "medium": 1.62671rem,
-  "small": 0.85rem,
+  "subheader": 1.313rem,
   "normal": 1rem,
+  "small": 0.85rem,
 );
 
 $dropshadow: (
@@ -118,12 +119,9 @@ $dropshadow: (
 
 @mixin body-link() {
   a {
-    &,
-    &:visited {
-      color: get-color(secondary, dark);
-      text-decoration: none;
-      border-bottom: 0.05em dashed get-color(secondary);
-    }
+    color: get-color(secondary, dark);
+    text-decoration: none;
+    border-bottom: 0.05em dashed get-color(secondary);
     &:hover,
     &:focus {
       border-bottom-color: get-color(secondary, dark);
