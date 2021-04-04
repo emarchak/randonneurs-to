@@ -107,7 +107,7 @@ export const DateField = ({ value, name, label, onChange, allowedRange, optional
                 wrapperClassName={styles.dateInputOverrides}
                 selected={value}
                 onChange={onChange}
-                className={styles.input}
+                className={styles.input + ' ' + styles.dateInputField}
                 filterDate={allowedRange}
                 dateFormat="MMMM d HH:mm" />
         </label>

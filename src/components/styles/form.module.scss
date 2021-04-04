@@ -26,13 +26,17 @@
   &:hover:enabled,
   &:focus:enabled {
     cursor: pointer;
-    border-color: get-outline-color(text, light);
+    background-color: get-hover-color(text, lighter)
   }
   
   &:active {
-    outline: none;
     box-shadow: get-dropshadow(pressed);
   }
+
+  &:focus {
+    outline: none;
+    border-color: get-color(text, light);
+  }  
 
   &:disabled {
     opacity: 60%;
@@ -50,28 +54,34 @@
 
   &:hover:enabled,
   &:focus:enabled {
-    cursor: pointer;
+    background-color: get-hover-color(primary, dark);
+  }
+
+  &:focus {
     border-color: get-outline-color(primary, darkest);
   }
-//   outline-color: get-color(primary, dark);
+}
 
-//   &:hover:enabled,
-//   &:focus:enabled {
-//     box-shadow: get-dropshadow(dark);
-//   }
+.secondaryButton{
+  background: get-color(secondary, light);
+  border-color: get-outline-color(secondary, light);
 
-//   &:focus:enabled {
-//     outline-color: get-color(primary, darkest);
-//   }
+  &:hover:enabled,
+  &:focus:enabled {
+    background-color: get-hover-color(secondary, light);
+  }
 
-//   &:active {
-//     background: get-color(primary, light);
-//     transform: scale(0.99);
-//   }
+  &:focus {
+    border-color: get-outline-color(secondary);
+  }
+}
 
-//   &:disabled {
-//     background: get-color(primary);
-//   }
+.smallButton {
+  padding: (get-spacing(small) / 3) 0 ;
+}
+
+.blockButton {
+  display:block;
 }
 
 .fieldset {
@@ -94,6 +104,7 @@
   }
 
   &:disabled {
+    border-color: get-color(secondary, light);
     background-color: get-color(text, lightest);
   }
 }
@@ -162,6 +173,13 @@
 }
 
 .date-input-overrides {
+  width: calc(100% - #{get-spacing(small) * 2});
+  @include media(large) {
+    width: 66%;
+  }
+}
+
+.dateInputField {
   width: 100%;
 }
 

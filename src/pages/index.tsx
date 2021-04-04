@@ -9,6 +9,7 @@ import { Callout } from '../components/callout'
 import ClubAudax from './assets/ClubAudax.svg'
 import styles from './styles/index.module.scss'
 import { useBrevets } from '../hooks/useBrevets'
+import { LinkButton } from 'src/components/form/buttons'
 
 const pageQuery = graphql`
 query {
@@ -61,7 +62,7 @@ const IndexPage = () => {
               ))}
             </ul>
             <footer className={styles.eventFooter}>
-              <Link className={styles.eventCta} to='/registration/'>Register to ride</Link>
+              <LinkButton to='/registration/' primary small block>Register to ride</LinkButton>
             </footer>
           </section>
 

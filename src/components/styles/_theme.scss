@@ -64,7 +64,7 @@ $theme-font-size: (
 );
 
 $dropshadow: (
-  "pressed": 0.05rem 0.05rem 0rem transparentize(#333333, 0.75),
+  "pressed": 0 0 0.25rem transparentize(#333333, 0.75),
   "normal":  0.05rem 0.05rem 0.25rem transparentize(#333333, 0.75),
   "dark": 0.05rem 0.05rem 0.25rem transparentize(#333333, 0.5),
 );
@@ -96,6 +96,11 @@ $dropshadow: (
 @function get-color($name, $variant: "normal") {
   $color: map-get($theme-colors, $name);
   @return map-get($color, $variant);
+}
+
+@function get-hover-color($name, $variant: "normal") {
+  $color: map-get($theme-colors, $name);
+  @return darken(map-get($color, $variant), 7%)
 }
 
 @function get-outline-color($name, $variant: "normal") {
@@ -130,7 +135,7 @@ $dropshadow: (
 }
 
 @mixin border-radius() {
-  -webkit-border-radius: .3rem;
-  -moz-border-radius: .3rem;
-  border-radius: .3rem;
+  -webkit-border-radius: .2rem;
+  -moz-border-radius: .2rem;
+  border-radius: .2rem;
 }
