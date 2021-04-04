@@ -32,6 +32,7 @@ const menuStyles = {
   },
   bmMenu: {
     background: '#d8d8d8',
+    borderLeft: '0.1rem solid #bfbfbf',
     padding: `${spacing.large} ${spacing.normal} 0`,
   },
   bmOverlay: {
