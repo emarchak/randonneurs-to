@@ -7,6 +7,8 @@
   "dependencies": {
     "@bugsnag/js": "^7.9.0",
     "@bugsnag/plugin-react": "^7.9.0",
+    "@loadable/component": "^5.14.1",
+    "@shopify/buy-button-js": "^2.1.7",
     "gatsby": "^2.5.5",
     "gatsby-image": "^3.2.0",
     "gatsby-plugin-manifest": "^2.1.1",
@@ -54,7 +56,7 @@
   "scripts": {
     "build": "gatsby build",
     "build:production": "jest && gatsby build",
-    "develop": "gatsby develop & ./node_modules/.bin/tsm src -w",
+    "develop": "gatsby develop -p 8080 -o & ./node_modules/.bin/tsm src -w",
     "develop:style": "./node_modules/.bin/tsm src",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "serve": "gatsby serve",

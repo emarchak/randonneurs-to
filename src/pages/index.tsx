@@ -69,14 +69,14 @@ const IndexPage = () => {
             <p>
               <Link
                 style={{ borderBottomWidth: 0, display: 'block' }}
-                to='/loneliness'
+                to='/loneliness/'
               >
                 <ClubAudax alt={'Club audax à distance'} />
               </Link>
             </p>
             <p>
               If we must be alone in these tough times, let us be alone
-              together. <Link to='/loneliness'>Learn more.</Link>
+              together. <Link to='/loneliness/'>Learn more.</Link>
             </p>
           </section>
 
