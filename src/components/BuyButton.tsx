@@ -53,7 +53,7 @@ type Props = {
     price?: boolean
 }
 
-const BuyButtonComponent = ({ productId,
+export const BuyButton = ({ productId,
     img = false,
     button = false,
     buttonWithQuantity = false,
@@ -79,6 +79,4 @@ const BuyButtonComponent = ({ productId,
     return <div id={buttonId}></div>
 }
 
-export default BuyButtonComponent
-
-export const BuyButton: typeof BuyButtonComponent = Loadable(() => import('src/components/buybutton'))
+export default BuyButton
