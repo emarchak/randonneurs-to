@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react'
 import Client from 'shopify-buy'
 import ShopifyBuy from '@shopify/buy-button-js'
-import Loadable from "@loadable/component"
 
 const bbOptions = {
     'product': {
