@@ -16,17 +16,14 @@ const BrevetRegistration = () => {
     <Layout hideHeader>
       <SEO title='Register for a ride' />
       <ContentWrapper>
-        <TabMenu tabs={registrationRoutes} />
+        <TabMenu tabs={registrationRoutes} activeRoute='/registration/' />
         <h1>Register to ride</h1><h2>with Randonneurs Ontario</h2>
 
-        <p>For all sanctioned rides, we require riders to have OCA membership and read the <a href='https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/'>Progressive Return to Cycling Policy</a>.</p>
-
-        <p>Please <a href='https://www.ontariocycling.org'>visit the OCA Website for the latest information</a> regarding permissible club/team and group riding activities. </p>
-
-        <p>If you have any questions, <a href='http://randonneursontario.ca/who/board.html'>please contact your chapter VP</a>.</p>
+        <p>You must have an OCA membership and have read the <a href='https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/'>Progressive Return to Cycling Policy</a>. Please visit the <a href='https://www.ontariocycling.org'>OCA Website for the latest information</a> about group riding during the pandemic.</p>
 
         <Callout alternative>
-          <p>Rides are not approved until the chapter VP has confirmed with the rider.</p>
+          <p>Your ride is not approved until your Chapter VP has confirmed with you.</p>
+          <p><a href='http://randonneursontario.ca/who/board.html'>Contact your Chapter VP</a> if you have any questions.</p>
         </Callout>
 
       </ContentWrapper>

@@ -174,9 +174,9 @@ export const RegistrationFormBrevet = () => {
                 <InputField label={fieldLabel['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
                 <InputField label={fieldLabel['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
                 <Aside>
-                    <p>To encourage social distancing, riders may schedule their own start times on the scheduled date.</p>
+                    <p>To encourage social distancing, you can pick your own start time on the scheduled date.</p>
 
-                    <p>Brevets cards will be emailed out for each ride. Submit the brevet cards, photos, and recorded activity (strava, ridewgps, garmin, etc.) to your chapter VP when you're done.</p>
+                    <p>You'll be emailed a brevets card before each ride. Submit your brevet card and recorded activity (strava, ridewgps, garmin, etc.) to your Chapter VP when you're done.</p>
 
                     <p><a href="http://randonneursontario.ca/who/whatis.html#COVID" target="_blank">Learn more about riding brevets and our COVID-19 guidelines.</a></p>
                 </Aside>
@@ -202,7 +202,7 @@ export const RegistrationFormBrevet = () => {
                 {isSubmitted ?
                     <p aria-live='polite'>
                         <strong>Thank you for registering to ride with us.</strong><br />
-                        <>A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration. </>
+                        <>A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration.</>
                         <>Refresh the page to submit again.</>
                     </p>
                     : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>Register</SubmitButton>}

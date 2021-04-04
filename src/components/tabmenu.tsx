@@ -9,19 +9,24 @@ type tab = {
 }
 
 type Props = {
-    tabs: tab[]
+    tabs: tab[],
+    activeRoute: string
 }
 
-export const TabMenu = ({ tabs }: Props) => (
+export const TabMenu = ({ tabs, activeRoute }: Props) => (
     <menu className={styles.tabmenu}>
         <ul className={styles.tabmenuList}>
             {tabs.map(tab => (
-                <li className={styles.tabmenuListItem}>
-                    <Link to={tab.route} className={styles.tabmenuLink} activeClassName={styles.tabmenuLinkActive}>
+                <li key={tab.route} className={styles.tabmenuListItem}>
+                    <Link to={tab.route} className={[
+                        styles.tabmenuLink,
+                        ...(activeRoute === tab.route ? [styles.tabmenuLinkActive] : [])
+                    ].join(' ')}>
                         {tab.label}
                     </Link>
                 </li>
-            ))}
+            )
+            )}
         </ul>
     </menu>
 )
