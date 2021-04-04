@@ -26,7 +26,10 @@ const bbOptions = {
                     'background-color': '#b1d3c4'
                 },
                 'border-radius': '0px'
-            }
+            },
+            'price': {
+                'font-size': '18px'
+            },
         },
         'buttonDestination': 'checkout',
         'text': {

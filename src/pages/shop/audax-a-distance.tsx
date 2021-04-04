@@ -20,31 +20,16 @@ const AudaxShopPage = () => {
                 <ContentChild>
                     <h1>Club Audax à Distance</h1><h2>cycling patch</h2>
 
-                    <p>A custom patch to celebrate riding by your lonesome! <em>Club Audax à Distance</em> is a play on "long distance relationships" and the time we spend together.</p>
+                    <p>A custom patch to celebrate riding by your lonesome! <em>Club Audax à Distance</em> is a play on "long distance relationships" and the time we spend together. Get your own randonneuring cycling patch to put on bags, jerseys, tool poutches, or put in your map pouch!</p>
 
-                    <p>They're made in Toronto, approx. 1.5" x 4.5", and have an iron-on backing. CO₂ canister for scale!</p>
-                    <p>Get your own randonneuring cycling patch to put on bags, jerseys, tool poutches, or put in your map pouch</p>
+                    <p>Patches are 1.5" x 4.5", and have an iron-on backing.</p>
+
+                    <p>Made in Toronto by <a href='http://www.sugarbomb.ca/'>Sugarbomb</a>, designed by <a href='http://www.garethfowler.com/'>Gareth Fowler</a>.</p>
                 </ContentChild>
                 <ContentChild>
-                    <BuyButton productId={5609667035158} img buttonWithQuantity />
+                    <BuyButton productId={5609667035158} price img buttonWithQuantity />
                 </ContentChild>
             </ContentWrapper>
-            <Callout alternative>
-                <ContentWrapper>
-                    <h3>Shipping</h3>
-                    <dl>
-                        <dt>Canada</dt>
-                        <dd>...</dd>
-
-                        <dt>USA</dt>
-                        <dd>...</dd>
-
-                        <dt>International</dt>
-                        <dd>...</dd>
-                    </dl>
-
-                </ContentWrapper>
-            </Callout>
         </Layout >
     )
 
