@@ -12,7 +12,7 @@ const spacing = {
   normal: '1.45rem'
 }
 
-const crossButtonHeight = '0.25rem'
+const crossButtonHeight = '2rem'
 
 const menuStyles = {
   bmBurgerBarsHover: {
@@ -60,7 +60,12 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
           <li><Link className={styles.linkSecondary} to='/registration/permanent/'>Permanents</Link></li>
         </ul>
       </li>
-      <li className={styles.listItem}><Link className={styles.link} to='/loneliness/'>Club audax à distance</Link></li>
+      <li className={styles.listItem}>
+        <Link className={styles.link} to='/loneliness/'>Club audax à distance</Link>
+        <ul className={styles.list}>
+          <li><Link className={styles.linkSecondary} to='/shop/audax-a-distance/'>Buy the patch</Link></li>
+        </ul>
+      </li>
       <li className={styles.listItem}>
         <a className={styles.link} href='http://randonneursontario.ca'>Randonneurs Ontario</a>
         <ul className={styles.list}>

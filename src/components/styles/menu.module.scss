@@ -35,6 +35,7 @@
   border-bottom: 1px solid transparent;
   &:hover, &:focus {
     text-decoration: underline;
+    border-bottom-color: transparent;
   }
 }
 

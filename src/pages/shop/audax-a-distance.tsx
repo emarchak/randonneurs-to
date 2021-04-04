@@ -2,9 +2,11 @@
 import React from 'react'
 import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
+import { ContentWrapper, ContentChild } from "src/components/content-wrapper"
 import { Callout } from "src/components/callout"
-import { BuyButton } from 'src/components/buybutton'
+import Loadable from "@loadable/component"
+
+const BuyButton = Loadable(() => import('src/components/buybutton'))
 
 const AudaxShopPage = () => {
     return (
