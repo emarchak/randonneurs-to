@@ -2,16 +2,32 @@ import { Link } from 'gatsby'
 import React from 'react'
 import styles from "../styles/form.module.scss"
 
-type ButtonProps = {
+type ButtonTypes = {
+    primary?: boolean,
+    secondary?: boolean,
+    small?: boolean,
+    block?: boolean,
+}
+
+const getButtonClassName = ({ primary = false, secondary = false, block = false, small = false }) => (
+    [
+        styles.button,
+        ...(primary ? [styles.primaryButton] : []),
+        ...(secondary ? [styles.secondaryButton] : []),
+        ...(block ? [styles.blockButton] : []),
+        ...(small ? [styles.smallButton] : []),
+    ].join(' '))
+
+type ButtonProps = ButtonTypes & {
     handleClick: (evt: any) => any,
     disabled?: boolean,
     className?: string,
     children: React.ReactChild
 }
 
-export const Button = ({ handleClick, disabled, className, children }: ButtonProps) => (
+export const Button = ({ handleClick, disabled, className, children, ...props }: ButtonProps) => (
     <button
-        className={className + ' ' + styles.button}
+        className={className + ' ' + getButtonClassName(props)}
         disabled={disabled}
         onClick={handleClick}
     >
@@ -28,7 +44,7 @@ type SubmitButtonProps = {
 export const SubmitButton = ({ handleSubmit, disabled = false, children }: SubmitButtonProps) => (
     <button
         type="submit"
-        className={styles.submit + ' ' + styles.button}
+        className={getButtonClassName({ primary: true })}
         disabled={disabled}
         onClick={handleSubmit}
     >
@@ -36,22 +52,11 @@ export const SubmitButton = ({ handleSubmit, disabled = false, children }: Submi
     </button>
 )
 
-type LinkButtonProps = {
+type LinkButtonProps = ButtonTypes & {
     to: string,
     children: React.ReactChild,
-    primary?: boolean,
-    secondary?: boolean,
-    small?: boolean,
-    block?: boolean,
 }
 
-export const LinkButton = ({ to, primary = false, secondary = false, block = false, small = false, children }: LinkButtonProps) => {
-    const classes = [
-        styles.button,
-        ...(primary ? [styles.primaryButton] : []),
-        ...(secondary ? [styles.secondaryButton] : []),
-        ...(block ? [styles.blockButton] : []),
-        ...(small ? [styles.smallButton] : []),
-    ]
-    return <Link to={to} className={classes.join(' ')}>{children}</Link>
-}
+export const LinkButton = ({ to, children, ...props }: LinkButtonProps) => (
+    <Link to={to} className={getButtonClassName(props)}>{children}</Link>
+)
