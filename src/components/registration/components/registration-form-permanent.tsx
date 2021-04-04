@@ -157,18 +157,6 @@ export const RegistrationFormPermanent = () => {
         }
     }
 
-    if (isSubmitted) {
-        return (
-            <ContentWrapper>
-                <p aria-live='polite'>
-                    <strong>Thank you for registering to ride with us.</strong><br />
-                    A copy of your registration request has been sent to your email, and your VP and Treasurer will be in contact to confirm your registration.
-                    Refresh the page to submit again.
-              </p>
-            </ContentWrapper>
-        )
-    }
-
     return (
         <form
             name={formName}
@@ -199,9 +187,13 @@ export const RegistrationFormPermanent = () => {
                 <HiddenField name='distance' value={formData.distance.toString()} />
                 <HiddenField name='membership' value={formData.membership} />
                 <ErrorsList formErrors={formErrors} />
-                <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>
-                    Register
-                </SubmitButton>
+                {isSubmitted ?
+                    <p aria-live='polite'>
+                        <strong>Thank you for registering to ride with us.</strong><br />
+                        <>A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration. </>
+                        <>Refresh the page to submit again.</>
+                    </p>
+                    : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>Register</SubmitButton>}
             </ContentWrapper>
         </form >
     )

@@ -13,15 +13,10 @@ export const Header = ({ siteTitle = '' }: Props) => (
   >
     <ContentWrapper
     >
-      <h1 className={styles.headerTitle} style={{ margin: 0 }}>
+      <h1 className={styles.headerTitle}>
         <Link
           to='/'
           className={styles.headerLink}
-          style={{
-            color: '#333',
-            textDecoration: 'none',
-            borderBottomWidth: 0
-          }}
         >
           {siteTitle}
         </Link>
