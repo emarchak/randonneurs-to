@@ -4,17 +4,20 @@
   padding: 0 0;
   margin: 0 0;
   background-color: get-color(secondary, light);
+  border: 0.1rem solid get-outline-color(secondary, light);
 }
 
 .button {
   box-shadow: get-dropshadow();
   display: inline-block;
-  border: none;
   padding: get-spacing(small) get-spacing(medium);
   color: get-color(text);
   background: get-color(text, lighter);
+  border: 0.1rem solid get-outline-color(text, lighter);
+  box-shadow: get-dropshadow();
+  @include border-radius();
   text-align: center;
-  outline: 0.1rem solid get-color(text, lighter);
+  
   width: 100%;
   transition: all 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
@@ -23,20 +26,20 @@
   &:hover:enabled,
   &:focus:enabled {
     cursor: pointer;
-    box-shadow: get-dropshadow();
+    background-color: get-hover-color(text, lighter)
   }
   
   &:active {
-    background: get-color(text, lightest);
+    box-shadow: get-dropshadow(pressed);
   }
 
-  &:focus:enabled{
-    outline-color: get-color(text, lighter);
-  }
+  &:focus {
+    outline: none;
+    border-color: get-color(text, light);
+  }  
 
   &:disabled {
-    background: get-color(text, lightest);
-    color: get-color(text, light);
+    opacity: 60%;
   }
 
   @include media(large) {
@@ -44,28 +47,40 @@
   }
 }
 
-
-.submit {
+.primaryButton {
   background: get-color(primary, dark);
-  outline-color: get-color(primary, dark);
+  border-color: get-outline-color(primary, dark);
 
   &:hover:enabled,
   &:focus:enabled {
-    box-shadow: get-dropshadow(dark);
+    background-color: get-hover-color(primary, dark);
   }
 
+  &:focus {
+    border-color: get-outline-color(primary, darkest);
+  }
+}
+
+.secondaryButton{
+  background: get-color(secondary, light);
+  border-color: get-outline-color(secondary, light);
+
+  &:hover:enabled,
   &:focus:enabled {
-    outline-color: get-color(primary, darkest);
+    background-color: get-hover-color(secondary, light);
   }
 
-  &:active {
-    background: get-color(primary, light);
-    transform: scale(0.99);
+  &:focus {
+    border-color: get-outline-color(secondary);
   }
+}
 
-  &:disabled {
-    background: get-color(primary);
-  }
+.smallButton {
+  padding: (get-spacing(small) / 3) 0 ;
+}
+
+.blockButton {
+  display:block;
 }
 
 .fieldset {
@@ -76,15 +91,20 @@
 
 .input {
   border-radius: 0 0 0;
-  background-color: #fff;
+  background-color: get-color(background);
   height: get-font-size(large);
   padding: 0 get-spacing(small);
-  outline: 0.1rem solid get-color(secondary, light);
-  border: 0;
+  border: 0.1rem solid get-color(secondary);
+  @include border-radius();
 
   &:focus {
-    outline-offset: 0;
-    outline-color: get-color(secondary);
+    outline-width: 0;
+    border-color: get-color(secondary, darkest);
+  }
+
+  &:disabled {
+    border-color: get-color(secondary, light);
+    background-color: get-color(text, lightest);
   }
 }
 
@@ -152,6 +172,13 @@
 }
 
 .date-input-overrides {
+  width: calc(100% - #{get-spacing(small) * 2});
+  @include media(large) {
+    width: 66%;
+  }
+}
+
+.dateInputField {
   width: 100%;
 }
 

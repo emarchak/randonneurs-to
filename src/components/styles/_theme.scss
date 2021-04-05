@@ -64,8 +64,9 @@ $theme-font-size: (
 );
 
 $dropshadow: (
-  "normal": 0 0 0.1rem transparentize(#333333, 0.75),
-  "dark": 0.05rem 0.05rem 0.1rem transparentize(#333333, 0.5),
+  "pressed": 0 0 0.25rem transparentize(#333333, 0.75),
+  "normal":  0.05rem 0.05rem 0.25rem transparentize(#333333, 0.75),
+  "dark": 0.05rem 0.05rem 0.25rem transparentize(#333333, 0.5),
 );
 
 @mixin no-space {
@@ -97,6 +98,16 @@ $dropshadow: (
   @return map-get($color, $variant);
 }
 
+@function get-hover-color($name, $variant: "normal") {
+  $color: map-get($theme-colors, $name);
+  @return darken(map-get($color, $variant), 7%)
+}
+
+@function get-outline-color($name, $variant: "normal") {
+  $color: map-get($theme-colors, $name);
+  @return darken(map-get($color, $variant), 10%)
+}
+
 @function get-spacing($name: "normal") {
   @return map-get($theme-spacing, $name);
 }
@@ -121,4 +132,10 @@ $dropshadow: (
   a {
     color: get-color(secondary, dark);
   }
+}
+
+@mixin border-radius() {
+  -webkit-border-radius: .2rem;
+  -moz-border-radius: .2rem;
+  border-radius: .2rem;
 }
