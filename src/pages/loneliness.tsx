@@ -11,6 +11,12 @@ import Routes from "../data/loneliness-routes.yaml"
 import Riders from "../data/loneliness-riders.yaml"
 import Logo from "./assets/ClubAudax.svg"
 import style from "./styles/loneliness.module.scss"
+import { TabMenu } from "src/components/tabmenu"
+
+export const lonelinessRoutes = [
+  { label: 'Club', route: '/loneliness/' },
+  { label: 'Shop', route: '/shop/audax-a-distance/' },
+]
 
 const Page = () => {
   const {
@@ -40,6 +46,7 @@ const Page = () => {
         image={metaImage.src}
       />
       <ContentWrapper>
+        <TabMenu tabs={lonelinessRoutes} activeRoute='/loneliness/' />
         <Logo className={style.heading} alt="Club audax à distance" />
         <p>
           When asked to socially isolate, to stay away from loved ones for long
