@@ -4,8 +4,8 @@ import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { ContentWrapper, ContentChild } from "src/components/content-wrapper"
 import Loadable from "@loadable/component"
-import { TabMenu } from 'src/components/tabmenu'
-import { lonelinessRoutes } from '../loneliness'
+// import { TabMenu } from 'src/components/tabmenu'
+// import { lonelinessRoutes } from '../loneliness'
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
 
@@ -18,7 +18,7 @@ const AudaxShopPage = () => {
             the right thing. If we must be alone in these tough times, let us be alone together."
             />
             <ContentWrapper>
-                <TabMenu tabs={lonelinessRoutes} activeRoute='/shop/audax-a-distance/' />
+                {/* <TabMenu tabs={lonelinessRoutes} activeRoute='/shop/audax-a-distance/' /> */}
             </ContentWrapper>
             <ContentWrapper container>
                 <ContentChild>

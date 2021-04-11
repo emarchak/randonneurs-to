@@ -3,7 +3,7 @@ import { Loading } from 'src/components/form/input-field'
 import { Fieldset } from 'src/components/form/fieldset'
 import { useBrevets, Brevet } from 'src/hooks/useBrevets'
 import { BrevetRow } from './brevet-row'
-import styles from 'src/components/styles/registration.module.scss'
+import * as styles from 'src/components/styles/registration.module.scss'
 import { Button } from 'src/components/form/buttons'
 
 const minBrevet = 5

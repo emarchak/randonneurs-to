@@ -6,12 +6,12 @@ import { SEO } from "../components/seo"
 import { ContentWrapper } from "../components/content-wrapper"
 import { Callout } from "../components/callout"
 import { LonelinessForm, LonelinessRoute } from "../components/loneliness"
-
 import Routes from "../data/loneliness-routes.yaml"
 import Riders from "../data/loneliness-riders.yaml"
 import Logo from "./assets/ClubAudax.svg"
-import style from "./styles/loneliness.module.scss"
 import { TabMenu } from "src/components/tabmenu"
+
+import * as style from "./styles/loneliness.module.scss"
 
 export const lonelinessRoutes = [
   { label: 'Club', route: '/loneliness/' },

@@ -1,7 +1,7 @@
 import { Link } from 'gatsby'
 import React from 'react'
 import { ContentWrapper } from './content-wrapper'
-import styles from './styles/layout.module.scss'
+import * as styles from './styles/layout.module.scss'
 
 type Props = {
   siteTitle: string

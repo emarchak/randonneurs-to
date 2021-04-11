@@ -7,7 +7,7 @@ import { InputField, DateField, CheckboxField, HiddenField } from 'src/component
 import { emailRegex } from 'src/components/form/regex'
 import { Brevet } from 'src/hooks/useBrevets'
 import { SelectBrevets } from './select-brevets'
-import styles from 'src/components/styles/registration.module.scss'
+import * as styles from 'src/components/styles/registration.module.scss'
 import { Aside, Callout } from 'src/components/callout'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembership'
