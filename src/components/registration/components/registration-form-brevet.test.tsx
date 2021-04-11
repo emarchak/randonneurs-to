@@ -43,6 +43,14 @@ jest.mock('src/hooks/useCheckRiderMembership', () => ({
 }))
 
 describe('<RegistrationForm>', () => {
+    beforeEach(() => {
+        advanceTo(new Date('Thu April 1 2021 09:00:00 EDT'))
+    })
+
+    afterEach(() => {
+        clear()
+    })
+
     it('renders all the required fields to the user', () => {
         const mount = render(<RegistrationFormBrevet />)
         expect(() => {
