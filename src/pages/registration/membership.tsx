@@ -34,10 +34,9 @@ const MemberRegistration = () => {
     const gallery2 = images.slice(2, 5)
     const gallery3 = images.slice(5, 8)
 
-
     return (
         < Layout >
-            <SEO title='Become a member' />
+            <SEO title='Become a member of Randonneurs Ontario' />
             <ContentWrapper>
                 <TabMenu activeRoute={'/registration/membership/'} tabs={registrationRoutes} />
                 <h1>Become a member</h1><h2>of Randonneurs Ontario</h2>
