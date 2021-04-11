@@ -6,16 +6,37 @@ import { lonelinessRoutes } from '../loneliness'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/tabmenu'
 import Loadable from "@loadable/component"
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
 
+const imageQuery = graphql`
+query {
+    allFile(filter: {name: {glob: "audax-a-distance"}}, limit: 1) {
+        nodes {
+          name
+          childImageSharp {
+            gatsbyImageData(aspectRatio: 1)
+            fixed {
+                src
+              } 
+          }
+        }
+      }
+}
+`
+
 const AudaxShopPage = () => {
+    const {
+        allFile: { nodes: images },
+    } = useStaticQuery(imageQuery)
     return (
         <Layout>
             <SEO
                 title="Club audax à distance patches"
-                description="Purchase patches for Club audax à distance. We are riders that are commited to socially distancing ourself, to do
-            the right thing. If we must be alone in these tough times, let us be alone together."
+                description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
+                image={images[0].childImageSharp.fixed.src}
             />
             <ContentWrapper>
                 <TabMenu tabs={lonelinessRoutes} activeRoute='/shop/audax-a-distance/' />
@@ -28,9 +49,16 @@ const AudaxShopPage = () => {
                     <p>Patches are 1.5" x 4.5", and have an iron-on backing.</p>
 
                     <p>Made in Toronto by <a href='http://www.sugarbomb.ca/'>Sugarbomb</a>, designed by <a href='http://www.garethfowler.com/'>Gareth Fowler</a>.</p>
+
+                    <BuyButton productId={5609667035158} price buttonWithQuantity />
                 </ContentChild>
                 <ContentChild>
-                    <BuyButton productId={5609667035158} price img buttonWithQuantity />
+                    {images.map(image => (
+                        <GatsbyImage
+                            key={image.name}
+                            image={image.childImageSharp.gatsbyImageData}
+                            alt="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
+                        />))}
                 </ContentChild>
             </ContentWrapper>
         </Layout >

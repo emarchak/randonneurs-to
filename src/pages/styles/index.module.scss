@@ -6,20 +6,6 @@
   }
 }
 
-.updates,
-.gallery {
-  padding: get-spacing(large) 0;
-  @include media(large) {
-    width: 50%;
-  }
-}
-
-.updates {
-  @include media(large) {
-    padding-right: get-spacing();
-  }
-}
-
 .gallery {
   &::after {
     content: "";

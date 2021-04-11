@@ -74,7 +74,7 @@ const Page = () => {
             <li>
               Ride isolated, no stopping, no support. Maintain social distance.
             </li>
-            <li>Complete the given route by the given deadline.</li>
+            <li>Complete the given route.</li>
             <li>Starting locations can be at any point within the route.</li>
             <li>
               Record the ride on Strava, and submit the public activity link for
@@ -88,11 +88,10 @@ const Page = () => {
             maintain distance.
           </p>
         </Callout>
-
-        <h2>Current ride</h2>
-
-        <p>We will be sharing new routes every two weeks.</p>
-        {Routes.slice(0, 1).map((route, i) => (
+      </ContentWrapper>
+      <ContentWrapper>
+        <h2>Routes</h2>
+        {Routes.map((route, i) => (
           <LonelinessRoute key={i} {...route} />
         ))}
       </ContentWrapper>
@@ -128,11 +127,6 @@ const Page = () => {
         – distance makes the heart grow stronger –
       </div>
       <ContentWrapper>
-        <h2>Previous rides</h2>
-        {Routes.slice(1).map((route, i) => (
-          <LonelinessRoute key={i} {...route} />
-        ))}
-
         <Logo className={style.heading} alt="Club audax à distance" />
         <p style={{ textAlign: "center" }}>
           Wordmark designed by{" "}

@@ -56,7 +56,7 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
       <li className={styles.listItem}>
         <Link className={styles.link} to='/registration/'>Register for a ride</Link>
         <ul className={styles.list}>
-          <li><a className={styles.linkSecondary} href='http://randonneursontario.ca/who/how.html'>Become a member</a></li>
+          <li><Link className={styles.linkSecondary} to='/registration/membership/'>Become a member</Link></li>
           <li><Link className={styles.linkSecondary} to='/registration/'>Scheduled rides</Link></li>
           <li><Link className={styles.linkSecondary} to='/registration/permanent/'>Permanents</Link></li>
         </ul>
