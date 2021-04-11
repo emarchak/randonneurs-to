@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { getDateTimeLong } from '../utils'
-import { GatsbyImage as Img } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { Layout } from '../components/layout'
 import { SEO } from '../components/seo'
 import { ContentWrapper } from '../components/content-wrapper'
@@ -14,19 +14,13 @@ import { LinkButton } from 'src/components/form/buttons'
 const pageQuery = graphql`
 query {
   allFile(
-    filter: {
-      extension: { regex: "/(jpg|JPG|jpeg)/" }
-      relativeDirectory: { eq: "gallery" }
-    }
+    filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
     limit: 9
   ) {
     nodes {
       name
       childImageSharp {
-        fluid(maxWidth: 150, maxHeight: 150, quality: 100) {
-          ...GatsbyImageSharpFluid
-          presentationWidth
-        }
+        gatsbyImageData(aspectRatio: 1, height: 150, formats: JPG)
       }
     }
   }
@@ -83,10 +77,10 @@ const IndexPage = () => {
 
           <section className={styles.gallery}>
             {images.map(image => (
-              <Img
+              <GatsbyImage
                 className={styles.galleryTile}
                 key={image.name}
-                fluid={image.childImageSharp.fluid}
+                image={image.childImageSharp.gatsbyImageData}
                 alt={image.name}
               />
             ))}
