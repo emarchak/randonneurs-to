@@ -59,14 +59,13 @@
   ],
   "license": "MIT",
   "scripts": {
+    "start": "./node_modules/.bin/netlify dev --live",
     "build": "gatsby build",
     "build:production": "jest && gatsby build",
-    "develop": "gatsby develop -p 8088 -o",
-    "develop:style": "./node_modules/.bin/tsm src",
-    "format": "prettier --write src/**/*.{ts,tsx}",
+    "develop": "gatsby develop -p 8000 -o",
     "serve": "gatsby serve",
     "test": "jest",
     "test:dev": "jest --watch",
-    "deploy": "gatsby build && gh-pages -d public"
+    "netlify": "./node_modules/.bin/netlify"
   }
 }

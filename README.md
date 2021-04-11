@@ -10,3 +10,4 @@ Automations to for Randonneurs Toronto
 2. `npm install`
 3. `npm run develop`
 4.  To run tests, `npm run test`
+5.  To access [netlify cli](https://docs.netlify.com/cli/) `npm run netlify`
