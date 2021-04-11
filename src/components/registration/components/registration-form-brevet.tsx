@@ -23,6 +23,7 @@ interface FormData {
     email: string
     membership: Rider['membership'] | 'missing' | ''
     route: Brevet['route']
+    rideType: Brevet['event'] | ''
     scheduleTime: Date
     startTime: Date
     startLocation: string
@@ -38,6 +39,7 @@ const defaultFormData: FormData = {
     email: '',
     membership: '',
     route: '',
+    rideType: '',
     startTime: twoDaysFromToday,
     scheduleTime: twoDaysFromToday,
     startLocation: '',
@@ -130,6 +132,7 @@ export const RegistrationFormBrevet = () => {
         const time = new Date(brevet.date)
         dirtyForm({
             route: brevet.route,
+            rideType: brevet.event,
             startTime: time,
             scheduleTime: time,
             chapter: brevet.chapter,
@@ -198,6 +201,7 @@ export const RegistrationFormBrevet = () => {
                 <HiddenField name='distance' value={formData.distance.toString()} />
                 <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
                 <HiddenField name='membership' value={formData.membership} />
+                <HiddenField name='rideType' value={formData.rideType} />
                 <ErrorsList formErrors={formErrors} />
                 {isSubmitted ?
                     <p aria-live='polite'>

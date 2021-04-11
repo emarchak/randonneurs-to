@@ -142,6 +142,7 @@ describe('<RegistrationForm>', () => {
                 email: 'foo@bar.com',
                 membership: 'Individual',
                 route: 'Rouge Ramble 60',
+                rideType: 'populaire',
                 startTime: rideDate.toString(),
                 scheduleTime: rideDate.toString(),
                 startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
