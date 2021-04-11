@@ -22,7 +22,6 @@ export const LonelinessRoute = ({
   rwgpsRouteId,
 }: Props) => {
   const postedDateObj = new Date(postedDate)
-  const completeDate = new Date(postedDateObj.getTime() + twoWeeks)
 
   return (
     <article className={styles.ride}>
@@ -31,7 +30,6 @@ export const LonelinessRoute = ({
           {routeNumber}. {name}
         </h3>
         <h4>Posted on {getDateString(postedDateObj)}</h4>
-        <h4>Complete by {getDateString(completeDate)}</h4>
 
         <p>{description}</p>
       </div>
