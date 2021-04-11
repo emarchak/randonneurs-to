@@ -23,7 +23,9 @@ module.exports = {
     "gatsby-plugin-typescript",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-image",
     "gatsby-plugin-sass",
+    "gatsby-plugin-postcss",
     {
       resolve: "gatsby-plugin-react-svg",
       options: {

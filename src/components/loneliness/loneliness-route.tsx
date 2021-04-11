@@ -1,7 +1,8 @@
 import React from "react"
 
 import { getDateString } from "../../utils"
-import style from "../styles/loneliness-route.module.scss"
+
+import * as styles from "../styles/loneliness-route.module.scss"
 
 type Props = {
   name: string
@@ -24,7 +25,7 @@ export const LonelinessRoute = ({
   const completeDate = new Date(postedDateObj.getTime() + twoWeeks)
 
   return (
-    <article className={style.ride}>
+    <article className={styles.ride}>
       <div>
         <h3>
           {routeNumber}. {name}
@@ -36,7 +37,7 @@ export const LonelinessRoute = ({
       </div>
       <iframe
         src={`https://ridewithgps.com/embeds?type=route&id=${rwgpsRouteId}`}
-        className={style.iframe}
+        className={styles.iframe}
         scrolling="no"
       />
     </article>

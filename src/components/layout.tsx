@@ -12,7 +12,7 @@ import { StaticQuery, graphql } from "gatsby"
 import { Menu, MenuState, MenuTrigger, menuConfig } from './menu'
 
 import "normalize.css"
-import styles from './styles/layout.module.scss'
+import * as styles from './styles/layout.module.scss'
 import "./styles/index.scss"
 
 type Props = {
@@ -46,13 +46,13 @@ export const Layout = ({ hideHeader = false, children }: Props) => {
         <div id={menuConfig.outerContainerId}>
           <Menu isOpen={menuOpen} onMenuChange={handleMenuChange} />
           <div
-            className={styles.mainWraper}
+            className={styles.mainWrapper}
             id={menuConfig.pageWrapId}
           >
             <MenuTrigger onTrigger={toggleMenu} />
             {!hideHeader && <Header siteTitle={data.site.siteMetadata.title} />}
 
-            <main className={styles.mainContent}>
+            <main>
               {children}
             </main>
           </div>

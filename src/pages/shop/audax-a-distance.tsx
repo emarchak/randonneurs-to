@@ -1,11 +1,11 @@
 
 import React from 'react'
-import { Layout } from 'src/components/layout'
-import { SEO } from 'src/components/seo'
 import { ContentWrapper, ContentChild } from "src/components/content-wrapper"
-import Loadable from "@loadable/component"
-import { TabMenu } from 'src/components/tabmenu'
+import { Layout } from 'src/components/layout'
 import { lonelinessRoutes } from '../loneliness'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/tabmenu'
+import Loadable from "@loadable/component"
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
 

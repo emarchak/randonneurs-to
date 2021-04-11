@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 export const menuConfig = {
   pageWrapId: 'pageWrap', outerContainerId: 'outerContainer',
 }
-import styles from './styles/menu.module.scss'
+import * as styles from './styles/menu.module.scss'
 
 const spacing = {
   large: '2.25rem',

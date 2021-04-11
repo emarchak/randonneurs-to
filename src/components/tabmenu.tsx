@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import styles from './styles/tabmenu.module.scss'
+import * as styles from './styles/tabmenu.module.scss'
 
 type tab = {
     label: string,

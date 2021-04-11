@@ -1,9 +1,9 @@
 import React from 'react'
-import { Layout } from 'src/components/layout'
-import { SEO } from 'src/components/seo'
-import { ContentWrapper } from 'src/components/content-wrapper'
 import { Callout } from 'src/components/callout'
+import { ContentWrapper } from 'src/components/content-wrapper'
+import { Layout } from 'src/components/layout'
 import { RegistrationFormBrevet } from 'src/components/registration'
+import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/tabmenu'
 
 export const registrationRoutes = [
