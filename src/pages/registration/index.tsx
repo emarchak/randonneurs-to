@@ -7,6 +7,7 @@ import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/tabmenu'
 
 export const registrationRoutes = [
+  { label: 'Membership', route: '/registration/membership/' },
   { label: 'Rides', route: '/registration/' },
   { label: 'Permanents', route: '/registration/permanent/' },
 ]

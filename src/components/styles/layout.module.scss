@@ -13,6 +13,7 @@ $footer-height: 4.3rem;
 }
 
 .contentContainerChild {
+  margin-bottom: get-spacing(large);
   @include media(large) {
     flex: 1
   }

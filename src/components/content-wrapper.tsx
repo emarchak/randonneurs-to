@@ -12,9 +12,10 @@ export const ContentWrapper = ({ container = false, children }: ContentWrapperPr
 )
 
 type ContentContainerProps = {
+  className?: string,
   children: React.ReactNode
 }
 
-export const ContentChild = ({ children }: ContentContainerProps) => (
-  <div className={styles.contentContainerChild}>{children}</div>
+export const ContentChild = ({ className = '', children }: ContentContainerProps) => (
+  <div className={`${styles.contentContainerChild} ${className}`}>{children}</div>
 )

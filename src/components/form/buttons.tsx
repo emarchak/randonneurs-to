@@ -53,10 +53,14 @@ export const SubmitButton = ({ handleSubmit, disabled = false, children }: Submi
 )
 
 type LinkButtonProps = ButtonTypes & {
-    to: string,
     children: React.ReactChild,
-}
+} & (
+        | { to: string; href?: never }
+        | { to?: never; href: string }
+    )
 
-export const LinkButton = ({ to, children, ...props }: LinkButtonProps) => (
-    <Link to={to} className={getButtonClassName(props)}>{children}</Link>
+export const LinkButton = ({ to, href, children, ...props }: LinkButtonProps) => (
+    to
+        ? <Link to={to} className={getButtonClassName(props)}>{children}</Link>
+        : <a href={href} target="_blank" className={getButtonClassName(props)}>{children}</a>
 )
