@@ -56,7 +56,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-google-spreadsheets',
       options: {
-        spreadsheetId: '1KUxsyTLQERX43VAiKMR_LKvIpwzGeoOEcHuRKUvmjOM',
+        spreadsheetId: '13OY3x4RK0_yJ6Lwf7Ov-duv1_jotcd9f3gWK_0PJtIE',
+        worksheetTitle: 'Routes',
         credentials: {
           type: 'service_account',
           project_id: 'randonneurs-to',
