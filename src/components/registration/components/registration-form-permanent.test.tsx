@@ -19,14 +19,14 @@ jest.mock('../hooks/useRoutes', () => ({
                 chapter: 'Toronto',
                 distance: 200,
                 startLocation: 'Starbucks',
-                routeName: 'Urban 200'
+                routeName: 'Urban'
             },
             {
                 id: 'route2',
                 chapter: 'Huron',
                 distance: 300,
                 startLocation: 'Careys House',
-                routeName: 'Golf 300'
+                routeName: 'Golf'
             }]
     }),
 }))
@@ -56,8 +56,8 @@ describe('<RegistrationFormPermanent>', () => {
             })
             const RouteSelector = mount.getByLabelText(/route/i)
 
-            expect(RouteSelector).toHaveTextContent(/Toronto - Urban 200/i)
-            expect(RouteSelector).toHaveTextContent(/Huron - Golf 300/i)
+            expect(RouteSelector).toHaveTextContent(/Toronto - 200 - Urban/i)
+            expect(RouteSelector).toHaveTextContent(/Huron - 300 - Golf/i)
 
             fireEvent.change(mount.getByLabelText(/starting time/i), {
                 target: { value: new Date() },
@@ -136,7 +136,7 @@ describe('<RegistrationFormPermanent>', () => {
                 name: 'Foo Bar',
                 email: 'foo@bar.com',
                 membership: 'Individual',
-                route: 'Urban 200',
+                route: 'Urban',
                 startTime: rideDate.toString(),
                 startLocation: 'Starbucks',
                 chapter: 'Toronto',
