@@ -2,7 +2,7 @@ import React, { ChangeEvent, ReactChild } from "react"
 import DatePicker from "react-datepicker"
 
 import * as styles from "../styles/form.module.scss"
-import 'react-datepicker/dist/react-datepicker-cssmodules.css'
+import "react-datepicker/dist/react-datepicker.css"
 
 type FieldProps = {
     name: string
