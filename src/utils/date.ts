@@ -1,3 +1,5 @@
+import 'date-time-format-timezone'
+
 const dayShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const monthsLong = [
@@ -17,25 +19,55 @@ const monthsLong = [
 
 const pad = (n) => (n < 10 ? '0' + n : n)
 
+
 const timeZone = 'America/Toronto'
-export const getTime = (d: Date) => {
-    const matches = d.toLocaleTimeString('en-US', { timeZone }).match(/(\d+):(\d{2}):(\d{2}) (AM|PM)/i)
-    const inMorning = matches[4] === 'AM'
 
-    const hours = inMorning ? Number(matches[1]) : Number(matches[1]) + 12
-    const minutes = Number(matches[2])
-
-    return `${pad(hours)}:${pad(minutes)}`
+type DateParts = {
+    weekday: string
+    literal: string
+    month: string
+    day: string
+    year: string
+    hour: string
+    minute: string
+    dayPeriod: string
+    timeZoneName: string
 }
 
-export const getDateString = (d: Date) =>
-    `${dayShort[d.getDay()]} ${d.getDate()} ${monthsLong[d.getMonth()]}, ${d.getFullYear()}`
+const getDateParts = (d: Date, options: Intl.DateTimeFormatOptions = {}) => new Intl.DateTimeFormat('en', {
+    timeZone,
+    timeZoneName: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    weekday: 'short',
+    hour12: true,
+    ...options
+}).formatToParts(d).reduce((result, datePart) => {
+    result[datePart.type] = datePart.value
+    return result
+}, {} as DateParts)
 
-export const getDateLong = (d: Date) =>
-    `${dayShort[d.getDay()]} ${monthsLong[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
+export const getTime = (d: Date) => {
+    const p = getDateParts(d)
+    return `${p.hour}:${p.minute}`
+}
 
-export const getDateTimeLong = (d: Date) =>
-    `${dayShort[d.getDay()]} ${monthsLong[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${getTime(d)}`
+export const getDateLong = (d: Date) => {
+    const p = getDateParts(d)
+    return `${p.weekday} ${p.month} ${p.day}, ${p.year}`
+}
 
-export const getDateTimeShort = (d: Date) =>
-    `${dayShort[d.getDay()]} ${monthsShort[d.getMonth()]} ${d.getDate()} ${getTime(d)}`
+export const getDateString = getDateLong
+
+export const getDateTimeLong = (d: Date) => {
+    const p = getDateParts(d)
+    return `${p.weekday} ${p.month} ${p.day}, ${p.year} ${getTime(d)}`
+}
+
+export const getDateTimeShort = (d: Date) => {
+    const p = getDateParts(d)
+    return `${p.weekday} ${p.month} ${p.day} ${getTime(d)}`
+}

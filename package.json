@@ -12,6 +12,7 @@
     "@bugsnag/plugin-react": "^7.9.2",
     "@loadable/component": "^5.14.1",
     "@shopify/buy-button-js": "^2.1.7",
+    "date-time-format-timezone": "^1.0.22",
     "gatsby": "^3.2.1",
     "gatsby-plugin-image": "^1.2.1",
     "gatsby-plugin-manifest": "^3.2.0",
