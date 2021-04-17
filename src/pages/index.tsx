@@ -4,12 +4,13 @@ import { ContentChild, ContentWrapper } from '../components/content-wrapper'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { getDateTimeLong } from '../utils'
 import { Layout } from '../components/layout'
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { LinkButton } from 'src/components/form/buttons'
 import { SEO } from '../components/seo'
 import { useBrevets } from '../hooks/useBrevets'
 import * as styles from './styles/index.module.scss'
 import ClubAudax from './assets/ClubAudax.svg'
+import { Link } from 'src/components/form/link'
 
 const pageQuery = graphql`
 query {
@@ -51,7 +52,7 @@ const IndexPage = () => {
                 <small>
                   {getDateTimeLong(new Date(event.date))}<br />
                   {event.startLocation}<br />
-                  {event.rwgpsUrl && (<a href={event.rwgpsUrl} target="_blank">View {event.route} route</a>)}
+                  {event.rwgpsUrl && (<Link href={event.rwgpsUrl}>{`View ${event.route} route`}</Link>)}
                 </small>
               </li>
             ))}
@@ -63,10 +64,7 @@ const IndexPage = () => {
 
         <ContentChild>
           <p>
-            <Link
-              style={{ borderBottomWidth: 0, display: 'block' }}
-              to='/loneliness/'
-            >
+            <Link to='/loneliness/'>
               <ClubAudax alt={'Club audax à distance'} />
             </Link>
           </p>

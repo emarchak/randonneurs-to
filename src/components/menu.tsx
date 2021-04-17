@@ -1,6 +1,6 @@
 import React from 'react'
 import { slide as Burger } from 'react-burger-menu'
-import { Link } from 'gatsby'
+import { Link } from "./form/link"
 
 export const menuConfig = {
   pageWrapId: 'pageWrap', outerContainerId: 'outerContainer',
@@ -68,10 +68,10 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
         </ul>
       </li>
       <li className={styles.listItem}>
-        <a className={styles.link} href='http://randonneursontario.ca'>Randonneurs Ontario</a>
+        <Link className={styles.link} href='http://randonneursontario.ca'>Randonneurs Ontario</Link>
         <ul className={styles.list}>
-          <li><a className={styles.linkSecondary} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Events</a></li>
-          <li><a className={styles.linkSecondary} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Blog</a></li>
+          <li><Link className={styles.linkSecondary} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Events</Link></li>
+          <li><Link className={styles.linkSecondary} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Blog</Link></li>
         </ul>
 
       </li>
