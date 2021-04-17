@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react'
-import Client from 'shopify-buy'
-import ShopifyBuy from '@shopify/buy-button-js'
+import { useBuyButton } from './buybutton-context'
 
 const bbOptions = {
     'product': {
@@ -59,20 +58,19 @@ export const BuyButton = ({ productId,
     title = false,
     price = false }: Props) => {
     const buttonId = `product-component-${productId}`
-
     bbOptions.product.contents = { img, button, buttonWithQuantity, title, price }
 
+    // const { shopifyUI } = useBuyButton()
+
+    // console.log(shopifyUI)
     useEffect(() => {
-        const client = Client.buildClient({
-            domain: 'randonneurs-ontario.myshopify.com',
-            storefrontAccessToken: process.env.GATSBY_SHOPIFY_TOKEN,
-        })
-        const ui = ShopifyBuy.UI.init(client)
-        ui.createComponent('product', {
-            id: productId,
-            node: document.getElementById(buttonId),
-            options: bbOptions
-        })
+        // if (shopifyUI) {
+        //     shopifyUI.createComponent('product', {
+        //         id: productId,
+        //         node: document.getElementById(buttonId),
+        //         options: bbOptions
+        //     })
+        // }
     }, [])
 
     return <div id={buttonId}></div>
