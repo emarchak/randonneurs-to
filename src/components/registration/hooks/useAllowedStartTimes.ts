@@ -23,12 +23,13 @@ function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
 }
 
 export const useAllowedStartTimes = () => {
+    const now = new Date(Date.now())
+
     const allowedStartTimes = (time: Date, scheduleTime?: Date) => {
-        const today = new Date(Date.now())
         if (scheduleTime) {
-            return onDate(time, scheduleTime) && inFutureDate(time, addDays(today, 6))
+            return onDate(time, scheduleTime) && inFutureDate(time, addDays(now, 6))
         }
-        return inFutureDate(time, today)
+        return inFutureDate(time, now)
     }
 
     const getBrevetRegistrationDeadline = (brevet: Brevet) => {
@@ -43,11 +44,15 @@ export const useAllowedStartTimes = () => {
                 return deadline
         }
     }
+    const cancelledUntil = new Date('May 8 2021')
+    const isBrevetCancelled = (brevet: Brevet) => brevet.date < cancelledUntil
 
     const allowedToRegister = (brevet: Brevet) => {
-        const now = new Date(Date.now())
         const registrationDeadline = getBrevetRegistrationDeadline(brevet)
-        return now < registrationDeadline
+        const brevetCancelled = isBrevetCancelled(brevet)
+
+        console.log({ now, registrationDeadline, brevetCancelled, cancelledUntil })
+        return !brevetCancelled || now < registrationDeadline
     }
     return { allowedToRegister, allowedStartTimes, getBrevetRegistrationDeadline }
 }
