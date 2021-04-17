@@ -57,23 +57,20 @@ export const BuyButton = ({ productId,
     buttonWithQuantity = false,
     title = false,
     price = false }: Props) => {
+
     const buttonId = `product-component-${productId}`
     bbOptions.product.contents = { img, button, buttonWithQuantity, title, price }
 
-    // const { shopifyUI } = useBuyButton()
-
-    // console.log(shopifyUI)
+    const { shopifyUI } = useBuyButton()
     useEffect(() => {
-        // if (shopifyUI) {
-        //     shopifyUI.createComponent('product', {
-        //         id: productId,
-        //         node: document.getElementById(buttonId),
-        //         options: bbOptions
-        //     })
-        // }
+        if (shopifyUI) {
+            shopifyUI.createComponent('product', {
+                id: productId,
+                node: document.getElementById(buttonId),
+                options: bbOptions
+            })
+        }
     }, [])
 
     return <div id={buttonId}></div>
 }
-
-export default BuyButton
