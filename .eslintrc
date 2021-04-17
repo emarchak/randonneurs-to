@@ -1,5 +1,4 @@
 {
-  "extends": "plugin:shopify/esnext",
   "settings": {
     "import/resolver": {
       "alias": [

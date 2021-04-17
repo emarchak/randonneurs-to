@@ -38,11 +38,12 @@ const IndexPage = () => {
       <SEO title='Home' />
       <ContentWrapper>
         <Callout>
-          <p>Sanctioned events are being approved on a case by case basis following OCA guidelines. <Link to="/registration">Register for upcoming events</Link>!</p>
+          <p>Due to the most recent provincewide declaration of emergency and stay-at-home order, as well as the cancellation of all organized cycling events by the Ontario Cycling Association (OCA), all Randonneurs Ontario organized Populaires and Brevets have been cancelled until further notice. These may be rescheduled at a later date depending on provincial and local health authority directives.</p>
+          <p>However, we have been notified by OCA that we can still offer our <Link to='/registration/permanent/'>Permanents program.</Link></p>
         </Callout>
       </ContentWrapper>
       <ContentWrapper container>
-        <ContentChild>
+        {/* <ContentChild>
           <h3>Upcoming events</h3>
           <ul className={styles.eventWrapper}>
             {brevets.slice(0, 2).map(event => (
@@ -59,7 +60,7 @@ const IndexPage = () => {
           <footer className={styles.eventFooter}>
             <LinkButton to='/registration/' primary small block>Register to ride</LinkButton>
           </footer>
-        </ContentChild>
+        </ContentChild> */}
 
         <ContentChild>
           <p>
@@ -72,8 +73,9 @@ const IndexPage = () => {
           </p>
           <p>
             If we must be alone in these tough times, let us be alone
-              together. <Link to='/loneliness/'>Learn more.</Link>
+            together.
           </p>
+          <LinkButton primary block to='/loneliness/'>Learn more</LinkButton>
         </ContentChild>
 
         <ContentChild className={styles.gallery}>
