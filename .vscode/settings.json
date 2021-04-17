@@ -2,5 +2,11 @@
     "editor.formatOnSave": true,
     "diffEditor.codeLens": true,
     "javascript.format.semicolons": "remove",
-    "typescript.format.semicolons": "remove"
+    "typescript.format.semicolons": "remove",
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.codeAction.showDocumentation": {
+        "enable": true
+    },
+    "eslint.debug": true,
 }
