@@ -1,13 +1,12 @@
 {
-  // "extends": "plugin:shopify/esnext",
-  // "settings": {
-  //   "import/resolver": {
-  //     "alias": [
-  //       [
-  //         "components",
-  //         "./src/components"
-  //       ]
-  //     ]
-  //   }
-  // }
+  "settings": {
+    "import/resolver": {
+      "alias": [
+        [
+          "components",
+          "./src/components"
+        ]
+      ]
+    }
+  }
 }
