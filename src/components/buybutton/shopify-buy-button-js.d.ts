@@ -13,7 +13,7 @@ declare namespace BuyButtonJs {
 
     interface UI {
         createComponent(type: ComponentTypes, config: Config): Promise<Component>
-        destroyComponet(type: ComponentTypes, id: Number),
+        destroyComponent(type: ComponentTypes, id: Number),
     }
 
     type ComponentTypes = 'product' | 'cart' | 'collection' | 'productSet' | 'toggle'
