@@ -1,16 +1,23 @@
-// Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
 const handler = async (event) => {
   try {
-    const subject = event.queryStringParameters.name || 'World'
+    const {to, subject, body} = event.queryStringParameters
+    const message = {
+      to,
+      subject,
+      text: body.replace(/(<([^>]+)>)/gi, ""),
+      html: body
+    }
+    await sgMail.send(message);
+
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
-      // // more keys you can return:
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
+      body: JSON.stringify({ message }),
     }
   } catch (error) {
-    return { statusCode: 500, body: error.toString() }
+    return { statusCode: 500, body: error.response ? error.response.body : '' }
   }
 }
 
