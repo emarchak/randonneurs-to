@@ -3,21 +3,34 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const handler = async (event) => {
   try {
-    const {to, subject, body} = event.queryStringParameters
-    const message = {
+    const {
+      to = '',
+      from = 'no-reply@randonneurs.to',
+      subject = '',
+      body = '',
+      templateId = null,
+      data = {}
+    } = JSON.parse(event.body)
+
+    const [response] = await sgMail.send({
       to,
       subject,
+      from,
       text: body.replace(/(<([^>]+)>)/gi, ""),
-      html: body
-    }
-    await sgMail.send(message);
+      html: body,
+      templateId: templateId || undefined,
+      dynamic_template_data: data
+    });
 
     return {
-      statusCode: 200,
-      body: JSON.stringify({ message }),
+      statusCode: response.statusCode || 200,
+      body: response.body || '',
     }
   } catch (error) {
-    return { statusCode: 500, body: error.response ? error.response.body : '' }
+    return {
+      statusCode: error.response ? error.response.statusCode : 500,
+      body: error.response ? JSON.stringify(error.response.body) : ''
+    }
   }
 }
 
