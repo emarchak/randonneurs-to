@@ -5,8 +5,8 @@ const handler = async (event) => {
   try {
     const {
       to,
-      from = 'no-reply@randonneurs.to',
-      replyTo = 'no-reply@randonneurs.to',
+      from = 'Randonneurs Ontario <no-reply@randonneurs.to>',
+      replyTo = 'Randonneurs Ontario <no-reply@randonneurs.to>',
       subject,
       body,
       templateId = null,
