@@ -2,13 +2,7 @@ import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationFormPermanent } from './registration-form-permanent'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as useAllowedStartTimes from '../../../pages/registration/hooks/useAllowedStartTimes'
 import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
-
-jest.mock('isomorphic-unfetch', () => ({
-    __esModule: true,
-    default: jest.fn().mockReturnValue({ ok: true })
-}))
 
 jest.mock('../hooks/useRoutes', () => ({
     __esModule: true,
