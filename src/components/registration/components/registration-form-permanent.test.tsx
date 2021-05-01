@@ -3,6 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationFormPermanent } from './registration-form-permanent'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
+import * as useSendMail from 'src/hooks/useSendMail'
 
 jest.mock('../hooks/useRoutes', () => ({
     __esModule: true,
@@ -94,6 +95,9 @@ describe('<RegistrationFormPermanent>', () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
         const mount = render(<RegistrationFormPermanent />)
         const rideDate = new Date('2021-10-09T12:00:00.000Z')
+        const useSendMailMock = jest.spyOn(useSendMail, 'useSendMail')
+        const sendMailSpy = jest.fn().mockReturnValue(true)
+        useSendMailMock.mockReturnValue({ sendMail: sendMailSpy })
 
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
@@ -139,6 +143,7 @@ describe('<RegistrationFormPermanent>', () => {
                 ocaConsent: true,
                 roConsent: true,
             }
+            expect(sendMailSpy).toHaveBeenCalled()
             expect(fetchSpy).toHaveBeenCalled()
             Object.keys(expectedFields).forEach((label) => {
                 expect(fetchBody).toMatch(`${label}=${encodeURIComponent(expectedFields[label])}`)
