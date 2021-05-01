@@ -4,10 +4,11 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const handler = async (event) => {
   try {
     const {
-      to = '',
+      to,
       from = 'no-reply@randonneurs.to',
-      subject = '',
-      body = '',
+      replyTo = 'no-reply@randonneurs.to',
+      subject,
+      body,
       templateId = null,
       data = {}
     } = JSON.parse(event.body)
@@ -16,6 +17,7 @@ const handler = async (event) => {
       to,
       subject,
       from,
+      replyTo,
       text: body.replace(/(<([^>]+)>)/gi, ""),
       html: body,
       templateId: templateId || undefined,

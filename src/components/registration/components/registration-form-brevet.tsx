@@ -159,12 +159,14 @@ export const RegistrationFormBrevet = () => {
             return
         }
         const successSubmit = await formSubmit(formName, { ...formData })
+        const replyTo = `vp-${formData.chapter.toLowerCase()}@randonneursontario.ca`
         const successMail = await sendMail({
-            to: formData.email,
+            to: [formData.email, replyTo],
             subject: `Registration for ${formData.route} ${formData.rideType}`,
             body: `Thank you for registering.`,
+            replyTo,
             data: formData,
-        })
+        }, 'brevetRegistration')
         if (successSubmit && successMail) {
             setFormState('submitted')
         } else {
