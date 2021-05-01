@@ -11,6 +11,7 @@
     "@bugsnag/js": "^7.9.2",
     "@bugsnag/plugin-react": "^7.9.2",
     "@loadable/component": "^5.14.1",
+    "@sendgrid/mail": "^7.4.2",
     "@shopify/buy-button-js": "^2.1.7",
     "date-time-format-timezone": "^1.0.22",
     "gatsby": "^3.2.1",
@@ -28,7 +29,7 @@
     "gatsby-transformer-sharp": "^3.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "jshint": "^2.11.0",
-    "netlify-cli": "^2.40.0",
+    "netlify-cli": "^3.21.12",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -61,13 +62,11 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "build:production": "jest && gatsby build",
-    "develop": "gatsby develop -p 8088 -o",
-    "develop:style": "./node_modules/.bin/tsm src",
-    "format": "prettier --write src/**/*.{ts,tsx}",
+    "build:production": "jest && npm run build",
+    "develop": "gatsby develop -p 8000 -o",
+    "develop:live": "./node_modules/.bin/netlify dev --live",
     "serve": "gatsby serve",
-    "test": "jest",
-    "test:dev": "jest --watch",
-    "deploy": "gatsby build && gh-pages -d public"
+    "test": "jest --watch",
+    "netlify": "./node_modules/.bin/netlify"
   }
 }

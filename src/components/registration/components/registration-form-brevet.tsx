@@ -6,6 +6,7 @@ import { formSubmit } from 'src/components/form/helpers'
 import { InputField, DateField, CheckboxField, HiddenField } from 'src/components/form/input-field'
 import { emailRegex } from 'src/components/form/regex'
 import { Brevet } from 'src/hooks/useBrevets'
+import { useSendMail } from 'src/hooks/useSendMail'
 import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
 import { Aside, Callout } from 'src/components/callout'
@@ -91,6 +92,7 @@ export const RegistrationFormBrevet = () => {
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
+    const { sendMail } = useSendMail()
     const { checkMembership } = useCheckRiderMembership()
     const { allowedStartTimes } = useAllowedStartTimes()
 
@@ -156,9 +158,16 @@ export const RegistrationFormBrevet = () => {
             setFormState(null)
             return
         }
-        const success = await formSubmit(formName, { ...formData })
-
-        if (success) {
+        const successSubmit = await formSubmit(formName, { ...formData })
+        const replyTo = `vp-${formData.chapter.toLowerCase()}@randonneursontario.ca`
+        const successMail = await sendMail({
+            to: [formData.email, replyTo],
+            subject: `Registration for ${formData.route} ${formData.rideType}`,
+            body: `Thank you for registering.`,
+            replyTo,
+            data: formData,
+        }, 'brevetRegistration')
+        if (successSubmit && successMail) {
             setFormState('submitted')
         } else {
             setFormErrors(['Server error! Try again later.'])

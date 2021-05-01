@@ -1,4 +1,10 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "env": {
+    "es6": true
+  },
   "settings": {
     "import/resolver": {
       "alias": [
