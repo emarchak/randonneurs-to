@@ -5,6 +5,7 @@ import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
 import * as useSendMail from 'src/hooks/useSendMail'
+import * as useSlack from 'src/hooks/useSlack'
 
 jest.mock('src/hooks/useBrevets', () => ({
     __esModule: true,
@@ -109,6 +110,10 @@ describe('<RegistrationForm>', () => {
         const sendMailSpy = jest.fn().mockReturnValue(true)
         useSendMailMock.mockReturnValue({ sendMail: sendMailSpy })
 
+        const useSlacklMock = jest.spyOn(useSlack, 'useSlack')
+        const sendSlackMsgSpy = jest.fn().mockReturnValue(true)
+        useSlacklMock.mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
+
         const mount = render(<RegistrationFormBrevet />)
         const rideDate = new Date('Sat August 7 2021 09:20:00 EDT')
 
@@ -153,6 +158,7 @@ describe('<RegistrationForm>', () => {
                 roConsent: true,
             }
             expect(sendMailSpy).toHaveBeenCalled()
+            expect(sendSlackMsgSpy).toHaveBeenCalled()
             expect(fetchSpy).toHaveBeenCalled()
             Object.keys(expectedFields).forEach((label) => {
                 expect(fetchBody).toMatch(`${label}=${encodeURIComponent(expectedFields[label])}`)
