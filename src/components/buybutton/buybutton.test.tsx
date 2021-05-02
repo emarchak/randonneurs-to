@@ -2,12 +2,18 @@ import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 import * as ShopifyBuy from '@shopify/buy-button-js'
 import { BuyButton } from './buybutton'
+import * as BuyButtonContext from './buybutton-context'
 
 describe('<buybutton>', () => {
     const createComponent = jest.fn()
+    const destroyComponent = jest.fn()
 
     beforeEach(() => {
-        ShopifyBuy.UI.init = jest.fn().mockReturnValue({ createComponent })
+        const buySpy = jest.spyOn(BuyButtonContext, 'useBuyButton')
+        buySpy.mockReturnValue({
+            shopifyClient: null,
+            shopifyUI: { createComponent, destroyComponent }
+        })
     })
 
     afterEach(() => {

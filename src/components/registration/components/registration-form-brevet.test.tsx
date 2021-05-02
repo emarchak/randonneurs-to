@@ -4,11 +4,7 @@ import { advanceTo, clear } from 'jest-date-mock'
 import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
-
-jest.mock('isomorphic-unfetch', () => ({
-    __esModule: true,
-    default: jest.fn().mockReturnValue({ ok: true })
-}))
+import * as useSendMail from 'src/hooks/useSendMail'
 
 jest.mock('src/hooks/useBrevets', () => ({
     __esModule: true,
@@ -19,7 +15,7 @@ jest.mock('src/hooks/useBrevets', () => ({
                 chapter: 'Toronto',
                 event: 'populaire',
                 distance: '60',
-                date: new Date('Sat April 10 2021 09:20:00 EDT'),
+                date: new Date('Sat August 7 2021 09:20:00 EDT'),
                 route: 'Rouge Ramble 60',
                 startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
                 id: 1,
@@ -44,7 +40,7 @@ jest.mock('src/hooks/useCheckRiderMembership', () => ({
 
 describe('<RegistrationForm>', () => {
     beforeEach(() => {
-        advanceTo(new Date('Thu April 1 2021 09:00:00 EDT'))
+        advanceTo(new Date('Wed August 4 2021 09:00:00 EDT'))
     })
 
     afterEach(() => {
@@ -109,8 +105,12 @@ describe('<RegistrationForm>', () => {
 
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+        const useSendMailMock = jest.spyOn(useSendMail, 'useSendMail')
+        const sendMailSpy = jest.fn().mockReturnValue(true)
+        useSendMailMock.mockReturnValue({ sendMail: sendMailSpy })
+
         const mount = render(<RegistrationFormBrevet />)
-        const rideDate = new Date('Sat April 10 2021 09:20:00 EDT')
+        const rideDate = new Date('Sat August 7 2021 09:20:00 EDT')
 
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
@@ -152,6 +152,7 @@ describe('<RegistrationForm>', () => {
                 ocaConsent: true,
                 roConsent: true,
             }
+            expect(sendMailSpy).toHaveBeenCalled()
             expect(fetchSpy).toHaveBeenCalled()
             Object.keys(expectedFields).forEach((label) => {
                 expect(fetchBody).toMatch(`${label}=${encodeURIComponent(expectedFields[label])}`)
@@ -191,7 +192,7 @@ describe('<RegistrationForm>', () => {
     })
 
     it('disables registrations for events that are not allowedToRegister', () => {
-        advanceTo(new Date('Fri April 10 2021 17:20:00 EDT'))
+        advanceTo(new Date('Fri August 7 2021 17:20:00 EDT'))
 
         const mount = render(<RegistrationFormBrevet />)
 

@@ -13,6 +13,7 @@ import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembershi
 import { MissingMembership } from './missing-membership'
 import { Route } from '../hooks/useRoutes'
 import { Link } from 'src/components/form/link'
+import { useSendMail } from 'src/hooks/useSendMail'
 
 const formName = 'registration-permanent'
 const twoDaysFromToday = new Date(Date.now())
@@ -88,6 +89,7 @@ export const RegistrationFormPermanent = () => {
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
+    const { sendMail } = useSendMail()
     const { checkMembership } = useCheckRiderMembership()
     const { allowedStartTimes } = useAllowedStartTimes()
 
@@ -127,10 +129,10 @@ export const RegistrationFormPermanent = () => {
 
     const handlePermanentChange = (permanent: Route) => {
         dirtyForm({
-            route: permanent.routeName,
-            startLocation: permanent.startLocation,
-            chapter: permanent.chapter,
-            distance: permanent.distance
+            route: permanent.routeName || '',
+            startLocation: permanent.startLocation || '',
+            chapter: permanent.chapter || 'Toronto',
+            distance: permanent.distance || 0
         })
     }
 
@@ -149,9 +151,17 @@ export const RegistrationFormPermanent = () => {
             setFormState(null)
             return
         }
-        const success = await formSubmit(formName, { ...formData })
+        const successSubmit = await formSubmit(formName, { ...formData })
+        const replyTo = `vp-${formData.chapter.toLowerCase()}@randonneursontario.ca`
+        const successMail = await sendMail({
+            to: [formData.email, replyTo, 'treasurer@randonneursontario.ca'],
+            subject: `Registration for ${formData.route} Permanent`,
+            body: `Thank you for registering.`,
+            replyTo,
+            data: { ...formData, rideType: 'Permanent' },
+        }, 'brevetRegistration')
 
-        if (success) {
+        if (successSubmit && successMail) {
             setFormState('submitted')
         } else {
             setFormErrors(['Server error! Try again later.'])
