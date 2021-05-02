@@ -1,0 +1,13 @@
+name: Daily build
+on:
+  schedule:
+    - cron: '*/30 6-23 * * *'
+jobs:
+  wake:
+    name: Wake up database engine
+    runs-on: ubuntu-latest
+    steps:
+      - name: Good morning!
+        env:
+          DB_ENDPOINT: ${{ secrets.DB_ENDPOINT }}
+        run: curl -I ${DB_ENDPOINT}
