@@ -8,6 +8,7 @@ import { TabMenu } from 'src/components/tabmenu'
 import Loadable from "@loadable/component"
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { Link } from 'src/components/form/link'
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
 
@@ -48,7 +49,7 @@ const AudaxShopPage = () => {
 
                     <p>Patches are 1.5" x 4.5", and have an iron-on backing.</p>
 
-                    <p>Made in Toronto by <a href='http://www.sugarbomb.ca/'>Sugarbomb</a>, designed by <a href='http://www.garethfowler.com/'>Gareth Fowler</a>.</p>
+                    <p>Made in Toronto by <Link href='http://www.sugarbomb.ca/'>Sugarbomb</Link>, designed by <Link href='http://www.garethfowler.com/'>Gareth Fowler</Link>.</p>
 
                     <BuyButton productId={5609667035158} price buttonWithQuantity />
                 </ContentChild>

@@ -12,6 +12,7 @@ import Logo from "../assets/ClubAudax.svg"
 import { TabMenu } from "src/components/tabmenu"
 
 import * as style from "../styles/loneliness.module.scss"
+import { Link } from "src/components/form/link"
 
 export const lonelinessRoutes = [
   { label: 'Club', route: '/loneliness/' },
@@ -62,9 +63,9 @@ const Page = () => {
         </p>
 
         <p>
-          <a href="https://www.cycleto.ca/news/cycling-time-covid-19">
+          <Link href="https://www.cycleto.ca/news/cycling-time-covid-19">
             Learn how to cycle during a pandemic from Cycle Toronto
-          </a>
+          </Link>
           .
         </p>
 
@@ -130,7 +131,7 @@ const Page = () => {
         <Logo className={style.heading} alt="Club audax à distance" />
         <p style={{ textAlign: "center" }}>
           Wordmark designed by{" "}
-          <a href="http://garethfowler.com/">Gareth Fowler</a>
+          <Link href="http://garethfowler.com/">Gareth Fowler</Link>
         </p>
       </ContentWrapper>
     </Layout>

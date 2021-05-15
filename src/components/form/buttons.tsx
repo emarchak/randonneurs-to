@@ -1,6 +1,6 @@
-import { Link } from 'gatsby'
 import React from 'react'
 import * as styles from "../styles/form.module.scss"
+import { Link, LinkProps } from './link'
 
 type ButtonTypes = {
     primary?: boolean,
@@ -52,15 +52,5 @@ export const SubmitButton = ({ handleSubmit, disabled = false, children }: Submi
     </button>
 )
 
-type LinkButtonProps = ButtonTypes & {
-    children: React.ReactChild,
-} & (
-        | { to: string; href?: never }
-        | { to?: never; href: string }
-    )
-
-export const LinkButton = ({ to, href, children, ...props }: LinkButtonProps) => (
-    to
-        ? <Link to={to} className={getButtonClassName(props)}>{children}</Link>
-        : <a href={href} target="_blank" className={getButtonClassName(props)}>{children}</a>
-)
+type LinkButtonProps = ButtonTypes & LinkProps
+export const LinkButton = (props: LinkButtonProps) => <Link {...props} className={getButtonClassName(props)} />

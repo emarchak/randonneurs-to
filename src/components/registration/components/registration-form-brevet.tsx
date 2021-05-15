@@ -11,7 +11,9 @@ import { Aside, Callout } from 'src/components/callout'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembership'
 import { MissingMembership } from './missing-membership'
+import { Link } from 'src/components/form/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
+
 const formName = 'registration'
 
 const twoDaysFromToday = new Date(Date.now())
@@ -181,7 +183,7 @@ export const RegistrationFormBrevet = () => {
 
                     <p>You'll be emailed a brevets card before each ride. Submit your brevet card and recorded activity (strava, ridewgps, garmin, etc.) to your Chapter VP when you're done.</p>
 
-                    <p><a href="http://randonneursontario.ca/who/whatis.html#COVID" target="_blank">Learn more about riding brevets and our COVID-19 guidelines.</a></p>
+                    <p><Link href="http://randonneursontario.ca/who/whatis.html#COVID">Learn more about riding brevets and our COVID-19 guidelines.</Link></p>
                 </Aside>
                 <SelectBrevets onChange={handleBrevetChange} />
                 <DateField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
@@ -190,10 +192,10 @@ export const RegistrationFormBrevet = () => {
                 <Callout alternative>
                     <h2>COVID-19 risk awareness</h2>
                     <CheckboxField name='ocaConsent' value={formData.ocaConsent} onChange={handleCheckboxChange}>
-                        I have read the <a href='https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/'>Ontario Cycling Association's Progressive Return to Cycling Policy</a> and understand the risks.
+                        I have read the <Link href='https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/'>Ontario Cycling Association's Progressive Return to Cycling Policy</Link> and understand the risks.
                     </CheckboxField>
                     <CheckboxField name='roConsent' value={formData.roConsent} onChange={handleCheckboxChange}>
-                        I have read <a href='http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf'>Randonneurs Ontario's Club Risk Management Policy</a> and understand my responsibilities.
+                        I have read <Link href='http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf'>Randonneurs Ontario's Club Risk Management Policy</Link> and understand my responsibilities.
                     </CheckboxField>
                 </Callout>
                 <HiddenField name='route' value={formData.route} />
