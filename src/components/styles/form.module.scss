@@ -123,8 +123,29 @@
 }
 
 .help,
-.inputText {
+.inputText,
+.inlineInputs {
   width: calc(100% - #{get-spacing(small) * 2});
+}
+
+
+.inlineInputs {
+  display: flex;
+  width: 100%;
+  margin: 0;
+
+  * {
+    padding-left: get-spacing(small);
+    flex-grow:1;
+  }
+
+  *:first-child {
+    padding-left: 0
+  }
+
+  .inputText {
+    width: 100%;
+  }
 }
 
 .select {
