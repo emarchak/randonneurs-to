@@ -2,9 +2,17 @@
 
 .form {
   padding: 0 0;
-  margin: 0 0;
+  margin: 0 auto;
+  width: 100%;
+  @include media(large) {
+    width: 66%;
+  } 
+}
+
+.formWrapper {
   background-color: get-color(secondary, light);
-  border: 0.1rem solid get-outline-color(secondary, light);
+  border-top: 0.1rem solid get-outline-color(secondary, light);
+  border-bottom: 0.1rem solid get-outline-color(secondary, light);
 }
 
 .button {
@@ -117,9 +125,6 @@
 .help,
 .inputText {
   width: calc(100% - #{get-spacing(small) * 2});
-  @include media(large) {
-    width: 66%;
-  }
 }
 
 .select {
@@ -142,10 +147,6 @@
     -webkit-appearance: none;
     -moz-appearance: none;
   width: 100%;
-
-  @include media(large) {
-    width: calc(66% + #{get-spacing(small) * 2});
-  }
 }
 
 .label {

@@ -65,6 +65,7 @@ li {
 
 p, figure, fieldset, form, iframe {
   @include no-space-text;
+  border: 0;
 }
 
 blockquote {
