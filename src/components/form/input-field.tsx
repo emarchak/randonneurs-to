@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css"
 
 type FieldProps = {
     name: string
-    value: string
+    value: string | number
     label: string
     disabled?: boolean
     optional?: boolean
@@ -16,7 +16,6 @@ type FieldProps = {
 const Help = ({ children }: { children: ReactChild }) => (
     <span className={styles.help}>{children}</span>
 )
-
 
 type HiddenFieldProps = {
     name: string
@@ -55,11 +54,13 @@ export const InputField = ({ type = 'text', name, value, label, onChange, onBlur
     </p>
 )
 
+type SelectOptionType = string | number | {
+    value: string
+    label: string
+}
+
 type SelectFieldProps = FieldProps & {
-    options: {
-        value: string
-        label: string
-    }[]
+    options: SelectOptionType[]
     onChange: (evt: ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -79,14 +80,55 @@ export const SelectField = ({ name, options, value, label, onChange, disabled, o
                 required={!Boolean(optional)}
             >
                 <option value='' key={''}> - </option>
-                {options.map(({ value, label }, i) => {
-                    return <option value={value} key={i}>{label}</option>
+                {options.map((option, i) => {
+                    const value = typeof option == 'object' ? option.value : option
+                    const label = typeof option == 'object' ? option.label : option
+                    return <option value={value}>{label}</option>
                 })}
             </select>
         </label>
         {help && <Help>{help}</Help>}
     </p >
 )
+
+
+type RadioOptionType = SelectOptionType | {
+    value: string
+    label: React.ReactNode
+}
+
+type RadioFieldProps = FieldProps & {
+    options: RadioOptionType[]
+    onChange: (evt: ChangeEvent<HTMLInputElement>) => void
+}
+export const RadioField = ({ name, options, value, label, onChange, disabled, optional, help }: RadioFieldProps) => (
+    <p>
+        <span className={styles.label}>
+            {label}
+            {optional && ' (optional)'}
+        </span>
+
+        {options.map((option, i) => {
+            const optionValue = typeof option == 'object' ? option.value : option
+            const optionLabel = typeof option == 'object' ? option.label : option
+
+            return <label className={styles.radioLabel}>
+                <input
+                    type="radio"
+                    required={!Boolean(optional)}
+                    disabled={Boolean(disabled)}
+                    checked={value === optionValue}
+                    onChange={onChange}
+                    value={optionValue}
+                    name={name}
+                /> {' '}
+                {optionLabel}
+            </label>
+        })}
+        {help && <Help>{help}</Help>}
+    </p>
+)
+
 
 type DateFieldProps = Omit<FieldProps, 'value'> & {
     value: Date
