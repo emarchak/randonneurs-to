@@ -43,7 +43,7 @@ export const useAllowedStartTimes = () => {
                 return deadline
         }
     }
-    const cancelledUntil = new Date('May 8 2021')
+    const cancelledUntil = new Date('June 2 2021')
     const isBrevetCancelled = (brevet: Brevet) => brevet.date < cancelledUntil
 
     const allowedToRegister = (brevet: Brevet) => {
