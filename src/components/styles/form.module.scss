@@ -98,7 +98,6 @@
 }
 
 .input {
-  border-radius: 0 0 0;
   background-color: get-color(background);
   height: get-font-size(large);
   padding: 0 get-spacing(small);
@@ -281,5 +280,68 @@
   }
   100% {
     transform: translate(24px, 0);
+  }
+}
+
+.radioTable {
+  background-color: get-color(background);
+  border: 0.1rem solid get-color(secondary);
+  display: block;
+  overflow: hidden;
+  @include border-radius();
+
+  overflow: scroll;
+  max-height: 30rem;
+  max-height: 60vh;
+  box-shadow: inset get-dropshadow();
+
+  thead th {
+    padding: get-spacing(small)  get-spacing(small);
+    background-color: get-color(text, lighter);
+    font-size: get-font-size(small);
+    position: sticky;
+    top: 0;
+  }
+
+  .cellSelector {
+    text-align: center;
+  }
+  
+  tr {
+    &:hover,
+    &:focus {
+        background-color: get-color(background, darken);
+        cursor: pointer;
+    }
+  }
+  
+  tr[data-checked="true"] {
+      &, &:hover, &:focus {
+      background-color: get-color(primary);
+      outline: 1px solid get-color(primary, dark);
+    }
+  }
+
+  @include media(small) {
+    thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .cellSelector {
+        padding-left: 0;
+        width: get-spacing(large);
+        margin-bottom: -2.3rem;
+    }
+
+    td {
+        position: relative; 
+        padding: 0 get-spacing(small) 0 get-spacing(large);
+    }
+
+    td:first-child,
+    .cellSelector + td {padding-top: get-spacing(small)}
+    td:last-child {padding-bottom: get-spacing(small)}
   }
 }
