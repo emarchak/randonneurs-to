@@ -20,6 +20,15 @@ type FormData = {
     [keyof: string]: any
 }
 
+const permEmail = 'treasurer_2021@randonneursontario.ca'
+const replyToEmails = {
+   "toronto": "vp@randonneurs.to",
+   "simcoe":  "vp-simcoe_2021@randonneursontario.ca", 
+   "huron":   "vp-huron_2021@randonneursontario.ca", 
+   "ottawa":  "vp-ottawa_2021@randonneursontario.ca", 
+   "default": "vp@randonneurs.to"
+}
+
 const sentenceCase = (str: string) => {
     const result = str.replace(/([A-Z])/g, " $1")
     return result.charAt(0).toUpperCase() + result.slice(1)
@@ -46,8 +55,8 @@ export const useRegistrationForm = (params: useRegistrationFormParams) => {
 
         const successSlack = await sendSlackMsg(formatSlackMessage(formData), 'registration')
 
-        const replyTo = `vp-${formData.chapter.toLowerCase()}@randonneursontario.ca`
-        const vpPermanent = formData.rideType === 'permanent' ? 'treasurer@randonneursontario.ca' : undefined
+        const replyTo = replyToEmails[formData.chapter.toLowerCase() || 'default']
+        const vpPermanent = formData.rideType === 'permanent' ? permEmail : undefined
         const successMail = await sendMail({
             to: [formData.email, replyTo, vpPermanent].filter(Boolean),
             subject: `Registration for ${formData.route} ${formData.rideType}`,
