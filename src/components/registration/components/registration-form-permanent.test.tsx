@@ -50,10 +50,11 @@ describe('<RegistrationFormPermanent>', () => {
             fireEvent.change(mount.getByLabelText(/email/i), {
                 target: { value: 'foo@bar.com' },
             })
-            const RouteSelector = mount.getByLabelText(/route/i)
 
-            expect(RouteSelector).toHaveTextContent(/Toronto - 200 - Urban/i)
-            expect(RouteSelector).toHaveTextContent(/Huron - 300 - Golf/i)
+            expect(mount.baseElement).toHaveTextContent(/Urban/i)
+            expect(mount.baseElement).toHaveTextContent(/Golf/i)
+
+            fireEvent.click(mount.getByLabelText(/Urban/i))
 
             fireEvent.change(mount.getByLabelText(/starting time/i), {
                 target: { value: new Date() },
@@ -116,9 +117,7 @@ describe('<RegistrationFormPermanent>', () => {
             target: { value: 'foo@bar.com' },
         })
 
-        fireEvent.change(mount.getByLabelText(/Routes/i), {
-            target: { value: 'route1' }
-        })
+        fireEvent.click(mount.getByLabelText(/Urban/i))
 
         fireEvent.change(mount.getByLabelText(/starting time/i), {
             target: { value: rideDate },
@@ -172,9 +171,7 @@ describe('<RegistrationFormPermanent>', () => {
             target: { value: 'foo@bar.com' },
         })
 
-        fireEvent.change(mount.getByLabelText(/route/i), {
-            target: { value: 'route1' }
-        })
+        fireEvent.click(mount.getByLabelText(/Urban/i))
 
         fireEvent.change(mount.getByLabelText(/starting time/i), {
             target: { value: new Date() },

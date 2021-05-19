@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useMemo, useState } from 'react'
 import { InlineInputs } from 'src/components/form/fieldset'
 import { RadioField, RadioTable, SelectField } from 'src/components/form/input-field'
+import { Link } from 'src/components/form/link'
 import { useRoutes, Route } from '../hooks/useRoutes'
 
 type Props = {
@@ -15,6 +16,18 @@ const filterOptions = (route: Route, chapter: string, distance: string) => {
 
   return (isDistance && isChapter)
 }
+
+const mapURL = (location: string) => `https://www.google.com/maps/search/?api=1&${encodeURIComponent(location)}`
+
+const RouteDescription = ({ route }: { route: Route }) => (
+  <>
+    <strong>{route.routeName}</strong>
+    {route.startLocation && <>
+      <br />
+      <small>Suggested start: <Link href={mapURL(route.startLocation)}>{route.startLocation}</Link></small>
+    </>}
+  </>
+)
 
 export const SelectPermanents = ({ onChange }: Props) => {
   const { routes: fullRoutes } = useRoutes()
@@ -33,19 +46,17 @@ export const SelectPermanents = ({ onChange }: Props) => {
   const filterChapters = (chapter) => Boolean(fullRoutes
     .filter((route) => filterOptions(route, chapter, filters.distance)).length)
 
-  const routeColumns = ['Chapter', 'Distance', 'Route name', 'Start location']
+  const routeColumns = ['Chapter', 'Distance', 'Route']
 
   const options = useMemo(() => ({
     chapters: Array.from(new Set(fullRoutes.map(route => (route.chapter)))).filter(filterChapters),
     distances: Array.from(new Set(fullRoutes.map(route => (route.distance)))).filter(filterDistances).sort(sortDistance),
     routes: fullRoutes.filter(filterRoutes).map(route => ({
       value: route.id,
-      labelColumn: route.routeName,
       columns: {
         chapter: route.chapter,
         distance: route.distance,
-        routeName: route.routeName,
-        startLocation: route.startLocation
+        route: <RouteDescription route={route} />,
       },
     }))
   }), [filters.chapter, filters.distance])
@@ -71,6 +82,6 @@ export const SelectPermanents = ({ onChange }: Props) => {
         <SelectField label={'Filter by chapter'} name="chapter" options={options.chapters} value={filters.chapter} onChange={handleFilterChange} />
         <SelectField label={'Filter by distance'} name="distance" options={options.distances} value={filters.distance} onChange={handleFilterChange} />
       </InlineInputs>
-      <RadioTable label={'Available routes'} name="route" columns={routeColumns} labelColumn='routeName' options={options.routes} value={selectedRouteId} onChange={handleRouteChange} />
+      <RadioTable label={'Available routes'} name="route" columns={routeColumns} labelColumn='route' options={options.routes} value={selectedRouteId} onChange={handleRouteChange} />
     </>)
 }

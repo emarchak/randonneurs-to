@@ -83,7 +83,7 @@ export const SelectField = ({ name, options, value, label, onChange, disabled, o
                 {options.map((option, i) => {
                     const value = typeof option == 'object' ? option.value : option
                     const label = typeof option == 'object' ? option.label : option
-                    return <option value={value}>{label}</option>
+                    return <option key={value} value={value}>{label}</option>
                 })}
             </select>
         </label>
@@ -111,7 +111,7 @@ export const RadioField = ({ name, options, value, label, onChange, disabled, op
             const optionValue = typeof option == 'object' ? option.value : option
             const optionLabel = typeof option == 'object' ? option.label : option
 
-            return <label className={styles.radioLabel}>
+            return <label key={optionValue} className={styles.radioLabel}>
                 <input
                     type="radio"
                     required={!Boolean(optional)}
@@ -217,7 +217,7 @@ export const RadioTable = ({
     }
 
     return (
-        <p>
+        <div>
             <span className={styles.label}>
                 {label}
                 {optional && ' (optional)'}
@@ -226,11 +226,11 @@ export const RadioTable = ({
             <table className={styles.radioTable}>
                 <thead><tr>
                     <th></th>
-                    {columns.map((column => (<th>{column}</th>)))}
+                    {columns.map((column => (<th key={column}>{column}</th>)))}
                 </tr></thead>
                 <tbody>
                     {options.map(({ value: optionValue, columns }) => (
-                        <tr data-checked={value === optionValue} onClick={() => handleRowSelect(optionValue)}>
+                        <tr key={optionValue} data-checked={value === optionValue} onClick={() => handleRowSelect(optionValue)}>
                             <td className={styles.cellSelector}>
                                 <input
                                     type="radio"
@@ -245,7 +245,7 @@ export const RadioTable = ({
                             </td>
                             {Object.keys(columns).map((key) => (
                                 <td key={key}>
-                                    <label htmlFor={labelColumn === key && optionValue}>
+                                    <label htmlFor={labelColumn === key ? optionValue : undefined}>
                                         {columns[key]}
                                     </label>
                                 </td>
@@ -253,6 +253,6 @@ export const RadioTable = ({
                         </tr>))}
                 </tbody>
             </table>
-        </p>
+        </div>
     )
 }

@@ -130,7 +130,6 @@ export const RegistrationFormPermanent = () => {
     }
 
     const handlePermanentChange = (permanent: Route) => {
-        console.log(permanent)
         dirtyForm({
             route: permanent.routeName || '',
             startLocation: permanent.startLocation || '',
