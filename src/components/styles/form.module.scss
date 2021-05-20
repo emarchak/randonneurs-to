@@ -284,16 +284,18 @@
 }
 
 .radioTable {
-  background-color: get-color(background);
-  border: 0.1rem solid get-color(secondary);
-  display: block;
-  overflow: hidden;
-  @include border-radius();
 
-  overflow: scroll;
-  max-height: 30rem;
-  max-height: 60vh;
-  box-shadow: inset get-dropshadow();
+  &Wrapper {
+    background-color: get-color(background);
+    border: 0.1rem solid get-color(secondary);
+    overflow: hidden;
+    @include border-radius();
+
+    overflow: scroll;
+    max-height: 30rem;
+    max-height: 60vh;
+    box-shadow: inset get-dropshadow();
+  }
 
   thead th {
     padding: get-spacing(small)  get-spacing(small);

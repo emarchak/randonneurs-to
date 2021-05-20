@@ -223,36 +223,38 @@ export const RadioTable = ({
                 {optional && ' (optional)'}
             </span>
             {help && <Help>{help}</Help>}
-            <table className={styles.radioTable}>
-                <thead><tr>
-                    <th></th>
-                    {columns.map((column => (<th key={column}>{column}</th>)))}
-                </tr></thead>
-                <tbody>
-                    {options.map(({ value: optionValue, columns }) => (
-                        <tr key={optionValue} data-checked={value === optionValue} onClick={() => handleRowSelect(optionValue)}>
-                            <td className={styles.cellSelector}>
-                                <input
-                                    type="radio"
-                                    id={optionValue}
-                                    required={!Boolean(optional)}
-                                    disabled={Boolean(disabled)}
-                                    checked={value === optionValue}
-                                    onChange={onChange}
-                                    value={optionValue}
-                                    name={name}
-                                />
-                            </td>
-                            {Object.keys(columns).map((key) => (
-                                <td key={key}>
-                                    <label htmlFor={labelColumn === key ? optionValue : undefined}>
-                                        {columns[key]}
-                                    </label>
+            <div className={styles.radioTableWrapper}>
+                <table className={styles.radioTable}>
+                    <thead><tr>
+                        <th></th>
+                        {columns.map((column => (<th key={column}>{column}</th>)))}
+                    </tr></thead>
+                    <tbody>
+                        {options.map(({ value: optionValue, columns }) => (
+                            <tr key={optionValue} data-checked={value === optionValue} onClick={() => handleRowSelect(optionValue)}>
+                                <td className={styles.cellSelector}>
+                                    <input
+                                        type="radio"
+                                        id={optionValue}
+                                        required={!Boolean(optional)}
+                                        disabled={Boolean(disabled)}
+                                        checked={value === optionValue}
+                                        onChange={onChange}
+                                        value={optionValue}
+                                        name={name}
+                                    />
                                 </td>
-                            ))}
-                        </tr>))}
-                </tbody>
-            </table>
+                                {Object.keys(columns).map((key) => (
+                                    <td key={key}>
+                                        <label htmlFor={labelColumn === key ? optionValue : undefined}>
+                                            {columns[key]}
+                                        </label>
+                                    </td>
+                                ))}
+                            </tr>))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }

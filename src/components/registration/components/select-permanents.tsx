@@ -17,7 +17,7 @@ const filterOptions = (route: Route, chapter: string, distance: string) => {
   return (isDistance && isChapter)
 }
 
-const mapURL = (location: string) => `https://www.google.com/maps/search/?api=1&${encodeURIComponent(location)}`
+const mapURL = (location: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
 
 const RouteDescription = ({ route }: { route: Route }) => (
   <>
