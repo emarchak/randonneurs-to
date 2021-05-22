@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactChild } from "react"
+import React, { ChangeEvent, ReactChild, ReactNode } from "react"
 import DatePicker from "react-datepicker"
 
 import * as styles from "../styles/form.module.scss"
@@ -202,11 +202,12 @@ type RadioTableProps = FieldProps & {
     options: RadioTableOptionType[]
     columns: string[]
     labelColumn: string
+    empty?: ReactNode
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const RadioTable = ({
-    name, options, columns, value, label, labelColumn, onChange, disabled, optional, help
+    name, options, columns, value, label, labelColumn, onChange, disabled, optional, help, empty = 'No options'
 }: RadioTableProps) => {
     const handleRowSelect = (value: string) => {
         onChange({
@@ -230,6 +231,11 @@ export const RadioTable = ({
                         {columns.map((column => (<th key={column}>{column}</th>)))}
                     </tr></thead>
                     <tbody>
+                        {options.length === 0 && <tr>
+                            <td className={styles.radioTableEmpty} colSpan={columns.length + 1}>
+                                {empty}
+                            </td>
+                        </tr>}
                         {options.map(({ value: optionValue, columns }) => (
                             <tr key={optionValue} data-checked={value === optionValue} onClick={() => handleRowSelect(optionValue)}>
                                 <td className={styles.cellSelector}>
