@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useMemo, useState } from 'react'
 import { InlineInputs } from 'src/components/form/fieldset'
-import { RadioField, RadioTable, SelectField } from 'src/components/form/input-field'
+import { RadioTable, SelectField } from 'src/components/form/input-field'
 import { Link } from 'src/components/form/link'
 import { useRoutes, Route } from '../hooks/useRoutes'
 
@@ -8,16 +8,21 @@ type Props = {
   onChange: (Route) => void
 }
 
-const sortDistance = (a, b) => (a - b)
-
-const filterOptions = (route: Route, chapter: string, distance: string) => {
-  const isChapter = chapter ? route.chapter === chapter : true
-  const isDistance = distance ? route.distance === parseInt(distance) : true
-
-  return (isDistance && isChapter)
+const getDistanceKey = (distance) => {
+  if (parseInt(distance) < 100) {
+    return '< 100'
+  }
+  if (parseInt(distance) < 200) {
+    return '100 - 199'
+  }
+  return distance.toString()
 }
 
+const getIsDistance = (route: Route, filterDistance: string) => getDistanceKey(route.distance) === filterDistance
+
 const mapURL = (location: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
+
+const routeColumns = ['Chapter', 'Distance', 'Route']
 
 const RouteDescription = ({ route }: { route: Route }) => (
   <>
@@ -38,28 +43,34 @@ export const SelectPermanents = ({ onChange }: Props) => {
     distance: ''
   })
 
-  const filterRoutes = (route) => filterOptions(route, filters.chapter, filters.distance)
+  const options = useMemo(() => {
+    const options = {
+      chapters: new Set<string>(),
+      distances: new Set<string>(),
+      routes: []
+    }
 
-  const filterDistances = (distance) => Boolean(fullRoutes
-    .filter((route) => filterOptions(route, filters.chapter, distance)).length)
+    fullRoutes.forEach((route) => {
+      const isChapter = filters.chapter ? route.chapter === filters.chapter : true
+      const isDistance = filters.distance ? getIsDistance(route, filters.distance) : true
 
-  const filterChapters = (chapter) => Boolean(fullRoutes
-    .filter((route) => filterOptions(route, chapter, filters.distance)).length)
+      options.chapters.add(route.chapter)
+      options.distances.add(getDistanceKey(route.distance))
 
-  const routeColumns = ['Chapter', 'Distance', 'Route']
+      if (isChapter && isDistance) {
+        options.routes.push({
+          value: route.id,
+          columns: {
+            chapter: route.chapter,
+            distance: route.distance,
+            route: <RouteDescription route={route} />,
+          },
+        })
+      }
+    })
 
-  const options = useMemo(() => ({
-    chapters: Array.from(new Set(fullRoutes.map(route => (route.chapter)))).filter(filterChapters),
-    distances: Array.from(new Set(fullRoutes.map(route => (route.distance)))).filter(filterDistances).sort(sortDistance),
-    routes: fullRoutes.filter(filterRoutes).map(route => ({
-      value: route.id,
-      columns: {
-        chapter: route.chapter,
-        distance: route.distance,
-        route: <RouteDescription route={route} />,
-      },
-    }))
-  }), [filters.chapter, filters.distance])
+    return options
+  }, [filters.chapter, filters.distance])
 
   const handleFilterChange = (evt: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = evt.currentTarget
@@ -79,9 +90,17 @@ export const SelectPermanents = ({ onChange }: Props) => {
   return (
     <>
       <InlineInputs>
-        <SelectField label={'Filter by chapter'} name="chapter" options={options.chapters} value={filters.chapter} onChange={handleFilterChange} />
-        <SelectField label={'Filter by distance'} name="distance" options={options.distances} value={filters.distance} onChange={handleFilterChange} />
+        <SelectField label={'Filter by chapter'} name="chapter" options={Array.from(options.chapters)} value={filters.chapter} onChange={handleFilterChange} />
+        <SelectField label={'Filter by distance'} name="distance" options={Array.from(options.distances)} value={filters.distance} onChange={handleFilterChange} />
       </InlineInputs>
-      <RadioTable label={'Available routes'} name="route" columns={routeColumns} labelColumn='route' options={options.routes} value={selectedRouteId} onChange={handleRouteChange} />
+      <RadioTable
+        label={'Available routes'}
+        name="route"
+        columns={routeColumns}
+        labelColumn='route'
+        options={options.routes}
+        value={selectedRouteId}
+        empty={'No routes available'}
+        onChange={handleRouteChange} />
     </>)
 }

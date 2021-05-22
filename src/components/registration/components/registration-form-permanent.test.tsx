@@ -23,6 +23,20 @@ jest.mock('../hooks/useRoutes', () => ({
                 distance: 300,
                 startLocation: 'Careys House',
                 routeName: 'Golf'
+            },
+            {
+                id: 'route3',
+                chapter: 'Simcoe',
+                distance: 90,
+                startLocation: 'Tims',
+                routeName: 'Shortest ride'
+            },
+            {
+                id: 'route4',
+                chapter: 'Ottawa',
+                distance: 170,
+                startLocation: 'Tims',
+                routeName: 'Shorter ride'
             }]
     }),
 }))
@@ -216,6 +230,30 @@ describe('<RegistrationFormPermanent>', () => {
         expect(checkMembershipMock).toHaveBeenCalledTimes(2)
         expect(mount.queryByText(/We can't find your name/)).toBeFalsy()
 
-        useCheckRiderMembershipSpy.mockRestore()
+        useCheckRiderMembershipSpy.mockClear()
+    })
+
+    it('filters routes less than 100km', () => {
+        const mount = render(<RegistrationFormPermanent />)
+        const DistanceSelector = mount.getByLabelText(/distance/i)
+
+        expect(DistanceSelector).toHaveTextContent(/< 100/i)
+        expect(DistanceSelector).toHaveTextContent(/100 - 199/i)
+        expect(DistanceSelector).toHaveTextContent(/200/i)
+        expect(DistanceSelector).toHaveTextContent(/300/i)
+
+        expect(mount.baseElement).toHaveTextContent(/Urban/i)
+        expect(mount.baseElement).toHaveTextContent(/Golf/i)
+        expect(mount.baseElement).toHaveTextContent(/Shorter/i)
+        expect(mount.baseElement).toHaveTextContent(/Shortest/i)
+
+        fireEvent.change(DistanceSelector, {
+            target: { value: '< 100' }
+        })
+
+        expect(mount.baseElement).not.toHaveTextContent(/Urban/i)
+        expect(mount.baseElement).not.toHaveTextContent(/Golf/i)
+        expect(mount.baseElement).not.toHaveTextContent(/Shorter/i)
+        expect(mount.baseElement).toHaveTextContent(/Shortest/i)
     })
 })
