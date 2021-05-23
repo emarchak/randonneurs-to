@@ -5,6 +5,7 @@ import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
 import { registrationRoutes } from '.'
 import { TabMenu } from 'src/components/tabmenu'
 import { LinkButton } from 'src/components/buttons'
+import { Link } from 'src/components/link'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { galleryTile, gallery } from '../styles/index.module.scss'
@@ -42,6 +43,8 @@ const MemberRegistration = () => {
                 <h1>Become a member</h1><h2>of Randonneurs Ontario</h2>
 
                 <p>For all sanctioned rides, we require riders to have Ontario Cycling Association (OCA) membership. If you're not an OCA member, you can purchase a membership during registration.</p>
+
+                <p><Link href="http://randonneursontario.ca">Learn more about being a member of Randonneurs Ontario</Link>.</p>
             </ContentWrapper>
 
             <ContentWrapper container>

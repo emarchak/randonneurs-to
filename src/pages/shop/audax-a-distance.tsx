@@ -14,14 +14,12 @@ const BuyButton = Loadable(() => import('../../components/buybutton'))
 
 const imageQuery = graphql`
 query {
-    allFile(filter: {name: {glob: "audax-a-distance"}}, limit: 1) {
-        nodes {
-          name
-          childImageSharp {
-            gatsbyImageData(aspectRatio: 1)
-            fixed {
-                src
-              } 
+      file(name: {glob: "audax-a-distance"}) {
+        name
+        childImageSharp {
+          gatsbyImageData(aspectRatio: 1)
+          fixed {
+            src
           }
         }
       }
@@ -30,14 +28,14 @@ query {
 
 const AudaxShopPage = () => {
     const {
-        allFile: { nodes: images },
+        file: image,
     } = useStaticQuery(imageQuery)
     return (
         <Layout>
             <SEO
                 title="Club audax à distance patches"
                 description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
-                image={images[0].childImageSharp.fixed.src}
+                image={images.childImageSharp.fixed.src}
             />
             <ContentWrapper>
                 <TabMenu tabs={lonelinessRoutes} activeRoute='/shop/audax-a-distance/' />
@@ -54,12 +52,11 @@ const AudaxShopPage = () => {
                     <BuyButton productId={5609667035158} price buttonWithQuantity />
                 </ContentChild>
                 <ContentChild>
-                    {images.map(image => (
-                        <GatsbyImage
-                            key={image.name}
-                            image={image.childImageSharp.gatsbyImageData}
-                            alt="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
-                        />))}
+                    <GatsbyImage
+                        key={image.name}
+                        image={image.childImageSharp.gatsbyImageData}
+                        alt="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
+                    />
                 </ContentChild>
             </ContentWrapper>
         </Layout >
