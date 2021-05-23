@@ -60,10 +60,10 @@ describe("<RadioTable>", () => {
     it('Allows options to be disabled', () => {
         const disabledOptions = [
             ...options,
-            { value: "3", disabled: true, columns: { letter: "3", position: 'Not in alphabet' } },
+            { value: "3", disabled: true, columns: { letter: "Three", position: 'Not in alphabet' } },
         ]
 
-        const { queryByLabelText, baseElement } = render(<RadioTable
+        const { getByLabelText, getByText } = render(<RadioTable
             name="alpha"
             label="Letter of the day"
             value=""
@@ -73,9 +73,8 @@ describe("<RadioTable>", () => {
             onChange={onChange}
         />)
 
-        fireEvent.click(queryByLabelText(/A/i))
-        expect(baseElement).toHaveTextContent(/3/i)
-        expect(queryByLabelText(/3/i)).toBeFalsy()
+        fireEvent.click(getByLabelText(/A/i))
+        fireEvent.click(getByText(/Three/i))
 
         expect(onChange).toHaveBeenCalledTimes(1)
         expect(onChange).toHaveBeenCalledWith({ "currentTarget": { "name": "alpha", "value": "A" } })
