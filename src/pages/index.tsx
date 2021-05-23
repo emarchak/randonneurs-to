@@ -10,7 +10,7 @@ import { SEO } from '../components/seo'
 import { useBrevets } from '../hooks/useBrevets'
 import * as styles from './styles/index.module.scss'
 import ClubAudax from './assets/ClubAudax.svg'
-import { Link } from 'src/components/form/link'
+import { Link } from 'src/components/link'
 
 const pageQuery = graphql`
 query {

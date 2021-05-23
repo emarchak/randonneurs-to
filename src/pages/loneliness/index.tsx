@@ -12,7 +12,7 @@ import Logo from "../assets/ClubAudax.svg"
 import { TabMenu } from "src/components/tabmenu"
 
 import * as style from "../styles/loneliness.module.scss"
-import { Link } from "src/components/form/link"
+import { Link } from "src/components/link"
 
 export const lonelinessRoutes = [
   { label: 'Club', route: '/loneliness/' },

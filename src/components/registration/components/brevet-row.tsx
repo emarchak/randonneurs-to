@@ -3,7 +3,7 @@ import { Brevet } from 'src/hooks/useBrevets'
 import { getDateLong, getTime, getDateTimeShort } from 'src/utils'
 import * as styles from 'src/components/styles/registration.module.scss'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
-import { Link } from 'src/components/form/link'
+import { Link } from 'src/components/link'
 
 
 type Props = { brevet: Brevet, isSelected: boolean, fieldsetID: string, handleChange: (brevet) => void }

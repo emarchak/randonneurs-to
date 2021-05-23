@@ -8,7 +8,7 @@ import { TabMenu } from 'src/components/tabmenu'
 import Loadable from "@loadable/component"
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import { Link } from 'src/components/form/link'
+import { Link } from 'src/components/link'
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
 

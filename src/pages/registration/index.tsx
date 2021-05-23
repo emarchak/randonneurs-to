@@ -1,7 +1,7 @@
 import React from 'react'
 import { Callout } from 'src/components/callout'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { Link } from 'src/components/form/link'
+import { Link } from 'src/components/link'
 import { Layout } from 'src/components/layout'
 import { RegistrationFormBrevet } from 'src/components/registration'
 import { SEO } from 'src/components/seo'

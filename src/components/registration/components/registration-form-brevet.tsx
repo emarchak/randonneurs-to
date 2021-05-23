@@ -11,7 +11,7 @@ import { Aside, Callout } from 'src/components/callout'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembership'
 import { MissingMembership } from './missing-membership'
-import { Link } from 'src/components/form/link'
+import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { Form } from 'src/components/form/components'
 
