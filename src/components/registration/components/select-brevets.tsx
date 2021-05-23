@@ -1,69 +1,102 @@
-import React, { useState, FormEvent } from 'react'
-import { Loading } from 'src/components/form/input-field'
-import { Fieldset } from 'src/components/form/fieldset'
+import React, { useState, FormEvent, ChangeEvent, useMemo } from 'react'
+import { RadioTable, SelectField } from 'src/components/form/components'
+import { Fieldset, InlineInputs } from 'src/components/form/fieldset'
 import { useBrevets, Brevet } from 'src/hooks/useBrevets'
-import { BrevetRow } from './brevet-row'
-import * as styles from 'src/components/styles/registration.module.scss'
-import { Button } from 'src/components/form/buttons'
+import { BrevetColumn } from './brevet-row'
+import { getDateLong, getTime } from 'src/utils'
+import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
+import { getDistanceKey, getIsDistance, sortDistances } from './utils'
 
-const minBrevet = 5
 const fieldSetID = 'upcoming_brevets'
+
+const columns = {
+    date: 'Date',
+    time: 'Start time',
+    chapter: 'Chapter',
+    distance: 'Distance',
+    event: 'Event'
+}
 
 type Props = {
     onChange: (Brevet) => void
 }
 
 export const SelectBrevets = ({ onChange }: Props) => {
-    const { loading, brevets } = useBrevets({})
-    const [displayBrevets, setDisplay] = useState<number>(minBrevet)
+    const { brevets } = useBrevets({})
+    const { allowedToRegister, getBrevetRegistrationDeadline } = useAllowedStartTimes()
     const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['id']>('')
+    const [filters, setFilters] = useState({
+        chapter: '',
+        distance: ''
+    })
 
-    const handleChange = (brevet: Brevet) => {
+    const handleFilterChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = evt.currentTarget
+        setFilters({
+            ...filters,
+            [name]: value
+        })
+    }
+    const handleBrevetChange = (evt: ChangeEvent<HTMLInputElement>) => {
+        const { value } = evt.currentTarget
+        const brevet = brevets.find(brevet => brevet.id === value)
+
+        setSelectedBrevetId(value)
         onChange(brevet)
-        setSelectedBrevetId(brevet.id)
     }
 
-    const handleShowMore = (evt) => {
-        evt.preventDefault()
-        setDisplay(displayBrevets + minBrevet)
-    }
+    const options = useMemo(() => {
+        const chapters = new Set<string>()
+        const distances = new Set<string>()
+        const availableBrevets = []
 
-    if (loading) {
-        return <Loading />
-    }
-    if (!Boolean(brevets.length)) {
-        return <h2>No upcoming brevets</h2>
-    }
+        brevets.forEach((brevet) => {
+            const isChapter = filters.chapter ? brevet.chapter === filters.chapter : true
+            const isDistance = filters.distance ? getIsDistance(brevet.distance, filters.distance) : true
+
+            chapters.add(brevet.chapter)
+            distances.add(getDistanceKey(brevet.distance))
+
+            if (isChapter && isDistance) {
+                availableBrevets.push({
+                    value: brevet.id,
+                    disabled: !allowedToRegister(brevet),
+                    columns: {
+                        date: getDateLong(brevet.date),
+                        time: getTime(brevet.date),
+                        chapter: brevet.chapter,
+                        distance: brevet.distance,
+                        event: <BrevetColumn brevet={brevet} canRegister={allowedToRegister(brevet)} registrationDeadline={getBrevetRegistrationDeadline(brevet)} />
+                    }
+                })
+            }
+        })
+
+        return {
+            chapters: Array.from(chapters).sort(),
+            distances: Array.from(distances).sort(sortDistances),
+            brevets: availableBrevets
+        }
+    }, [filters.chapter, filters.distance])
+
     return (
-        <Fieldset id={fieldSetID}><>
-            <h2>Upcoming Brevets</h2>
-
-            <table className={styles.brevetTable}>
-                <thead><tr>
-                    <th></th>
-                    <th>Date</th>
-                    <th>Start time</th>
-                    <th>Chapter</th>
-                    <th colSpan={2}>Event</th>
-                </tr></thead>
-                <tbody>
-                    {brevets.slice(0, displayBrevets).map((brevet, i) => (
-                        <BrevetRow key={i} brevet={brevet} handleChange={handleChange} isSelected={selectedBrevetId === brevet.id} fieldsetID={fieldSetID} />
-                    ))}
-                </tbody>
-                <tfoot>
-                    <tr><td colSpan={6} className={styles.brevetsShowMoreWrapper}>
-                        <Button
-                            disabled={(displayBrevets > brevets.length)}
-                            handleClick={handleShowMore}
-                            className={styles.brevetsShowMore}
-                        >
-                            Show more
-                    </Button>
-                    </td></tr>
-                </tfoot>
-
-            </table>
-        </></Fieldset>
+        <Fieldset id={fieldSetID}>
+            <h2>Upcoming Rides</h2>
+            <InlineInputs>
+                <SelectField label={'Filter by chapter'} name="chapter" options={options.chapters} value={filters.chapter} onChange={handleFilterChange} />
+                <SelectField label={'Filter by distance'} name="distance" options={options.distances} value={filters.distance} onChange={handleFilterChange} />
+            </InlineInputs>
+            <RadioTable
+                name={fieldSetID}
+                label='Selected Rides'
+                hideLabel
+                labelColumn='event'
+                columns={columns}
+                options={options.brevets}
+                value={selectedBrevetId}
+                empty='No rides available'
+                onChange={handleBrevetChange}
+            />
+        </Fieldset>
     )
 }

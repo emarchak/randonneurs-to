@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'src/components/form/link'
+import { Link } from 'src/components/link'
 
 export const MissingMembership = () => (
     <>

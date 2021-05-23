@@ -174,6 +174,11 @@
   font-size: get-font-size(small);
 }
 
+.hidden {
+  visibility: hidden;
+  height: 0;
+}
+
 .error-list {
   list-style: none;
   margin-bottom: get-spacing();
@@ -329,26 +334,16 @@
     }
   }
 
-  @include media(small) {
-    thead tr { 
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
+  @include media(medium) {
+    input {
+      position: absolute;
+      display: block;
+      top: 1.8em;
+      left: get-spacing();
     }
-
-    .cellSelector {
-        padding-left: 0;
-        width: get-spacing(large);
-        margin-bottom: -2.3rem;
-    }
-
+    
     td {
-        position: relative; 
-        padding: 0 get-spacing(small) 0 get-spacing(large);
+        padding-left: get-spacing(large);
     }
-
-    td:first-child,
-    .cellSelector + td {padding-top: get-spacing(small)}
-    td:last-child {padding-bottom: get-spacing(small)}
   }
 }

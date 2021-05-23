@@ -1,6 +1,6 @@
 import React from 'react'
 import { slide as Burger } from 'react-burger-menu'
-import { Link } from "./form/link"
+import { Link } from "./link"
 
 export const menuConfig = {
   pageWrapId: 'pageWrap', outerContainerId: 'outerContainer',

@@ -122,6 +122,10 @@ $dropshadow: (
     @media only screen and (min-width: 481px) {
       @content;
     }
+  } @else if $point == medium {
+    @media only screen and (max-width: 720px) {
+      @content;
+    }
   } @else if $point == small {
     @media only screen and (max-width: 480px) {
       @content;

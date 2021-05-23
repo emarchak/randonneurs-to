@@ -74,8 +74,6 @@ describe('<RegistrationForm>', () => {
         expect(mount.getByRole('textbox', { name: 'Starting location' })).toHaveAttribute('disabled')
     })
 
-    it.skip('shows more brevets on click', () => { })
-
     it('requires email, rider name, randonneurs ontario consent and oca consent', () => {
         const mount = render(<RegistrationFormBrevet />)
 

@@ -1,58 +1,26 @@
 import React from 'react'
 import { Brevet } from 'src/hooks/useBrevets'
-import { getDateLong, getTime, getDateTimeShort } from 'src/utils'
-import * as styles from 'src/components/styles/registration.module.scss'
-import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
-import { Link } from 'src/components/form/link'
+import { getDateTimeShort } from 'src/utils'
+import { Link } from 'src/components/link'
 
+const mapURL = (location: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
 
-type Props = { brevet: Brevet, isSelected: boolean, fieldsetID: string, handleChange: (brevet) => void }
-
-export const BrevetRow = ({ brevet, isSelected, fieldsetID, handleChange }: Props) => {
-    const { allowedToRegister, getBrevetRegistrationDeadline } = useAllowedStartTimes()
-
-    const classNames = `${styles.brevetRow} ${isSelected ? styles.brevetRowSelected : ''}`
-
-    const registrationDeadline = getBrevetRegistrationDeadline(brevet)
-    const canRegister = allowedToRegister(brevet)
-
-    const onChange = () => {
-        handleChange(brevet)
-    }
-
-    return (
-        <tr className={classNames} onClick={canRegister ? onChange : null} >
-            <td className={styles.brevetCellSelector}>
-                {canRegister && <input
-                    type="radio"
-                    aria-labelledby={brevet.id}
-                    name={fieldsetID}
-                    value={brevet.id}
-                    onChange={onChange}
-                    checked={isSelected}
-                    className={styles.brevetRadio}
-                />}
-            </td>
-            <td>
-                {getDateLong(brevet.date)}
-            </td>
-            <td>{getTime(brevet.date)}</td>
-            <td>{brevet.chapter}</td>
-            <td>{brevet.distance}{' '}{brevet.event}</td>
-            <td>
-                <label id={brevet.id} htmlFor={brevet.id}><strong>{brevet.route}</strong>
-                    <br />
-                    <small>{brevet.startLocation}</small>
-                    {brevet.rwgpsUrl && <>
-                        <br />
-                        <small>(<Link href={brevet.rwgpsUrl}>{`View ${brevet.route} route`}</Link>)</small>
-                    </>}
-                </label>
-                <small><br />
-                    {canRegister && 'Registration deadline: ' + getDateTimeShort(registrationDeadline)}
-                    {!canRegister && 'Registration closed'}
-                </small>
-            </td>
-        </tr>
-    )
+type BrevetColumnType = {
+    brevet: Brevet,
+    canRegister: boolean,
+    registrationDeadline: Date
 }
+
+export const BrevetColumn = ({ brevet, canRegister, registrationDeadline }: BrevetColumnType) => (<>
+    <strong>{brevet.route}</strong>
+    <br />
+    <small>Start: <Link href={mapURL(brevet.startLocation)}>{brevet.startLocation}</Link></small>
+    {brevet.rwgpsUrl && <>
+        <br />
+        <small>(<Link href={brevet.rwgpsUrl}>{`View ${brevet.route} route`}</Link>)</small>
+    </>}
+    <small><br />
+        {canRegister && 'Registration deadline: ' + getDateTimeShort(registrationDeadline)}
+        {!canRegister && 'Registration closed'}
+    </small>
+</>)

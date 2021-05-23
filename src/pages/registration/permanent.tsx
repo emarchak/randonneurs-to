@@ -6,7 +6,7 @@ import { RegistrationFormPermanent } from 'src/components/registration'
 import { Callout } from 'src/components/callout'
 import { registrationRoutes } from '.'
 import { TabMenu } from 'src/components/tabmenu'
-import { Link } from 'src/components/form/link'
+import { Link } from 'src/components/link'
 
 export const PermanentRegistration = () => {
   return (
