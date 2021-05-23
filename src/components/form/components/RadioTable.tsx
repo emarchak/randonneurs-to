@@ -35,7 +35,7 @@ export const RadioTable = ({
 }: RadioTableProps) => {
     const handleRowSelect = (option: RadioTableOptionType) => (evt: MouseEvent<HTMLTableRowElement>) => {
         evt.stopPropagation()
-        if (!Boolean(option.disabled)) {
+        if (!(Boolean(disabled) || Boolean(option.disabled))) {
             onChange({
                 currentTarget: {
                     name, value: option.value
@@ -44,11 +44,9 @@ export const RadioTable = ({
         }
     }
 
-    const handleRadioSelect = (option: RadioTableOptionType) => (evt: ChangeEvent<HTMLInputElement>) => {
+    const handleRadioSelect = (evt: ChangeEvent<HTMLInputElement>) => {
         evt.stopPropagation()
-        if (!Boolean(option.disabled)) {
-            onChange(evt)
-        }
+        onChange(evt)
     }
 
     const columnKeys = Object.keys(columns)
@@ -75,16 +73,17 @@ export const RadioTable = ({
                         {options.map((option) => (
                             <tr key={option.value} data-checked={value === option.value} onClickCapture={handleRowSelect(option)}>
                                 <td className={styles.cellSelector}>
-                                    <input
-                                        type="radio"
-                                        id={option.value}
-                                        required={!Boolean(optional)}
-                                        disabled={Boolean(disabled) || Boolean(option.disabled)}
-                                        checked={value === option.value}
-                                        onChange={handleRadioSelect(option)}
-                                        value={option.value}
-                                        name={name}
-                                    />
+                                    {!(Boolean(disabled) || Boolean(option.disabled)) &&
+                                        <input
+                                            type="radio"
+                                            id={option.value}
+                                            required={!Boolean(optional)}
+                                            checked={value === option.value}
+                                            onChange={handleRadioSelect}
+                                            value={option.value}
+                                            name={name}
+                                        />
+                                    }
                                 </td>
                                 {columnKeys.map((key) => (
                                     <td key={key}>
@@ -93,7 +92,8 @@ export const RadioTable = ({
                                         </label>
                                     </td>
                                 ))}
-                            </tr>))}
+                            </tr>)
+                        )}
                     </tbody>
                 </table>
             </div>

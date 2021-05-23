@@ -337,18 +337,21 @@
     }
 
     .cellSelector {
-        padding-left: 0;
-        width: get-spacing(large);
-        margin-bottom: -2.3rem;
+        padding-left: get-spacing(small);
     }
 
+    input {
+      position: absolute;
+      display:block;
+      top: get-spacing(large);
+    }
+    
     td {
         position: relative; 
-        padding: 0 get-spacing(small) 0 get-spacing(large);
+        padding: 0 get-spacing(small) 0 get-spacing(large );
     }
 
-    td:first-child,
-    .cellSelector + td {padding-top: get-spacing(small)}
-    td:last-child {padding-bottom: get-spacing(small)}
+    .cellSelector + td {padding-top: get-spacing()}
+    td:last-child {padding-bottom: get-spacing()}
   }
 }

@@ -1,12 +1,11 @@
-import React, { useState, FormEvent } from 'react'
-import { Loading } from 'src/components/form/components'
+import React, { useState, FormEvent, ChangeEvent } from 'react'
+import { RadioTable } from 'src/components/form/components'
 import { Fieldset } from 'src/components/form/fieldset'
 import { useBrevets, Brevet } from 'src/hooks/useBrevets'
-import { BrevetRow } from './brevet-row'
-import * as styles from 'src/components/styles/registration.module.scss'
-import { Button } from 'src/components/buttons'
+import { BrevetColumn } from './brevet-row'
+import { getDateLong, getTime } from 'src/utils'
+import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 
-const minBrevet = 5
 const fieldSetID = 'upcoming_brevets'
 
 type Props = {
@@ -14,56 +13,51 @@ type Props = {
 }
 
 export const SelectBrevets = ({ onChange }: Props) => {
-    const { loading, brevets } = useBrevets({})
-    const [displayBrevets, setDisplay] = useState<number>(minBrevet)
+    const { brevets } = useBrevets({})
+    const { allowedToRegister, getBrevetRegistrationDeadline } = useAllowedStartTimes()
     const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['id']>('')
 
-    const handleChange = (brevet: Brevet) => {
+    const handleOnChange = (evt: ChangeEvent<HTMLInputElement>) => {
+        const { value } = evt.currentTarget
+        const brevet = brevets.find(brevet => brevet.id === value)
+
+        setSelectedBrevetId(value)
         onChange(brevet)
-        setSelectedBrevetId(brevet.id)
     }
 
-    const handleShowMore = (evt) => {
-        evt.preventDefault()
-        setDisplay(displayBrevets + minBrevet)
+    const columns = {
+        date: 'Date',
+        time: 'Start time',
+        chapter: 'Chapter',
+        distance: 'Distance',
+        event: 'Event'
     }
 
-    if (loading) {
-        return <Loading />
-    }
-    if (!Boolean(brevets.length)) {
-        return <h2>No upcoming brevets</h2>
-    }
+    const options = brevets.map((brevet) => ({
+        value: brevet.id,
+        disabled: !allowedToRegister(brevet),
+        columns: {
+            date: getDateLong(brevet.date),
+            time: getTime(brevet.date),
+            chapter: brevet.chapter,
+            distance: brevet.distance,
+            event: <BrevetColumn brevet={brevet} canRegister={allowedToRegister(brevet)} registrationDeadline={getBrevetRegistrationDeadline(brevet)} />
+        }
+    }))
+
     return (
         <Fieldset id={fieldSetID}><>
             <h2>Upcoming Brevets</h2>
-
-            <table className={styles.brevetTable}>
-                <thead><tr>
-                    <th></th>
-                    <th>Date</th>
-                    <th>Start time</th>
-                    <th>Chapter</th>
-                    <th colSpan={2}>Event</th>
-                </tr></thead>
-                <tbody>
-                    {brevets.slice(0, displayBrevets).map((brevet, i) => (
-                        <BrevetRow key={i} brevet={brevet} handleChange={handleChange} isSelected={selectedBrevetId === brevet.id} fieldsetID={fieldSetID} />
-                    ))}
-                </tbody>
-                <tfoot>
-                    <tr><td colSpan={6} className={styles.brevetsShowMoreWrapper}>
-                        <Button
-                            disabled={(displayBrevets > brevets.length)}
-                            handleClick={handleShowMore}
-                            className={styles.brevetsShowMore}
-                        >
-                            Show more
-                    </Button>
-                    </td></tr>
-                </tfoot>
-
-            </table>
+            <RadioTable
+                name={fieldSetID}
+                label='Upcoming Brevets'
+                labelColumn='event'
+                columns={columns}
+                options={options}
+                value={selectedBrevetId}
+                empty='No rides available'
+                onChange={handleOnChange}
+            />
         </></Fieldset>
     )
 }
