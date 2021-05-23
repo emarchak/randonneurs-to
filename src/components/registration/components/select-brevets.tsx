@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react'
-import { Loading } from 'src/components/form/input-field'
+import { Loading } from 'src/components/form/components'
 import { Fieldset } from 'src/components/form/fieldset'
 import { useBrevets, Brevet } from 'src/hooks/useBrevets'
 import { BrevetRow } from './brevet-row'

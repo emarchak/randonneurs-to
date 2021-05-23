@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react"
 import { ContentWrapper } from "../content-wrapper"
 import { ErrorsList } from "../form/errors-list"
-import { InputField } from "../form/input-field"
+import { InputField } from "../form/components"
 import { SubmitButton } from "../form/buttons"
 import { emailRegex, stravaRegex } from "../form/regex"
 import { formSubmit } from "../form/helpers"
