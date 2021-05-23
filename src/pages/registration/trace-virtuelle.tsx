@@ -1,63 +1,62 @@
 import React from 'react'
-import { ContentWrapper } from "src/components/content-wrapper"
+import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
 import { Layout } from 'src/components/layout'
 import { lonelinessRoutes } from '../loneliness'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/tabmenu'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Link } from 'src/components/link'
 import { Callout } from 'src/components/callout'
 import { ContactForm } from 'src/components/ContactForm'
+import { registrationRoutes } from '.'
 
 const imageQuery = graphql`
 query {
     file(name: {glob: "TraceVirtuelle"}) {
         name
         childImageSharp {
-            fluid {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
-            }
-            fixed {
-                src
-            }
+          gatsbyImageData(width:500, layout: FULL_WIDTH)
+          fixed {
+            src
+          }
         }
       }
 }
 `
 
 const TraceVirtuelle = () => {
-    const {
-        file: image,
-    } = useStaticQuery(imageQuery)
-
+    const { file } = useStaticQuery(imageQuery)
+    const image = getImage(file)
     return (
         <Layout>
             <SEO
                 title='Trace Virtuelle'
                 description='The Trace Virtuelle is a virtual ultra-endurance cycling event based off of the Trace Vélocio'
-                image={image.childImageSharp.fixed.src}
+                image={file.childImageSharp.fixed.src}
             />
             <ContentWrapper>
-                <TabMenu tabs={lonelinessRoutes} activeRoute='/registration/trace-virtuelle/' />
+                <TabMenu tabs={registrationRoutes} activeRoute='/registration/trace-virtuelle/' />
                 <h1>Trace Virtuelle</h1>
-                <GatsbyImage
-
-                    key={image.name}
-                    image={image.childImageSharp.gatsbyImageData}
-                    alt="The Trace Virtuelle is a virtual ultra-endurance cycling event based off of the Trace Vélocio."
-                />
-                <p>The Trace Virtuelle is a virtual ultra-endurance cycling event based off of the <Link href="https://www.audax-club-parisien.com/en/our-organizations/trace-velocio-en/">Trace Vélocio</Link> and is not an ACP approved Trace. The Trace Virtuelle has three main features:</p>
-                <ol>
-                    <li>Building a strong team spirit by training and riding together.</li>
-                    <li>Each team member must complete at least 24 hours of riding together.</li>
-                    <li>Teams will complete the ride together by participating remotely on their own virtual cycling platform of choice.</li>
-                </ol>
-
+            </ContentWrapper>
+            <ContentWrapper container>
+                <ContentChild>
+                    <GatsbyImage
+                        image={image}
+                        alt="The Trace Virtuelle is a virtual ultra-endurance cycling event based off of the Trace Vélocio."
+                    />
+                </ContentChild>
+                <ContentChild>
+                    <p>The Trace Virtuelle is a virtual ultra-endurance cycling event based off of the <Link href="https://www.audax-club-parisien.com/en/our-organizations/trace-velocio-en/">Trace Vélocio</Link> and is not an ACP approved Trace.</p>
+                    <p> The Trace Virtuelle has three main features:</p>
+                    <ol>
+                        <li>Building a strong team spirit by training and riding together.</li>
+                        <li>Each team member must complete at least 24 hours of riding together.</li>
+                        <li>Teams will complete the ride together by participating remotely on their own virtual cycling platform of choice.</li>
+                    </ol>
+                </ContentChild>
+            </ContentWrapper>
+            <ContentWrapper>
                 <h2>The Rules</h2>
                 <p>A team is 2-6 riders with one appointed Captain. This is not a relay event, each team member must ride the full duration.</p>
                 <p>At least 2 team members must complete at least 24 hours of riding together for the Trace Virtuelle to be certified.</p>
@@ -72,7 +71,8 @@ const TraceVirtuelle = () => {
                     <p>Teams can choose whatever virtual cycling platform they prefer to ride on, but the platform must be used by all team members. </p>
                     <p>Team members must record their rides and submit them for certification at the same time. A lost or unsubmitted recording would be considered a DNF by the team member.</p>
                 </Callout>
-
+            </ContentWrapper>
+            <ContentWrapper>
                 <h2>Certification requirements</h2>
                 <p>For a Trace to be certified by Randonneurs Ontario, it is required that:</p>
                 <ol>

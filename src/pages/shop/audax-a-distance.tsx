@@ -7,7 +7,7 @@ import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/tabmenu'
 import Loadable from "@loadable/component"
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { Link } from 'src/components/link'
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
@@ -17,7 +17,7 @@ query {
       file(name: {glob: "audax-a-distance"}) {
         name
         childImageSharp {
-          gatsbyImageData(aspectRatio: 1)
+          gatsbyImageData(aspectRatio:1, width:500, layout: FULL_WIDTH)
           fixed {
             src
           }
@@ -27,15 +27,14 @@ query {
 `
 
 const AudaxShopPage = () => {
-    const {
-        file: image,
-    } = useStaticQuery(imageQuery)
+    const { file } = useStaticQuery(imageQuery)
+    const image = getImage(file)
     return (
         <Layout>
             <SEO
                 title="Club audax à distance patches"
                 description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
-                image={images.childImageSharp.fixed.src}
+                image={file.childImageSharp.fixed.src}
             />
             <ContentWrapper>
                 <TabMenu tabs={lonelinessRoutes} activeRoute='/shop/audax-a-distance/' />
@@ -53,8 +52,7 @@ const AudaxShopPage = () => {
                 </ContentChild>
                 <ContentChild>
                     <GatsbyImage
-                        key={image.name}
-                        image={image.childImageSharp.gatsbyImageData}
+                        image={image}
                         alt="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
                     />
                 </ContentChild>

@@ -11,6 +11,7 @@ export const registrationRoutes = [
   { label: 'Membership', route: '/registration/membership/' },
   { label: 'Rides', route: '/registration/' },
   { label: 'Permanents', route: '/registration/permanent/' },
+  { label: 'Trace', route: '/registration/trace-virtuelle/' },
 ]
 
 const BrevetRegistration = () => {
