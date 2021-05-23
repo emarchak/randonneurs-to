@@ -4,7 +4,7 @@ import { Fieldset } from 'src/components/form/fieldset'
 import { useBrevets, Brevet } from 'src/hooks/useBrevets'
 import { BrevetRow } from './brevet-row'
 import * as styles from 'src/components/styles/registration.module.scss'
-import { Button } from 'src/components/form/buttons'
+import { Button } from 'src/components/buttons'
 
 const minBrevet = 5
 const fieldSetID = 'upcoming_brevets'

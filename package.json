@@ -61,7 +61,7 @@
   "scripts": {
     "build": "gatsby build",
     "build:production": "jest --runInBand && npm run build",
-    "develop": "gatsby develop -p 8000 -o",
+    "develop": "yarn tsm src & gatsby develop -p 8000 -o",
     "develop:live": "./node_modules/.bin/netlify dev --live",
     "serve": "gatsby serve",
     "test": "jest --watch",

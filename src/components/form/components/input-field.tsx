@@ -1,30 +1,8 @@
-import React, { ChangeEvent, ReactChild, ReactNode } from "react"
-import DatePicker from "react-datepicker"
+import React, { ChangeEvent } from "react"
+import { FieldProps } from './types'
+import { Help } from './Help'
 
 import * as styles from "../../styles/form.module.scss"
-import "react-datepicker/dist/react-datepicker.css"
-
-type FieldProps = {
-    name: string
-    value: string | number
-    label: string
-    disabled?: boolean
-    optional?: boolean
-    help?: ReactChild
-}
-
-const Help = ({ children }: { children: ReactChild }) => (
-    <span className={styles.help}>{children}</span>
-)
-
-type HiddenFieldProps = {
-    name: string
-    value: string
-}
-
-export const HiddenField = ({ name, value }: HiddenFieldProps) => (
-    <input type="hidden" name={name} value={value} />
-)
 
 type InputFieldProps = FieldProps & {
     type?: 'text' | 'email'
@@ -128,33 +106,6 @@ export const RadioField = ({ name, options, value, label, onChange, disabled, op
     </p>
 )
 
-type DateFieldProps = Omit<FieldProps, 'value'> & {
-    value: Date
-    onChange: (date: Date) => void
-    allowedRange?: (date: Date) => boolean
-    options?: {}
-}
-
-export const DateField = ({ value, name, label, onChange, allowedRange, optional, help }: DateFieldProps) => (
-    <div className={styles.dateInput}>
-        <label>
-            <span className={styles.label}>
-                {label}
-                {optional && ' (optional)'}
-            </span>
-            <DatePicker
-                showTimeSelect
-                wrapperClassName={styles.dateInputOverrides}
-                selected={value}
-                onChange={onChange}
-                className={styles.input + ' ' + styles.dateInputField}
-                filterDate={allowedRange}
-                dateFormat="MMMM d HH:mm" />
-        </label>
-        {help && <Help>{help}</Help>}
-        <HiddenField name={name} value={value.toString()} />
-    </div>
-)
 
 export const Loading = () => (
     <div className={styles.loadingWrapper} aria-label={'Loading'}>
@@ -189,78 +140,3 @@ export const CheckboxField = ({ name, value, children, onChange, disabled, optio
         {help && <Help>{help}</Help>}
     </p>
 )
-
-
-type RadioTableOptionType = {
-    value: string
-    columns: {
-        [key: string]: React.ReactNode
-    }
-}
-
-type RadioTableProps = FieldProps & {
-    options: RadioTableOptionType[]
-    columns: string[]
-    labelColumn: string
-    empty?: ReactNode
-    onChange: (evt: ChangeEvent<HTMLInputElement>) => void
-}
-
-export const RadioTable = ({
-    name, options, columns, value, label, labelColumn, onChange, disabled, optional, help, empty = 'No options'
-}: RadioTableProps) => {
-    const handleRowSelect = (value: string) => {
-        onChange({
-            currentTarget: {
-                name, value
-            }
-        } as ChangeEvent<HTMLInputElement>)
-    }
-
-    return (
-        <div>
-            <span className={styles.label}>
-                {label}
-                {optional && ' (optional)'}
-            </span>
-            {help && <Help>{help}</Help>}
-            <div className={styles.radioTableWrapper}>
-                <table className={styles.radioTable}>
-                    <thead><tr>
-                        <th></th>
-                        {columns.map((column => (<th key={column}>{column}</th>)))}
-                    </tr></thead>
-                    <tbody>
-                        {options.length === 0 && <tr>
-                            <td className={styles.radioTableEmpty} colSpan={columns.length + 1}>
-                                {empty}
-                            </td>
-                        </tr>}
-                        {options.map(({ value: optionValue, columns }) => (
-                            <tr key={optionValue} data-checked={value === optionValue} onClick={() => handleRowSelect(optionValue)}>
-                                <td className={styles.cellSelector}>
-                                    <input
-                                        type="radio"
-                                        id={optionValue}
-                                        required={!Boolean(optional)}
-                                        disabled={Boolean(disabled)}
-                                        checked={value === optionValue}
-                                        onChange={onChange}
-                                        value={optionValue}
-                                        name={name}
-                                    />
-                                </td>
-                                {Object.keys(columns).map((key) => (
-                                    <td key={key}>
-                                        <label htmlFor={labelColumn === key ? optionValue : undefined}>
-                                            {columns[key]}
-                                        </label>
-                                    </td>
-                                ))}
-                            </tr>))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    )
-}

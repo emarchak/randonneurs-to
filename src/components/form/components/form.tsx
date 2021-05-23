@@ -1,5 +1,4 @@
 import React from "react"
-
 import { form, formWrapper } from "../../styles/form.module.scss"
 
 type FormProps = {

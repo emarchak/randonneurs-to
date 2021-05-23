@@ -1,5 +1,5 @@
 import React from 'react'
-import * as styles from "../styles/form.module.scss"
+import * as styles from "./styles/form.module.scss"
 import { Link, LinkProps } from './link'
 
 type ButtonTypes = {

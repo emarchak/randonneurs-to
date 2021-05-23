@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { SubmitButton } from 'src/components/form/buttons'
+import { SubmitButton } from 'src/components/buttons'
 import { ErrorsList } from 'src/components/form/errors-list'
 import { InputField, DateField, CheckboxField, HiddenField } from 'src/components/form/components'
 import { emailRegex } from 'src/components/form/regex'
