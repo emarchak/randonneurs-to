@@ -295,10 +295,13 @@
     max-height: 30rem;
     max-height: 60vh;
     box-shadow: inset get-dropshadow();
+    margin-bottom: get-spacing();
   }
+
   &Empty {
     text-align: center;
   }
+
   thead th {
     padding: get-spacing(small)  get-spacing(small);
     background-color: get-color(text, lighter);

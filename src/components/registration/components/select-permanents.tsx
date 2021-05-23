@@ -95,6 +95,7 @@ export const SelectPermanents = ({ onChange }: Props) => {
       </InlineInputs>
       <RadioTable
         label={'Available routes'}
+        help={<>See the full routes in our <Link href="https://www.randonneursontario.ca/">route archive</Link>.</>}
         name="route"
         columns={routeColumns}
         labelColumn='route'
