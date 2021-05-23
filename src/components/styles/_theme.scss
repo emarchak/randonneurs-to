@@ -37,6 +37,7 @@ $theme-colors: (
   "background": (
     "normal": #fff,
     "darken": lighten(#333333, 75%),
+    "subtle": lighten(#333333, 10%),
   )
 );
 

@@ -11,24 +11,25 @@ export type Route = {
   id: string
 }
 
+const sortRoutes = (a, b) => (a.chapter.localeCompare(b.chapter) || a.distance - b.distance)
+
 export const useRoutes = () => {
-  const { allGoogleRoutesSheet: { edges } } = useStaticQuery(graphql`
+  const { allGoogleRoutesSheet: { nodes } } = useStaticQuery(graphql`
     query {
-      allGoogleRoutesSheet(filter: {ableToRide_: {eq: "Yes"}}, sort: {fields: chapter}) {
-          edges {
-            node {
-              id
-              chapter
-              distance
-              routeName
-              startLocation
-            }
-          }
+      allGoogleRoutesSheet(filter: {ableToRide_: {eq: "Yes"}}, sort: {fields: [chapter, distance]}) {
+        nodes {
+          id
+          chapter
+          distance
+          routeName
+          startLocation
+        }
       }
     }
     `)
 
-  const routes = useMemo(() => edges.map(edge => edge.node), [edges]) as Route[]
+  // Google sheets doesn't recognize distance as Int
+  const routes = useMemo(() => nodes.map(node => ({ ...node, distance: parseInt(node.distance) })).sort(sortRoutes) as Route[], [])
 
   return ({ routes })
 }

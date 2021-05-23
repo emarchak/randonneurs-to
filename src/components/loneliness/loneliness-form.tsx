@@ -6,6 +6,7 @@ import { SubmitButton } from "../form/buttons"
 import { emailRegex, stravaRegex } from "../form/regex"
 import { formSubmit } from "../form/helpers"
 import * as styles from "../styles/form.module.scss"
+import { Form } from "../form/components"
 
 const formName = "clubaudaxadistance"
 
@@ -94,13 +95,8 @@ export const LonelinessForm = ({ children }: Props) => {
   }
 
   return (
-    <form
-      name={formName}
-      method="post"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      className={styles.form}
-    >
+    <Form name={formName}>
+
       <ContentWrapper>
         {children}
         <InputField name="name" label="Your name" value={formData.name} onChange={handleChange} />
@@ -114,6 +110,6 @@ export const LonelinessForm = ({ children }: Props) => {
           Share your journey
         </SubmitButton>
       </ContentWrapper>
-    </form>
+    </Form>
   )
 }

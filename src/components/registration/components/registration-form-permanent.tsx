@@ -14,6 +14,7 @@ import { MissingMembership } from './missing-membership'
 import { Route } from '../hooks/useRoutes'
 import { Link } from 'src/components/form/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
+import { Form } from 'src/components/form/components'
 
 const formName = 'registration-permanent'
 
@@ -161,13 +162,7 @@ export const RegistrationFormPermanent = () => {
     }
 
     return (
-        <form
-            name={formName}
-            method='post'
-            data-netlify='true'
-            data-netlify-honeypot='bot-field'
-            className={styles.registrationForm}
-        >
+        <Form name={formName} className={styles.registrationForm}>
             <ContentWrapper>
                 <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
@@ -198,6 +193,6 @@ export const RegistrationFormPermanent = () => {
                     </p>
                     : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>Register</SubmitButton>}
             </ContentWrapper>
-        </form >
+        </Form>
     )
 }

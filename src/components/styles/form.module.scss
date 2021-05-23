@@ -2,9 +2,17 @@
 
 .form {
   padding: 0 0;
-  margin: 0 0;
+  margin: 0 auto;
+  width: 100%;
+  @include media(large) {
+    width: 66%;
+  } 
+}
+
+.formWrapper {
   background-color: get-color(secondary, light);
-  border: 0.1rem solid get-outline-color(secondary, light);
+  border-top: 0.1rem solid get-outline-color(secondary, light);
+  border-bottom: 0.1rem solid get-outline-color(secondary, light);
 }
 
 .button {
@@ -90,7 +98,6 @@
 }
 
 .input {
-  border-radius: 0 0 0;
   background-color: get-color(background);
   height: get-font-size(large);
   padding: 0 get-spacing(small);
@@ -115,10 +122,28 @@
 }
 
 .help,
-.inputText {
+.inputText,
+.inlineInputs {
   width: calc(100% - #{get-spacing(small) * 2});
-  @include media(large) {
-    width: 66%;
+}
+
+
+.inlineInputs {
+  display: flex;
+  width: 100%;
+  margin: 0;
+
+  * {
+    padding-left: get-spacing(small);
+    flex-grow:1;
+  }
+
+  *:first-child {
+    padding-left: 0
+  }
+
+  .inputText {
+    width: 100%;
   }
 }
 
@@ -142,10 +167,6 @@
     -webkit-appearance: none;
     -moz-appearance: none;
   width: 100%;
-
-  @include media(large) {
-    width: calc(66% + #{get-spacing(small) * 2});
-  }
 }
 
 .label {
@@ -191,6 +212,14 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.radio {
+  margin-right: .1rem
+  line-
+}
+.radioLabel {
+  display:block;
 }
 
 .loading-wrapper {
@@ -251,5 +280,75 @@
   }
   100% {
     transform: translate(24px, 0);
+  }
+}
+
+.radioTable {
+
+  &Wrapper {
+    background-color: get-color(background);
+    border: 0.1rem solid get-color(secondary);
+    overflow: hidden;
+    @include border-radius();
+
+    overflow-y: scroll;
+    max-height: 30rem;
+    max-height: 60vh;
+    box-shadow: inset get-dropshadow();
+    margin-bottom: get-spacing();
+  }
+
+  &Empty {
+    text-align: center;
+  }
+
+  thead th {
+    padding: get-spacing(small)  get-spacing(small);
+    background-color: get-color(text, lighter);
+    font-size: get-font-size(small);
+    position: sticky;
+    top: 0;
+  }
+
+  .cellSelector {
+    text-align: center;
+  }
+  
+  tr {
+    &:hover,
+    &:focus {
+        background-color: get-color(background, darken);
+        cursor: pointer;
+    }
+  }
+  
+  tr[data-checked="true"] {
+      &, &:hover, &:focus {
+      background-color: get-color(primary);
+      outline: 1px solid get-color(primary, dark);
+    }
+  }
+
+  @include media(small) {
+    thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .cellSelector {
+        padding-left: 0;
+        width: get-spacing(large);
+        margin-bottom: -2.3rem;
+    }
+
+    td {
+        position: relative; 
+        padding: 0 get-spacing(small) 0 get-spacing(large);
+    }
+
+    td:first-child,
+    .cellSelector + td {padding-top: get-spacing(small)}
+    td:last-child {padding-bottom: get-spacing(small)}
   }
 }
