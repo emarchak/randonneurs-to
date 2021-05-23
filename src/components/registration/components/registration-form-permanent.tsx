@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { SubmitButton } from 'src/components/buttons'
 import { ErrorsList } from 'src/components/form/errors-list'
-import { formSubmit } from 'src/components/form/helpers'
+import { FormState } from 'src/components/form/utils'
 import { InputField, DateField, CheckboxField, HiddenField } from 'src/components/form/components'
 import { emailRegex } from 'src/components/form/regex'
 import * as styles from 'src/components/styles/registration.module.scss'
@@ -21,7 +21,6 @@ const formName = 'registration-permanent'
 const twoDaysFromToday = new Date(Date.now())
 twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
 
-type FormState = 'submitted' | 'dirty' | null
 interface FormData {
     name: string
     email: string

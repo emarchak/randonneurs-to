@@ -4,7 +4,7 @@ import { ErrorsList } from "../form/errors-list"
 import { InputField } from "../form/components"
 import { SubmitButton } from "../buttons"
 import { emailRegex, stravaRegex } from "../form/regex"
-import { formSubmit } from "../form/helpers"
+import { formSubmit, FormState } from "../form/utils"
 import * as styles from "../styles/form.module.scss"
 import { Form } from "../form/components"
 
@@ -33,8 +33,6 @@ type FormData = {
   strava: string
 }
 
-type FormState = "submitted" | "dirty" | null
-
 type Props = {
   children?: React.ReactNode
 }
@@ -46,7 +44,7 @@ export const LonelinessForm = ({ children }: Props) => {
     strava: "",
   })
   const [formState, setFormState] = useState<FormState>(null)
-  const [formErrors, setFormErrors] = useState<String[]>([])
+  const [formErrors, setFormErrors] = useState<string[]>([])
   const isSubmitted = formState === "submitted"
   const isDirty = formState === "dirty"
   const hasError = Boolean(formErrors.length)

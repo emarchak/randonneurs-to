@@ -14,13 +14,13 @@ import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { Form } from 'src/components/form/components'
+import { FormState } from 'src/components/form/utils'
 
 const formName = 'registration'
 
 const twoDaysFromToday = new Date(Date.now())
 twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
 
-type FormState = 'submitted' | 'dirty' | null
 interface FormData {
     name: string
     email: string
