@@ -22,7 +22,11 @@ const getIsDistance = (route: Route, filterDistance: string) => getDistanceKey(r
 
 const mapURL = (location: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
 
-const routeColumns = ['Chapter', 'Distance', 'Route']
+const routeColumns = {
+  chapter: 'Chapter',
+  distance: 'Distance',
+  route: 'Route'
+}
 
 const RouteDescription = ({ route }: { route: Route }) => (
   <>

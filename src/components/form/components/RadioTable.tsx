@@ -1,11 +1,12 @@
-import React, { ChangeEvent, ReactNode } from "react"
+import React, { ChangeEvent, ReactNode, MouseEvent } from "react"
 import { FieldProps } from './types'
 import { Help } from './Help'
 
 import * as styles from "../../styles/form.module.scss"
 
 type RadioTableOptionType = {
-    value: string
+    value: string,
+    disabled?: boolean
     columns: {
         [key: string]: ReactNode
     }
@@ -13,7 +14,7 @@ type RadioTableOptionType = {
 
 type RadioTableProps = FieldProps & {
     options: RadioTableOptionType[]
-    columns: string[]
+    columns: { [key: string]: string }
     labelColumn: string
     empty?: ReactNode
     onChange: (evt: ChangeEvent<HTMLInputElement>) => void
@@ -32,13 +33,25 @@ export const RadioTable = ({
     help,
     empty = 'No options'
 }: RadioTableProps) => {
-    const handleRowSelect = (value: string) => {
-        onChange({
-            currentTarget: {
-                name, value
-            }
-        } as ChangeEvent<HTMLInputElement>)
+    const handleRowSelect = (option: RadioTableOptionType) => (evt: MouseEvent<HTMLTableRowElement>) => {
+        evt.stopPropagation()
+        if (!Boolean(option.disabled)) {
+            onChange({
+                currentTarget: {
+                    name, value: option.value
+                }
+            } as ChangeEvent<HTMLInputElement>)
+        }
     }
+
+    const handleRadioSelect = (option: RadioTableOptionType) => (evt: ChangeEvent<HTMLInputElement>) => {
+        evt.stopPropagation()
+        if (!Boolean(option.disabled)) {
+            onChange(evt)
+        }
+    }
+
+    const columnKeys = Object.keys(columns)
 
     return (
         <div>
@@ -51,32 +64,32 @@ export const RadioTable = ({
                 <table className={styles.radioTable}>
                     <thead><tr>
                         <th></th>
-                        {columns.map((column => (<th key={column}>{column}</th>)))}
+                        {columnKeys.map((key) => (<th key={key}>{columns[key]}</th>))}
                     </tr></thead>
                     <tbody>
                         {options.length === 0 && <tr>
-                            <td className={styles.radioTableEmpty} colSpan={columns.length + 1}>
+                            <td className={styles.radioTableEmpty} colSpan={columnKeys.length + 1}>
                                 {empty}
                             </td>
                         </tr>}
-                        {options.map(({ value: optionValue, columns }) => (
-                            <tr key={optionValue} data-checked={value === optionValue} onClick={() => handleRowSelect(optionValue)}>
+                        {options.map((option) => (
+                            <tr key={option.value} data-checked={value === option.value} onClickCapture={handleRowSelect(option)}>
                                 <td className={styles.cellSelector}>
                                     <input
                                         type="radio"
-                                        id={optionValue}
+                                        id={option.value}
                                         required={!Boolean(optional)}
-                                        disabled={Boolean(disabled)}
-                                        checked={value === optionValue}
-                                        onChange={onChange}
-                                        value={optionValue}
+                                        disabled={Boolean(disabled) || Boolean(option.disabled)}
+                                        checked={value === option.value}
+                                        onChange={handleRadioSelect(option)}
+                                        value={option.value}
                                         name={name}
                                     />
                                 </td>
-                                {Object.keys(columns).map((key) => (
+                                {columnKeys.map((key) => (
                                     <td key={key}>
-                                        <label htmlFor={labelColumn === key ? optionValue : undefined}>
-                                            {columns[key]}
+                                        <label htmlFor={labelColumn === key ? option.value : undefined}>
+                                            {option.columns[key]}
                                         </label>
                                     </td>
                                 ))}
