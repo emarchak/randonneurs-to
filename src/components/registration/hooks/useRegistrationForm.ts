@@ -2,7 +2,6 @@ import { Brevet } from 'src/hooks/useBrevets'
 import { formatSlackMessage, formSubmit } from 'src/components/form/utils'
 import { useSendMail } from 'src/hooks/useSendMail'
 import { useSlack } from 'src/hooks/useSlack'
-import { getDateTimeShort } from 'src/utils'
 
 type useRegistrationFormParams = {
     formName: string,
