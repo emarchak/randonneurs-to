@@ -63,7 +63,7 @@ describe("<RadioTable>", () => {
             { value: "3", disabled: true, columns: { letter: "3", position: 'Not in alphabet' } },
         ]
 
-        const { baseElement, getByLabelText } = render(<RadioTable
+        const { queryByLabelText, baseElement } = render(<RadioTable
             name="alpha"
             label="Letter of the day"
             value=""
@@ -73,11 +73,9 @@ describe("<RadioTable>", () => {
             onChange={onChange}
         />)
 
-        fireEvent.click(getByLabelText(/3/i))
-        fireEvent.click(getByLabelText(/A/i))
-
-        // This doesn't work for some reason
-        // expect(getByLabelText(/A/i).closest('input')).toBeDisabled()
+        fireEvent.click(queryByLabelText(/A/i))
+        expect(baseElement).toHaveTextContent(/3/i)
+        expect(queryByLabelText(/3/i)).toBeFalsy()
 
         expect(onChange).toHaveBeenCalledTimes(1)
         expect(onChange).toHaveBeenCalledWith({ "currentTarget": { "name": "alpha", "value": "A" } })
