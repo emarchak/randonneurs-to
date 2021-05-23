@@ -1,9 +1,14 @@
 import { ReactNode } from "react"
 
-export type FieldProps = {
+export type LabelProps = {
+    label: string
+    hideLabel?: boolean
+    optional?: boolean
+}
+
+export type FieldProps = LabelProps & {
     name: string
     value: string | number
-    label: string
     disabled?: boolean
     optional?: boolean
     help?: ReactNode

@@ -3,6 +3,7 @@ import { FieldProps } from './types'
 import { Help } from './Help'
 
 import * as styles from "../../styles/form.module.scss"
+import { Label } from "./Label"
 
 type RadioTableOptionType = {
     value: string,
@@ -26,6 +27,7 @@ export const RadioTable = ({
     columns,
     value,
     label,
+    hideLabel,
     labelColumn,
     onChange,
     disabled,
@@ -53,10 +55,7 @@ export const RadioTable = ({
 
     return (
         <div>
-            <span className={styles.label}>
-                {label}
-                {optional && ' (optional)'}
-            </span>
+            <Label label={label} hideLabel={hideLabel} optional={optional} />
             {help && <Help>{help}</Help>}
             <div className={styles.radioTableWrapper}>
                 <table className={styles.radioTable}>
