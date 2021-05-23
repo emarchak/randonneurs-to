@@ -13,6 +13,7 @@ import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembershi
 import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/form/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
+import { Form } from 'src/components/form/components'
 
 const formName = 'registration'
 
@@ -168,13 +169,7 @@ export const RegistrationFormBrevet = () => {
     }
 
     return (
-        <form
-            name={formName}
-            method='post'
-            data-netlify='true'
-            data-netlify-honeypot='bot-field'
-            className={styles.registrationForm}
-        >
+        <Form name={formName} className={styles.registrationForm}>
             <ContentWrapper>
                 <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
@@ -213,6 +208,6 @@ export const RegistrationFormBrevet = () => {
                     </p>
                     : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>Register</SubmitButton>}
             </ContentWrapper>
-        </form >
+        </Form>
     )
 }
