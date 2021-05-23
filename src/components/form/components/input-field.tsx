@@ -3,6 +3,7 @@ import { FieldProps } from './types'
 import { Help } from './Help'
 
 import * as styles from "../../styles/form.module.scss"
+import { Label } from "./Label"
 
 type InputFieldProps = FieldProps & {
     type?: 'text' | 'email'
@@ -10,13 +11,10 @@ type InputFieldProps = FieldProps & {
     onBlur?: (evt: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const InputField = ({ type = 'text', name, value, label, onChange, onBlur, disabled, optional, help }: InputFieldProps) => (
+export const InputField = ({ type = 'text', name, value, label, hideLabel, onChange, onBlur, disabled, optional, help }: InputFieldProps) => (
     <p>
         <label>
-            <span className={styles.label}>
-                {label}
-                {optional && ' (optional)'}
-            </span>
+            <Label label={label} optional={optional} hideLabel={hideLabel} />
             <input
                 type={type}
                 name={name}
