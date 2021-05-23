@@ -107,7 +107,7 @@ tfoot td {
   text-align: center;
 }
 
-@include media(small) {
+@include media(medium) {
   thead, tbody, th, td, tr { 
       display: block; 
   }
@@ -121,8 +121,8 @@ tfoot td {
     position: relative; 
     padding: 0 get-spacing(small);
   }
-  td:first-child {padding-top: get-spacing(small)}
-  td:last-child {padding-bottom: get-spacing(small)}
+  td:first-child {padding-top: get-spacing()}
+  td:last-child {padding-bottom: get-spacing()}
 }
 
 .shopify-buy-frame--product { max-width: 100% !important;}
