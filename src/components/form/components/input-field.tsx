@@ -56,7 +56,7 @@ export const SelectField = ({ name, options, value, label, onChange, disabled, o
                 required={!Boolean(optional)}
             >
                 <option value='' key={''}> - </option>
-                {options.map((option, i) => {
+                {options.map((option) => {
                     const value = typeof option == 'object' ? option.value : option
                     const label = typeof option == 'object' ? option.label : option
                     return <option key={value} value={value}>{label}</option>
