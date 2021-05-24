@@ -59,6 +59,7 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
           <li><Link className={styles.linkSecondary} to='/registration/membership/'>Become a member</Link></li>
           <li><Link className={styles.linkSecondary} to='/registration/'>Scheduled rides</Link></li>
           <li><Link className={styles.linkSecondary} to='/registration/permanent/'>Permanents</Link></li>
+          <li><Link className={styles.linkSecondary} to='/registration/trace-virtuelle/'>Trace Virtuelle</Link></li>
         </ul>
       </li>
       <li className={styles.listItem}>
