@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 
 import * as styles from './styles/tabmenu.module.scss'
 
@@ -15,6 +15,18 @@ type Props = {
 
 export const TabMenu = ({ tabs, activeRoute }: Props) => (
     <menu className={styles.tabmenu}>
+        <select
+            name={'sub menu'}
+            onChange={(evt) => { navigate(evt.currentTarget.value) }}
+            value={activeRoute}
+            className={styles.tabmenuSelect}
+        >
+            {tabs.map((tab) => (
+                <option key={tab.route} value={tab.route}>
+                    {tab.label}
+                </option>)
+            )}
+        </select>
         <ul className={styles.tabmenuList}>
             {tabs.map(tab => (
                 <li key={tab.route} className={styles.tabmenuListItem}>

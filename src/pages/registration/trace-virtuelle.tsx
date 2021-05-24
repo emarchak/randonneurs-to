@@ -1,15 +1,15 @@
+
 import React from 'react'
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
 import { Layout } from 'src/components/layout'
-import { lonelinessRoutes } from '../loneliness'
 import { SEO } from 'src/components/seo'
+import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
+import { Callout } from 'src/components/callout'
+import { registrationRoutes } from '.'
 import { TabMenu } from 'src/components/tabmenu'
+import { Link } from 'src/components/link'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Link } from 'src/components/link'
-import { Callout } from 'src/components/callout'
 import { ContactForm } from 'src/components/ContactForm'
-import { registrationRoutes } from '.'
 
 const imageQuery = graphql`
 query {
