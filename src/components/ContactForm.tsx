@@ -1,33 +1,13 @@
 import React, { ChangeEvent, ReactNode, useState } from 'react'
 import { SubmitButton } from './buttons'
 import { ContentWrapper } from './content-wrapper'
-import { Form, InputField } from './form/components'
-import { TextField } from './form/components/TextField'
-import { ErrorsList } from './form/errors-list'
-import { formatSlackMessage, FormState, formSubmit } from './form/utils'
-import { emailRegex } from './form/regex'
+import { Form, InputField, TextField, ErrorsList } from './form/components'
+import { formatSlackMessage, FormState, formSubmit, RequiredFields, validate } from './form/utils'
 import { useSlack } from 'src/hooks/useSlack'
 
-const checkForErrors = (fields: FormData, fieldLabels: FormLabels) =>
-    Object.entries(fields)
-        .map(([field, value]) => {
-            if (!value.length) {
-                return `${fieldLabels[field]} is required`
-            }
-
-            if (field === "email" && !emailRegex.test(value)) {
-                return `${value} is not a valid email`
-            }
-        })
-        .filter(Boolean)
+const requiredFields: RequiredFields<FormData> = ['name', 'email', 'message']
 
 type FormData = {
-    name: string
-    email: string
-    message: string
-}
-
-type FormLabels = {
     name: string
     email: string
     message: string
@@ -62,7 +42,7 @@ export const ContactForm = ({ formName, messageLabel = "Message", submitLabel = 
     const handleSubmit = async evt => {
         evt.preventDefault()
 
-        const errors = checkForErrors(formData, fieldLabels)
+        const errors = validate(formData, fieldLabels, requiredFields)
         if (errors.length) {
             setFormErrors(errors)
             setFormState(null)
