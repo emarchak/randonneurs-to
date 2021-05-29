@@ -12,8 +12,8 @@ if (process.env.NODE_ENV !== 'development') {
     })
 }
 
-const ErrorBoundary = process.env.NODE_ENV === 'development' 
-    ? React.Fragment 
+const ErrorBoundary = process.env.NODE_ENV === 'development'
+    ? React.Fragment
     : Bugsnag.getPlugin('react').createErrorBoundary(React)
 
 export const wrapRootElement = ({ element }) =>  (
@@ -23,6 +23,6 @@ export const wrapRootElement = ({ element }) =>  (
                  {console.log(apolloClient)}
                 {element}
              </ApolloProvider>
-        </BuyButtonProvider> 
+        </BuyButtonProvider>
      </ErrorBoundary>
 )

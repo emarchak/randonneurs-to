@@ -1,0 +1,5 @@
+query Chapters {
+  chapters {
+    name
+  }
+}

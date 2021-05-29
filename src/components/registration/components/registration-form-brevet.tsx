@@ -13,7 +13,7 @@ import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, validate, RequiredFields } from 'src/components/form/utils'
 import { useQuery } from "@apollo/react-hooks"
-import { queryChapters } from '../graphql'
+import queryChapters from '../gql/queryChapters.graphql'
 const formName = 'registration'
 
 const twoDaysFromToday = new Date(Date.now())
