@@ -71,6 +71,18 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "V1",
+        fieldName: "v1",
+        refetchInterval: 60,
+        url: process.env.GRAPHQL_URL,
+        headers: {
+          [`${process.env.GRAPHQL_SECRETKEY}`]: process.env.GRAPHQL_SECRET,
+        }
+      },
+    },
   ],
 }
 /* eslint-enable no-undef */
