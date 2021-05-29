@@ -12,7 +12,8 @@ import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, validate, RequiredFields } from 'src/components/form/utils'
-
+import { useQuery } from "@apollo/react-hooks"
+import { queryChapters } from '../graphql'
 const formName = 'registration'
 
 const twoDaysFromToday = new Date(Date.now())
@@ -75,7 +76,8 @@ export const RegistrationFormBrevet = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
-
+    const { loading, data } = useQuery(queryChapters)
+    console.log({ loading, data })
     const { onSubmit } = useRegistrationForm({ formName, fieldLabels })
     const { checkMembership } = useCheckRiderMembership()
     const { allowedStartTimes } = useAllowedStartTimes()
