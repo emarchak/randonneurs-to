@@ -20,7 +20,6 @@ export const wrapRootElement = ({ element }) =>  (
     <ErrorBoundary>
          <BuyButtonProvider>
              <ApolloProvider client={apolloClient}>
-                 {console.log(apolloClient)}
                 {element}
              </ApolloProvider>
         </BuyButtonProvider>
