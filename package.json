@@ -65,7 +65,8 @@
   "scripts": {
     "build": "gatsby build",
     "build:production": "jest --runInBand && npm run build",
-    "predevelop": "./scripts/updateSchema.sh",
+    "build:schema": "./node_modules/.bin/apollo schema:download --config=\"apollo.config.js\" schema.graphql.json",
+    "predevelop": "npm run build:schema",
     "develop": "yarn tsm src & gatsby develop -p 8000 -o",
     "develop:live": "./node_modules/.bin/netlify dev --live",
     "serve": "gatsby serve",

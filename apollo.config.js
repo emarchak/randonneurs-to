@@ -12,7 +12,7 @@ module.exports = {
             headers: {
                 [`${process.env.GRAPHQL_SECRETKEY}`]: process.env.GRAPHQL_SECRET,
             },
-            localSchemaFile: 'schema.json'
+            localSchemaFile: 'schema.graphql.json'
         }
     }
 }
