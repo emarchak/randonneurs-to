@@ -11,6 +11,7 @@
     "@apollo/react-hooks": "^4.0.0",
     "@bugsnag/js": "^7.9.2",
     "@bugsnag/plugin-react": "^7.9.2",
+    "@jagi/jest-transform-graphql": "^1.0.2",
     "@loadable/component": "^5.14.1",
     "@sendgrid/mail": "^7.4.2",
     "@shopify/buy-button-js": "^2.1.7",

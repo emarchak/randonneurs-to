@@ -2,6 +2,7 @@
 module.exports = {
   transform: {
     '^.+\\.(tsx?|jsx?)$': `<rootDir>/jest/jest-preprocess.js`,
+    "\\.(gql|graphql)$": "@jagi/jest-transform-graphql"
   },
   moduleNameMapper: {
     ".+\\.(scss|css)$": `identity-obj-proxy`,

@@ -3,6 +3,7 @@
         "jsx": "react",
         "baseUrl": ".",
         "esModuleInterop": true,
+        "resolveJsonModule": true,
         "paths": {
             "components": [
                 "src/components"
