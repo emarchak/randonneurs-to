@@ -11,8 +11,7 @@ import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembershi
 import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
-import { FormState, validate, RequiredFields } from 'src/components/form/utils'
-import { useQuery } from "@apollo/react-hooks"
+import { useLazyQuery } from "@apollo/react-hooks"
 import queryChapters from '../graphql/queryChapters.graphql'
 const formName = 'registration'
 
@@ -76,7 +75,7 @@ export const RegistrationFormBrevet = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
-    const { loading, data } = useQuery(queryChapters)
+    const [getChapters, { loading, data }] = useLazyQuery(queryChapters)
     console.log({ loading, data })
     const { onSubmit } = useRegistrationForm({ formName, fieldLabels })
     const { checkMembership } = useCheckRiderMembership()
@@ -154,6 +153,7 @@ export const RegistrationFormBrevet = () => {
 
     return (
         <Form name={formName} className={styles.registrationForm}>
+            <button onClick={() => getChapters()}>Get Chapters</button>
             <ContentWrapper>
                 <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
@@ -192,6 +192,6 @@ export const RegistrationFormBrevet = () => {
                     </p>
                     : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>Register</SubmitButton>}
             </ContentWrapper>
-        </Form>
+        </Form >
     )
 }
