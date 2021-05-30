@@ -8,7 +8,6 @@ const handler = async (event) => {
       headers: {
           "content-type": headers["content-type"],
           "apollographql-client-name": headers["apollographql-client-name"],
-          [`${process.env.GRAPHQL_SECRETKEY}`]: process.env.GRAPHQL_SECRET,
       },
       body
     })

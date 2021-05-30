@@ -9,9 +9,6 @@ module.exports = {
         service: {
             name: `gastby-apollo@${env}`,
             uri: process.env.GRAPHQL_URL,
-            headers: {
-                [`${process.env.GRAPHQL_SECRETKEY}`]: process.env.GRAPHQL_SECRET,
-            },
             localSchemaFile: 'schema.graphql.json'
         }
     }
