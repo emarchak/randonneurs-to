@@ -11,12 +11,13 @@ export const registrationRoutes = [
   { label: 'Membership', route: '/registration/membership/' },
   { label: 'Rides', route: '/registration/' },
   { label: 'Permanents', route: '/registration/permanent/' },
+  { label: 'Trace', route: '/registration/trace-virtuelle/' },
 ]
 
 const BrevetRegistration = () => {
   return (
     <Layout hideHeader>
-      <SEO title='Register for a ride' />
+      <SEO title='Register for a ride' description="Register for a brevet with Randonneurs Ontario, an memmber of the Audax Club Parisien" />
       <ContentWrapper>
         <TabMenu tabs={registrationRoutes} activeRoute='/registration/' />
         <h1>Register to ride</h1><h2>with Randonneurs Ontario</h2>

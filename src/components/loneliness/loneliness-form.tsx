@@ -1,39 +1,27 @@
 import React, { useState, ChangeEvent } from "react"
 import { ContentWrapper } from "../content-wrapper"
-import { ErrorsList } from "../form/errors-list"
-import { InputField } from "../form/components"
+import { InputField, ErrorsList } from "../form/components"
 import { SubmitButton } from "../buttons"
-import { emailRegex, stravaRegex } from "../form/regex"
-import { formSubmit } from "../form/helpers"
+import { formSubmit, FormState, RequiredFields } from "../form/utils"
 import * as styles from "../styles/form.module.scss"
 import { Form } from "../form/components"
+import { validate } from "../form/utils/validate"
 
 const formName = "clubaudaxadistance"
 
-const checkForErrors = (fields: FormData) =>
-  Object.entries(fields)
-    .map(([field, value]) => {
-      if (!value.length) {
-        return `${field} field is required`
-      }
+const fieldLabels = {
+  name: 'Your name',
+  email: 'Your email',
+  strava: 'Strava activity url'
+}
 
-      if (field === "email" && !emailRegex.test(value)) {
-        return `${value} is not a valid email`
-      }
-
-      if (field === "strava" && !stravaRegex.test(value)) {
-        return `${value} is not a valid strava activity url. It should be in the format https://www.strava.com/activities/11111111`
-      }
-    })
-    .filter(Boolean)
+const requiredFields: RequiredFields<FormData> = ['name', 'email', 'strava']
 
 type FormData = {
   name: string
   email: string
   strava: string
 }
-
-type FormState = "submitted" | "dirty" | null
 
 type Props = {
   children?: React.ReactNode
@@ -46,7 +34,7 @@ export const LonelinessForm = ({ children }: Props) => {
     strava: "",
   })
   const [formState, setFormState] = useState<FormState>(null)
-  const [formErrors, setFormErrors] = useState<String[]>([])
+  const [formErrors, setFormErrors] = useState<string[]>([])
   const isSubmitted = formState === "submitted"
   const isDirty = formState === "dirty"
   const hasError = Boolean(formErrors.length)
@@ -54,7 +42,7 @@ export const LonelinessForm = ({ children }: Props) => {
   const handleSubmit = async evt => {
     evt.preventDefault()
 
-    const errors = checkForErrors(formData)
+    const errors = validate(formData, fieldLabels, requiredFields)
     if (errors.length) {
       setFormErrors(errors)
       setFormState(null)

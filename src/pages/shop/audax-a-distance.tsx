@@ -7,21 +7,19 @@ import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/tabmenu'
 import Loadable from "@loadable/component"
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { Link } from 'src/components/link'
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
 
 const imageQuery = graphql`
 query {
-    allFile(filter: {name: {glob: "audax-a-distance"}}, limit: 1) {
-        nodes {
-          name
-          childImageSharp {
-            gatsbyImageData(aspectRatio: 1)
-            fixed {
-                src
-              } 
+      file(name: {glob: "audax-a-distance"}) {
+        name
+        childImageSharp {
+          gatsbyImageData(aspectRatio:1, width:500, layout: FULL_WIDTH)
+          fixed {
+            src
           }
         }
       }
@@ -29,15 +27,14 @@ query {
 `
 
 const AudaxShopPage = () => {
-    const {
-        allFile: { nodes: images },
-    } = useStaticQuery(imageQuery)
+    const { file } = useStaticQuery(imageQuery)
+    const image = getImage(file)
     return (
         <Layout>
             <SEO
                 title="Club audax à distance patches"
                 description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
-                image={images[0].childImageSharp.fixed.src}
+                image={file.childImageSharp.fixed.src}
             />
             <ContentWrapper>
                 <TabMenu tabs={lonelinessRoutes} activeRoute='/shop/audax-a-distance/' />
@@ -54,12 +51,10 @@ const AudaxShopPage = () => {
                     <BuyButton productId={5609667035158} price buttonWithQuantity />
                 </ContentChild>
                 <ContentChild>
-                    {images.map(image => (
-                        <GatsbyImage
-                            key={image.name}
-                            image={image.childImageSharp.gatsbyImageData}
-                            alt="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
-                        />))}
+                    <GatsbyImage
+                        image={image}
+                        alt="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
+                    />
                 </ContentChild>
             </ContentWrapper>
         </Layout >

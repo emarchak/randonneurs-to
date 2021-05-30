@@ -10,6 +10,32 @@
     @include no-space();
 }
 
+.tabmenuSelect {
+    @include no-space();
+    border-radius: 0;
+    background-image:
+        linear-gradient(45deg, transparent 50%, get-color(text, light) 50%),
+        linear-gradient(135deg, get-color(text, light) 50%, transparent 50%);
+    background-position:
+        calc(100% - 20px) calc(.5em),
+        calc(100% - 15px) calc(.5em);
+    background-size:
+        5px 5px,
+        5px 5px;
+    background-repeat: no-repeat;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    width: 100%;
+    &:hover,
+    &:focus {
+        cursor: pointer;
+        outline: none;
+    }
+}
+
 .tabmenuListItem {
     @include no-space();
     display: inline-block;
@@ -24,15 +50,12 @@
     margin-left: 0;
 }
 
+.tabmenuSelect,
 .tabmenuLink {
     font-family: get-font(header);
     font-size: get-font-size(subheader);
-    text-decoration: none;
     font-weight: bold;
     border-bottom: 3px solid transparent;
-    display: block;
-    position: relative;
-    bottom: -2px;
     color: get-color(text, light) ;
     border-color: transparent;
     transition: border-color 0.5s ease;
@@ -43,7 +66,28 @@
     }
 }
 
+.tabmenuLink {
+    display: block;
+    position: relative;
+    bottom: -2px;  
+    text-decoration: none;
+}
+
 .tabmenuLinkActive {
     color: get-color(text) ;
     border-bottom: 3px solid get-color(text);
+}
+
+.tabmenuList {
+    display: none;
+    @include media(large) {
+        display:block;
+    }
+}
+
+.tabmenuSelect {
+    display:block;
+    @include media(large) {
+        display:none;
+    }
 }

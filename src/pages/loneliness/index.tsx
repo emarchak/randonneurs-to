@@ -17,6 +17,7 @@ import { Link } from "src/components/link"
 export const lonelinessRoutes = [
   { label: 'Club', route: '/loneliness/' },
   { label: 'Shop', route: '/shop/audax-a-distance/' },
+  { label: 'Trace', route: '/registration/trace-virtuelle/' },
 ]
 
 const Page = () => {

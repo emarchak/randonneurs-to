@@ -1,8 +1,7 @@
 import { Brevet } from 'src/hooks/useBrevets'
-import { formSubmit } from 'src/components/form/helpers'
+import { formatSlackMessage, formSubmit } from 'src/components/form/utils'
 import { useSendMail } from 'src/hooks/useSendMail'
 import { useSlack } from 'src/hooks/useSlack'
-import { getDateTimeShort } from 'src/utils'
 
 type useRegistrationFormParams = {
     formName: string,
@@ -22,16 +21,11 @@ type FormData = {
 
 const permEmail = 'treasurer_2021@randonneursontario.ca'
 const replyToEmails = {
-   "toronto": "vp@randonneurs.to",
-   "simcoe":  "vp-simcoe_2021@randonneursontario.ca", 
-   "huron":   "vp-huron_2021@randonneursontario.ca", 
-   "ottawa":  "vp-ottawa_2021@randonneursontario.ca", 
-   "default": "vp@randonneurs.to"
-}
-
-const sentenceCase = (str: string) => {
-    const result = str.replace(/([A-Z])/g, " $1")
-    return result.charAt(0).toUpperCase() + result.slice(1)
+    "toronto": "vp@randonneurs.to",
+    "simcoe": "vp-simcoe_2021@randonneursontario.ca",
+    "huron": "vp-huron_2021@randonneursontario.ca",
+    "ottawa": "vp-ottawa_2021@randonneursontario.ca",
+    "default": "vp@randonneurs.to"
 }
 
 export const useRegistrationForm = (params: useRegistrationFormParams) => {
@@ -39,21 +33,11 @@ export const useRegistrationForm = (params: useRegistrationFormParams) => {
     const { sendMail } = useSendMail()
     const { sendSlackMsg } = useSlack()
 
-    const formatSlackMessage = (formData: FormData) => ({
-        message: `Registration for ${formData.chapter} ${formData.route} ${formData.rideType}`,
-        attachments: [
-            Object.keys(formData).map(key => {
-                const value = formData[key] instanceof Date ? getDateTimeShort(formData[key]) : formData[key]
-                const label = fieldLabels[key] || sentenceCase(key)
-                return `${label}: ${value}`
-            }).join(' \n ')
-        ]
-    })
-
     const onSubmit = async (formData: FormData) => {
+        const message = `Registration for ${formData.chapter} ${formData.route} ${formData.rideType}`
         const successSubmit = await formSubmit(formName, { ...formData })
 
-        const successSlack = await sendSlackMsg(formatSlackMessage(formData), 'registration')
+        const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData, message }), 'registration')
 
         const replyTo = replyToEmails[formData.chapter.toLowerCase() || 'default']
         const vpPermanent = formData.rideType === 'permanent' ? permEmail : undefined

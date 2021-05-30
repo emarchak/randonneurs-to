@@ -1,6 +1,5 @@
 import React, { ReactChild } from "react"
-
-import * as styles from "../styles/form.module.scss"
+import { errorList, error } from "../../styles/form.module.scss"
 
 type Props = {
     formErrors: ReactChild[]
@@ -10,9 +9,9 @@ export const ErrorsList = ({ formErrors }: Props) => {
     if (!Boolean(formErrors.length)) return <></>
 
     return (
-        <ul className={styles.errorList} aria-live="polite">
+        <ul className={errorList} aria-live="polite">
             {formErrors.map((message, i) => (
-                <li className={styles.error} key={i}>
+                <li className={error} key={i}>
                     {message}
                 </li>
             ))}

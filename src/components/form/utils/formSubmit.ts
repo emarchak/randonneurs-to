@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-unfetch'
+import { FormData } from './types'
 
 const formEncode = data => {
     return Object.keys(data)
@@ -6,7 +7,7 @@ const formEncode = data => {
         .join("&")
 }
 
-export const formSubmit = async (formName: string, formData: { [key: string]: any }) => {
+export const formSubmit = async (formName: string, formData: FormData) => {
     const body = formEncode({ "form-name": formName, ...formData })
     try {
         const response = await fetch(`/`, {

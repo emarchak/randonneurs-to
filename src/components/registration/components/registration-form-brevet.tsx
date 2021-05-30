@@ -1,9 +1,7 @@
 import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { SubmitButton } from 'src/components/buttons'
-import { ErrorsList } from 'src/components/form/errors-list'
-import { InputField, DateField, CheckboxField, HiddenField } from 'src/components/form/components'
-import { emailRegex } from 'src/components/form/regex'
+import { InputField, DateField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
 import { Brevet } from 'src/hooks/useBrevets'
 import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
@@ -13,14 +11,13 @@ import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembershi
 import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
-import { Form } from 'src/components/form/components'
+import { FormState, validate, RequiredFields } from 'src/components/form/utils'
 
 const formName = 'registration'
 
 const twoDaysFromToday = new Date(Date.now())
 twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
 
-type FormState = 'submitted' | 'dirty' | null
 interface FormData {
     name: string
     email: string
@@ -64,7 +61,7 @@ const fieldLabels = {
     roConsent: 'Randonneurs Ontario risk policy',
 }
 
-const requiredFields: Partial<keyof FormData>[] = [
+const requiredFields: RequiredFields<FormData> = [
     'name',
     'email',
     'route',
@@ -73,21 +70,6 @@ const requiredFields: Partial<keyof FormData>[] = [
     'ocaConsent',
     'roConsent'
 ]
-
-const checkForErrors = (fields: FormData) => (
-    Object.entries(fields)
-        .map(([field, value]) => {
-            if (requiredFields.includes(field as keyof FormData) && !Boolean(value)) {
-                return `${fieldLabels[field]} is required`
-            }
-
-            if (field === 'email' && !emailRegex.test(value)) {
-                return `${value} is not a valid email`
-            }
-        })
-        .filter(Boolean)
-)
-
 
 export const RegistrationFormBrevet = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
@@ -154,7 +136,7 @@ export const RegistrationFormBrevet = () => {
     const handleSubmit = async evt => {
         evt.preventDefault()
 
-        const errors = checkForErrors(formData)
+        const errors = validate(formData, fieldLabels, requiredFields)
         if (errors.length) {
             setFormErrors(errors)
             setFormState(null)

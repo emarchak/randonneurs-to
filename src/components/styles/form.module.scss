@@ -88,7 +88,9 @@
 }
 
 .blockButton {
-  display:block;
+  display: block;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .fieldset {
@@ -127,6 +129,10 @@
   width: calc(100% - #{get-spacing(small) * 2});
 }
 
+.textField {
+  height: calc(#{get-font-size(large)} * 2);
+  padding: get-spacing(small);
+}
 
 .inlineInputs {
   display: flex;
