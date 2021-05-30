@@ -64,6 +64,12 @@ const Joi = {
 }
 
 describe('gatsby-source-ccn', () => {
+    const consoleSpy = jest.spyOn(console, "log").mockImplementation()
+
+    afterAll(() => {
+        consoleSpy.mockRestore()
+    })
+
     it('processes input', async () => {
         const createNode = jest.fn()
         const createContentDigest = jest.fn()
