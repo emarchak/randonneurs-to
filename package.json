@@ -73,6 +73,7 @@
     "serve": "gatsby serve",
     "test": "jest --watch",
     "netlify": "./node_modules/.bin/netlify",
-    "apollo": "./node_modules/.bin/apollo"
+    "apollo": "./node_modules/.bin/apollo",
+    "test:coverage": "jest --coverage"
   }
 }
