@@ -11,7 +11,7 @@ const formEncode = data => {
 export const formSubmit = async (formName: string, formData: FormData) => {
     const body = formEncode({ "form-name": formName, ...formData })
     try {
-        trackEvent(formName, { ...formData })
+        trackEvent("sign_up", { method: formName, ...formData })
         const response = await fetch(`/`, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
