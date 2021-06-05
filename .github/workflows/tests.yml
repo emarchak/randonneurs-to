@@ -1,4 +1,4 @@
-name: Running Code Coverage
+name: Running Tests
 
 on: [push]
 
@@ -15,7 +15,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 15
+        node-version: 15.14
 
     - name: Install dependencies
       run: npm install
