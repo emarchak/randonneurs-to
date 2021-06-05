@@ -1,6 +1,6 @@
 # Randonneurs TO
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/17a06075-366c-485f-9e60-34bfee1fee3c/deploy-status)](https://app.netlify.com/sites/randonneursto/deploys)
+[![Netlify](https://img.shields.io/netlify/17a06075-366c-485f-9e60-34bfee1fee3c)](https://app.netlify.com/sites/randonneursto/deploys) [![Coverage](https://img.shields.io/codecov/c/github/emarchak/randonneurs-to)](https://app.codecov.io/gh/emarchak/randonneurs-to)
 
 Automations and marketing for Toronto Randonneurs
 

@@ -1,0 +1,28 @@
+name: Running Tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 2 
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run the tests
+      run: npm run test:coverage
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
