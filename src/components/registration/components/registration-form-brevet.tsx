@@ -11,7 +11,7 @@ import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembershi
 import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
-import { FormState, validate, RequiredFields } from 'src/components/form/utils'
+import { FormState, RequiredFields, validate } from 'src/components/form/utils'
 
 const formName = 'registration'
 

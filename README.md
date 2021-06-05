@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/17a06075-366c-485f-9e60-34bfee1fee3c/deploy-status)](https://app.netlify.com/sites/randonneursto/deploys)
 
-Automations to for Randonneurs Toronto
+Automations and marketing for Toronto Randonneurs
 
 ## Local development
 
@@ -10,3 +10,7 @@ Automations to for Randonneurs Toronto
 2. `npm install`
 3. `npm run develop`
 4.  To run tests, `npm run test`
+
+## Database 
+
+![Data struture](docs/database.drawio.svg)

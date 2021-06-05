@@ -8,11 +8,15 @@
     "node": "12.x"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
     "@bugsnag/js": "^7.9.2",
     "@bugsnag/plugin-react": "^7.9.2",
+    "@jagi/jest-transform-graphql": "^1.0.2",
     "@loadable/component": "^5.14.1",
     "@sendgrid/mail": "^7.4.2",
     "@shopify/buy-button-js": "^2.1.7",
+    "apollo": "^2.33.4",
+    "apollo-boost": "^0.4.9",
     "date-time-format-timezone": "^1.0.22",
     "gatsby": "^3.2.1",
     "gatsby-plugin-image": "^1.2.1",
@@ -25,6 +29,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^3.2.0",
     "gatsby-source-google-spreadsheets": "^3.0.5",
+    "gatsby-source-graphql": "^3.6.0",
     "gatsby-transformer-sharp": "^3.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "jshint": "^2.11.0",
@@ -61,10 +66,13 @@
   "scripts": {
     "build": "gatsby build",
     "build:production": "jest --runInBand && npm run build",
+    "build:schema": "./node_modules/.bin/apollo schema:download --config=\"apollo.config.js\" schema.graphql.json",
+    "predevelop": "npm run build:schema",
     "develop": "yarn tsm src & gatsby develop -p 8000 -o",
     "develop:live": "./node_modules/.bin/netlify dev --live",
     "serve": "gatsby serve",
     "test": "jest --watch",
-    "netlify": "./node_modules/.bin/netlify"
+    "netlify": "./node_modules/.bin/netlify",
+    "apollo": "./node_modules/.bin/apollo"
   }
 }

@@ -1,8 +1,9 @@
-const React = require('react')
-const Bugsnag = require('@bugsnag/js').default
-const BugsnagPluginReact = require('@bugsnag/plugin-react').default
-const BuyButton = require('./src/components/buybutton')
-
+import React from "react"
+import Bugsnag from "@bugsnag/js"
+import BugsnagPluginReact from '@bugsnag/plugin-react'
+import { BuyButtonProvider } from "./src/components/buybutton"
+import { ApolloProvider } from "@apollo/react-hooks";
+import { apolloClient } from "./src/utils";
 
 if (process.env.NODE_ENV !== 'development') {
     Bugsnag.start({
@@ -10,12 +11,17 @@ if (process.env.NODE_ENV !== 'development') {
         plugins: [new BugsnagPluginReact()],
     })
 }
-const ErrorBoundary = process.env.NODE_ENV === 'development' ? React.Fragment : Bugsnag.getPlugin('react').createErrorBoundary(React)
 
-exports.wrapRootElement = ({ element }) =>  (
+const ErrorBoundary = process.env.NODE_ENV === 'development'
+    ? React.Fragment
+    : Bugsnag.getPlugin('react').createErrorBoundary(React)
+
+export const wrapRootElement = ({ element }) =>  (
     <ErrorBoundary>
-        <BuyButton.BuyButtonProvider>
-            {element}
-        </BuyButton.BuyButtonProvider>
-    </ErrorBoundary>
+         <BuyButtonProvider>
+             <ApolloProvider client={apolloClient}>
+                {element}
+             </ApolloProvider>
+        </BuyButtonProvider>
+     </ErrorBoundary>
 )
