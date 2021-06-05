@@ -4,9 +4,6 @@
   "description": "Automations for randonneurs toronto",
   "version": "0.1.0",
   "author": "Erin Marchak <erin@emarchak.com>",
-  "engines": {
-    "node": "v15.13.0"
-  },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "@bugsnag/js": "^7.9.2",

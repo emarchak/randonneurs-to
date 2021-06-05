@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Read .nvmrc
+      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+      id: nvm
+
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
@@ -15,7 +19,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 15.13
+        node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
     - name: Install dependencies
       run: npm install
