@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link as GastsbyLink } from 'gatsby'
+import { OutboundLink } from "gatsby-plugin-google-gtag"
 
 export type LinkProps = {
     children: React.ReactChild,
@@ -12,5 +13,5 @@ export type LinkProps = {
 export const Link = ({ to, href, className = '', children }: LinkProps) => (
     to
         ? <GastsbyLink to={to} className={className}>{children}</GastsbyLink>
-        : <a href={href} target="_blank" rel="noopener" className={className}>{children}</a>
+        : <OutboundLink href={href} target="_blank" rel="noopener" className={className}>{children}</OutboundLink>
 )

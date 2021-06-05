@@ -11,6 +11,9 @@ declare namespace NodeJS {
   export interface Global {
     fetch: any
   }
+  export interface Window {
+    gtag: any
+  }
 }
 
 declare module '*.graphql' {
