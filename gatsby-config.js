@@ -4,7 +4,10 @@ require("dotenv").config({
 })
 
 module.exports = {
-  flags: { DEV_SSR: true },
+  flags: {
+    DEV_SSR: true,
+    PRESERVE_WEBPACK_CACHE: true
+  },
   siteMetadata: {
     title: "Toronto Randonneurs",
     description: "Long distance cyclists of Toronto, Canada",
@@ -78,6 +81,14 @@ module.exports = {
         fieldName: "v1",
         refetchInterval: 60,
         url: process.env.GRAPHQL_URL
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [
+          process.env.GTAG_ID
+        ],
       },
     },
   ],
