@@ -5,8 +5,7 @@
   "version": "0.1.0",
   "author": "Erin Marchak <erin@emarchak.com>",
   "engines": {
-    "node": "v15.13.0",
-    "npm": "7.8.0"
+    "node": "v15.13.0"
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
