@@ -14,3 +14,7 @@ Automations and marketing for Toronto Randonneurs
 ## Database 
 
 ![Data struture](docs/database.drawio.svg)
+
+## Theme
+
+Theme documentation is available on [components.ai](https://components.ai/theme/ib6MBZe7zLkwBRcSKWRI)

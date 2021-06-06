@@ -1,32 +1,54 @@
 @use "sass:map";
 
+$mint: #c5eada;
+$lavender: #b888a0;
+$pewter: #88b2b8;
+$jet: #333333;
+
+$variants: lightest, light, normal, dark, darkest;
+
+@function varient($color, $variant) {
+  @if $variant == light {
+    @return lighten(saturate(adjust-hue($color, -1), 0.78), 7.25)
+  } @else if $variant == lightest {
+    @return lighten(desaturate(adjust-hue($color, 6), 3.98), 14.12)
+  } @else if $variant == dark {
+    @return darken(desaturate(adjust-hue($color, -1), 38.65), 41.37)
+  } @else if $variant == darkest {
+    @return darken(desaturate(adjust-hue($color, -4), 42.07), 76.27)
+  } @else {
+    @return $color
+  }
+}
+
+
 $theme-colors: (
   "primary": (
-    "normal": #c5eada,
-    "desaturate": desaturate(#c5eada, 90%),
-    "light": lighten(#c5eada, 10%),
-    "dark": darken(#c5eada, 10%),
-    "darkest": desaturate(darken(#c5eada, 20%), 10%),
+    "normal": $mint,
+    "desaturate": desaturate($mint, 90%),
+    "light": lighten($mint, 10%),
+    "dark": darken($mint, 10%),
+    "darkest": desaturate(darken($mint, 20%), 10%),
   ),
   "secondary": (
-    "normal": #b888a0,
-    "light": lighten(#b888a0, 20%),
-    "dark": darken(#b888a0, 30%),
-    "darkest": desaturate(darken(#b888a0, 30%), 10%),
+    "normal": $lavender,
+    "light": lighten($lavender, 20%),
+    "dark": darken($lavender, 30%),
+    "darkest": desaturate(darken($lavender, 30%), 10%),
   ),
   "tertiary": (
-    "normal": #88b2b8,
-    "light": lighten(#88b2b8, 20%),
+    "normal": $pewter,
+    "light": lighten($pewter, 20%),
   ),
   "success": (
     "normal": #28a745,
   ),
   "text": (
-    "normal": #333333,
-    "subtle": lighten(#333333, 10%),
-    "light": lighten(#333333, 20%),
-    "lighter": lighten(#333333, 60%),
-    "lightest": lighten(#333333, 75%)
+    "normal": $jet,
+    "subtle": lighten($jet, 10%),
+    "light": lighten($jet, 20%),
+    "lighter": lighten($jet, 60%),
+    "lightest": lighten($jet, 75%)
   ),
   "info": (
     "normal": #17a2b8,
@@ -36,8 +58,8 @@ $theme-colors: (
   ),
   "background": (
     "normal": #fff,
-    "darken": lighten(#333333, 75%),
-    "subtle": lighten(#333333, 10%),
+    "darken": lighten($jet, 75%),
+    "subtle": lighten($jet, 10%),
   )
 );
 
@@ -65,9 +87,9 @@ $theme-font-size: (
 );
 
 $dropshadow: (
-  "pressed": 0 0 0.25rem transparentize(#333333, 0.75),
-  "normal":  0.05rem 0.05rem 0.25rem transparentize(#333333, 0.75),
-  "dark": 0.05rem 0.05rem 0.25rem transparentize(#333333, 0.5),
+  "pressed": 0 0 0.25rem transparentize($jet, 0.75),
+  "normal":  0.05rem 0.05rem 0.25rem transparentize($jet, 0.75),
+  "dark": 0.05rem 0.05rem 0.25rem transparentize($jet, 0.5),
 );
 
 @mixin no-space {
