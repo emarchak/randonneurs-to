@@ -75,15 +75,6 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-graphql",
-      options: {
-        typeName: "V1",
-        fieldName: "v1",
-        refetchInterval: 60,
-        url: process.env.GRAPHQL_URL
-      },
-    },
-    {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         trackingIds: [
