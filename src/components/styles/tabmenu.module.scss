@@ -62,7 +62,7 @@
 
     &:focus,
     &:hover {
-        border-bottom: 3px solid get-color(text, light);
+        border-bottom: 0.3rem solid get-color(text, light);
     }
 }
 
@@ -75,7 +75,7 @@
 
 .tabmenuLinkActive {
     color: get-color(text) ;
-    border-bottom: 3px solid get-color(text);
+    border-bottom: 0.3rem solid get-color(text);
 }
 
 .tabmenuList {

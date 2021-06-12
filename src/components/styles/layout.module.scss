@@ -67,15 +67,15 @@ $footer-height: 4.3rem;
 
 .callout {
   background-color: get-color(secondary, light);
-  border: 0.1rem solid get-outline-color(secondary, light);
+  border: get-border(secondary, light);
 }
 
 .calloutAlternative {
   background-color: get-color(tertiary, light);
-  border: 0.1rem solid get-outline-color(tertiary, light);
+  border: get-border(tertiary, light);
 }
 
 .aside {
   background-color: get-color(primary, desaturate);
-  border: 0.1rem solid get-outline-color(primary, desaturate);
+  border: get-border(primary, desaturate);
 }

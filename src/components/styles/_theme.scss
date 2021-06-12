@@ -40,15 +40,15 @@ $theme-colors: (
     "normal": $pewter,
     "light": lighten($pewter, 20%),
   ),
-  "success": (
-    "normal": #28a745,
-  ),
   "text": (
     "normal": $jet,
     "subtle": lighten($jet, 10%),
     "light": lighten($jet, 20%),
     "lighter": lighten($jet, 60%),
     "lightest": lighten($jet, 75%)
+  ),
+  "success": (
+    "normal": #28a745,
   ),
   "info": (
     "normal": #17a2b8,
@@ -72,6 +72,7 @@ $theme-fonts: (
 );
 
 $theme-spacing: (
+  "line": 0.1rem,
   "small": 0.72rem,
   "medium": 1rem,
   "normal": 1.45rem,
@@ -137,6 +138,10 @@ $dropshadow: (
 
 @function get-dropshadow($name: "normal") {
   @return map-get($dropshadow, $name);
+}
+
+@function get-border($name: "secondary", $variant: "normal") {
+  @return get-spacing(line) solid get-outline-color($name, $variant)
 }
 
 @mixin media($point) {

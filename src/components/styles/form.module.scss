@@ -11,8 +11,8 @@
 
 .formWrapper {
   background-color: get-color(secondary, light);
-  border-top: 0.1rem solid get-outline-color(secondary, light);
-  border-bottom: 0.1rem solid get-outline-color(secondary, light);
+  border-top: get-border(secondary, light);
+  border-bottom: get-border(secondary, light);
 }
 
 .button {
@@ -21,7 +21,7 @@
   padding: get-spacing(small) get-spacing(medium);
   color: get-color(text);
   background: get-color(text, lighter);
-  border: 0.1rem solid get-outline-color(text, lighter);
+  border: get-border(text, lighter);
   box-shadow: get-dropshadow();
   @include border-radius();
   text-align: center;
@@ -103,16 +103,16 @@
   background-color: get-color(background);
   height: get-font-size(large);
   padding: 0 get-spacing(small);
-  border: 0.1rem solid get-color(secondary);
+  border: get-border();
   @include border-radius();
 
   &:focus {
     outline-width: 0;
-    border-color: get-color(secondary, darkest);
+    border-color: get-outline-color(secondary, darkest);
   }
 
   &:disabled {
-    border-color: get-color(secondary, light);
+    border-color: get-outline-color(secondary, light);
     background-color: get-color(text, lightest);
   }
 }
@@ -298,8 +298,8 @@
 
   &Wrapper {
     background-color: get-color(background);
-    border: 0.1rem solid get-color(secondary);
     overflow: hidden;
+    border: get-border();
     @include border-radius();
 
     overflow-y: scroll;
@@ -336,7 +336,7 @@
   tr[data-checked="true"] {
       &, &:hover, &:focus {
       background-color: get-color(primary);
-      outline: 1px solid get-color(primary, dark);
+      outline: get-border(primary, dark);
     }
   }
 

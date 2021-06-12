@@ -78,7 +78,7 @@ hr {
   margin-bottom: calc(1.45rem - 1px);
   background: hsla(0, 0%, 0%, 0.2);
   border: none;
-  height: 1px;
+  height: get-spacing(line);
 }
 
 p > a {
@@ -87,14 +87,14 @@ p > a {
 
 table {
   @include no-space-text;
-  font-size: 1rem;
+  font-size: get-font-size(normal);
   line-height: get-spacing();
   border-collapse: collapse;
   width: 100%;
 }
 
 td, th {
-  padding: get-spacing()  get-spacing(small);
+  padding: get-spacing() get-spacing(small);
 }
 
 thead, tbody tr {
