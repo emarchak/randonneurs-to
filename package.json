@@ -63,7 +63,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "build:production": "npm run build",
-    "predevelop": "npm run build:schema",
+    "build:schema": "./node_modules/.bin/apollo schema:download --config=\"apollo.config.js\" schema.graphql.json",
     "develop": "gatsby develop -p 8000 -o",
     "develop:live": "./node_modules/.bin/netlify dev --live",
     "test": "jest --watch",
