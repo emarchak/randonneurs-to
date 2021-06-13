@@ -6,7 +6,6 @@ import { Form, InputField, ErrorsList, CheckboxField } from 'src/components/form
 import { formatMessage, FormState, formSubmit, RequiredFields, validate } from 'src/components/form/utils'
 import { Link } from 'src/components/link'
 import { useSendMail } from 'src/hooks/useSendMail'
-import { useSlack } from 'src/hooks/useSlack'
 
 type FormData = {
     name: string
@@ -86,17 +85,16 @@ const checkScreening = (formData: FormData) => (
         formData[fieldName]
     ))
 )
+const screeningResultText = (screeningStatus) => screeningStatus
+    ? '✗ You may not participate in this event.'
+    : '✔ You may participate in this event.'
 
 export const CovidForm = ({ children }: CovidFormProps) => {
     const [formData, setFormData] = useState<FormData>(defaultData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<string[]>([])
-    const [failedScreening, setScreeningResult] = useState<boolean | null>(null)
+    const [screeningResult, setScreeningResult] = useState<boolean | null>(null)
     const { sendMail } = useSendMail()
-
-    const screeningResult = failedScreening
-        ? '✗ You may not participate in this event.'
-        : '✔ You may participate in this event.'
 
     const isSubmitted = formState === "submitted"
     const isDirty = formState === "dirty"
@@ -111,6 +109,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
             setFormState(null)
             return
         }
+        const screeningStatus = checkScreening({ ...formData })
 
         const success = await formSubmit(formName, { ...formData })
         const successMail = await sendMail({
@@ -118,13 +117,13 @@ export const CovidForm = ({ children }: CovidFormProps) => {
             data: {
                 name: formData.name,
                 subject: `Randonneurs Ontario COVID-19 screening form`,
-                body: `Here are the results of your COVID-19 screening, for your own records. <p><strong>${screeningResult}</strong></p>`,
+                body: `Here are the results of your COVID-19 screening, for your own records. <p><strong>${screeningResultText(screeningStatus)}</strong></p>`,
                 formData: formatMessage({ formData, fieldLabels })
             },
         }, 'defaultForm')
 
         if (success && successMail) {
-            setScreeningResult(checkScreening({ ...formData }))
+            setScreeningResult(screeningStatus)
             setFormState("submitted")
         } else {
             setFormErrors(["Server error! Try again later."])
@@ -176,8 +175,8 @@ export const CovidForm = ({ children }: CovidFormProps) => {
                 {isSubmitted && <Callout alternative>
                     <h3>Your screening has been completed</h3>
                     <p>A copy has been sent to your email and has been recorded as per <Link href="https://ontariocycling.org/covid-19-information/">OCA guidelines</Link>.</p>
-                    <p><strong>{screeningResult}</strong></p>
-                    {failedScreening && <p>You've selected "Yes" to some of the above questions. Please stay home and follow regional guidelines.</p>}
+                    <p><strong>{screeningResultText(screeningResult)}</strong></p>
+                    {screeningResult && <p>You've selected "Yes" to some of the above questions. Please stay home and follow regional guidelines.</p>}
                     <p>Refresh the page to submit again</p>
                 </Callout>}
             </ContentWrapper>

@@ -98,7 +98,7 @@ describe("<CovidForm>", () => {
         await waitFor(() => {
             expect(fetchSpy).toHaveBeenCalledWith('/', expect.objectContaining({ method: "POST" }))
             expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail', expect.objectContaining({
-                body: expect.stringContaining("Pink eye or headache: true")
+                body: expect.stringContaining("You may not participate in this event")
             }))
             expect(mount.getByText(/Your screening has been completed/)).toBeTruthy()
             expect(mount.getByText(/You may not participate in this event/)).toBeTruthy()
@@ -124,7 +124,7 @@ describe("<CovidForm>", () => {
         await waitFor(() => {
             expect(fetchSpy).toHaveBeenCalledWith('/', expect.objectContaining({ method: "POST" }))
             expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail', expect.objectContaining({
-                body: expect.stringContaining("Pink eye or headache: false")
+                body: expect.stringContaining("You may participate in this event")
             }))
             expect(mount.getByText(/Your screening has been completed/)).toBeTruthy()
             expect(mount.getByText(/You may participate in this event/)).toBeTruthy()
