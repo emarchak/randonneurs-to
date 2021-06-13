@@ -11,7 +11,7 @@ const CovidScreening = () => {
             <SEO title='COVID screening form' />
             <ContentWrapper>
                 <h1>COVID screening form</h1><h2>for Randonneurs Ontario</h2>
-                <p>All riders must complete self-screen before starting a ride. A missing screening will result in a DNF.</p>
+                <p>All riders must complete self-screen before starting a ride. A missing screening will result in a DNF. <Link href="https://www.randonneursontario.ca/who/whatis.html#COVID">Learn more about our COVID-19 policies</Link>.</p>
             </ContentWrapper>
             <CovidForm />
             <ContentWrapper>
