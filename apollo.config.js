@@ -9,7 +9,7 @@ module.exports = {
         service: {
             name: `gastby-apollo@${env}`,
             uri: process.env.GRAPHQL_URL,
-            localSchemaFile: 'schema.graphql.json'
+            localSchemaFile: 'schema.gql'
         }
     }
 }
