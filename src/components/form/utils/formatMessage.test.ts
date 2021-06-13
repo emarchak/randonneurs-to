@@ -11,6 +11,6 @@ describe('formatMessage()', () => {
                 fieldA: 'Your name',
                 fieldB: 'PBP Date'
             }
-        })).toEqual("Your name: Dan Harmon \n PBP Date: Mon August 19 08:00")
+        })).toEqual("Your name: Dan Harmon \nPBP Date: Mon August 19 08:00")
     })
 })
