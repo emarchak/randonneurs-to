@@ -8,7 +8,7 @@ const handler = async (event) => {
       from = 'Randonneurs Ontario <no-reply@randonneurs.to>',
       replyTo = 'Randonneurs Ontario <no-reply@randonneurs.to>',
       subject,
-      body = '',
+      body = ' ',
       templateId = null,
       data = {}
     } = JSON.parse(event.body)
