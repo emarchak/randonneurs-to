@@ -115,6 +115,9 @@
     border-color: get-color(secondary, light);
     background-color: get-color(text, lightest);
   }
+  @include media(large) {
+    max-width: 40em;
+  }
 }
 
 .help {
@@ -219,6 +222,7 @@
 }
 
 .checkboxLabel {
+  display: inline;
   padding-left: .6em;
   &:hover {
     cursor: pointer;
