@@ -14,4 +14,4 @@ export const formatMessage = ({ formData, fieldLabels }: formatMessageArgs) => (
         const value = formData[key] instanceof Date ? getDateTimeShort(formData[key]) : formData[key]
         const label = fieldLabels[key] || sentenceCase(key)
         return `${label}: ${value}`
-    }).join(' \n '))
+    }).join(' \n'))

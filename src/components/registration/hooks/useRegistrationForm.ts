@@ -43,8 +43,6 @@ export const useRegistrationForm = (params: useRegistrationFormParams) => {
         const vpPermanent = formData.rideType === 'permanent' ? permEmail : undefined
         const successMail = await sendMail({
             to: [formData.email, replyTo, vpPermanent].filter(Boolean),
-            subject: `Registration for ${formData.route} ${formData.rideType}`,
-            body: `Thank you for registering.`,
             replyTo,
             data: formData,
         }, 'brevetRegistration')

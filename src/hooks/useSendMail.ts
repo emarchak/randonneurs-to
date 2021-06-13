@@ -7,10 +7,8 @@ const mailTemplates = {
 
 type sendMailParams = {
     to: string | string[],
-    subject: string,
     replyTo?: string,
     from?: string,
-    body?: string,
     data?: Object
 }
 
