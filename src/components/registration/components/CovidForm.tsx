@@ -116,8 +116,11 @@ export const CovidForm = ({ children }: CovidFormProps) => {
         const success = await formSubmit(formName, { ...formData })
         const successMail = await sendMail({
             to: formData.email,
-            subject: `Randonneurs Ontario COVID screening form`,
-            data: { formData: formatMessage({ formData, fieldLabels }) },
+            subject: `Randonneurs Ontario COVID-19 screening form`,
+            data: {
+                body: "Here are the results of your COVID-19 screening, for your own records.",
+                formData: formatMessage({ formData, fieldLabels })
+            },
         }, 'defaultForm')
 
         if (success && successMail) {
