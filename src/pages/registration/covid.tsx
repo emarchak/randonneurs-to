@@ -13,7 +13,7 @@ const CovidScreening = () => {
                 <h1>COVID screening form</h1><h2>for Randonneurs Ontario</h2>
                 <p>All riders must complete self-screen before starting a ride. A missing screening will result in a DNF.</p>
             </ContentWrapper>
-            <CovidForm formUrl="/registration/covid" />
+            <CovidForm />
             <ContentWrapper>
                 <p>Screening questionnaire based off of the <Link href="https://www.toronto.ca/wp-content/uploads/2020/05/95ea-Screening-poster-retail-entrance-TPH.pdf">Toronto Public Health screening</Link>.</p>
             </ContentWrapper>

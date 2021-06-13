@@ -26,7 +26,6 @@ type FormData = {
 }
 
 type CovidFormProps = {
-    formUrl: string,
     children?: ReactNode
 }
 
@@ -88,7 +87,7 @@ const checkScreening = (formData: FormData) => (
     ))
 )
 
-export const CovidForm = ({ formUrl, children }: CovidFormProps) => {
+export const CovidForm = ({ children }: CovidFormProps) => {
     const [formData, setFormData] = useState<FormData>(defaultData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<string[]>([])
@@ -110,8 +109,7 @@ export const CovidForm = ({ formUrl, children }: CovidFormProps) => {
         }
 
         // const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData, formName }))
-        // const success = await formSubmit(formName, { ...formData })
-        const success = true
+        const success = await formSubmit(formName, { ...formData })
 
         if (success) {
             setScreeningResult(checkScreening({ ...formData }))
