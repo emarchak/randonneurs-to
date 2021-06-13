@@ -175,7 +175,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
             <ContentWrapper>
                 {isSubmitted && <Callout alternative>
                     <h3>Your screening has been completed</h3>
-                    <p><small>A copy has been sent to your email and has been recorded as per <Link href="https://ontariocycling.org/covid-19-information/">OCA guidelines</Link>.</small></p>
+                    <p>A copy has been sent to your email and has been recorded as per <Link href="https://ontariocycling.org/covid-19-information/">OCA guidelines</Link>.</p>
                     <p><strong>{screeningResult}</strong></p>
                     {failedScreening && <p>You've selected "Yes" to some of the above questions. Please stay home and follow regional guidelines</p>}
                     <p>Refresh the page to submit again</p>
