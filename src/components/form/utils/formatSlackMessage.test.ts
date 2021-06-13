@@ -15,7 +15,7 @@ describe('formatSlackMessage()', () => {
         })
         expect(message).toEqual({
             message: "Submission from testForm",
-            attachments: ["Your name: Dan Harmon \n PBP Date: Mon August 19 08:00"],
+            attachments: ["Your name: Dan Harmon \nPBP Date: Mon August 19 08:00"],
         })
     })
     it('accepts a custom message', () => {
@@ -32,7 +32,7 @@ describe('formatSlackMessage()', () => {
         })
         expect(message).toEqual({
             message: 'A highly custom message',
-            attachments: ["Your name: Dan Harmon \n PBP Date: Mon August 19 08:00"],
+            attachments: ["Your name: Dan Harmon \nPBP Date: Mon August 19 08:00"],
         })
     })
 })

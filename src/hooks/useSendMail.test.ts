@@ -14,7 +14,7 @@ describe('useSendMail()', () => {
         const emailContent = {
             to: 'foo@bar.com',
             subject: 'Test email',
-            body: 'Hello'
+            data: { body: 'Hello' }
         }
         const response = await result.current.sendMail(emailContent)
 
@@ -30,7 +30,6 @@ describe('useSendMail()', () => {
         const response = await result.current.sendMail({
             to: 'foo@bar.com',
             subject: 'Test email',
-            body: 'Hello'
         })
 
         expect(response).toEqual(false)
@@ -42,7 +41,6 @@ describe('useSendMail()', () => {
             to: 'foo@bar.com',
             from: 'bar@baz.com',
             subject: 'Test email',
-            body: 'Hello',
             data: {
                 'baz': 'qux'
             }
