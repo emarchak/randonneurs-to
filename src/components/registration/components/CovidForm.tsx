@@ -4,8 +4,9 @@ import { Callout } from 'src/components/callout'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { Form, InputField, TextField, ErrorsList, CheckboxField } from 'src/components/form/components'
 import { Label } from 'src/components/form/components/Label'
-import { formatSlackMessage, FormState, formSubmit, RequiredFields, validate } from 'src/components/form/utils'
+import { formatMessage, formatSlackMessage, FormState, formSubmit, RequiredFields, validate } from 'src/components/form/utils'
 import { Link } from 'src/components/link'
+import { useSendMail } from 'src/hooks/useSendMail'
 import { useSlack } from 'src/hooks/useSlack'
 
 type FormData = {
@@ -87,11 +88,14 @@ const checkScreening = (formData: FormData) => (
     ))
 )
 
+const formatEmail = (formData) => formatSlackMessage({ formName, formData, fieldLabels }).attachments.pop()
+
 export const CovidForm = ({ children }: CovidFormProps) => {
     const [formData, setFormData] = useState<FormData>(defaultData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<string[]>([])
     const [failedScreening, setScreeningResult] = useState<boolean | null>(null)
+    const { sendMail } = useSendMail()
     const { sendSlackMsg } = useSlack()
 
     const isSubmitted = formState === "submitted"
@@ -110,8 +114,13 @@ export const CovidForm = ({ children }: CovidFormProps) => {
 
         // const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData, formName }))
         const success = await formSubmit(formName, { ...formData })
+        const successMail = await sendMail({
+            to: formData.email,
+            subject: `Randonneurs Ontario COVID screening form`,
+            data: { formData: formatMessage({ formData, fieldLabels }) },
+        }, 'defaultForm')
 
-        if (success) {
+        if (success && successMail) {
             setScreeningResult(checkScreening({ ...formData }))
             setFormState("submitted")
         } else {

@@ -1,6 +1,7 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react"
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as sendMail from 'src/hooks/useSendMail'
 import { CovidForm } from "./CovidForm"
 
 describe("<CovidForm>", () => {
@@ -12,12 +13,6 @@ describe("<CovidForm>", () => {
 
     afterEach(() => {
         fetchSpy.mockReset()
-    })
-
-    it("renders child content", () => {
-        const mount = render(<CovidForm>{"content"}</CovidForm >)
-
-        expect(mount.getByText("content")).toBeTruthy()
     })
 
     it("requires name and email", async () => {
@@ -101,7 +96,10 @@ describe("<CovidForm>", () => {
         fireEvent.click(mount.getByText("Submit"))
 
         await waitFor(() => {
-            expect(fetchSpy).toHaveBeenCalled()
+            expect(fetchSpy).toHaveBeenCalledWith('/', expect.objectContaining({ method: "POST" }))
+            expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail', expect.objectContaining({
+                body: expect.stringContaining("Pink eye or headache: true")
+            }))
             expect(mount.getByText(/Your screening has been completed/)).toBeTruthy()
             expect(mount.getByText(/You may not participate in this event/)).toBeTruthy()
         })
@@ -124,7 +122,10 @@ describe("<CovidForm>", () => {
         fireEvent.click(mount.getByText("Submit"))
 
         await waitFor(() => {
-            expect(fetchSpy).toHaveBeenCalled()
+            expect(fetchSpy).toHaveBeenCalledWith('/', expect.objectContaining({ method: "POST" }))
+            expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail', expect.objectContaining({
+                body: expect.stringContaining("Pink eye or headache: false")
+            }))
             expect(mount.getByText(/Your screening has been completed/)).toBeTruthy()
             expect(mount.getByText(/You may participate in this event/)).toBeTruthy()
         })

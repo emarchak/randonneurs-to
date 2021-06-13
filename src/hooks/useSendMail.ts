@@ -1,15 +1,16 @@
 import fetch from 'isomorphic-unfetch'
 
 const mailTemplates = {
-    'brevetRegistration': 'd-6d0774ec805f41e09c68b2da5e79978a'
+    'brevetRegistration': 'd-6d0774ec805f41e09c68b2da5e79978a',
+    'defaultForm': 'd-72b32a8ddf0d473783046d9911229cf7'
 }
 
 type sendMailParams = {
     to: string | string[],
     subject: string,
-    body: string,
     replyTo?: string,
     from?: string,
+    body?: string,
     data?: Object
 }
 
