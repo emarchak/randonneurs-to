@@ -117,7 +117,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
             data: {
                 name: formData.name,
                 subject: `Randonneurs Ontario COVID-19 screening form`,
-                body: `Here are the results of your COVID-19 screening, for your own records. <p><strong>${screeningResultText(screeningStatus)}</strong></p>`,
+                body: `<p>Here are the results of your COVID-19 screening, for your own records.</p><p><strong>${screeningResultText(screeningStatus)}</strong></p>`,
                 formData: formatMessage({ formData, fieldLabels })
             },
         }, 'defaultForm')
