@@ -25,3 +25,8 @@ export const wrapRootElement = ({ element }) =>  (
         </BuyButtonProvider>
      </ErrorBoundary>
 )
+
+export const onClientEntry = () => {
+    // IE11 timezone polyfill
+    require('date-time-format-timezone')
+}
