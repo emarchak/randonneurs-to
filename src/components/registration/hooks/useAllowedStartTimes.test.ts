@@ -16,6 +16,11 @@ const brevet: Brevet = {
     season: 2021
 }
 
+const ottawaBrevet: Brevet = { ...brevet, chapter: 'Ottawa' }
+
+const rideOnSaturday = new Date('Sat August 7 2021 09:20:00 EDT')
+const rideNextSaturday = new Date('Sat August 14 2021 09:20:00 EDT')
+
 describe('useAllowedStartTimes', () => {
     afterEach(() => {
         clear()
@@ -44,19 +49,15 @@ describe('useAllowedStartTimes', () => {
     })
 
     describe('allowedToRegister()', () => {
-        const ottawaBrevet: Brevet = { ...brevet, chapter: 'Ottawa' }
-
         it('allows riders to register three days before scheduled date', () => {
             advanceTo(new Date('Wed August 4 2021 12:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
 
-            const rideOnSaturday = new Date('Sat August 7 2021 09:20:00 EDT')
             expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeTruthy()
 
             advanceTo(new Date('Thu August 5 2021 19:59:30 EDT'))
             expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeFalsy()
 
-            const rideNextSaturday = new Date('Sat August 14 2021 09:20:00 EDT')
             expect(allowedToRegister({ ...brevet, date: rideNextSaturday })).toBeTruthy()
         })
 
@@ -64,7 +65,6 @@ describe('useAllowedStartTimes', () => {
             advanceTo(new Date('Fri August 6 2021 7:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
 
-            const rideOnSaturday = new Date('Sat August 7 2021 09:20:00 EDT')
             expect(allowedToRegister({ ...ottawaBrevet, date: rideOnSaturday })).toBeTruthy()
 
             advanceTo(new Date('Fri August 6 2021 18:01:30 EDT'))
@@ -75,8 +75,33 @@ describe('useAllowedStartTimes', () => {
             advanceTo(new Date('Fri August 6 2021 7:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
 
-            const rideOnSaturday = new Date('Sat August 7 2021 09:20:00 EDT')
             expect(allowedToRegister({ ...ottawaBrevet, date: rideOnSaturday })).toBeTruthy()
+        })
+    })
+
+    describe('getBrevetRegistrationDeadline()', () => {
+        const opts = {
+            timeZone: 'America/Toronto',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            weekday: 'short',
+            hour12: false,
+        }
+
+        it('shows Friday at 6pm ET for Ottawa brevets date', () => {
+            const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
+            const d = getBrevetRegistrationDeadline({ ...ottawaBrevet, date: rideOnSaturday })
+
+            expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 18:00')
+        })
+
+        it('shows 3 days before at 11:59pm ET for brevets', () => {
+            const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
+            const d = getBrevetRegistrationDeadline({ ...brevet, date: rideOnSaturday })
+
+            expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Wed, Aug 4, 23:59')
         })
     })
 })

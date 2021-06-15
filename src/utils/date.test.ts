@@ -10,14 +10,14 @@ describe('getTime()', () => {
 describe('getDateLong()', () => {
     it('formats date', () => {
         expect(getDateLong(new Date('Sat April 10 2021 09:20:00 EDT')))
-            .toEqual('Sat April 10, 2021')
+            .toEqual('Sat April 10 2021')
     })
 })
 
 describe('getDateTimeLong()', () => {
     it('formats date and time', () => {
         expect(getDateTimeLong(new Date('Sat April 10 2021 09:20:00 EDT')))
-            .toEqual('Sat April 10, 2021 09:20')
+            .toEqual('Sat April 10 2021 09:20')
     })
 })
 

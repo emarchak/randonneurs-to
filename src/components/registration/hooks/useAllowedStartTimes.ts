@@ -35,11 +35,11 @@ export const useAllowedStartTimes = () => {
         switch (brevet.chapter) {
             case 'Ottawa':
                 const ottawaDeadline = getWeekdayBefore('Fri', brevet.date)
-                ottawaDeadline.setHours(18, 0, 0)
+                ottawaDeadline.setUTCHours(22, 0, 0)
                 return ottawaDeadline
             default:
                 const deadline = addDays(brevet.date, -3)
-                deadline.setHours(23, 59, 0)
+                deadline.setUTCHours(27, 59, 0)
                 return deadline
         }
     }
