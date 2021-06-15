@@ -4,9 +4,6 @@
   padding: 0 0;
   margin: 0 auto;
   width: 100%;
-  @include media(large) {
-    width: 66%;
-  } 
 }
 
 .formWrapper {
