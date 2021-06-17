@@ -42,7 +42,8 @@ describe('trackEvent', () => {
 
     it('handles errors from gtag', () => {
         gtagSpy.mockImplementation(() => { throw new Error })
+        trackEvent("sign_up", formData)
 
-        expect(trackEvent("sign_up", formData)).not.toThrow()
+        expect(() => trackEvent("sign_up", formData)).not.toThrow()
     })
 })
