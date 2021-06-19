@@ -1,5 +1,4 @@
 import React from "react"
-
 import { graphql, useStaticQuery } from "gatsby"
 import { Layout } from "src/components/layout"
 import { SEO } from "src/components/seo"
@@ -8,11 +7,11 @@ import { Callout } from "src/components/callout"
 import { LonelinessForm, LonelinessRoute } from "src/components/loneliness"
 import Routes from "src/data/loneliness-routes.yaml"
 import Riders from "src/data/loneliness-riders.yaml"
-import Logo from "../assets/ClubAudax.svg"
 import { TabMenu } from "src/components/tabmenu"
 
 import * as style from "../styles/loneliness.module.scss"
 import { Link } from "src/components/link"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 export const lonelinessRoutes = [
   { label: 'Club', route: '/loneliness/' },
@@ -20,24 +19,20 @@ export const lonelinessRoutes = [
   { label: 'Trace', route: '/registration/trace-virtuelle/' },
 ]
 
-const Page = () => {
-  const {
-    file: {
-      childImageSharp: { fixed: metaImage },
-    },
-  } = useStaticQuery(
-    graphql`
-      query {
-        file(relativePath: { eq: "ClubAudax.png" }) {
-          childImageSharp {
-            fixed(width: 1200) {
-              src
-            }
-          }
+const imageQuery = graphql`
+query {
+    file(name: {glob: "ClubAudax"}) {
+        name
+        childImageSharp {
+          gatsbyImageData(width:1200)
         }
       }
-    `
-  )
+}
+`
+
+const Page = () => {
+  const { file } = useStaticQuery(imageQuery)
+  const image = getImage(file)
 
   return (
     <Layout>
@@ -45,11 +40,14 @@ const Page = () => {
         title="Club audax à distance"
         description="We are riders that are commited to socially distancing ourself, to do
         the right thing. If we must be alone in these tough times, let us be alone together."
-        image={metaImage.src}
+        image={image}
       />
       <ContentWrapper>
         <TabMenu tabs={lonelinessRoutes} activeRoute='/loneliness/' />
-        <Logo className={style.heading} alt="Club audax à distance" />
+        <GatsbyImage
+          image={image}
+          className={style.heading} alt="Club audax à distance"
+        />
         <p>
           When asked to socially isolate, to stay away from loved ones for long
           time, what does an audax rider do?
@@ -129,7 +127,10 @@ const Page = () => {
         – distance makes the heart grow stronger –
       </div>
       <ContentWrapper>
-        <Logo className={style.heading} alt="Club audax à distance" />
+        <GatsbyImage
+          image={image}
+          className={style.heading} alt="Club audax à distance"
+        />
         <p style={{ textAlign: "center" }}>
           Wordmark designed by{" "}
           <Link href="http://garethfowler.com/">Gareth Fowler</Link>

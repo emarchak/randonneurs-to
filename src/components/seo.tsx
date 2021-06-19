@@ -1,5 +1,7 @@
+
 import React from "react"
 import Helmet from "react-helmet"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import { useSiteMetadata } from "../hooks/use-site-metadata"
 
 type meta = { property: string; content: any; name?: any }
@@ -8,9 +10,11 @@ type Props = {
   description?: string
   lang?: string
   meta?: meta[]
-  image?: string
+  image?: IGatsbyImageData,
   title: string
 }
+
+const getImage = (image: IGatsbyImageData) => image.images.fallback.src
 
 export const SEO = ({
   description = "",
@@ -26,11 +30,11 @@ export const SEO = ({
     ? [
       {
         property: "og:image",
-        content: `${siteMetadata.siteURL}${image}`,
+        content: `${siteMetadata.siteURL}${getImage(image)}`,
       },
       {
         property: "twitter:image",
-        content: `${siteMetadata.siteURL}${image}`,
+        content: `${siteMetadata.siteURL}${getImage(image)}`,
       },
     ]
     : []
