@@ -18,9 +18,6 @@ query {
         name
         childImageSharp {
           gatsbyImageData(aspectRatio:1, width:500, layout: FULL_WIDTH)
-          fixed {
-            src
-          }
         }
       }
 }
@@ -34,7 +31,7 @@ const AudaxShopPage = () => {
             <SEO
                 title="Club audax à distance patches"
                 description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
-                image={file.childImageSharp.fixed.src}
+                image={image}
             />
             <ContentWrapper>
                 <TabMenu tabs={lonelinessRoutes} activeRoute='/shop/audax-a-distance/' />

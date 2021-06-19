@@ -1,7 +1,7 @@
 import React from 'react'
 import { Callout } from '../components/callout'
 import { ContentChild, ContentWrapper } from '../components/content-wrapper'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getDateTimeLong } from '../utils'
 import { Layout } from '../components/layout'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -21,7 +21,7 @@ query {
     nodes {
       name
       childImageSharp {
-        gatsbyImageData(aspectRatio: 1, height: 150, formats: JPG)
+        gatsbyImageData(aspectRatio: 1, height: 300, formats: JPG)
       }
     }
   }
@@ -32,11 +32,15 @@ const IndexPage = () => {
   const {
     allFile: { nodes: images },
   } = useStaticQuery(pageQuery)
+  const seoImage = getImage(images[0])
   const { brevets } = useBrevets({ chapter: 'Toronto' })
 
   return (
     <Layout>
-      <SEO title='Home' />
+      <SEO
+        title='Home'
+        description='Part of Randonneurs Ontario, a long distance cycling club affiliated with the Audax Club Parisien'
+        image={seoImage} />
       <ContentWrapper>
         <Callout>
           <p>Sanctioned events are being approved on a case by case basis following OCA guidelines. <Link to="/registration">Register for upcoming events</Link>!</p>

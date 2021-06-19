@@ -16,10 +16,7 @@ query {
     file(name: {glob: "TraceVirtuelle"}) {
         name
         childImageSharp {
-          gatsbyImageData(width:500, layout: FULL_WIDTH)
-          fixed {
-            src
-          }
+          gatsbyImageData(width:500)
         }
       }
 }
@@ -33,7 +30,7 @@ const TraceVirtuelle = () => {
             <SEO
                 title='Trace Virtuelle'
                 description='The Trace Virtuelle is a virtual ultra-endurance cycling event based off of the Trace Vélocio'
-                image={file.childImageSharp.fixed.src}
+                image={image}
             />
             <ContentWrapper>
                 <TabMenu tabs={registrationRoutes} activeRoute='/registration/trace-virtuelle/' />
