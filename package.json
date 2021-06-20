@@ -67,6 +67,7 @@
     "build:schema": "./node_modules/.bin/dotenv -c development -- bash -c 'echo \"$GRAPHQL_URL\"' | xargs ./node_modules/.bin/gq --introspect > schema.gql",
     "predevelop": "npm run build:schema",
     "develop": "gatsby develop -p 8000 -o",
+    "develop:functions": "./node_modules/.bin/netlify functions:serve",
     "develop:live": "./node_modules/.bin/netlify dev --live",
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
