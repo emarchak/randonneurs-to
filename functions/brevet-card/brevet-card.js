@@ -1,33 +1,15 @@
-const cardEndpoint = 'https://www.randonneursontario.ca/brevetcard/cardtopdf.php'
+require('isomorphic-unfetch');
+const { formEncode, buildCard} = require('./utils')
 
-const formEncode = data => Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(
-        typeof data[key] === 'string' ? data[key] : JSON.stringify(data[key])
-          ))
-      .join("&")
+const cardEndpoint = 'https://www.randonneursontario.ca/brevetcard/cardtopdf.php'
 
 const handler = async (event) => {
   try {
     const riderName = event.queryStringParameters.name || ''
-    const startTime = event.queryStringParameters.startTime || new Date()
+    const scheduleId = event.queryStringParameters.scheduleId || ''
+    const startTime = event.queryStringParameters.startTime || ''
 
-    const body = {
-      distance:    "300",
-      evname:      "Kissing Bridge 300",
-      evstart:     "June 19 2021",
-      maxhours:    "20",
-      maxminutes:  "00",
-      emergetel:   "vp@randonneurs.to",
-      riderlist:   [{fname: riderName}],
-      controllist: [    
-        {       
-          dist: "0.0 km",
-          name: "Start",
-          open: "O: Sat 04h59",
-          close: "C: Sat 05h59"    
-        },
-      ],
-    }
+    const body = await buildCard({riderName, scheduleId, startTime})
 
     const response = await fetch(cardEndpoint, {
       method: 'POST',
