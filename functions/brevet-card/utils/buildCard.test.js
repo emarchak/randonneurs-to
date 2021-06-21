@@ -1,4 +1,4 @@
-const{ buildCard } = require('./buildCard')
+const { buildCard } = require('./buildCard')
 
 jest.mock('./getEvent', () => ({
     getEvent: () => ({
@@ -12,6 +12,20 @@ jest.mock('./getEvent', () => ({
 }))
 
 describe('buildCard()', () => {
+    const mockFetch = jest.fn().mockReturnValue({
+      ok: true,
+      status: 200, 
+      json: jest.fn().mockResolvedValue({route: {course_points: []}})
+    });
+  
+    beforeAll(() => {
+      global.fetch = mockFetch;
+    });
+  
+    afterEach(() => {
+      mockFetch.mockReset();
+    });
+
     it('builds the default card', async () => {
         const card = await buildCard({riderName: 'Erin', scheduleId: 123})
         expect(card).toEqual({

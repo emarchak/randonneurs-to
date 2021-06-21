@@ -1,4 +1,4 @@
-const {getTime, getDate} = require('./date')
+const { getDate } = require('./date')
 const { getTimeLimit } = require('./getTime')
 const { getControls } = require('./getControls')
 const { getEvent } = require('./getEvent')
