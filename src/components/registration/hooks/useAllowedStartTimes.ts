@@ -39,7 +39,7 @@ export const useAllowedStartTimes = () => {
 
     const getBrevetRegistrationDeadline = (brevet: Brevet) => {
 
-        if (brevet.chapter === 'Huron' && brevet.date.toString().startsWith('Sat Jun 26 2021')) {
+        if (brevet.chapter === 'Huron' && brevet.date.valueOf() === 1624701600000) {
             return hotfixErieOh2021(brevet)
         }
 
