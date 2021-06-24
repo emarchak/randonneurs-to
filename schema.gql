@@ -3,6 +3,12 @@ schema {
   subscription: subscription_root
 }
 
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+) on QUERY
+
 """
 Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
 """
