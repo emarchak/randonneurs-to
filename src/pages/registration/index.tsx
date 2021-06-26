@@ -22,7 +22,7 @@ const BrevetRegistration = () => {
         <TabMenu tabs={registrationRoutes} activeRoute='/registration/' />
         <h1>Register to ride</h1><h2>with Randonneurs Ontario</h2>
 
-        <p>You must have an OCA membership and have read the <Link href='https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/'>Progressive Return to Cycling Policy</Link>. Please visit the <Link href='https://www.ontariocycling.org'>OCA Website for the latest information</Link> about group riding during the pandemic.</p>
+        <p>You must have an OCA membership and have read the <Link href='https://ontariocycling.org/covid-19-information/'>latest OCA Return to Sport updates</Link>. Please visit the <Link href='https://www.ontariocycling.org'>OCA Website for the latest information</Link> about group riding during the pandemic.</p>
 
         <Callout alternative>
           <p>Your ride is not approved until your Chapter VP has confirmed with you.</p>
