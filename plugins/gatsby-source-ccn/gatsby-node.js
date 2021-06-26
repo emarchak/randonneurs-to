@@ -36,6 +36,7 @@ const fetchPaginatedQuery = async (query, accumulator = []) => {
 exports.pluginOptionsSchema = ({ Joi }) => {
     return Joi.object({
         ccnEndpoint: Joi.string()
+            .required()
             .description('The endpoint to fetch'),
     })
 }
