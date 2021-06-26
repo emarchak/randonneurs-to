@@ -3,7 +3,7 @@ name: Running Tests
 on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -40,11 +40,11 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Configure env
-          - run: |
-          touch .env.production
-          echo CCN_ENDPOINT=${{ secrets.CCN_ENDPOINT }} >> .env.production
-          echo GS_PRIVATE_KEY_ID=${{ secrets.GS_PRIVATE_KEY_ID }} >> .env.production
-          echo GS_PRIVATE_KEY=${{ secrets.GS_PRIVATE_KEY }} >> .env.production
+      run: |
+        touch .env.production
+        echo CCN_ENDPOINT=${{ secrets.CCN_ENDPOINT }} >> .env.production
+        echo GS_PRIVATE_KEY_ID=${{ secrets.GS_PRIVATE_KEY_ID }} >> .env.production
+        echo GS_PRIVATE_KEY=${{ secrets.GS_PRIVATE_KEY }} >> .env.production
 
     - name: Build screenshots
       run: yarn build
