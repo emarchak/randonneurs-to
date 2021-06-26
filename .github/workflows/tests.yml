@@ -3,15 +3,21 @@ name: Running Tests
 on: [push]
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
-
     steps:
-
     - name: Checkout repository
       uses: actions/checkout@v2
+    
+    - name: Cache modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
       with:
-        fetch-depth: 2 
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
 
     - name: Set up Node.js
       uses: actions/setup-node@v1
@@ -19,6 +25,11 @@ jobs:
     - name: Install dependencies
       run: yarn install --production=false
 
+  unit:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      
     - name: Run the tests
       run: yarn test:coverage
 
@@ -26,6 +37,11 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+
+  snapshot:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
 
     - name: Build screenshots
       run: yarn build
