@@ -3,7 +3,7 @@ name: Running Tests
 on: [push]
 
 jobs:
-  setup:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -20,7 +20,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
 
     - name: Read .nvmrc
-      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+      run: echo ::set-output name=NVMRC::$(cat .nvmrc)
       id: nvm
 
     - name: Use Node.js (.nvmrc)
@@ -31,11 +31,6 @@ jobs:
     - name: Install dependencies
       run: yarn install --production=false
 
-  unit:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-
     - name: Run the tests
       run: yarn test:coverage
 
@@ -43,11 +38,6 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-
-  snapshot:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
 
     - name: Build screenshots
       run: yarn build
