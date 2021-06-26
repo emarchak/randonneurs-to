@@ -14,18 +14,12 @@ const weekdays = {
     'Sat': 6,
 }
 
-const getWeekdayBefore = (day: keyof typeof weekdays, date: Date) => {
+function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
     const weekday = weekdays[day]
     const dayOfDate = date.getDay()
     const diff = (dayOfDate < weekday) ? (7 - weekday + dayOfDate) : (weekday - dayOfDate)
 
     return addDays(date, diff)
-}
-
-const hotfixErieOh2021 = (brevet: Brevet) => {
-    const deadline = addDays(brevet.date, -2)
-    deadline.setUTCHours(27, 59, 0)
-    return deadline
 }
 
 export const useAllowedStartTimes = () => {
@@ -38,11 +32,6 @@ export const useAllowedStartTimes = () => {
     }
 
     const getBrevetRegistrationDeadline = (brevet: Brevet) => {
-
-        if (brevet.chapter === 'Huron' && brevet.date.valueOf() === 1624701600000) {
-            return hotfixErieOh2021(brevet)
-        }
-
         switch (brevet.chapter) {
             case 'Ottawa':
                 const ottawaDeadline = getWeekdayBefore('Fri', brevet.date)
