@@ -17,12 +17,20 @@ jobs:
       uses: actions/setup-node@v1
 
     - name: Install dependencies
-      run: npm install
+      run: yarn install --production=false
 
     - name: Run the tests
-      run: npm run test:coverage
+      run: yarn test:coverage
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Build screenshots
+      run: yarn build
+
+    - name: Upload snapshots to Percy
+      run: yarn test:snapshot
+      env:
+        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}

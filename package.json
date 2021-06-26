@@ -10,7 +10,6 @@
     "@bugsnag/plugin-react": "^7.9.2",
     "@jagi/jest-transform-graphql": "^1.0.2",
     "@loadable/component": "^5.14.1",
-    "@percy/agent": "^0.28.6",
     "@sendgrid/mail": "^7.4.2",
     "@shopify/buy-button-js": "^2.1.7",
     "apollo-boost": "^0.4.9",
@@ -18,7 +17,6 @@
     "gatsby": "^3.7.2",
     "gatsby-plugin-google-gtag": "^3.6.0",
     "gatsby-plugin-image": "^1.2.1",
-    "gatsby-plugin-percy": "^0.1.4",
     "gatsby-plugin-react-helmet": "^4.2.0",
     "gatsby-plugin-react-svg": "^3.0.1",
     "gatsby-plugin-sass": "^4.2.0",
@@ -40,6 +38,7 @@
     "sass": "^1.32.8"
   },
   "devDependencies": {
+    "@percy/cli": "^1.0.0-beta.56",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^12.0.0",
     "@testing-library/react-hooks": "^7.0.1",
@@ -65,15 +64,14 @@
   "scripts": {
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "build:production": "npm run build",
-    "build:schema": "./node_modules/.bin/dotenv -c development -- bash -c 'echo \"$GRAPHQL_URL\"' | xargs ./node_modules/.bin/gq --introspect > schema.gql",
-    "predevelop": "npm run build:schema",
+    "build:production": "gatsby build",
+    "build:schema": "dotenv -c development -- bash -c 'echo \"$GRAPHQL_URL\"' | xargs ./node_modules/.bin/gq --introspect > schema.gql",
+    "predevelop": "yarn build:schema",
     "develop": "gatsby develop -p 8000 -o",
-    "develop:functions": "./node_modules/.bin/netlify functions:serve",
-    "develop:live": "./node_modules/.bin/netlify dev --live",
+    "develop:functions": "netlify functions:serve",
+    "develop:live": "netlify dev --live",
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
-    "netlify": "./node_modules/.bin/netlify",
-    "apollo": "./node_modules/.bin/apollo"
+    "test:snapshot": "yarn percy snapshot public/"
   }
 }
