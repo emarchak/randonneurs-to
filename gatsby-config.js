@@ -28,7 +28,6 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-plugin-image",
     "gatsby-plugin-sass",
-    "gatsby-plugin-percy",
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
