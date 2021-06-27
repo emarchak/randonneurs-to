@@ -1,11 +1,7 @@
 // Time limits and calculations from 
 // https://rusa.org/pages/acp-brevet-control-times-calculator
 
-const addTime = (d, {h = 0, m = 0}) => {
-  const newTime = new Date(d);
-  newTime.setTime(d.getTime() + (h*60*60*1000) + (m*60*1000))
-  return newTime
-};
+const addTime = (d, {h = 0, m = 0}) =>  new Date(d.valueOf() + (h*60*60*1000) + (m*60*1000))
 
 const brevetTimeLimits = {
   200:  {h:13,  m: 30},

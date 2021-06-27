@@ -1,6 +1,5 @@
 const { getTimeLimit, getOpenTime, getCloseTime } = require('./getTime')
 
-
 const startTime = new Date('June 6 2021 06:00')
 const eventDistance = 1300
 const args = {startTime, eventDistance}
@@ -28,8 +27,8 @@ describe('getCloseTime()', () => {
         expect(closeTime.toString()).toMatch(/Jun 09 2021 16:21/)
     })
     it('uses time limit for controls past the event distance', () => {
-        const closeTime = getCloseTime({...args, eventDistance: 200, controlDistance: 201})
-        expect(closeTime.toString()).toMatch(/Jun 06 2021 19:30/)
+        const closeTime = getCloseTime({...args, eventDistance: 300, controlDistance: 307})
+        expect(closeTime.toString()).toMatch(/Jun 07 2021 02:00/)
     })
     it('uses French variation for controls < 60km from the start', () => {
       const closeTime = getCloseTime({...args, controlDistance: 58})

@@ -8,10 +8,10 @@ const localeOpts = {
   useGrouping: false
 }
 
-const buildCard = async ({riderName, startTime, scheduleId}) =>  {
+const buildCard = async ({riderName, customStartTime, scheduleId}) =>  {
     const event = await getEvent(scheduleId)
     const timeLimit = getTimeLimit(event.distance)
-    const controls = await getControls({event, startTime})
+    const controls = await getControls({event, customStartTime})
 
     return {
         distance:    event.distance,

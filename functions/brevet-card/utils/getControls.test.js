@@ -1,5 +1,4 @@
-const{ getControls } = require('./getControls')
-global.fetch = jest.requireActual('isomorphic-unfetch')
+const { getControls } = require('./getControls')
 
 const event = {
     distance: 300,
@@ -13,13 +12,22 @@ const event = {
 describe('getControls()', () => {
     it('gets the controls', async () => {
         const controls = await getControls({event})
-
         expect(controls).toEqual([    
             {       
-              dist: "0.0 km",
-              name: "Start",
-              open: "O: Sat 04h59",
-              close: "C: Sat 05h59"    
+              "dist": "0.0km",
+              "name": "CTL START",
+              "open": "O: Sat 04:59",
+              "close": "C: Sat 05:59",
+            },{
+              'dist': '160.4km',
+              'name': 'CTL MIDDLE',
+              'open': 'O: Sat 09:42',
+              'close': 'C: Sat 15:40',
+            },{
+              "dist": "307.8km",
+              "name": "CTL FINISH",
+              "open": "O: Sat 14:36",
+              "close": "C: Sun 00:59",
             },
           ])
     })

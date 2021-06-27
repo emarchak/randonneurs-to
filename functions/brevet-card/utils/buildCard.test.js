@@ -1,47 +1,60 @@
 const { buildCard } = require('./buildCard')
 
-jest.mock('./getEvent', () => ({
-    getEvent: () => ({
-        distance: 300,
-        name: 'Kissing Bridge',
-        chapter: 'Toronto',
-        id: 123,
-        rwgpsId: 31557200,
-        date: new Date('Sat June 19 2021 04:59 EDT')
-    })
-}))
-
 describe('buildCard()', () => {
-    const mockFetch = jest.fn().mockReturnValue({
-      ok: true,
-      status: 200, 
-      json: jest.fn().mockResolvedValue({route: {course_points: []}})
-    });
-  
-    beforeAll(() => {
-      global.fetch = mockFetch;
-    });
-  
-    afterEach(() => {
-      mockFetch.mockReset();
-    });
-
-    it('builds the default card', async () => {
-        const card = await buildCard({riderName: 'Erin', scheduleId: 123})
-        expect(card).toEqual({
-            'controllist': [{
-                'dist': '0.0 km',
-                'name': 'Start',
-                'open': 'O: Sat 04h59',
-                'close': 'C: Sat 05h59',
-            }],
-            'distance': 300,
-            'emergetel': 'vp@randonneurs.to',
-            'evname': 'Kissing Bridge',
-            'evstart': 'Sat June 19 2021',
-            'maxhours': '20',
-            'maxminutes': '00',
-            'riderlist': [ {'fname': 'Erin'}],
-        })
+  it('builds the default card', async () => {
+    const card = await buildCard({riderName: 'Erin', scheduleId: 123})
+    expect(card).toEqual({
+      'controllist': [{
+        'dist': '0.0km',
+        'name': 'CTL START',
+        'open': 'O: Sat 06:00',
+        'close': 'C: Sat 07:00',
+      },{
+        'dist': '160.4km',
+        'name': 'CTL MIDDLE',
+        'open': 'O: Sat 10:43',
+        'close': 'C: Sat 16:41',
+      },{
+        'dist': '307.8km',
+        'name': 'CTL FINISH',
+        'open': 'O: Sat 15:37',
+        'close': 'C: Sun 02:00',
+      }],
+      'distance': 300,
+      'emergetel': 'vp@randonneurs.to',
+      'evname': 'Kissing Bridge',
+      'evstart': 'Sat June 19 2021',
+      'maxhours': '20',
+      'maxminutes': '00',
+      'riderlist': [ {'fname': 'Erin'}],
     })
+  })
+  it('allows custom start times', async () => {
+    const card = await buildCard({riderName: 'Erin', scheduleId: 123, customStartTime: '08:00' })
+    expect(card).toEqual({
+      'controllist': [{
+        'dist': '0.0km',
+        'name': 'CTL START',
+        'open': 'O: Sat 08:00',
+        'close': 'C: Sat 09:00',
+      },{
+        'dist': '160.4km',
+        'name': 'CTL MIDDLE',
+        'open': 'O: Sat 12:43',
+        'close': 'C: Sat 18:41',
+      },{
+        'dist': '307.8km',
+        'name': 'CTL FINISH',
+        'open': 'O: Sat 17:37',
+        'close': 'C: Sun 04:00',
+      }],
+      'distance': 300,
+      'emergetel': 'vp@randonneurs.to',
+      'evname': 'Kissing Bridge',
+      'evstart': 'Sat June 19 2021',
+      'maxhours': '20',
+      'maxminutes': '00',
+      'riderlist': [ {'fname': 'Erin'}],
+    })
+  })
 })

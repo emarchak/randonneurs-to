@@ -1,7 +1,8 @@
-require('isomorphic-unfetch');
-const { getOpenTime, getCloseTime, getTimeLimit } = require('./getTime')
+const fetch = require('isomorphic-unfetch');
+const { getOpenTime, getCloseTime } = require('./getTime')
 const { getControlTime } = require('./date')
 
+const utcOffset = 4
 const apiKey = process.env.RWGPS_API_KEY
 const rwgpsEndpoint = (routeId) => `https://ridewithgps.com/routes/${routeId}.json?apikey=${apiKey}&version=2`
 
@@ -19,34 +20,37 @@ const getRoute = async (rwgpsId) => {
   }
 }
 
-const getControls = async ({event, startDate}) => {
+const getStartTime = ({eventDate, customStartTime}) => {
+  if (!customStartTime){
+    return eventDate
+  }
+  try {
+    const time = customStartTime.split(':').map(t => parseInt(t) || 0)
+    const customStart = new Date(eventDate.toString())
+    customStart.setUTCHours(time[0] + utcOffset, time[1])
+    return customStart
+  } catch (e) {
+    throw Error('Invalid custom start. Custom start times must be ##:##')
+  }
+
+}
+
+const getControls = async ({event, customStartTime}) => {
     const route = await getRoute(event.rwgpsId)
     const eventDistance = event.distance
-    const startTime =   startDate || event.date
+    const startTime = getStartTime({customStartTime, eventDate: event.date})
 
-    console.log(getTimeLimit(event.distance))
     const controls = route.course_points.filter((point) => point.t === 'Control')
 
     return controls.map((control) => {
       const controlDistance = (control.d * .001).toFixed(1)
       return {
         name: control.n,
-        distance: `${controlDistance}km`,
-        open: `Open: ${getControlTime(getOpenTime({startTime, controlDistance, eventDistance}))}`,
-        close: `Close: ${getControlTime(getCloseTime({startTime, controlDistance, eventDistance}))}`,
-        
+        dist: `${controlDistance}km`,
+        open: `O: ${getControlTime(getOpenTime({startTime, controlDistance, eventDistance}))}`,
+        close: `C: ${getControlTime(getCloseTime({startTime, controlDistance, eventDistance}))}`,
       }
     })
-
-  
-    return [    
-        {       
-          dist: "0.0 km",
-          name: "Start",
-          open: "O: Sat 04h59",
-          close: "C: Sat 05h59"    
-        },
-      ]
 }
 
 module.exports = { getControls }
