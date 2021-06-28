@@ -54,7 +54,7 @@
     "jest": "^26.6.3",
     "jest-date-mock": "^1.0.8",
     "netlify-cli": "^3.37.0",
-    "prettier": "^1.17.1"
+    "prettier": "^2.3.2"
   },
   "keywords": [
     "gatsby"
