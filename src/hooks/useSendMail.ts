@@ -16,7 +16,7 @@ export const useSendMail = () => {
     const sendMail = async (params: sendMailParams, template?: keyof typeof mailTemplates) => {
         try {
             const templateId = mailTemplates[template] || undefined
-            const response = await fetch('/.netlify/functions/send-mail', {
+            const response = await fetch('/.netlify/functions/send-mail/send', {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: JSON.stringify({

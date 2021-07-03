@@ -19,7 +19,7 @@ describe('useSendMail()', () => {
         const response = await result.current.sendMail(emailContent)
 
         expect(response).toEqual(true)
-        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail', expect.objectContaining({
+        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', expect.objectContaining({
             body: JSON.stringify(emailContent)
         }))
     })
@@ -29,7 +29,6 @@ describe('useSendMail()', () => {
 
         const response = await result.current.sendMail({
             to: 'foo@bar.com',
-            subject: 'Test email',
         })
 
         expect(response).toEqual(false)
