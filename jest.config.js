@@ -23,4 +23,5 @@ module.exports = {
     'jest-date-mock'
   ],
   setupFilesAfterEnv: ['<rootDir>/jest/setupFilesAfterEnv.js'],
+  testEnvironment: 'jsdom'
 }

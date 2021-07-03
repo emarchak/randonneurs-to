@@ -24,7 +24,7 @@
     "gatsby-plugin-typescript": "^3.2.0",
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^3.2.0",
-    "gatsby-source-graphql": "^3.8.0",
+    "gatsby-source-google-spreadsheets": "^3.0.5",
     "gatsby-transformer-sharp": "^3.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "jshint": "^2.11.0",
@@ -40,18 +40,23 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^12.0.0",
-    "@testing-library/react-hooks": "^7.0.1",
+<<<<<<< HEAD
+    "@testing-library/react-hooks": "^7.0.0",
+    "@types/gtag.js": "^0.0.5",
+=======
+    "@testing-library/react-hooks": "^5.1.0",
     "@types/gtag.js": "^0.0.6",
+>>>>>>> Bump @types/gtag.js from 0.0.5 to 0.0.6
     "@types/jest": "^26.0.22",
     "@types/react": "^17.0.3",
-    "babel-jest": "^27.0.6",
+    "babel-jest": "^26.6.3",
     "babel-preset-gatsby": "^1.2.0",
     "dotenv-cli": "^4.0.0",
-    "eslint": "^7.30.0",
+    "eslint": "^7.29.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "graphqurl": "^1.0.1",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.0.6",
+    "jest": "^26.6.3",
     "jest-date-mock": "^1.0.8",
     "netlify-cli": "^3.37.0",
     "prettier": "^2.3.2"
