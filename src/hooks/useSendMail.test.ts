@@ -1,3 +1,4 @@
+
 import { renderHook } from '@testing-library/react-hooks'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import { useSendMail } from './useSendMail'
@@ -19,7 +20,7 @@ describe('useSendMail()', () => {
         const response = await result.current.sendMail(emailContent)
 
         expect(response).toEqual(true)
-        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail', expect.objectContaining({
+        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', expect.objectContaining({
             body: JSON.stringify(emailContent)
         }))
     })
