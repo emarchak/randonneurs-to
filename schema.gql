@@ -198,14 +198,14 @@ type query_root {
 columns and relationships of "route_current"
 """
 type route_current {
-  chapter_name: String
-  route_active: Boolean
-  route_brevet_distance: Int
-  route_cuesheet: String
-  route_distance: Int
-  route_id: Int
-  route_name: String
-  route_start_location: String
+  active: Boolean
+  brevetDistance: Int
+  chapter: String
+  cuesheet: String
+  distance: Int
+  id: Int
+  name: String
+  startLocation: String
 }
 
 """
@@ -215,26 +215,26 @@ input route_current_bool_exp {
   _and: [route_current_bool_exp!]
   _not: route_current_bool_exp
   _or: [route_current_bool_exp!]
-  chapter_name: String_comparison_exp
-  route_active: Boolean_comparison_exp
-  route_brevet_distance: Int_comparison_exp
-  route_cuesheet: String_comparison_exp
-  route_distance: Int_comparison_exp
-  route_id: Int_comparison_exp
-  route_name: String_comparison_exp
-  route_start_location: String_comparison_exp
+  active: Boolean_comparison_exp
+  brevetDistance: Int_comparison_exp
+  chapter: String_comparison_exp
+  cuesheet: String_comparison_exp
+  distance: Int_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+  startLocation: String_comparison_exp
 }
 
 """Ordering options when selecting data from "route_current"."""
 input route_current_order_by {
-  chapter_name: order_by
-  route_active: order_by
-  route_brevet_distance: order_by
-  route_cuesheet: order_by
-  route_distance: order_by
-  route_id: order_by
-  route_name: order_by
-  route_start_location: order_by
+  active: order_by
+  brevetDistance: order_by
+  chapter: order_by
+  cuesheet: order_by
+  distance: order_by
+  id: order_by
+  name: order_by
+  startLocation: order_by
 }
 
 """
@@ -242,28 +242,28 @@ select columns of table "route_current"
 """
 enum route_current_select_column {
   """column name"""
-  chapter_name
+  active
 
   """column name"""
-  route_active
+  brevetDistance
 
   """column name"""
-  route_brevet_distance
+  chapter
 
   """column name"""
-  route_cuesheet
+  cuesheet
 
   """column name"""
-  route_distance
+  distance
 
   """column name"""
-  route_id
+  id
 
   """column name"""
-  route_name
+  name
 
   """column name"""
-  route_start_location
+  startLocation
 }
 
 type subscription_root {

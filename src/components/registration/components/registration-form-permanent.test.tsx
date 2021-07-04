@@ -15,28 +15,28 @@ jest.mock('../hooks/useRoutes', () => ({
                 chapter: 'Toronto',
                 distance: 200,
                 startLocation: 'Starbucks',
-                routeName: 'Urban'
+                name: 'Urban'
             },
             {
                 id: 'route2',
                 chapter: 'Huron',
                 distance: 300,
                 startLocation: 'Careys House',
-                routeName: 'Golf'
+                name: 'Golf'
             },
             {
                 id: 'route3',
                 chapter: 'Simcoe',
                 distance: 90,
                 startLocation: 'Tims',
-                routeName: 'Shortest ride'
+                name: 'Shortest ride'
             },
             {
                 id: 'route4',
                 chapter: 'Ottawa',
                 distance: 170,
                 startLocation: 'Tims',
-                routeName: 'Shorter ride'
+                name: 'Shorter ride'
             }]
     }),
 }))

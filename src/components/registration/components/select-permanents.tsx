@@ -19,7 +19,7 @@ const routeColumns = {
 
 const RouteDescription = ({ route }: { route: Route }) => (
   <>
-    <strong>{route.routeName}</strong>
+    <strong>{route.name}</strong>
     {route.startLocation && <>
       <br />
       <small>Suggested start: <Link href={mapURL(route.startLocation)}>{route.startLocation}</Link></small>
