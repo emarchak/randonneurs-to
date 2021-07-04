@@ -7,7 +7,25 @@ schema {
 directive @cached(
   """measured in seconds"""
   ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
 ) on QUERY
+
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
 
 """
 Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
@@ -77,6 +95,42 @@ input String_comparison_exp {
   _similar: String
 }
 
+"""
+columns and relationships of "chapter"
+"""
+type chapter {
+  chapter_id: Int!
+  name: String!
+}
+
+"""
+Boolean expression to filter rows from the table "chapter". All fields are combined with a logical 'AND'.
+"""
+input chapter_bool_exp {
+  _and: [chapter_bool_exp!]
+  _not: chapter_bool_exp
+  _or: [chapter_bool_exp!]
+  chapter_id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+"""Ordering options when selecting data from "chapter"."""
+input chapter_order_by {
+  chapter_id: order_by
+  name: order_by
+}
+
+"""
+select columns of table "chapter"
+"""
+enum chapter_select_column {
+  """column name"""
+  chapter_id
+
+  """column name"""
+  name
+}
+
 """column ordering options"""
 enum order_by {
   """in ascending order, nulls last"""
@@ -100,11 +154,11 @@ enum order_by {
 
 type query_root {
   """
-  fetch data from the table: "route"
+  fetch data from the table: "chapter"
   """
-  route(
+  chapter(
     """distinct select on columns"""
-    distinct_on: [route_select_column!]
+    distinct_on: [chapter_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -113,56 +167,112 @@ type query_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [route_order_by!]
+    order_by: [chapter_order_by!]
 
     """filter the rows returned"""
-    where: route_bool_exp
-  ): [route!]!
+    where: chapter_bool_exp
+  ): [chapter!]!
+
+  """
+  fetch data from the table: "route_current"
+  """
+  route_current(
+    """distinct select on columns"""
+    distinct_on: [route_current_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [route_current_order_by!]
+
+    """filter the rows returned"""
+    where: route_current_bool_exp
+  ): [route_current!]!
 }
 
 """
-columns and relationships of "route"
+columns and relationships of "route_current"
 """
-type route {
-  route_chapter: Int!
-  route_name: String!
+type route_current {
+  chapter_name: String
+  route_active: Boolean
+  route_brevet_distance: Int
+  route_cuesheet: String
+  route_distance: Int
+  route_id: Int
+  route_name: String
+  route_start_location: String
 }
 
 """
-Boolean expression to filter rows from the table "route". All fields are combined with a logical 'AND'.
+Boolean expression to filter rows from the table "route_current". All fields are combined with a logical 'AND'.
 """
-input route_bool_exp {
-  _and: [route_bool_exp!]
-  _not: route_bool_exp
-  _or: [route_bool_exp!]
-  route_chapter: Int_comparison_exp
+input route_current_bool_exp {
+  _and: [route_current_bool_exp!]
+  _not: route_current_bool_exp
+  _or: [route_current_bool_exp!]
+  chapter_name: String_comparison_exp
+  route_active: Boolean_comparison_exp
+  route_brevet_distance: Int_comparison_exp
+  route_cuesheet: String_comparison_exp
+  route_distance: Int_comparison_exp
+  route_id: Int_comparison_exp
   route_name: String_comparison_exp
+  route_start_location: String_comparison_exp
 }
 
-"""Ordering options when selecting data from "route"."""
-input route_order_by {
-  route_chapter: order_by
+"""Ordering options when selecting data from "route_current"."""
+input route_current_order_by {
+  chapter_name: order_by
+  route_active: order_by
+  route_brevet_distance: order_by
+  route_cuesheet: order_by
+  route_distance: order_by
+  route_id: order_by
   route_name: order_by
+  route_start_location: order_by
 }
 
 """
-select columns of table "route"
+select columns of table "route_current"
 """
-enum route_select_column {
+enum route_current_select_column {
   """column name"""
-  route_chapter
+  chapter_name
+
+  """column name"""
+  route_active
+
+  """column name"""
+  route_brevet_distance
+
+  """column name"""
+  route_cuesheet
+
+  """column name"""
+  route_distance
+
+  """column name"""
+  route_id
 
   """column name"""
   route_name
+
+  """column name"""
+  route_start_location
 }
 
 type subscription_root {
   """
-  fetch data from the table: "route"
+  fetch data from the table: "chapter"
   """
-  route(
+  chapter(
     """distinct select on columns"""
-    distinct_on: [route_select_column!]
+    distinct_on: [chapter_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -171,10 +281,30 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [route_order_by!]
+    order_by: [chapter_order_by!]
 
     """filter the rows returned"""
-    where: route_bool_exp
-  ): [route!]!
+    where: chapter_bool_exp
+  ): [chapter!]!
+
+  """
+  fetch data from the table: "route_current"
+  """
+  route_current(
+    """distinct select on columns"""
+    distinct_on: [route_current_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [route_current_order_by!]
+
+    """filter the rows returned"""
+    where: route_current_bool_exp
+  ): [route_current!]!
 }
 
