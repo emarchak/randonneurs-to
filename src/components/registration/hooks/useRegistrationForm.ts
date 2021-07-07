@@ -22,9 +22,9 @@ type FormData = {
 const permEmail = 'treasurer_2021@randonneursontario.ca'
 const replyToEmails = {
     "toronto": "vp@randonneurs.to",
-    "simcoe": "vp-simcoe_2021@randonneursontario.ca",
-    "huron": "vp-huron_2021@randonneursontario.ca",
-    "ottawa": "vp-ottawa_2021@randonneursontario.ca",
+    "simcoe": "vp-simcoe@randonneursontario.ca",
+    "huron": "vp-huron@randonneursontario.ca",
+    "ottawa": "vp-ottawa@randonneursontario.ca",
     "default": "vp@randonneurs.to"
 }
 
