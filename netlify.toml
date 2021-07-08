@@ -5,3 +5,8 @@
   to = "/registration/covid"
   status = 301
   
+[[redirects]]
+  from = "/register"
+  to = "/registration"
+  status = 301
+  

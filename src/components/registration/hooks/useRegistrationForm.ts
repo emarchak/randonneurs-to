@@ -22,9 +22,9 @@ type FormData = {
 const permEmail = 'treasurer_2021@randonneursontario.ca'
 const replyToEmails = {
     "toronto": "vp@randonneurs.to",
-    "simcoe": "vp-simcoe_2021@randonneursontario.ca",
-    "huron": "vp-huron_2021@randonneursontario.ca",
-    "ottawa": "vp-ottawa_2021@randonneursontario.ca",
+    "simcoe": "vp-simcoe@randonneursontario.ca",
+    "huron": "vp-huron@randonneursontario.ca",
+    "ottawa": "vp-ottawa@randonneursontario.ca",
     "default": "vp@randonneurs.to"
 }
 
@@ -40,9 +40,10 @@ export const useRegistrationForm = (params: useRegistrationFormParams) => {
         const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData, message }), 'registration')
 
         const replyTo = replyToEmails[formData.chapter.toLowerCase() || 'default']
+        const memberAtLarge = formData.chapter === 'Huron' ? 'director1@randonneursontario.ca' : undefined
         const vpPermanent = formData.rideType === 'permanent' ? permEmail : undefined
         const successMail = await sendMail({
-            to: [formData.email, replyTo, vpPermanent].filter(Boolean),
+            to: [formData.email, replyTo, vpPermanent, memberAtLarge].filter(Boolean),
             replyTo,
             data: formData,
         }, 'brevetRegistration')
