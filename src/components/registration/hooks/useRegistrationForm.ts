@@ -40,9 +40,10 @@ export const useRegistrationForm = (params: useRegistrationFormParams) => {
         const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData, message }), 'registration')
 
         const replyTo = replyToEmails[formData.chapter.toLowerCase() || 'default']
+        const memberAtLarge = formData.chapter === 'Huron' ? 'director1@randonneursontario.ca' : undefined
         const vpPermanent = formData.rideType === 'permanent' ? permEmail : undefined
         const successMail = await sendMail({
-            to: [formData.email, replyTo, vpPermanent].filter(Boolean),
+            to: [formData.email, replyTo, vpPermanent, memberAtLarge].filter(Boolean),
             replyTo,
             data: formData,
         }, 'brevetRegistration')
