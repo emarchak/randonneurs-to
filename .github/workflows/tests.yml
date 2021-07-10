@@ -39,14 +39,12 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
 
-    - name: Configure env
-      run: |
-        touch .env.production
-        echo CCN_ENDPOINT=${{ secrets.CCN_ENDPOINT }} >> .env.production
-        echo GRAPHQL_URL=${{ secrets.GRAPHQL_URL }} >> .env.production
-
     - name: Build screenshots
       run: yarn build
+      env:
+        CCN_ENDPOINT: ${{ secrets.CCN_ENDPOINT }}
+        GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
+
 
     - name: Upload snapshots to Percy
       run: yarn test:snapshot
