@@ -22,7 +22,7 @@ interface FormData {
     name: string
     email: string
     membership: Rider['membership'] | 'missing' | ''
-    route: Route['routeName']
+    route: Route['name']
     distance: Number,
     startTime: Date
     startLocation: string
@@ -112,7 +112,7 @@ export const RegistrationFormPermanent = () => {
 
     const handlePermanentChange = (permanent: Route) => {
         dirtyForm({
-            route: permanent.routeName || '',
+            route: permanent.name || '',
             startLocation: permanent.startLocation || '',
             chapter: permanent.chapter || 'Toronto',
             distance: permanent.distance || 0

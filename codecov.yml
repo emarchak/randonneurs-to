@@ -1,0 +1,5 @@
+ignore:
+  - "docs/**/*"
+  - "**/*.gql"
+  - "*.gql"
+  - "gatsby-*.js"

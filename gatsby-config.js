@@ -56,30 +56,19 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-google-spreadsheets',
-      options: {
-        spreadsheetId: '13OY3x4RK0_yJ6Lwf7Ov-duv1_jotcd9f3gWK_0PJtIE',
-        worksheetTitle: 'Routes',
-        credentials: {
-          type: 'service_account',
-          project_id: 'randonneurs-to',
-          private_key_id: process.env.GS_PRIVATE_KEY_ID,
-          private_key: process.env.GS_PRIVATE_KEY.replace(/(\\r)|(\\n)/g, '\n'),
-          client_email: 'randonneurstosheets@randonneurs-to.iam.gserviceaccount.com',
-          client_id: '116465140767443102500',
-          auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-          token_uri: 'https://oauth2.googleapis.com/token',
-          auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-          client_x509_cert_url: `https://www.googleapis.com/robot/v1/metadata/x509/randonneurs-to%40appspot.gserviceaccount.com`,
-        },
-      },
-    },
-    {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         trackingIds: [
           process.env.GTAG_ID
         ],
+      },
+    },
+    {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        typeName: 'db',
+        fieldName: 'db',
+        url: process.env.GRAPHQL_URL,
       },
     },
   ],
