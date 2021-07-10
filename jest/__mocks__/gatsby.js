@@ -22,6 +22,7 @@ module.exports = {
         href: to,
       }),
   ),
+  graphql: jest.fn(),
   StaticQuery: jest.fn(),
   useStaticQuery: jest.fn(),
 }
