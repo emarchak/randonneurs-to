@@ -11,10 +11,10 @@ export type Route = {
 }
 
 export const useRoutes = () => {
-  const { db: { route_current } } = useStaticQuery(graphql`
+  const { db: { routes } } = useStaticQuery(graphql`
     query {
       db {
-        route_current(
+        routes(
           order_by: {chapter: asc, distance: asc}
           where: {active: {_eq: true}}
         ) {
@@ -28,5 +28,5 @@ export const useRoutes = () => {
     }
   `)
 
-  return ({ routes: route_current })
+  return ({ routes })
 }

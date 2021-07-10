@@ -8,7 +8,7 @@ import * as useSlack from 'src/hooks/useSlack'
 import * as Gatsby from 'gatsby'
 
 const db =  {
-  route_current: [
+  routes: [
     {
       id: 'route1',
       chapter: 'Toronto',

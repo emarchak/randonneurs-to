@@ -99,7 +99,6 @@ input String_comparison_exp {
 columns and relationships of "chapter"
 """
 type chapter {
-  chapter_id: Int!
   name: String!
 }
 
@@ -110,13 +109,11 @@ input chapter_bool_exp {
   _and: [chapter_bool_exp!]
   _not: chapter_bool_exp
   _or: [chapter_bool_exp!]
-  chapter_id: Int_comparison_exp
   name: String_comparison_exp
 }
 
 """Ordering options when selecting data from "chapter"."""
 input chapter_order_by {
-  chapter_id: order_by
   name: order_by
 }
 
@@ -124,9 +121,6 @@ input chapter_order_by {
 select columns of table "chapter"
 """
 enum chapter_select_column {
-  """column name"""
-  chapter_id
-
   """column name"""
   name
 }
@@ -174,11 +168,11 @@ type query_root {
   ): [chapter!]!
 
   """
-  fetch data from the table: "route_current"
+  fetch data from the table: "routes"
   """
-  route_current(
+  routes(
     """distinct select on columns"""
-    distinct_on: [route_current_select_column!]
+    distinct_on: [routes_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -187,17 +181,17 @@ type query_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [route_current_order_by!]
+    order_by: [routes_order_by!]
 
     """filter the rows returned"""
-    where: route_current_bool_exp
-  ): [route_current!]!
+    where: routes_bool_exp
+  ): [routes!]!
 }
 
 """
-columns and relationships of "route_current"
+columns and relationships of "routes"
 """
-type route_current {
+type routes {
   active: Boolean
   brevetDistance: Int
   chapter: String
@@ -209,12 +203,12 @@ type route_current {
 }
 
 """
-Boolean expression to filter rows from the table "route_current". All fields are combined with a logical 'AND'.
+Boolean expression to filter rows from the table "routes". All fields are combined with a logical 'AND'.
 """
-input route_current_bool_exp {
-  _and: [route_current_bool_exp!]
-  _not: route_current_bool_exp
-  _or: [route_current_bool_exp!]
+input routes_bool_exp {
+  _and: [routes_bool_exp!]
+  _not: routes_bool_exp
+  _or: [routes_bool_exp!]
   active: Boolean_comparison_exp
   brevetDistance: Int_comparison_exp
   chapter: String_comparison_exp
@@ -225,8 +219,8 @@ input route_current_bool_exp {
   startLocation: String_comparison_exp
 }
 
-"""Ordering options when selecting data from "route_current"."""
-input route_current_order_by {
+"""Ordering options when selecting data from "routes"."""
+input routes_order_by {
   active: order_by
   brevetDistance: order_by
   chapter: order_by
@@ -238,9 +232,9 @@ input route_current_order_by {
 }
 
 """
-select columns of table "route_current"
+select columns of table "routes"
 """
-enum route_current_select_column {
+enum routes_select_column {
   """column name"""
   active
 
@@ -288,11 +282,11 @@ type subscription_root {
   ): [chapter!]!
 
   """
-  fetch data from the table: "route_current"
+  fetch data from the table: "routes"
   """
-  route_current(
+  routes(
     """distinct select on columns"""
-    distinct_on: [route_current_select_column!]
+    distinct_on: [routes_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -301,10 +295,10 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [route_current_order_by!]
+    order_by: [routes_order_by!]
 
     """filter the rows returned"""
-    where: route_current_bool_exp
-  ): [route_current!]!
+    where: routes_bool_exp
+  ): [routes!]!
 }
 

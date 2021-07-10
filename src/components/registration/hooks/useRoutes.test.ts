@@ -38,7 +38,7 @@ describe('useRoutes()', () => {
 
   beforeEach(() => {
     querySpy.mockReturnValue({
-      db: {route_current: routes}
+      db: { routes }
     })
   })
 
