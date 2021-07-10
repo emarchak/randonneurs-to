@@ -47,7 +47,7 @@
     "babel-jest": "^26.6.3",
     "babel-preset-gatsby": "^1.2.0",
     "dotenv-cli": "^4.0.0",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "graphqurl": "^1.0.1",
     "identity-obj-proxy": "^3.0.0",
