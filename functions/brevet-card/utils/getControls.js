@@ -37,6 +37,13 @@ const getStartTime = ({eventDate, customStartTime}) => {
 
 const getControls = async ({event, customStartTime}) => {
     const route = await getRoute(event.rwgpsId)
+
+    if (!route) {
+      throw new Error(`Unable to find route ${event.rwgpsId}`)
+    }
+
+    console.log(`Found route ${route.name} id: ${route.id}`)
+
     const eventDistance = event.distance
     const startTime = getStartTime({customStartTime, eventDate: event.date})
 
