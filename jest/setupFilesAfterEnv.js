@@ -3,6 +3,8 @@ import "@testing-library/jest-dom/extend-expect"
 const originalError = console.error
 const originalLog = console.log
 
+const isCI = process.env.NODE_ENV === 'ci'
+
 beforeAll(() => {
   console.error = (...args) => {
     if (/Warning.*not wrapped in act/.test(args[0])) {
@@ -10,7 +12,9 @@ beforeAll(() => {
     }
     originalError.call(console, ...args);
   }
-  console.log = jest.fn()
+  if (isCI) {
+    console.log = jest.fn()
+  }
 })
 
 afterAll(() => {

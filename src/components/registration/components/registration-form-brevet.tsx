@@ -143,6 +143,7 @@ export const RegistrationFormBrevet = () => {
             return
         }
         const success = await onSubmit(formData)
+
         if (success) {
             setFormState('submitted')
         } else {

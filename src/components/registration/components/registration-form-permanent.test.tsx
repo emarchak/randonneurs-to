@@ -178,7 +178,7 @@ describe('<RegistrationFormPermanent>', () => {
 
   it('shows an error when unable to submit', async () => {
     const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-    fetchSpy.mockRejectedValueOnce({ ok: false })
+    fetchSpy.mockRejectedValue({ ok: false })
 
     const mount = render(<RegistrationFormPermanent />)
     fireEvent.change(mount.getByLabelText(/name/i), {
@@ -212,6 +212,8 @@ describe('<RegistrationFormPermanent>', () => {
       expect(fetchSpy).toHaveBeenCalled()
       expect(mount.getByText(/Server error! Try again later/)).toBeTruthy()
     })
+
+    fetchSpy.mockClear()
   })
 
   it('warns riders if they are not a member', () => {
