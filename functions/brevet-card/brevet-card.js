@@ -32,7 +32,7 @@ const handler = async (event) => {
     return { 
       statusCode: response.status,
       headers: {
-        'Content-Disposition': response.headers.get('content-disposition'),
+        'Content-Disposition': `filename=brevetcard-${riderName}-${scheduleId}.pdf`,
       },
       body: Buffer.from(memBuffer).toString('base64'),
       isBase64Encoded: true,

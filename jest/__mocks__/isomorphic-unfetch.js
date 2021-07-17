@@ -1,10 +1,13 @@
 const fetch = jest.fn().mockImplementation(async (endpoint) => {
-  if (endpoint.match(/ridewithgps/)) {
+
+  if (endpoint.match(/ridewithgps.com\/routes\/\d+.json/)) {
     return {
       ok: true,
       status: 200, 
       json: jest.fn().mockResolvedValue({
         route: {
+          name: 'Flat Loop',
+          id: 229,
           course_points: [
             {
               d: 19.79,
