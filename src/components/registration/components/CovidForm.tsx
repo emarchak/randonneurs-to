@@ -6,6 +6,8 @@ import { Form, InputField, ErrorsList, CheckboxField } from 'src/components/form
 import { formatMessage, FormState, formSubmit, RequiredFields, validate } from 'src/components/form/utils'
 import { Link } from 'src/components/link'
 import { useSendMail } from 'src/hooks/useSendMail'
+import { useSheets } from 'src/hooks/useSheets'
+import { getDateTimeLong } from 'src/utils'
 
 type FormData = {
     name: string
@@ -95,6 +97,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
     const [formErrors, setFormErrors] = useState<string[]>([])
     const [screeningResult, setScreeningResult] = useState<boolean | null>(null)
     const { sendMail } = useSendMail()
+    const { addRow } = useSheets()
 
     const isSubmitted = formState === "submitted"
     const isDirty = formState === "dirty"
@@ -122,7 +125,15 @@ export const CovidForm = ({ children }: CovidFormProps) => {
             },
         }, 'defaultForm')
 
-        if (success && successMail) {
+        const successSheet = await addRow({
+            sheet: formName,
+            row: {
+                ...formData,
+                submitted: getDateTimeLong(new Date(Date.now())),
+            }
+        })
+
+        if (success && successMail && successSheet) {
             setScreeningResult(screeningStatus)
             setFormState("submitted")
         } else {

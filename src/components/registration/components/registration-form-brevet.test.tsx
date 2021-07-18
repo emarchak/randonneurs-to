@@ -167,7 +167,7 @@ describe('<RegistrationForm>', () => {
 
     it('shows an error when unable to submit', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-        fetchSpy.mockRejectedValueOnce({ ok: false })
+        fetchSpy.mockRejectedValue({ ok: false })
 
         const mount = render(<RegistrationFormBrevet />)
         fireEvent.change(mount.getByLabelText(/name/i), {
@@ -193,6 +193,8 @@ describe('<RegistrationForm>', () => {
             expect(fetchSpy).toHaveBeenCalled()
             expect(mount.getByText(/Server error! Try again later/)).toBeTruthy()
         })
+
+        fetchSpy.mockClear()
     })
 
     it('disables registrations for events that are not allowedToRegister', () => {

@@ -28,8 +28,7 @@ describe('useSendMail()', () => {
         const { result } = renderHook(() => useSendMail())
 
         const response = await result.current.sendMail({
-            to: 'foo@bar.com',
-            subject: 'Test email',
+            to: 'foo@bar.com'
         })
 
         expect(response).toEqual(false)
@@ -40,7 +39,6 @@ describe('useSendMail()', () => {
         const emailContent = {
             to: 'foo@bar.com',
             from: 'bar@baz.com',
-            subject: 'Test email',
             data: {
                 'baz': 'qux'
             }
