@@ -25,7 +25,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^3.2.0",
     "gatsby-source-graphql": "^3.8.0",
-    "gatsby-transformer-sharp": "^3.2.0",
+    "gatsby-transformer-sharp": "^3.9.0",
     "google-spreadsheet": "^3.1.15",
     "isomorphic-unfetch": "^3.0.0",
     "jshint": "^2.11.0",
