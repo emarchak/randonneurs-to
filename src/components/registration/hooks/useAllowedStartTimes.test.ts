@@ -17,6 +17,7 @@ const brevet: Brevet = {
 }
 
 const ottawaBrevet: Brevet = { ...brevet, chapter: 'Ottawa' }
+const huronBrevet: Brevet = { ...brevet, chapter: 'Huron' }
 
 const rideOnSaturday = new Date('Sat August 7 2021 09:20:00 EDT')
 const rideNextSaturday = new Date('Sat August 14 2021 09:20:00 EDT')
@@ -71,16 +72,19 @@ describe('useAllowedStartTimes', () => {
             expect(allowedToRegister({ ...ottawaBrevet, date: rideOnSaturday })).toBeFalsy()
         })
 
-        it('allows Ottawa riders to register before Friday at 6pm ET before scheduled date', () => {
+        it('allows Huron riders to register before Friday at 8pm ET before scheduled date', () => {
             advanceTo(new Date('Fri August 6 2021 7:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
 
-            expect(allowedToRegister({ ...ottawaBrevet, date: rideOnSaturday })).toBeTruthy()
+            expect(allowedToRegister({ ...huronBrevet, date: rideOnSaturday })).toBeTruthy()
+
+            advanceTo(new Date('Fri August 6 2021 20:01:30 EDT'))
+            expect(allowedToRegister({ ...huronBrevet, date: rideOnSaturday })).toBeFalsy()
         })
     })
 
     describe('getBrevetRegistrationDeadline()', () => {
-        const opts = {
+        const opts: Intl.DateTimeFormatOptions = {
             timeZone: 'America/Toronto',
             month: 'short',
             day: 'numeric',
@@ -95,6 +99,13 @@ describe('useAllowedStartTimes', () => {
             const d = getBrevetRegistrationDeadline({ ...ottawaBrevet, date: rideOnSaturday })
 
             expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 18:00')
+        })
+
+        it('shows Friday at 8pm ET for Huron brevets date', () => {
+            const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
+            const d = getBrevetRegistrationDeadline({ ...huronBrevet, date: rideOnSaturday })
+
+            expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 20:00')
         })
 
         it('shows 3 days before at 11:59pm ET for brevets', () => {

@@ -37,6 +37,10 @@ export const useAllowedStartTimes = () => {
                 const ottawaDeadline = getWeekdayBefore('Fri', brevet.date)
                 ottawaDeadline.setUTCHours(22, 0, 0)
                 return ottawaDeadline
+            case 'Huron':
+                const huronDeadline = getWeekdayBefore('Fri', brevet.date)
+                huronDeadline.setUTCHours(24, 0, 0)
+                return huronDeadline
             default:
                 const deadline = addDays(brevet.date, -3)
                 deadline.setUTCHours(27, 59, 0)
