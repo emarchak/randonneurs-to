@@ -125,4 +125,12 @@ tfoot td {
   td:last-child {padding-bottom: get-spacing()}
 }
 
-.shopify-buy-frame--product { max-width: 100% !important;}
+.shopify-buy-frame--product {
+  max-width: 100% !important;
+}
+
+@media only percy {
+  .hide-in-percy {
+    visibility: hidden;
+  }
+}
