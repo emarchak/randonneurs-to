@@ -33,6 +33,9 @@ const dateTimeLong: Intl.DateTimeFormatOptions = {
     ...dateLong
 }
 
+const isTest = process.env.NODE_ENV === 'test'
+export const getToday = () => new Date(!isTest ? Date.now() : 2021, 0, 1, 0, 0, 0, 0)
+
 export const getTime = (d: Date) => new Intl.DateTimeFormat('en', time).format(d)
 
 export const getDateLong = (d: Date) => new Intl.DateTimeFormat('en', dateLong).format(d).replace(/,/g, '')

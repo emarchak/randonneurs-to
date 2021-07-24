@@ -8,8 +8,8 @@ import { Link } from 'src/components/link'
 import { useBrevets } from 'src/data/brevets'
 import { useSendMail } from 'src/hooks/useSendMail'
 import { useSheets } from 'src/hooks/useSheets'
-import { getDateTimeLong } from 'src/utils'
 import { getEventOptions } from './getEventOptions'
+import { getDateTimeLong, getToday } from 'src/utils'
 
 type FormData = {
     name: string
@@ -138,7 +138,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
             sheet: formName,
             row: {
                 ...formData,
-                submitted: getDateTimeLong(new Date(Date.now())),
+                submitted: getDateTimeLong(getToday()),
             }
         })
 

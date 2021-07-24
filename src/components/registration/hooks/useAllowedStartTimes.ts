@@ -1,4 +1,5 @@
 import { Brevet } from "src/data/brevets"
+import { getToday } from "src/utils"
 
 const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > new Date(after).setHours(23)
 const onDate = (date: Date, now: Date) => new Date(date).setHours(0) === new Date(now).setHours(0)
@@ -24,7 +25,7 @@ function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
 
 export const useAllowedStartTimes = () => {
     const allowedStartTimes = (time: Date, scheduleTime?: Date) => {
-        const now = new Date(Date.now())
+        const now = getToday()
         if (scheduleTime) {
             return onDate(time, scheduleTime) && inFutureDate(time, addDays(now, 6))
         }
@@ -51,7 +52,7 @@ export const useAllowedStartTimes = () => {
     const isBrevetCancelled = (brevet: Brevet) => brevet.date < cancelledUntil
 
     const allowedToRegister = (brevet: Brevet) => {
-        const now = new Date(Date.now())
+        const now = getToday()
         const registrationDeadline = getBrevetRegistrationDeadline(brevet)
         const brevetCancelled = isBrevetCancelled(brevet)
 
