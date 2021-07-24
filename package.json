@@ -54,7 +54,7 @@
     "graphqurl": "^1.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
-    "jest-date-mock": "^1.0.8",
+    "mockdate": "^3.0.5",
     "netlify-cli": "^3.37.0",
     "prettier": "^2.3.2"
   },

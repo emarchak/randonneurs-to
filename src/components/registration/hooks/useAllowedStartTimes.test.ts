@@ -1,4 +1,4 @@
-import { advanceTo, clear } from 'jest-date-mock'
+import MockDate from 'mockdate'
 import { Brevet } from 'src/data/brevets'
 import { useAllowedStartTimes } from "./useAllowedStartTimes"
 
@@ -23,13 +23,9 @@ const rideOnSaturday = new Date('Sat August 7 2021 09:20:00 EDT')
 const rideNextSaturday = new Date('Sat August 14 2021 09:20:00 EDT')
 
 describe('useAllowedStartTimes', () => {
-    afterEach(() => {
-        clear()
-    })
-
     describe('allowedStartTimes()', () => {
         it('requires the start date to be a day in the future for unscheduled events', () => {
-            advanceTo(new Date('August 18 2021 19:59:30 EDT'))
+            MockDate.set(new Date('August 18 2021 19:59:30 EDT'))
             const { allowedStartTimes } = useAllowedStartTimes()
 
             expect(allowedStartTimes(new Date('August 18 2021'))).toBeFalsy()
@@ -37,7 +33,7 @@ describe('useAllowedStartTimes', () => {
         })
 
         it('requires start date to be on scheduled date', () => {
-            advanceTo(new Date('August 1 2021 19:59:30 EDT'))
+            MockDate.set(new Date('August 1 2021 19:59:30 EDT'))
 
             const { allowedStartTimes } = useAllowedStartTimes()
 
@@ -51,34 +47,34 @@ describe('useAllowedStartTimes', () => {
 
     describe('allowedToRegister()', () => {
         it('allows riders to register three days before scheduled date', () => {
-            advanceTo(new Date('Wed August 4 2021 12:59:30 EDT'))
+            MockDate.set(new Date('Wed August 4 2021 12:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
 
             expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeTruthy()
 
-            advanceTo(new Date('Thu August 5 2021 19:59:30 EDT'))
+            MockDate.set(new Date('Thu August 5 2021 19:59:30 EDT'))
             expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeFalsy()
 
             expect(allowedToRegister({ ...brevet, date: rideNextSaturday })).toBeTruthy()
         })
 
         it('allows Ottawa riders to register before Friday at 6pm ET before scheduled date', () => {
-            advanceTo(new Date('Fri August 6 2021 7:59:30 EDT'))
+            MockDate.set(new Date('Fri August 6 2021 7:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
 
             expect(allowedToRegister({ ...ottawaBrevet, date: rideOnSaturday })).toBeTruthy()
 
-            advanceTo(new Date('Fri August 6 2021 18:01:30 EDT'))
+            MockDate.set(new Date('Fri August 6 2021 18:01:30 EDT'))
             expect(allowedToRegister({ ...ottawaBrevet, date: rideOnSaturday })).toBeFalsy()
         })
 
         it('allows Huron riders to register before Friday at 8pm ET before scheduled date', () => {
-            advanceTo(new Date('Fri August 6 2021 7:59:30 EDT'))
+            MockDate.set(new Date('Fri August 6 2021 7:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
 
             expect(allowedToRegister({ ...huronBrevet, date: rideOnSaturday })).toBeTruthy()
 
-            advanceTo(new Date('Fri August 6 2021 20:01:30 EDT'))
+            MockDate.set(new Date('Fri August 6 2021 20:01:30 EDT'))
             expect(allowedToRegister({ ...huronBrevet, date: rideOnSaturday })).toBeFalsy()
         })
     })

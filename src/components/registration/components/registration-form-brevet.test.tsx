@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { advanceTo, clear } from 'jest-date-mock'
+import MockDate from 'mockdate'
 import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useRiders from 'src/data/riders'
@@ -41,11 +41,7 @@ jest.mock('src/data/riders', () => ({
 
 describe('<RegistrationForm>', () => {
     beforeEach(() => {
-        advanceTo(new Date('Wed August 4 2021 09:00:00 EDT'))
-    })
-
-    afterEach(() => {
-        clear()
+        MockDate.set(new Date('Wed August 4 2021 09:00:00 EDT'))
     })
 
     it('renders all the required fields to the user', () => {
@@ -198,7 +194,7 @@ describe('<RegistrationForm>', () => {
     })
 
     it('disables registrations for events that are not allowedToRegister', () => {
-        advanceTo(new Date('Fri August 7 2021 17:20:00 EDT'))
+        MockDate.set(new Date('Fri August 7 2021 17:20:00 EDT'))
 
         const mount = render(<RegistrationFormBrevet />)
 
@@ -207,8 +203,6 @@ describe('<RegistrationForm>', () => {
 
         expect(mount.queryByLabelText(/Rouge Ramble 60/i)).toBeNull()
         expect(mount.getByRole('textbox', { name: 'Starting location' })).not.toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
-
-        clear()
     })
 
     it('warns riders if they are not a member', () => {
@@ -233,6 +227,4 @@ describe('<RegistrationForm>', () => {
 
         useCheckRiderMembershipSpy.mockRestore()
     })
-
-    it.skip('limits registration to maximum of 10 riders per start time', () => { })
 })
