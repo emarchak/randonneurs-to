@@ -1,4 +1,4 @@
-import { Brevet } from 'src/data/useBrevets'
+import { Brevet } from 'src/data/brevets'
 import { formatSlackMessage, formSubmit } from 'src/components/form/utils'
 import { useSendMail } from 'src/hooks/useSendMail'
 import { useSlack } from 'src/hooks/useSlack'

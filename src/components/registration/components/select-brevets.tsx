@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent, useMemo } from 'react'
 import { RadioTable, SelectField } from 'src/components/form/components'
 import { Fieldset, InlineInputs } from 'src/components/form/fieldset'
-import { useBrevets, Brevet } from 'src/data/useBrevets'
+import { useBrevets, Brevet } from 'src/data/brevets'
 import { BrevetColumn } from './brevet-row'
 import { getDateLong, getTime } from 'src/utils'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
