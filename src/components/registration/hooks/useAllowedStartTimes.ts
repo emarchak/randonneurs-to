@@ -1,4 +1,4 @@
-import { Brevet } from "../../../hooks/useBrevets"
+import { Brevet } from "src/data/useBrevets"
 
 const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > new Date(after).setHours(23)
 const onDate = (date: Date, now: Date) => new Date(date).setHours(0) === new Date(now).setHours(0)
