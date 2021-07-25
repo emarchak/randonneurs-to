@@ -1,6 +1,6 @@
 import React from 'react'
 import * as styles from "./styles/form.module.scss"
-import { Link, LinkProps } from './link'
+import { Link, LinkProps } from 'src/components/link'
 
 type ButtonTypes = {
     primary?: boolean,
@@ -18,12 +18,11 @@ const getButtonClassName = ({ primary = false, secondary = false, block = false,
         ...(small ? [styles.smallButton] : []),
     ].join(' '))
 
-type ButtonProps = ButtonTypes & {
+type ButtonProps = React.PropsWithChildren<ButtonTypes & {
     handleClick: (evt: any) => any,
     disabled?: boolean,
     className?: string,
-    children: React.ReactChild
-}
+}>
 
 export const Button = ({ handleClick, disabled, className, children, ...props }: ButtonProps) => (
     <button
@@ -35,11 +34,10 @@ export const Button = ({ handleClick, disabled, className, children, ...props }:
     </button>
 )
 
-type SubmitButtonProps = {
+type SubmitButtonProps = React.PropsWithChildren<{
     handleSubmit: (evt: any) => Promise<void>,
     disabled?: boolean,
-    children: React.ReactChild
-}
+}>
 
 export const SubmitButton = ({ handleSubmit, disabled = false, children }: SubmitButtonProps) => (
     <button
