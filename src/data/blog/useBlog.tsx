@@ -10,8 +10,11 @@ export type Post = {
   teaser: string
 }
 
+type useBlogArgs = {
+  limit?: number
+}
 
-export const useBlog = ({ limit }) => {
+export const useBlog = ({ limit = 10 }: useBlogArgs) => {
   const { allFeedblog: { nodes } } = useStaticQuery(graphql`
     query {
       allFeedblog(limit: 10) {
