@@ -1,6 +1,6 @@
 import React from 'react'
 import * as styles from "./styles/form.module.scss"
-import { Link, LinkProps } from './link'
+import { Link, LinkProps } from 'src/components/link'
 
 type ButtonTypes = {
     primary?: boolean,
@@ -18,7 +18,7 @@ const getButtonClassName = ({ primary = false, secondary = false, block = false,
         ...(small ? [styles.smallButton] : []),
     ].join(' '))
 
-type ButtonProps = React.PropsWithChildren<{
+type ButtonProps = React.PropsWithChildren<ButtonTypes & {
     handleClick: (evt: any) => any,
     disabled?: boolean,
     className?: string,

@@ -1,5 +1,3 @@
-
-
 import { graphql, useStaticQuery } from 'gatsby'
 import { useMemo } from 'react'
 
