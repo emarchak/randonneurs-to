@@ -19,6 +19,7 @@ query {
   allFile(
     filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
     limit: 6
+    sort: {fields: birthTime, order: DESC}
   ) {
     nodes {
       name
@@ -57,11 +58,9 @@ const IndexPage = () => {
             {brevets.slice(0, 2).map(event => (
               <li key={event.id} className={styles.eventRow}>
                 <strong>{event.route} {event.distance}</strong><br />
-                <small>
-                  {getDateTimeLong(new Date(event.date))}<br />
-                  {event.startLocation}<br />
-                  {event.rwgpsUrl && (<Link href={event.rwgpsUrl}>{`View ${event.route} route`}</Link>)}
-                </small>
+                {getDateTimeLong(new Date(event.date))}<br />
+                {event.startLocation}<br />
+                {event.rwgpsUrl && (<Link href={event.rwgpsUrl}>{`View ${event.route} route`}</Link>)}
               </li>
             ))}
           </ul>

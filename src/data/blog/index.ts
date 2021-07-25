@@ -1,1 +1,1 @@
-export { useBlog, Post } from './useBlog'
+export { useBlog } from './useBlog'
