@@ -2,7 +2,7 @@ import React, { ChangeEvent, useMemo, useState } from 'react'
 import { InlineInputs } from 'src/components/form/fieldset'
 import { RadioTable, SelectField } from 'src/components/form/components'
 import { Link } from 'src/components/link'
-import { useRoutes, Route } from '../hooks/useRoutes'
+import { useRoutes, Route } from 'src/data/useRoutes'
 import { getDistanceKey, getIsDistance, sortDistances } from './utils'
 
 type Props = {

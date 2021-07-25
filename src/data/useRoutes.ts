@@ -1,6 +1,6 @@
 
 import { graphql, useStaticQuery } from 'gatsby'
-import { Chapter } from '../../../hooks/useBrevets'
+import { Chapter } from 'src/data/useBrevets'
 
 export type Route = {
   chapter: Chapter
