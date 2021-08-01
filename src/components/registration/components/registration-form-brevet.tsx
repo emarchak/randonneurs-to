@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { SubmitButton } from 'src/components/buttons'
-import { InputField, DateField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
+import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
 import { Brevet } from 'src/data/brevets'
 import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
@@ -164,7 +164,7 @@ export const RegistrationFormBrevet = () => {
                     <p><Link href="http://randonneursontario.ca/who/whatis.html#COVID">Learn more about riding brevets and our COVID-19 guidelines.</Link></p>
                 </Aside>
                 <SelectBrevets onChange={handleBrevetChange} />
-                <DateField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
+                <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} disableDate />
                 <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled={true} />
                 <InputField label={fieldLabels['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>

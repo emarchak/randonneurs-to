@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { SubmitButton } from 'src/components/buttons'
 import { FormState } from 'src/components/form/utils'
-import { InputField, DateField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
+import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
 import { Callout } from 'src/components/callout'
 import { SelectPermanents } from './select-permanents'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
@@ -148,7 +148,7 @@ export const RegistrationFormPermanent = () => {
                 <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
                 <SelectPermanents onChange={handlePermanentChange} />
-                <DateField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
+                <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
                 <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} />
                 <InputField label={fieldLabels['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>
