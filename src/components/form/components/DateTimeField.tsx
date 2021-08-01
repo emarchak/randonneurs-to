@@ -19,47 +19,47 @@ const timeOptions: string[] = [].concat(...hours.map(hour => minutes.map(minute 
 const getQrtHour = minutes => ((Math.round(minutes/15) * 15) % 60).toString()
 
 type DateTimeFieldProps = Omit<FieldProps, 'value'> & {
-    value: Date
-    disableDate?: boolean
-    onChange: (date: Date) => void
-    allowedRange?: (date: Date) => boolean
+  value: Date
+  disableDate?: boolean
+  onChange: (date: Date) => void
+  allowedRange?: (date: Date) => boolean
 }
 
 export const DateTimeField = ({ value, name, label, hideLabel, disableDate, disabled, onChange, allowedRange, optional, help }: DateTimeFieldProps) => {
-    return (
-    <div className={styles.dateTimeField}>
-        <label>
-            <Label label={label} optional={optional} hideLabel={hideLabel} />
-            <InlineInputs>
-                <div><DatePicker
-                    wrapperClassName={styles.dateInputOverrides}
-                    selected={value}
-                    onChange={onChange}
-                    className={styles.input + ' ' + styles.dateInputField}
-                    filterDate={allowedRange}
-                    disabled={disabled || disableDate}
-                    dateFormat='MMMM d' /></div>
-            <TimeField value={value} label={label} hideLabel onChange={onChange} name={name} disabled={disabled}/>
-            </InlineInputs>
-        </label>
-        {help && <Help>{help}</Help>}
-        <HiddenField name={name} value={value.toString()} />
-    </div>
+  return (
+  <div className={styles.dateTimeField}>
+    <label>
+      <Label label={label} optional={optional} hideLabel={hideLabel} />
+      <InlineInputs>
+        <div><DatePicker
+          wrapperClassName={styles.dateInputOverrides}
+          selected={value}
+          onChange={onChange}
+          className={styles.input + ' ' + styles.dateInputField}
+          filterDate={allowedRange}
+          disabled={disabled || disableDate}
+          dateFormat='MMMM d' /></div>
+      <TimeField value={value} label={label} hideLabel onChange={onChange} name={name} disabled={disabled}/>
+      </InlineInputs>
+    </label>
+    {help && <Help>{help}</Help>}
+    <HiddenField name={name} value={value.toString()} />
+  </div>
 )}
 
 type TimeFieldProps = Omit<FieldProps, 'value'> & {
-    value: Date
-    showDate?: boolean
-    onChange: (date: Date) => void
+  value: Date
+  showDate?: boolean
+  onChange: (date: Date) => void
 }
 
 export const TimeField = ({ value, onChange, showDate, ...props }: TimeFieldProps) => {
-    const timeValue = `${String(value.getHours()).padStart(2, '0')}:${getQrtHour(value.getMinutes()).padStart(2, '0')}`
+  const timeValue = `${String(value.getHours()).padStart(2, '0')}:${getQrtHour(value.getMinutes()).padStart(2, '0')}`
 
-    const handleOnChange = (evt: ChangeEvent<HTMLSelectElement>) => {
-        const {value: targetValue} = evt.target
-        onChange(new Date(`${getDateLong(value)} ${targetValue} ${value.getTimezoneOffset()}`))
-    }
+  const handleOnChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+    const {value: targetValue} = evt.target
+    onChange(new Date(`${getDateLong(value)} ${targetValue} ${value.getTimezoneOffset()}`))
+  }
 
-    return <SelectField {...props} onChange={handleOnChange} options={timeOptions} value={timeValue} />
+  return <SelectField {...props} onChange={handleOnChange} options={timeOptions} value={timeValue} />
 }
