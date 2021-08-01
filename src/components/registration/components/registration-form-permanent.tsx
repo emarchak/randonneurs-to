@@ -6,7 +6,7 @@ import { InputField, DateField, CheckboxField, HiddenField, ErrorsList, Form } f
 import { Callout } from 'src/components/callout'
 import { SelectPermanents } from './select-permanents'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
-import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembership'
+import { useRiders, Rider } from 'src/data/riders'
 import { MissingMembership } from './missing-membership'
 import { Route } from 'src/data/routes'
 import { Link } from 'src/components/link'
@@ -73,7 +73,7 @@ export const RegistrationFormPermanent = () => {
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
     const { onSubmit } = useRegistrationForm({ formName, fieldLabels })
-    const { checkMembership } = useCheckRiderMembership()
+    const { checkMembership } = useRiders()
     const { allowedStartTimes } = useAllowedStartTimes()
 
     const isSubmitted = formState === 'submitted'

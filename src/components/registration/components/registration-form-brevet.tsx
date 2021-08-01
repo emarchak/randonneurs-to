@@ -7,7 +7,7 @@ import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
 import { Aside, Callout } from 'src/components/callout'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
-import { useCheckRiderMembership, Rider } from 'src/hooks/useCheckRiderMembership'
+import { useRiders, Rider } from 'src/data/riders'
 import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
@@ -77,7 +77,7 @@ export const RegistrationFormBrevet = () => {
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
     const { onSubmit } = useRegistrationForm({ formName, fieldLabels })
-    const { checkMembership } = useCheckRiderMembership()
+    const { checkMembership } = useRiders()
     const { allowedStartTimes } = useAllowedStartTimes()
 
     const isSubmitted = formState === 'submitted'
