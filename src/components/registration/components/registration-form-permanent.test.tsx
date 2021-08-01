@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationFormPermanent } from './registration-form-permanent'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
+import * as useRiders from 'src/data/riders'
 import * as useSendMail from 'src/hooks/useSendMail'
 import * as useSlack from 'src/hooks/useSlack'
 import * as Gatsby from 'gatsby'
@@ -40,9 +40,9 @@ const db =  {
   ]
 }
 
-jest.mock('src/hooks/useCheckRiderMembership', () => ({
+jest.mock('src/data/riders', () => ({
   __esModule: true,
-  useCheckRiderMembership: jest.fn().mockReturnValue({
+  useRiders: jest.fn().mockReturnValue({
     checkMembership: jest.fn().mockImplementation((fullName) => ({
       fullName,
       city: 'Toronto',
@@ -57,7 +57,7 @@ describe('<RegistrationFormPermanent>', () => {
   beforeAll(() => {
     const staticQuerySpy = jest.spyOn(Gatsby, 'useStaticQuery')
     staticQuerySpy.mockReturnValue({db})
-  }); 
+  });
 
   it('renders all the required fields to the user', () => {
     const mount = render(<RegistrationFormPermanent />)
@@ -220,7 +220,7 @@ describe('<RegistrationFormPermanent>', () => {
     const checkMembershipMock = jest.fn()
       .mockReturnValueOnce(null)
       .mockReturnValueOnce({ membership: 'Trial' })
-    const useCheckRiderMembershipSpy = jest.spyOn(useCheckRiderMembership, 'useCheckRiderMembership')
+    const useCheckRiderMembershipSpy = jest.spyOn(useRiders, 'useRiders')
     useCheckRiderMembershipSpy.mockReturnValue({ checkMembership: checkMembershipMock })
 
     const mount = render(<RegistrationFormPermanent />)
