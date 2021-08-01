@@ -18,8 +18,11 @@ const timeOptions: string[] = [].concat(...hours.map(hour => minutes.map(minute 
 
 const getQrtHour = minutes => ((Math.round(minutes/15) * 15) % 60).toString()
 
+const twoDaysFromToday = new Date(Date.now())
+twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
+
 type DateTimeFieldProps = Omit<FieldProps, 'value'> & {
-  value: Date
+  value?: Date
   disableDate?: boolean
   onChange: (date: Date) => void
   allowedRange?: (date: Date) => boolean
@@ -38,32 +41,41 @@ export const DateTimeField = ({ value, name, label, hideLabel, disableDate, disa
             wrapperClassName={styles.dateInputOverrides}
             selected={value}
             onChange={onChange}
-            className={styles.input + ' ' + styles.dateInputField}
+            className={styles.input}
             filterDate={allowedRange}
             disabled={disabled || disableDate}
             dateFormat='MMMM d'
             ariaLabelledBy={id}
             />
         </label>
-      <TimeField value={value} label={label + 'time select'} hideLabel onChange={onChange} name={name + 'Time'} disabled={disabled}/>
+        <TimeField
+          value={value}
+          label={label + 'time select'}
+          hideLabel
+          onChange={onChange}
+          name={name + 'Time'}
+          disabled={disabled}/>
       </InlineInputs>
-
     {help && <Help>{help}</Help>}
-    <HiddenField name={name} value={value.toString()} />
+    <HiddenField name={name} value={value?.toString()} />
   </div>
 )}
 
 type TimeFieldProps = Omit<FieldProps, 'value'> & {
-  value: Date
+  value?: Date
   onChange: (date: Date) => void
 }
 
 export const TimeField = ({ value, onChange, ...props }: TimeFieldProps) => {
-  const timeValue = `${String(value.getHours()).padStart(2, '0')}:${getQrtHour(value.getMinutes()).padStart(2, '0')}`
+  const sourceValue = value || twoDaysFromToday
+  const timeValue = value
+    ? `${String(value.getHours()).padStart(2, '0')}:${getQrtHour(value.getMinutes()).padStart(2, '0')}`
+    : '06:00'
 
   const handleOnChange = (evt: ChangeEvent<HTMLSelectElement>) => {
     const {value: targetValue} = evt.target
-    onChange(new Date(`${getDateLong(value)} ${targetValue} ${value.getTimezoneOffset()}`))
+
+    onChange(new Date(`${getDateLong(sourceValue)} ${targetValue} ${sourceValue.getTimezoneOffset()}`))
   }
 
   return <SelectField {...props} onChange={handleOnChange} options={timeOptions} value={timeValue} />

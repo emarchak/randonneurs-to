@@ -199,6 +199,10 @@
 }
 
 .dateTimeField {
+  @include no-space-text;
+  p {
+    margin-bottom: 0;
+  }
   @include media(large) {
     max-width: 41.6rem;
   }

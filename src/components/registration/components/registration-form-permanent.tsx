@@ -14,17 +14,13 @@ import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { validate, RequiredFields } from 'src/components/form/utils'
 import * as styles from 'src/components/styles/registration.module.scss'
 const formName = 'registration-permanent'
-
-const twoDaysFromToday = new Date(Date.now())
-twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
-
 interface FormData {
     name: string
     email: string
     membership: Rider['membership'] | 'missing' | ''
     route: Route['name']
     distance: Number,
-    startTime: Date
+    startTime: Date | null
     startLocation: string
     chapter: Route['chapter'] | '',
     notes: string,
@@ -37,7 +33,7 @@ const defaultFormData: FormData = {
     email: '',
     membership: '',
     route: '',
-    startTime: twoDaysFromToday,
+    startTime: null,
     startLocation: '',
     chapter: '',
     distance: 0,
