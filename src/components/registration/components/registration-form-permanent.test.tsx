@@ -57,7 +57,7 @@ describe('<RegistrationFormPermanent>', () => {
   beforeAll(() => {
     const staticQuerySpy = jest.spyOn(Gatsby, 'useStaticQuery')
     staticQuerySpy.mockReturnValue({db})
-  }); 
+  });
 
   it('renders all the required fields to the user', () => {
     const mount = render(<RegistrationFormPermanent />)
@@ -74,7 +74,7 @@ describe('<RegistrationFormPermanent>', () => {
 
       fireEvent.click(mount.getByLabelText(/Urban/i))
 
-      fireEvent.change(mount.getByLabelText(/starting time/i), {
+      fireEvent.change(mount.getByLabelText(/starting time date/i), {
         target: { value: new Date() },
       })
       fireEvent.change(mount.getByLabelText(/notes/i), {
@@ -137,8 +137,12 @@ describe('<RegistrationFormPermanent>', () => {
 
     fireEvent.click(mount.getByLabelText(/Urban/i))
 
-    fireEvent.change(mount.getByLabelText(/starting time/i), {
+    fireEvent.change(mount.getByLabelText(/starting time date/i), {
       target: { value: rideDate },
+    })
+
+    fireEvent.change(mount.getByLabelText(/time select/i), {
+      target: { value: '12:00' },
     })
 
     fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
@@ -191,7 +195,7 @@ describe('<RegistrationFormPermanent>', () => {
 
     fireEvent.click(mount.getByLabelText(/Urban/i))
 
-    fireEvent.change(mount.getByLabelText(/starting time/i), {
+    fireEvent.change(mount.getByLabelText(/starting time date/i), {
       target: { value: new Date() },
     })
 

@@ -26,22 +26,28 @@ type DateTimeFieldProps = Omit<FieldProps, 'value'> & {
 }
 
 export const DateTimeField = ({ value, name, label, hideLabel, disableDate, disabled, onChange, allowedRange, optional, help }: DateTimeFieldProps) => {
+  const id = `${name}Id`
+
   return (
   <div className={styles.dateTimeField}>
-    <label>
       <Label label={label} optional={optional} hideLabel={hideLabel} />
       <InlineInputs>
-        <div><DatePicker
-          wrapperClassName={styles.dateInputOverrides}
-          selected={value}
-          onChange={onChange}
-          className={styles.input + ' ' + styles.dateInputField}
-          filterDate={allowedRange}
-          disabled={disabled || disableDate}
-          dateFormat='MMMM d' /></div>
-      <TimeField value={value} label={label} hideLabel onChange={onChange} name={name} disabled={disabled}/>
+        <label>
+          <Label label={label + ' date select'} hideLabel={true} id={id} />
+          <DatePicker
+            wrapperClassName={styles.dateInputOverrides}
+            selected={value}
+            onChange={onChange}
+            className={styles.input + ' ' + styles.dateInputField}
+            filterDate={allowedRange}
+            disabled={disabled || disableDate}
+            dateFormat='MMMM d'
+            ariaLabelledBy={id}
+            />
+        </label>
+      <TimeField value={value} label={label + 'time select'} hideLabel onChange={onChange} name={name + 'Time'} disabled={disabled}/>
       </InlineInputs>
-    </label>
+
     {help && <Help>{help}</Help>}
     <HiddenField name={name} value={value.toString()} />
   </div>
@@ -49,11 +55,10 @@ export const DateTimeField = ({ value, name, label, hideLabel, disableDate, disa
 
 type TimeFieldProps = Omit<FieldProps, 'value'> & {
   value: Date
-  showDate?: boolean
   onChange: (date: Date) => void
 }
 
-export const TimeField = ({ value, onChange, showDate, ...props }: TimeFieldProps) => {
+export const TimeField = ({ value, onChange, ...props }: TimeFieldProps) => {
   const timeValue = `${String(value.getHours()).padStart(2, '0')}:${getQrtHour(value.getMinutes()).padStart(2, '0')}`
 
   const handleOnChange = (evt: ChangeEvent<HTMLSelectElement>) => {
