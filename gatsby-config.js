@@ -30,6 +30,13 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-sass",
     {
+      resolve: 'gatsby-source-rss-feed',
+      options: {
+        url: 'https://blog.randonneursontario.ca/?feed=rss2',
+        name: 'blog',
+      }
+    },
+    {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {

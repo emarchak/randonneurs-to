@@ -4,6 +4,11 @@ $footer-height: 4.3rem;
 @include body-link();
 .content {
   @include max-width();
+
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .contentContainer {
@@ -15,7 +20,7 @@ $footer-height: 4.3rem;
 .contentContainerChild {
   margin-bottom: get-spacing(large);
   @include media(large) {
-    flex: 1
+    flex: 1;
   }
 }
 
@@ -38,14 +43,13 @@ $footer-height: 4.3rem;
 }
 
 .headerLink {
-    color: get-color(text);
-    text-decoration: none;
+  color: get-color(text);
+  text-decoration: none;
 }
 
 .main-wrapper {
   min-height: calc(100vh - #{$footer-height});
 }
-
 
 .footer {
   @include body-link();
@@ -59,7 +63,9 @@ $footer-height: 4.3rem;
   transform: scale(-1, 1);
 }
 
-.callout, .calloutAlternative, .aside {
+.callout,
+.calloutAlternative,
+.aside {
   padding: get-spacing() get-spacing(large) get-spacing(small);
   margin-bottom: get-spacing();
   @include border-radius();

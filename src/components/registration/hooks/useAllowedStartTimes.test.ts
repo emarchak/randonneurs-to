@@ -1,5 +1,5 @@
 import { advanceTo, clear } from 'jest-date-mock'
-import { Brevet } from '../../../hooks/useBrevets'
+import { Brevet } from 'src/data/brevets'
 import { useAllowedStartTimes } from "./useAllowedStartTimes"
 
 const brevet: Brevet = {

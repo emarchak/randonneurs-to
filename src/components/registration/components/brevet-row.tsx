@@ -1,5 +1,5 @@
 import React from 'react'
-import { Brevet } from 'src/hooks/useBrevets'
+import { Brevet } from 'src/data/brevets'
 import { getDateTimeShort } from 'src/utils'
 import { Link } from 'src/components/link'
 

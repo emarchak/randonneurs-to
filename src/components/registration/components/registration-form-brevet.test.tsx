@@ -7,7 +7,7 @@ import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
 import * as useSendMail from 'src/hooks/useSendMail'
 import * as useSlack from 'src/hooks/useSlack'
 
-jest.mock('src/hooks/useBrevets', () => ({
+jest.mock('src/data/brevets', () => ({
     __esModule: true,
     useBrevets: jest.fn().mockReturnValue({
         loading: false,

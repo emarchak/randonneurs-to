@@ -1,4 +1,4 @@
-import { Brevet } from "../../../hooks/useBrevets"
+import { Brevet } from "src/data/brevets"
 
 const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > new Date(after).setHours(23)
 const onDate = (date: Date, now: Date) => new Date(date).setHours(0) === new Date(now).setHours(0)
@@ -12,12 +12,6 @@ const weekdays = {
     'Thu': 4,
     'Fri': 5,
     'Sat': 6,
-}
-
-const hotfixNassagaweya2021 = (brevet: Brevet) => {
-    const deadline = addDays(brevet.date, -1)
-    deadline.setUTCHours(27, 59, 0)
-    return deadline
 }
 
 function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
@@ -38,10 +32,6 @@ export const useAllowedStartTimes = () => {
     }
 
     const getBrevetRegistrationDeadline = (brevet: Brevet) => {
-        if (brevet.chapter === 'Huron' && brevet.route === 'Nassagaweya') {
-            return hotfixNassagaweya2021(brevet)
-        }
-
         switch (brevet.chapter) {
             case 'Ottawa':
                 const ottawaDeadline = getWeekdayBefore('Fri', brevet.date)
