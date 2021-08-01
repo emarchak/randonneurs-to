@@ -20,7 +20,7 @@ interface FormData {
     membership: Rider['membership'] | 'missing' | ''
     route: Route['name']
     distance: Number,
-    startTime: Date | null
+    startTime: Date | ''
     startLocation: string
     chapter: Route['chapter'] | '',
     notes: string,
@@ -33,7 +33,7 @@ const defaultFormData: FormData = {
     email: '',
     membership: '',
     route: '',
-    startTime: null,
+    startTime: '',
     startLocation: '',
     chapter: '',
     distance: 0,

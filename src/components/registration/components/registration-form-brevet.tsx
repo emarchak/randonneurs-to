@@ -22,8 +22,8 @@ interface FormData {
     membership: Rider['membership'] | 'missing' | ''
     route: Brevet['route']
     rideType: Brevet['event'] | ''
-    scheduleTime: Date | null
-    startTime: Date | null
+    scheduleTime: Date | ''
+    startTime: Date | ''
     startLocation: string
     chapter: Brevet['chapter'] | '',
     distance: Brevet['distance'],
@@ -38,8 +38,8 @@ const defaultFormData: FormData = {
     membership: '',
     route: '',
     rideType: '',
-    startTime: null,
-    scheduleTime: null,
+    startTime: '',
+    scheduleTime: '',
     startLocation: '',
     chapter: '',
     distance: 0,

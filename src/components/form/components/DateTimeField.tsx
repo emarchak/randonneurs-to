@@ -22,7 +22,7 @@ const twoDaysFromToday = new Date(Date.now())
 twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
 
 type DateTimeFieldProps = Omit<FieldProps, 'value'> & {
-  value?: Date
+  value: Date | ''
   disableDate?: boolean
   onChange: (date: Date) => void
   allowedRange?: (date: Date) => boolean
@@ -62,7 +62,7 @@ export const DateTimeField = ({ value, name, label, hideLabel, disableDate, disa
 )}
 
 type TimeFieldProps = Omit<FieldProps, 'value'> & {
-  value?: Date
+  value: Date | ''
   onChange: (date: Date) => void
 }
 
