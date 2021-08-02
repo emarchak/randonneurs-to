@@ -1,21 +1,22 @@
-import React, { useState } from "react"
+import React from "react"
 import { FieldProps } from './types'
 import { Help } from './Help'
 import DatePicker from "react-datepicker"
 import { HiddenField } from "./HiddenField"
-
-import * as styles from "../../styles/form.module.scss"
-import "react-datepicker/dist/react-datepicker.css"
 import { SelectField } from "./SelectField"
 import { Label } from "./Label"
 import { ChangeEvent } from "react"
-import { getDateLong } from "src/utils"
 import { InlineInputs } from "../fieldset"
+import { getTime } from "src/utils"
+
+import * as styles from "../../styles/form.module.scss"
+import "react-datepicker/dist/react-datepicker.css"
 
 const hours = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
 const minutes = ['00', '15', '30', '45']
 const timeOptions: string[] = [].concat(...hours.map(hour => minutes.map(minute => `${hour}:${minute}`)))
 
+const calcTime = (time: string) => time.split(':').map(x => isNaN(parseInt(x)) ? 0 : parseInt(x))
 const getQrtHour = minutes => ((Math.round(minutes/15) * 15) % 60).toString()
 
 type DateTimeFieldProps = Omit<FieldProps, 'value'> & {
@@ -71,17 +72,16 @@ const twoDaysFromToday = () => {
 
 export const TimeField = ({ value, onChange, ...props }: TimeFieldProps) => {
   const sourceValue = value || twoDaysFromToday()
-  const timeValue = value
-    ? `${String(value.getHours()).padStart(2, '0')}:${getQrtHour(value.getMinutes()).padStart(2, '0')}`
-    : '06:00'
+
+  const [selectedHrs, selectedMins] = calcTime(getTime(sourceValue))
+  const timeValue = `${String(selectedHrs).padStart(2, '0')}:${getQrtHour(selectedMins).padStart(2, '0')}`
 
   const handleOnChange = (evt: ChangeEvent<HTMLSelectElement>) => {
     const {value: targetValue} = evt.target
+    const [hours, minutes] = calcTime(targetValue)
 
     const newDate = new Date(sourceValue)
-    const hours = targetValue.split(':').map(x => isNaN(parseInt(x)) ? 0 : parseInt(x))
-
-    newDate.setHours(hours[0], hours[1], 0, 0)
+    newDate.setHours(hours, minutes, 0, 0)
     onChange(newDate)
   }
 
