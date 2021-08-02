@@ -18,9 +18,6 @@ const timeOptions: string[] = [].concat(...hours.map(hour => minutes.map(minute 
 
 const getQrtHour = minutes => ((Math.round(minutes/15) * 15) % 60).toString()
 
-const twoDaysFromToday = new Date(Date.now())
-twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
-
 type DateTimeFieldProps = Omit<FieldProps, 'value'> & {
   value: Date | ''
   disableDate?: boolean
@@ -66,8 +63,14 @@ type TimeFieldProps = Omit<FieldProps, 'value'> & {
   onChange: (date: Date) => void
 }
 
+const twoDaysFromToday = () => {
+  const twoDaysFromToday = new Date(Date.now())
+  twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
+  return twoDaysFromToday
+}
+
 export const TimeField = ({ value, onChange, ...props }: TimeFieldProps) => {
-  const sourceValue = value || twoDaysFromToday
+  const sourceValue = value || twoDaysFromToday()
   const timeValue = value
     ? `${String(value.getHours()).padStart(2, '0')}:${getQrtHour(value.getMinutes()).padStart(2, '0')}`
     : '06:00'
@@ -75,7 +78,11 @@ export const TimeField = ({ value, onChange, ...props }: TimeFieldProps) => {
   const handleOnChange = (evt: ChangeEvent<HTMLSelectElement>) => {
     const {value: targetValue} = evt.target
 
-    onChange(new Date(`${getDateLong(sourceValue)} ${targetValue} ${sourceValue.getTimezoneOffset()}`))
+    const newDate = new Date(sourceValue)
+    const hours = targetValue.split(':').map(x => isNaN(parseInt(x)) ? 0 : parseInt(x))
+
+    newDate.setHours(hours[0], hours[1], 0, 0)
+    onChange(newDate)
   }
 
   return <SelectField {...props} onChange={handleOnChange} options={timeOptions} value={timeValue} />
