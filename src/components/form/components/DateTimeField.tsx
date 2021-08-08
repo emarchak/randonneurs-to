@@ -64,14 +64,16 @@ type TimeFieldProps = Omit<FieldProps, 'value'> & {
   onChange: (date: Date) => void
 }
 
-const twoDaysFromToday = () => {
+const defaultSourceValue = () => {
   const twoDaysFromToday = new Date(Date.now())
   twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
+
+  twoDaysFromToday.setUTCHours(10, 0, 0) // 06:00 EDT
   return twoDaysFromToday
 }
 
 export const TimeField = ({ value, onChange, ...props }: TimeFieldProps) => {
-  const sourceValue = value || twoDaysFromToday()
+  const sourceValue = value || defaultSourceValue()
 
   const [selectedHrs, selectedMins] = calcTime(getTime(sourceValue))
   const timeValue = `${String(selectedHrs).padStart(2, '0')}:${getQrtHour(selectedMins).padStart(2, '0')}`
