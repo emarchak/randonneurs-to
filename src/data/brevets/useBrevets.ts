@@ -26,7 +26,6 @@ query {
   allEvent(filter: {season: {gte:2021}}) {
     nodes {
       chapter
-      contact
       distance
       event
       id
@@ -45,20 +44,20 @@ type UseBrevetFilters = {
   before?: Date,
 }
 
+const sortBrevetsAsc = (a: Brevet, b: Brevet) => (a.date < b.date ? -1 : 1)
+
 export const useBrevets = ({ chapter, before = today }: UseBrevetFilters) => {
   const {
     allEvent: { nodes: events }
   } = useStaticQuery(brevetQuery)
 
-  const filteredEvents: Brevet[] = useMemo(() => events.map((event: Brevet) => {
-    return {
+  const filteredEvents: Brevet[] = useMemo(() => events.map((event: Brevet) => ({
       ...event,
       date: new Date(event.date)
-    }
-  }).filter((event: Brevet) => {
-    const matchDate = new Date(event.date) > before
-    const matchChapter = chapter ? event.chapter === chapter : true
-    return matchDate && matchChapter
+    })).sort(sortBrevetsAsc).filter((event: Brevet) => {
+      const matchDate = new Date(event.date) > before
+      const matchChapter = chapter ? event.chapter === chapter : true
+      return matchDate && matchChapter
   }), [chapter, before])
 
   return {

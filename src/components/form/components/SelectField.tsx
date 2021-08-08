@@ -8,6 +8,7 @@ import { Label } from "./Label"
 export type SelectOptionType = string | number | {
   value: string
   label: React.ReactNode
+  disabled?: boolean
 }
 
 type SelectFieldProps = FieldProps & {
@@ -28,11 +29,15 @@ export const SelectField = ({ name, options, value, label, onChange, disabled, o
         required={!Boolean(optional)}
       >
         <option value='' key={''}> - </option>
-        {options.map((option) => {
-          const value = typeof option == 'object' ? option.value : option
-          const label = typeof option == 'object' ? option.label : option
-          return <option key={value} value={value}>{label}</option>
-        })}
+        {options.map((option, i) => (
+          <option
+            value={typeof option === 'object' ? option.value : option}
+            disabled={typeof option === 'object' ? option.disabled : false}
+            key={i}
+            >
+              {typeof option === 'object' ? option.label : option}
+          </option>))
+        }
       </select>
     </label>
     {help && <Help>{help}</Help>}
