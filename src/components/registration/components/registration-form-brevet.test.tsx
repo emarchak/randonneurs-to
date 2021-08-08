@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import { advanceTo, clear } from 'jest-date-mock'
 import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as useCheckRiderMembership from 'src/hooks/useCheckRiderMembership'
+import * as useRiders from 'src/data/riders'
 import * as useSendMail from 'src/hooks/useSendMail'
 import * as useSlack from 'src/hooks/useSlack'
 
@@ -26,9 +26,9 @@ jest.mock('src/data/brevets', () => ({
     })
 }))
 
-jest.mock('src/hooks/useCheckRiderMembership', () => ({
+jest.mock('src/data/riders', () => ({
     __esModule: true,
-    useCheckRiderMembership: jest.fn().mockReturnValue({
+    useRiders: jest.fn().mockReturnValue({
         checkMembership: jest.fn().mockImplementation((fullName) => ({
             fullName,
             city: 'Toronto',
@@ -215,7 +215,7 @@ describe('<RegistrationForm>', () => {
         const checkMembershipMock = jest.fn()
             .mockReturnValueOnce(null)
             .mockReturnValueOnce({ membership: 'Trial' })
-        const useCheckRiderMembershipSpy = jest.spyOn(useCheckRiderMembership, 'useCheckRiderMembership')
+        const useCheckRiderMembershipSpy = jest.spyOn(useRiders, 'useRiders')
         useCheckRiderMembershipSpy.mockReturnValue({ checkMembership: checkMembershipMock })
 
         const mount = render(<RegistrationFormBrevet />)
