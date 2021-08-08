@@ -74,7 +74,7 @@ describe('<RegistrationFormPermanent>', () => {
 
       fireEvent.click(mount.getByLabelText(/Urban/i))
 
-      fireEvent.change(mount.getByLabelText(/starting time/i), {
+      fireEvent.change(mount.getByLabelText(/starting time date/i), {
         target: { value: new Date() },
       })
       fireEvent.change(mount.getByLabelText(/notes/i), {
@@ -137,8 +137,12 @@ describe('<RegistrationFormPermanent>', () => {
 
     fireEvent.click(mount.getByLabelText(/Urban/i))
 
-    fireEvent.change(mount.getByLabelText(/starting time/i), {
+    fireEvent.change(mount.getByLabelText(/starting time date/i), {
       target: { value: rideDate },
+    })
+
+    fireEvent.change(mount.getByLabelText(/time select/i), {
+      target: { value: '12:00' },
     })
 
     fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
@@ -191,8 +195,12 @@ describe('<RegistrationFormPermanent>', () => {
 
     fireEvent.click(mount.getByLabelText(/Urban/i))
 
-    fireEvent.change(mount.getByLabelText(/starting time/i), {
+    fireEvent.change(mount.getByLabelText(/starting time date/i), {
       target: { value: new Date() },
+    })
+
+    fireEvent.change(mount.getByLabelText(/time select/i), {
+      target: { value: '12:00' },
     })
 
     fireEvent.change(mount.getByLabelText(/starting location/i), {
@@ -206,7 +214,7 @@ describe('<RegistrationFormPermanent>', () => {
       target: { value: 'notes' },
     })
 
-    fireEvent.click(mount.getByText('Register'))
+    fireEvent.click(mount.getByRole('button', {name: 'Register'}))
 
     await waitFor(() => {
       expect(fetchSpy).toHaveBeenCalled()
