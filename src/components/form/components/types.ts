@@ -4,6 +4,7 @@ export type LabelProps = {
     label: string
     hideLabel?: boolean
     optional?: boolean
+    id?: string
 }
 
 export type FieldProps = LabelProps & {

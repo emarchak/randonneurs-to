@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { SubmitButton } from 'src/components/buttons'
 import { FormState } from 'src/components/form/utils'
-import { InputField, DateField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
+import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
 import { Callout } from 'src/components/callout'
 import { SelectPermanents } from './select-permanents'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
@@ -14,17 +14,13 @@ import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { validate, RequiredFields } from 'src/components/form/utils'
 import * as styles from 'src/components/styles/registration.module.scss'
 const formName = 'registration-permanent'
-
-const twoDaysFromToday = new Date(Date.now())
-twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
-
 interface FormData {
     name: string
     email: string
     membership: Rider['membership'] | 'missing' | ''
     route: Route['name']
     distance: Number,
-    startTime: Date
+    startTime: Date | ''
     startLocation: string
     chapter: Route['chapter'] | '',
     notes: string,
@@ -37,7 +33,7 @@ const defaultFormData: FormData = {
     email: '',
     membership: '',
     route: '',
-    startTime: twoDaysFromToday,
+    startTime: '',
     startLocation: '',
     chapter: '',
     distance: 0,
@@ -148,7 +144,7 @@ export const RegistrationFormPermanent = () => {
                 <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
                 <SelectPermanents onChange={handlePermanentChange} />
-                <DateField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
+                <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
                 <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} />
                 <InputField label={fieldLabels['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>

@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { SubmitButton } from 'src/components/buttons'
-import { InputField, DateField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
+import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
 import { Brevet } from 'src/data/brevets'
 import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
@@ -12,11 +12,9 @@ import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, RequiredFields, validate } from 'src/components/form/utils'
+import { getDateTimeLong } from 'src/utils'
 
 const formName = 'registration'
-
-const twoDaysFromToday = new Date(Date.now())
-twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
 
 interface FormData {
     name: string
@@ -24,8 +22,8 @@ interface FormData {
     membership: Rider['membership'] | 'missing' | ''
     route: Brevet['route']
     rideType: Brevet['event'] | ''
-    scheduleTime: Date
-    startTime: Date
+    scheduleTime: Date | ''
+    startTime: Date | ''
     startLocation: string
     chapter: Brevet['chapter'] | '',
     distance: Brevet['distance'],
@@ -40,8 +38,8 @@ const defaultFormData: FormData = {
     membership: '',
     route: '',
     rideType: '',
-    startTime: twoDaysFromToday,
-    scheduleTime: twoDaysFromToday,
+    startTime: '',
+    scheduleTime: '',
     startLocation: '',
     chapter: '',
     distance: 0,
@@ -71,6 +69,18 @@ const requiredFields: RequiredFields<FormData> = [
     'roConsent'
 ]
 
+const GrandDepartWarning = ({date}: {date?: Date}) => (
+    date
+        ? <>The <em>grand depart</em> is {getDateTimeLong(date)}. For social distancing, you may pick an alternative time.</>
+        : null
+)
+
+const NameHelp = ({isMissingMembership}: {isMissingMembership: boolean}) => (
+    isMissingMembership
+        ? <MissingMembership />
+        : <>Must match what you used to register with the OCA</>
+)
+
 export const RegistrationFormBrevet = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
@@ -85,10 +95,6 @@ export const RegistrationFormBrevet = () => {
     const hasError = Boolean(formErrors.length)
 
     const isMissingMembership = formData.membership === 'missing'
-
-    const NameHelp = isMissingMembership
-        ? <MissingMembership />
-        : 'Must match what you used to register with the OCA'
 
     const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime)
 
@@ -154,7 +160,7 @@ export const RegistrationFormBrevet = () => {
     return (
         <Form name={formName} className={styles.registrationForm}>
             <ContentWrapper>
-                <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
+                <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={<NameHelp isMissingMembership={isMissingMembership}/>} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
                 <Aside>
                     <p>To encourage social distancing, you can pick your own start time on the scheduled date.</p>
@@ -164,7 +170,7 @@ export const RegistrationFormBrevet = () => {
                     <p><Link href="http://randonneursontario.ca/who/whatis.html#COVID">Learn more about riding brevets and our COVID-19 guidelines.</Link></p>
                 </Aside>
                 <SelectBrevets onChange={handleBrevetChange} />
-                <DateField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />
+                <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} disableDate help={<GrandDepartWarning date={formData.scheduleTime}/>} />
                 <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled={true} />
                 <InputField label={fieldLabels['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>
@@ -179,7 +185,7 @@ export const RegistrationFormBrevet = () => {
                 <HiddenField name='route' value={formData.route} />
                 <HiddenField name='chapter' value={formData.chapter} />
                 <HiddenField name='distance' value={formData.distance.toString()} />
-                <HiddenField name='scheduleTime' value={formData.scheduleTime.toString()} />
+                <HiddenField name='scheduleTime' value={formData.scheduleTime?.toString()} />
                 <HiddenField name='membership' value={formData.membership} />
                 <HiddenField name='rideType' value={formData.rideType} />
                 <ErrorsList formErrors={formErrors} />
