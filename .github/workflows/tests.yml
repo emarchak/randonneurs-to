@@ -6,47 +6,49 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    
-    - name: Cache modules
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Read .nvmrc
-      run: echo ::set-output name=NVMRC::$(cat .nvmrc)
-      id: nvm
+      - name: Cache modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
 
-    - name: Use Node.js (.nvmrc)
-      uses: actions/setup-node@v1
-      with:
-        node-version: "${{ steps.nvm.outputs.NVMRC }}"
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
 
-    - name: Install dependencies
-      run: yarn install --production=false
+      - name: Use Node.js (.nvmrc)
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
-    - name: Run the tests
-      run: yarn test:coverage
+      - name: Install dependencies
+        run: yarn install --production=false
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Run the tests
+        run: yarn test:coverage
 
-    - name: Build screenshots
-      run: yarn build
-      env:
-        CCN_ENDPOINT: ${{ secrets.CCN_ENDPOINT }}
-        GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Build screenshots
+        run: yarn build
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        env:
+          CCN_ENDPOINT: ${{ secrets.CCN_ENDPOINT }}
+          GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
 
-    - name: Upload snapshots to Percy
-      run: yarn test:snapshot
-      env:
-        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      - name: Upload snapshots to Percy
+        run: yarn test:snapshot
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}

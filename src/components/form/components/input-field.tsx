@@ -4,6 +4,7 @@ import { Help } from './Help'
 
 import * as styles from "../../styles/form.module.scss"
 import { Label } from "./Label"
+import { SelectOptionType } from "./SelectField"
 
 type InputFieldProps = FieldProps & {
     type?: 'text' | 'email'
@@ -30,47 +31,7 @@ export const InputField = ({ type = 'text', name, value, label, hideLabel, onCha
     </p>
 )
 
-type SelectOptionType = string | number | {
-    value: string
-    label: string
-}
-
-type SelectFieldProps = FieldProps & {
-    options: SelectOptionType[]
-    onChange: (evt: ChangeEvent<HTMLSelectElement>) => void
-}
-
-export const SelectField = ({ name, options, value, label, onChange, disabled, optional, help }: SelectFieldProps) => (
-    <p>
-        <label>
-            <span className={styles.label}>
-                {label}
-                {optional && ' (optional)'}
-            </span>
-            <select
-                value={value}
-                name={name}
-                className={styles.input + ' ' + styles.select}
-                onChange={onChange}
-                disabled={Boolean(disabled)}
-                required={!Boolean(optional)}
-            >
-                <option value='' key={''}> - </option>
-                {options.map((option) => {
-                    const value = typeof option == 'object' ? option.value : option
-                    const label = typeof option == 'object' ? option.label : option
-                    return <option key={value} value={value}>{label}</option>
-                })}
-            </select>
-        </label>
-        {help && <Help>{help}</Help>}
-    </p >
-)
-
-type RadioOptionType = SelectOptionType | {
-    value: string
-    label: React.ReactNode
-}
+type RadioOptionType = SelectOptionType
 
 type RadioFieldProps = FieldProps & {
     options: RadioOptionType[]

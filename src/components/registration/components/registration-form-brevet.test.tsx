@@ -57,8 +57,8 @@ describe('<RegistrationForm>', () => {
             fireEvent.change(mount.getByLabelText(/email/i), {
                 target: { value: 'foo@bar.com' },
             })
-            fireEvent.change(mount.getByLabelText(/starting time/i), {
-                target: { value: new Date() },
+            fireEvent.change(mount.getByLabelText(/time select/i), {
+                target: { value: '06:00' },
             })
             fireEvent.change(mount.getByLabelText(/notes/i), {
                 target: { value: 'notes' },
