@@ -1,8 +1,7 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react"
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as sendMail from 'src/hooks/useSendMail'
-import { CovidForm } from "./CovidForm"
+import CovidForm from "."
 
 describe("<CovidForm>", () => {
     const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')

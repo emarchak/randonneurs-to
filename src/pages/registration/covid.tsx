@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { ContentWrapper } from "src/components/content-wrapper"
-import { CovidForm } from 'src/components/registration/components/CovidForm'
+import CovidForm from 'src/components/registration/CovidForm'
 import { Link } from 'src/components/link'
 
 const CovidScreening = () => {

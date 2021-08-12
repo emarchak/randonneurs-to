@@ -2,16 +2,19 @@ import React, { ChangeEvent, ReactNode, useState } from 'react'
 import { SubmitButton } from 'src/components/buttons'
 import { Callout } from 'src/components/callout'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { Form, InputField, ErrorsList, CheckboxField } from 'src/components/form/components'
+import { Form, InputField, ErrorsList, CheckboxField, SelectField } from 'src/components/form/components'
 import { formatMessage, FormState, formSubmit, RequiredFields, validate } from 'src/components/form/utils'
 import { Link } from 'src/components/link'
+import { useBrevets } from 'src/data/brevets'
 import { useSendMail } from 'src/hooks/useSendMail'
 import { useSheets } from 'src/hooks/useSheets'
 import { getDateTimeLong } from 'src/utils'
+import { getEventOptions } from './getEventOptions'
 
 type FormData = {
     name: string
     email: string
+    event: string
     fever: boolean
     cough: boolean
     breathing: boolean
@@ -33,6 +36,7 @@ type CovidFormProps = {
 const defaultData = {
     name: "",
     email: "",
+    event: '',
     fever: false,
     cough: false,
     breathing: false,
@@ -53,6 +57,7 @@ const submitLabel = "Submit"
 const fieldLabels = {
     name: 'Your name',
     email: 'Your email',
+    event: 'Event',
     fever: "Fever or chills",
     cough: "Cough",
     breathing: "Difficulty breathing or shortness of breath",
@@ -87,11 +92,15 @@ const checkScreening = (formData: FormData) => (
         formData[fieldName]
     ))
 )
+
 const screeningResultText = (screeningStatus) => screeningStatus
     ? '✗ You may not participate in this event.'
     : '✔ You may participate in this event.'
 
+const eventsHelp = 'You must submit a screening the day of your ride.'
+
 export const CovidForm = ({ children }: CovidFormProps) => {
+    const { brevets } = useBrevets({})
     const [formData, setFormData] = useState<FormData>(defaultData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<string[]>([])
@@ -141,8 +150,8 @@ export const CovidForm = ({ children }: CovidFormProps) => {
         }
     }
 
-    const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { value = "", name } = evt.target
+    const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { value = '', name } = evt.target
         setFormState("dirty")
         setFormData({ ...formData, [name]: value })
     }
@@ -160,6 +169,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
                     {children}
                     <InputField name="name" label={fieldLabels.name} value={formData.name} onChange={handleChange} disabled={isSubmitted} />
                     <InputField name="email" label={fieldLabels.email} type="email" value={formData.email} onChange={handleChange} />
+                    <SelectField name="event" label={fieldLabels.event} value={formData.event} onChange={handleChange} options={getEventOptions(brevets)} help={eventsHelp}/>
                     <Callout alternative>
                         <fieldset>
                             <legend><strong>1. {fieldLabels['symptoms']}</strong></legend>
