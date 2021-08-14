@@ -9009,10 +9009,10 @@ gatsby-cli@^3.9.0:
     yoga-layout-prebuilt "^1.9.6"
     yurnalist "^2.1.0"
 
-gatsby-core-utils@^2.8.0, gatsby-core-utils@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-2.9.0.tgz#f1ba30dfa687bdd2c1c5106d29e6491e5376e8c5"
-  integrity sha512-LKmkk4B/VnSEYKR9W/C8Lp9lwk/l/qY5jbsoiChc43F67VM667gITWH0noSUdcGzbEsN8xi0Wuc8dMA6BvKkvg==
+gatsby-core-utils@^2.11.0, gatsby-core-utils@^2.8.0, gatsby-core-utils@^2.9.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-2.11.0.tgz#155aafe7962ba6ad9b3e72c784bba8a87f99ea6b"
+  integrity sha512-t5PL1/MvTPSG6IeJn+Yd3Fxp0L3HfLI1vvVsmxXvxEiwDp5MJjjtZbrSnWpST1oylMSKI/UECUEKQUax9UJW+A==
   dependencies:
     ci-info "2.0.0"
     configstore "^5.0.1"
@@ -9249,17 +9249,17 @@ gatsby-recipes@^0.20.0:
     xstate "^4.9.1"
     yoga-layout-prebuilt "^1.9.6"
 
-gatsby-source-filesystem@^3.2.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-3.8.0.tgz#d434e3dc4c297851313d56135e1208d00aa3feac"
-  integrity sha512-EyyqiIOhDeZ2EzykLRy3lR9WlpDrBCeHwn5wohvvjGBmWDnA54LloScIf1r/0PxSHSn/vFtXkBuh2Slzln5eag==
+gatsby-source-filesystem@^3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-3.11.0.tgz#b9d67f9a685e8542d1be0f0917a6223b31a787e4"
+  integrity sha512-cKQ4yhzLfw8Gs0B1FtgsLu51iqF+BUu/UewLBtu61I7Qyym797ESqeAvBd0bdHYckXmWl7c3qhBd1531iOXp2w==
   dependencies:
-    "@babel/runtime" "^7.14.0"
+    "@babel/runtime" "^7.14.6"
     better-queue "^3.8.10"
     chokidar "^3.4.3"
     file-type "^16.0.0"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^2.8.0"
+    gatsby-core-utils "^2.11.0"
     got "^9.6.0"
     md5-file "^5.0.0"
     mime "^2.4.6"
@@ -19156,9 +19156,9 @@ url-parse-lax@^3.0.0:
     prepend-http "^2.0.0"
 
 url-parse@^1.4.3, url-parse@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.1.tgz#d5fa9890af8a5e1f274a2c98376510f6425f6e3b"
-  integrity sha512-HOfCOUJt7iSYzEx/UqgtwKRMC6EU91NFhsCHMv9oM03VJcVo2Qrp8T8kI9D7amFf1cu+/3CEhgb3rF9zL7k85Q==
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.3.tgz#71c1303d38fb6639ade183c2992c8cc0686df862"
+  integrity sha512-IIORyIQD9rvj0A4CLWsHkBBJuNqWpFQe224b6j9t/ABmquIS0qDU2pY6kl6AuOrL5OkCXHMCFNe1jBcuAggjvQ==
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
