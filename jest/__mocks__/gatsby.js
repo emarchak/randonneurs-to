@@ -36,6 +36,16 @@ module.exports = {
             rwgpsUrl: 'https://ridewithgps.com/routes/20784084',
             startLocation: 'Rouge GO',
             date: 'August 7 2021 08:00 EDT'
+          },
+          {
+            chapter: 'Huron',
+            distance: 600,
+            event: 'brevet',
+            id: 2,
+            route: 'Brouse\'s Beach Browser',
+            rwgpsUrl: 'https://ridewithgps.com/routes/27865209',
+            startLocation: 'Goderich, Ontario',
+            date: 'August 14 2021 08:00 EDT'
           }]
         }}
     }

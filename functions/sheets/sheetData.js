@@ -53,7 +53,8 @@ module.exports = {
       'pinkEye',
       'household',
       'contact',
-      'travel'
+      'travel',
+      'event'
     ]
   }
 }

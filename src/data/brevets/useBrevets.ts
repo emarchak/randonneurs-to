@@ -19,8 +19,6 @@ export type Brevet = {
   date: Date
 }
 
-const today = new Date(Date.now())
-
 const brevetQuery = graphql`
 query {
   allEvent(filter: {season: {gte:2021}}) {
@@ -46,7 +44,7 @@ type UseBrevetFilters = {
 
 const sortBrevetsAsc = (a: Brevet, b: Brevet) => (a.date < b.date ? -1 : 1)
 
-export const useBrevets = ({ chapter, after = today }: UseBrevetFilters) => {
+export const useBrevets = ({ chapter, after = new Date(Date.now()) }: UseBrevetFilters) => {
   const {
     allEvent: { nodes: events }
   } = useStaticQuery(brevetQuery)
