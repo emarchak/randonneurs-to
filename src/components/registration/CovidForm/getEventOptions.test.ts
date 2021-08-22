@@ -1,10 +1,10 @@
-import { advanceTo } from 'jest-date-mock'
+import MockDate from 'mockdate'
 import { mockBrevet } from 'src/data/brevets'
 import { getEventOptions } from './getEventOptions'
 
 describe('getEventOptions()', () => {
   it('builds array of event options', () => {
-    advanceTo(mockBrevet.date)
+    MockDate.set(new Date(mockBrevet.date))
 
     const eventOptions = getEventOptions([mockBrevet])
     expect(eventOptions[0]).toEqual({
@@ -20,7 +20,7 @@ describe('getEventOptions()', () => {
 
   it('disables events that are more than 2 days in the future', () => {
     const newBrevetDate = new Date(mockBrevet.date).setDate(new Date(mockBrevet.date).getDate() - 3)
-    advanceTo(newBrevetDate)
+    MockDate.set(newBrevetDate)
     const eventOptions = getEventOptions([mockBrevet])
     expect(eventOptions[1]).toEqual({
       value: expect.stringContaining(`${mockBrevet.distance} - ${mockBrevet.route}`),
