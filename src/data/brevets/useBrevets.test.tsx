@@ -55,4 +55,11 @@ describe('useBrevets()', () => {
       expect(brevet.chapter).toEqual(chapter)
     })
   })
+
+  it('slices by limit', () => {
+    const limit = 1
+    const { result } = renderHook(() => useBrevets({limit}))
+
+    expect(result.current.brevets).toHaveLength(limit)
+  })
 })

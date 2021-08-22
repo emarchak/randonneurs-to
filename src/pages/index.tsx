@@ -36,7 +36,7 @@ const IndexPage = () => {
     allFile: { nodes: images },
   } = useStaticQuery(pageQuery)
   const seoImage = getImage(images[0])
-  const { brevets } = useBrevets({ chapter: 'Toronto' })
+  const { brevets } = useBrevets({ chapter: 'Toronto', limit: 2 })
   const { posts } = useBlog({limit: 2})
 
   return (
@@ -55,7 +55,7 @@ const IndexPage = () => {
         <ContentChild>
           <h3>Upcoming events</h3>
           <ul className={styles.eventWrapper}>
-            {brevets.slice(0, 2).map(event => (
+            {brevets.map(event => (
               <li key={event.id} className={styles.eventRow}>
                 <strong>{event.route} {event.distance}</strong><br />
                 {getDateTimeLong(new Date(event.date))}<br />
