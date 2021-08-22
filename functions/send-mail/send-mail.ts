@@ -1,6 +1,6 @@
 import { Handler } from '@netlify/functions'
-import send from './send'
-import singlesend from './singlesend'
+import send from './methods/send'
+import { getSendsByCategory } from './methods/singlesend'
 
 const handler: Handler = async (event) => {
   const { path, httpMethod } = event
@@ -9,7 +9,7 @@ const handler: Handler = async (event) => {
     case '/.netlify/functions/send-mail/send:POST':
       return send(event)
     case '/.netlify/functions/send-mail/singlesends:GET':
-      return singlesend.get(event)
+      return getSendsByCategory(event)
     default:
       return {
         statusCode: 404,
