@@ -12,7 +12,7 @@ describe('getEventOptions()', () => {
       'value': 'permanent',
     })
     expect(eventOptions[1]).toEqual({
-      value: expect.any(String),
+      value: expect.stringContaining(`${mockBrevet.distance} - ${mockBrevet.route}`),
       label: expect.stringContaining(mockBrevet.route),
       disabled: false
     })
@@ -23,7 +23,7 @@ describe('getEventOptions()', () => {
     advanceTo(newBrevetDate)
     const eventOptions = getEventOptions([mockBrevet])
     expect(eventOptions[1]).toEqual({
-      value: expect.any(String),
+      value: expect.stringContaining(`${mockBrevet.distance} - ${mockBrevet.route}`),
       label: expect.stringContaining('screening not open'),
       disabled: true
     })

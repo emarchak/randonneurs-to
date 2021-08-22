@@ -34,8 +34,8 @@ type CovidFormProps = {
 }
 
 const defaultData = {
-    name: "",
-    email: "",
+    name: '',
+    email: '',
     event: '',
     fever: false,
     cough: false,
@@ -73,7 +73,7 @@ const fieldLabels = {
     travel: "In the last 14 days, have you or anyone in your household travelled outside of Canada?",
 }
 
-const requiredFields: RequiredFields<FormData> = ['name', 'email']
+const requiredFields: RequiredFields<FormData> = ['name', 'email', 'event']
 const contactFields = ['household', 'contact', 'travel']
 const symptomFields = [
     'fever',

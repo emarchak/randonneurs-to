@@ -1,10 +1,15 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react"
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as useSendMail from 'src/hooks/useSendMail'
 import CovidForm from "."
+import { advanceTo } from "jest-date-mock"
 
 describe("<CovidForm>", () => {
     const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+    beforeAll(() =>{
+      advanceTo(new Date('August 7 2021 07:00 EDT'))
+    })
 
     beforeEach(() => {
         fetchSpy.mockResolvedValue({ ok: true } as Response)
@@ -14,7 +19,7 @@ describe("<CovidForm>", () => {
         fetchSpy.mockReset()
     })
 
-    it("requires name and email", async () => {
+    it("requires name, email and event", async () => {
         const mount = render(<CovidForm />)
 
         expect(mount.getByText("Submit")).not.toBeDisabled()
@@ -31,6 +36,16 @@ describe("<CovidForm>", () => {
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: "foo@bar.com" },
         })
+
+        fireEvent.click(mount.getByText("Submit"))
+
+        expect(fetchSpy).not.toHaveBeenCalled()
+        expect(mount.getByText("Submit")).toBeDisabled()
+
+        fireEvent.change(mount.getByLabelText(/event/i), {
+            target: { value: "permanent" },
+        })
+
         expect(mount.getByText("Submit")).not.toBeDisabled()
         fireEvent.click(mount.getByText("Submit"))
 
@@ -67,6 +82,10 @@ describe("<CovidForm>", () => {
             target: { value: "foo@bar.com" },
         })
 
+        fireEvent.change(mount.getByLabelText(/event/i), {
+            target: { value: "permanent" },
+        })
+
         expect(mount.getByText("Submit")).not.toBeDisabled()
         fireEvent.click(mount.getByText("Submit"))
 
@@ -87,6 +106,10 @@ describe("<CovidForm>", () => {
 
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: "foo@bar.com" },
+        })
+
+        fireEvent.change(mount.getByLabelText(/event/i), {
+            target: { value: "permanent" },
         })
 
         fireEvent.click(mount.getByLabelText(/Pink eye or headache/i))
@@ -117,6 +140,10 @@ describe("<CovidForm>", () => {
             target: { value: "foo@bar.com" },
         })
 
+        fireEvent.change(mount.getByLabelText(/event/i), {
+            target: { value: "permanent" },
+        })
+
         expect(mount.getByText("Submit")).not.toBeDisabled()
         fireEvent.click(mount.getByText("Submit"))
 
@@ -126,6 +153,46 @@ describe("<CovidForm>", () => {
                 body: expect.stringContaining("You may participate in this event")
             }))
             expect(mount.getByText(/Your screening has been completed/)).toBeTruthy()
+            expect(mount.getByText(/You may participate in this event/)).toBeTruthy()
+        })
+    })
+
+    it('records the screening when submitted', async () => {
+        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+        const useSendMailMock = jest.spyOn(useSendMail, 'useSendMail')
+        const sendMailSpy = jest.fn().mockReturnValue(true)
+        useSendMailMock.mockReturnValue({ sendMail: sendMailSpy })
+
+        const mount = render(<CovidForm />)
+        fireEvent.change(mount.getByLabelText(/name/i), {
+            target: { value: "Foo" },
+        })
+
+        fireEvent.change(mount.getByLabelText(/email/i), {
+            target: { value: "foo@bar.com" },
+        })
+
+        fireEvent.change(mount.getByLabelText(/event/i), {
+            target: { value: 'Sat August 7 - 200 - Waterfront East' },
+        })
+
+        fireEvent.click(mount.getByText("Submit"))
+
+        await waitFor(() => {
+            const fetchBody = fetchSpy.mock.calls[0][1]?.body
+            const mailBody = sendMailSpy.mock.calls[0][0]?.data.formData
+            const expectedFields = {
+                name: 'Foo',
+                email: 'foo@bar.com',
+                event: 'Sat August 7 - 200 - Waterfront East',
+            }
+            expect(sendMailSpy).toHaveBeenCalled()
+            expect(sendMailSpy).toHaveBeenCalled()
+            expect(fetchSpy).toHaveBeenCalled()
+            Object.keys(expectedFields).forEach((label) => {
+                expect(fetchBody).toMatch(`${label}=${encodeURIComponent(expectedFields[label])}`)
+                expect(mailBody).toContain(expectedFields[label])
+            })
             expect(mount.getByText(/You may participate in this event/)).toBeTruthy()
         })
     })

@@ -8,7 +8,7 @@ export const getEventOptions = (brevets: Brevet[]): SelectOptionType[] => {
 
   const options: SelectOptionType[] = brevets.map((brevet) => ({
       value: `${getDateShort(brevet.date)} - ${brevet.distance} - ${brevet.route}`,
-      label: `${getDateShort(brevet.date)} - ${brevet.chapter} - ${brevet.distance} - ${brevet.route}${brevet.date > twoDaysFromNow ? ' (screening not open)': ''}`,
+      label: `${getDateShort(brevet.date)} - ${brevet.distance} - ${brevet.route} ${brevet.date > twoDaysFromNow ? ' (screening not open)': ''}`,
       disabled: brevet.date > twoDaysFromNow
   }))
 
