@@ -3,12 +3,13 @@ import { render, fireEvent, waitFor } from "@testing-library/react"
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useSendMail from 'src/hooks/useSendMail'
 import CovidForm from "."
-import { advanceTo } from "jest-date-mock"
+import MockDate from 'mockdate'
+
 
 describe("<CovidForm>", () => {
     const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
     beforeAll(() =>{
-      advanceTo(new Date('August 7 2021 07:00 EDT'))
+      MockDate.set((new Date('August 7 2021 07:00 EDT')))
     })
 
     beforeEach(() => {
