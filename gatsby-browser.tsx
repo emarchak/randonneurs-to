@@ -29,5 +29,4 @@ export const wrapRootElement = ({ element }) =>  (
 export const onClientEntry = () => {
     // IE11 timezone polyfill
     require('date-time-format-timezone')
-   console.log('snapshot ', process.env.IS_SNAPSHOT)
 }
