@@ -1,4 +1,5 @@
 const send = require('./send')
+const singlesend = require('./singlesend')
 
 const handler = async (event) => {
   const { path, httpMethod } = event
@@ -6,7 +7,9 @@ const handler = async (event) => {
   switch (`${path}:${httpMethod}`) {
     case '/.netlify/functions/send-mail/send:POST':
       return send(event)
-    default: 
+      case '/.netlify/functions/send-mail/singlesend:GET':
+        return singlesend.get(event)
+    default:
       return {
         statusCode: 404
       }
