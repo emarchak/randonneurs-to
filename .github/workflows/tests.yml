@@ -9,8 +9,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - uses: actions/hello-world-composite-action@v1
-
       - name: Install
         uses: ./.github/actions/install
 
@@ -29,8 +27,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - uses: actions/hello-world-composite-action@v1
 
       - name: Install
         uses: ./.github/actions/install
