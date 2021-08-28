@@ -1,6 +1,4 @@
-const path = require('path')
-
-exports.onCreateWebpackConfig = ({ actions }) => {
+export const onCreateWebpackConfig = ({ actions }) => {
     actions.setWebpackConfig({
         module: {
             rules: [
@@ -10,11 +8,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
                 loader: 'graphql-tag/loader',
               },
             ],
-          },
-        resolve: {
-            alias: {
-                'src': path.resolve(__dirname, 'src/')
-            }
-        }
+          }
     })
 }
