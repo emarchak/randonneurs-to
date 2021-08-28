@@ -1,4 +1,4 @@
-exports.onCreateWebpackConfig = ({ actions }) => {
+export const onCreateWebpackConfig = ({ actions }) => {
     actions.setWebpackConfig({
         module: {
             rules: [
