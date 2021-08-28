@@ -19,8 +19,9 @@ describe('getEventOptions()', () => {
   })
 
   it('disables events that are more than 2 days in the future', () => {
-    const newBrevetDate = new Date(mockBrevet.date).setDate(new Date(mockBrevet.date).getDate() - 3)
+    const newBrevetDate = new Date(mockBrevet.date).setDate(new Date(mockBrevet.date).getDate() - 4)
     MockDate.set(newBrevetDate)
+
     const eventOptions = getEventOptions([mockBrevet])
     expect(eventOptions[1]).toEqual({
       value: expect.stringContaining(`${mockBrevet.distance} - ${mockBrevet.route}`),

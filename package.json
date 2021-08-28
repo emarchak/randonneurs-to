@@ -17,7 +17,7 @@
     "gatsby": "^3.9.1",
     "gatsby-plugin-google-gtag": "^3.6.0",
     "gatsby-plugin-image": "^1.11.0",
-    "gatsby-plugin-react-helmet": "^4.2.0",
+    "gatsby-plugin-react-helmet": "^4.12.0",
     "gatsby-plugin-react-svg": "^3.0.1",
     "gatsby-plugin-sass": "^4.2.0",
     "gatsby-plugin-sharp": "^3.2.1",
@@ -39,11 +39,11 @@
     "sass": "^1.37.5"
   },
   "devDependencies": {
-    "@percy/cli": "^1.0.0-beta.65",
+    "@percy/cli": "^1.0.0-beta.67",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^12.0.0",
     "@testing-library/react-hooks": "^7.0.1",
-    "@types/gtag.js": "^0.0.6",
+    "@types/gtag.js": "^0.0.7",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.3",
     "babel-jest": "^27.0.6",
@@ -55,7 +55,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "mockdate": "^3.0.5",
-    "netlify-cli": "^3.37.0",
+    "netlify-cli": "^6.7.1",
     "prettier": "^2.3.2"
   },
   "keywords": [
