@@ -12,27 +12,27 @@ export const flags = {
 }
 
 export const siteMetadata = {
-  title: 'Toronto Randonneurs ',
-  description: 'Long distance cyclists of Toronto, Canada ',
+  title: 'Toronto Randonneurs',
+  description: 'Long distance cyclists of Toronto, Canada',
   author: '@emarchak',
-  siteURL: 'https://randonneurs.to ',
+  siteURL: 'https://randonneurs.to',
 }
 
 export const plugins = [
   'gatsby-plugin-root-import',
-   'gatsby-source-ro ',
+  'gatsby-source-ro',
   {
-    resolve:  'gatsby-source-ccn ',
+    resolve: 'gatsby-source-ccn',
     options: {
       ccnEndpoint: process.env.CCN_ENDPOINT,
     }
   },
-   'gatsby-plugin-react-helmet ',
-   'gatsby-plugin-typescript ',
-   'gatsby-transformer-sharp ',
-   'gatsby-plugin-sharp ',
-   'gatsby-plugin-image ',
-   'gatsby-plugin-sass ',
+  'gatsby-plugin-react-helmet',
+  'gatsby-plugin-typescript',
+  'gatsby-transformer-sharp',
+  'gatsby-plugin-sharp',
+  'gatsby-plugin-image',
+  'gatsby-plugin-sass',
   {
     resolve: 'gatsby-source-rss-feed',
     options: {
@@ -41,7 +41,7 @@ export const plugins = [
     }
   },
   {
-    resolve:  'gatsby-plugin-react-svg ',
+    resolve: 'gatsby-plugin-react-svg',
     options: {
       rule: {
         include: /assets/,
@@ -49,20 +49,20 @@ export const plugins = [
     },
   },
   {
-    resolve:  'gatsby-source-filesystem ',
+    resolve: 'gatsby-source-filesystem',
     options: {
-      name:  'images ',
+      name: 'images',
       path: `${__dirname}/src/images/`,
     },
   },
   {
-    resolve:  'gatsby-plugin-web-font-loader ',
+    resolve: 'gatsby-plugin-web-font-loader',
     options: {
       google: {
         families: [
-           'EB Garamond:400,400i,700,800 ',
-           'Dawning of a New Day ',
-           'Roboto:400,400i,700 ',
+           'EB Garamond:400,400i,700,800',
+           'Dawning of a New Day',
+           'Roboto:400,400i,700',
         ],
       },
     },
