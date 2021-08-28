@@ -1,13 +1,14 @@
 {
-    "compilerOptions": {
-        "jsx": "react",
-        "baseUrl": ".",
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "paths": {
-            "components": [
-                "src/components"
-            ]
-        }
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "components": [
+        "src/components"
+      ]
     }
+  }
 }
