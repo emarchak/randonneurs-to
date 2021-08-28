@@ -2,6 +2,7 @@ name: Install
 
 runs:
   using: composite
+  runs-on: ubuntu-latest
   steps:
     - name: Cache modules
       uses: actions/cache@v2
