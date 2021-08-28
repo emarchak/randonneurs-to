@@ -39,7 +39,7 @@
     "sass": "^1.37.5"
   },
   "devDependencies": {
-    "@percy/cli": "^1.0.0-beta.65",
+    "@percy/cli": "^1.0.0-beta.67",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^12.0.0",
     "@testing-library/react-hooks": "^7.0.1",
