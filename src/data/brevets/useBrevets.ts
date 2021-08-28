@@ -40,11 +40,12 @@ query {
 type UseBrevetFilters = {
   chapter?: Brevet['chapter'],
   after?: Date,
+  limit?: number
 }
 
 const sortBrevetsAsc = (a: Brevet, b: Brevet) => (a.date < b.date ? -1 : 1)
 
-export const useBrevets = ({ chapter, after = new Date(Date.now()) }: UseBrevetFilters) => {
+export const useBrevets = ({ chapter, after = new Date(Date.now()), limit = 20 }: UseBrevetFilters) => {
   const {
     allEvent: { nodes: events }
   } = useStaticQuery(brevetQuery)
@@ -56,7 +57,7 @@ export const useBrevets = ({ chapter, after = new Date(Date.now()) }: UseBrevetF
       const matchDate = new Date(event.date) > after
       const matchChapter = chapter ? event.chapter === chapter : true
       return matchDate && matchChapter
-  }), [chapter, after])
+  }).slice(0, limit), [chapter, after, limit])
 
   return {
     loading: false,

@@ -1,1 +1,2 @@
-export { useBlog, Post } from './useBlog'
+export { useBlog } from './useBlog'
+export type { Post } from './useBlog'

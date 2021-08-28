@@ -1,6 +1,6 @@
 import React from 'react'
+import MockDate from 'mockdate'
 import { fireEvent, render } from "@testing-library/react"
-import { advanceTo, clear } from "jest-date-mock"
 import { TimeField } from "./DateTimeField"
 
 const props = {
@@ -13,7 +13,6 @@ describe('<TimeField>', () => {
 
   afterEach(() => {
     onChangeSpy.mockReset()
-    clear()
   })
 
   it('passes time back to onChange event', () => {
@@ -28,7 +27,7 @@ describe('<TimeField>', () => {
   })
 
   it('uses 06:00 two days from today as default', () => {
-    advanceTo(new Date('2021-08-22 05:01 EDT'))
+    MockDate.set(new Date('2021-08-22 05:01 EDT'))
     const mount = render(<TimeField {...props} value={''} onChange={onChangeSpy} />)
 
     expect(mount.getByLabelText(/time/i)).toHaveProperty('value', '06:00')

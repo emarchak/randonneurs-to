@@ -1,1 +1,2 @@
-export { useRiders, Rider } from './useRiders'
+export { useRiders } from './useRiders'
+export type { Rider } from './useRiders'

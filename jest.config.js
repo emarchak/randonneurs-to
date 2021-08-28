@@ -20,7 +20,6 @@ module.exports = {
   globalSetup: `<rootDir>/jest/globalSetup.js`,
   setupFiles: [
     `<rootDir>/jest/setupFiles.js`,
-    'jest-date-mock'
   ],
   setupFilesAfterEnv: ['<rootDir>/jest/setupFilesAfterEnv.js'],
   testEnvironment: 'jsdom'
