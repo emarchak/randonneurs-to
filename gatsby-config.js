@@ -16,6 +16,7 @@ module.exports = {
     siteURL: "https://randonneurs.to",
   },
   plugins: [
+    'gatsby-plugin-root-import',
     "gatsby-source-ro",
     {
       resolve: "gatsby-source-ccn",
