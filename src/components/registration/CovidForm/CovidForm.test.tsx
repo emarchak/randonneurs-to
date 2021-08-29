@@ -1,7 +1,7 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react"
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as useSendMail from 'src/hooks/useSendMail'
+import * as useMail from 'src/data/mail'
 import CovidForm from "."
 import MockDate from 'mockdate'
 
@@ -120,7 +120,7 @@ describe("<CovidForm>", () => {
 
         await waitFor(() => {
             expect(fetchSpy).toHaveBeenCalledWith('/', expect.objectContaining({ method: "POST" }))
-            expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail', expect.objectContaining({
+            expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', expect.objectContaining({
                 body: expect.stringContaining("You may not participate in this event")
             }))
             expect(mount.getByText(/Your screening has been completed/)).toBeTruthy()
@@ -150,7 +150,7 @@ describe("<CovidForm>", () => {
 
         await waitFor(() => {
             expect(fetchSpy).toHaveBeenCalledWith('/', expect.objectContaining({ method: "POST" }))
-            expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail', expect.objectContaining({
+            expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', expect.objectContaining({
                 body: expect.stringContaining("You may participate in this event")
             }))
             expect(mount.getByText(/Your screening has been completed/)).toBeTruthy()
@@ -160,9 +160,9 @@ describe("<CovidForm>", () => {
 
     it('records the screening when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-        const useSendMailMock = jest.spyOn(useSendMail, 'useSendMail')
+        const useMailMock = jest.spyOn(useMail, 'useMail')
         const sendMailSpy = jest.fn().mockReturnValue(true)
-        useSendMailMock.mockReturnValue({ sendMail: sendMailSpy })
+        useMailMock.mockReturnValue({ sendMail: sendMailSpy })
 
         const mount = render(<CovidForm />)
         fireEvent.change(mount.getByLabelText(/name/i), {

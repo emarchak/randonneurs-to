@@ -1,6 +1,6 @@
 import { Brevet } from 'src/data/brevets'
 import { formatSlackMessage, formSubmit } from 'src/components/form/utils'
-import { useSendMail } from 'src/hooks/useSendMail'
+import { useMail } from 'src/data/mail'
 import { useSlack } from 'src/hooks/useSlack'
 import { useSheets } from 'src/hooks/useSheets'
 import { getDateShort, getDateTimeLong, getTime } from 'src/utils'
@@ -34,7 +34,7 @@ const replyToEmails = {
 
 export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFormParams) => {
     const [ loading, setLoading ] = useState(false)
-    const { sendMail } = useSendMail()
+    const { sendMail } = useMail()
     const { sendSlackMsg } = useSlack()
     const { addRow } = useSheets()
 
@@ -60,6 +60,7 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         const successMail = await sendMail({
             to: [formData.email, replyTo, vpPermanent, memberAtLarge].filter(Boolean),
             replyTo,
+
             data: formData,
         }, 'brevetRegistration')
 

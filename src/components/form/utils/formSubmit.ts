@@ -1,15 +1,10 @@
 import fetch from 'isomorphic-unfetch'
+import { urlEncode } from 'src/utils'
 import { trackEvent } from 'src/utils/tracking'
 import { FormData } from './types'
 
-const formEncode = data => {
-    return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&")
-}
-
 export const formSubmit = async (formName: string, formData: FormData) => {
-    const body = formEncode({ "form-name": formName, ...formData })
+    const body = urlEncode({ "form-name": formName, ...formData })
     try {
         trackEvent("sign_up", { method: formName, ...formData })
         const response = await fetch(`/`, {
