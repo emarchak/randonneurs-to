@@ -102,6 +102,7 @@ const eventsHelp = 'You must submit a screening the day of your ride.'
 export const CovidForm = ({ children }: CovidFormProps) => {
     const { brevets } = useBrevets({})
     const [formData, setFormData] = useState<FormData>(defaultData)
+    const [loading, setLoading] = useState(false)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<string[]>([])
     const [screeningResult, setScreeningResult] = useState<boolean | null>(null)
@@ -121,6 +122,8 @@ export const CovidForm = ({ children }: CovidFormProps) => {
             setFormState(null)
             return
         }
+
+        setLoading(true)
         const screeningStatus = checkScreening({ ...formData })
 
         const success = await formSubmit(formName, { ...formData })
@@ -148,6 +151,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
         } else {
             setFormErrors(["Server error! Try again later."])
         }
+        setLoading(false)
     }
 
     const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -187,7 +191,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
                     )}
 
                     <ErrorsList formErrors={formErrors} />
-                    <SubmitButton disabled={hasError && !isDirty || isSubmitted} handleSubmit={handleSubmit}>
+                    <SubmitButton disabled={hasError && !isDirty || isSubmitted} loading={loading} handleSubmit={handleSubmit}>
                         {submitLabel}
                     </SubmitButton>
                 </ContentWrapper>

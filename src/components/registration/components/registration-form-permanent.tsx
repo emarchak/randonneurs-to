@@ -68,7 +68,7 @@ export const RegistrationFormPermanent = () => {
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
-    const { onSubmit } = useRegistrationForm({ formName, fieldLabels })
+    const { onSubmit, loading } = useRegistrationForm({ formName, fieldLabels })
     const { checkMembership } = useRiders()
     const { allowedStartTimes } = useAllowedStartTimes()
 
@@ -161,14 +161,16 @@ export const RegistrationFormPermanent = () => {
                 <HiddenField name='chapter' value={formData.chapter} />
                 <HiddenField name='distance' value={formData.distance.toString()} />
                 <HiddenField name='membership' value={formData.membership} />
-                <ErrorsList formErrors={formErrors} />
-                {isSubmitted ?
-                    <p aria-live='polite'>
-                        <strong>Thank you for registering to ride with us.</strong><br />
-                        <>A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration. </>
-                        <>Refresh the page to submit again.</>
-                    </p>
-                    : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>Register</SubmitButton>}
+                <div aria-live='polite'>
+                    <ErrorsList formErrors={formErrors} />
+                    {isSubmitted ?
+                        <p>
+                            <strong>Thank you for registering to ride with us.</strong><br />
+                            <>A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration. </>
+                            <>Refresh the page to submit again.</>
+                        </p>
+                        : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty} loading={loading}>Register</SubmitButton>}
+                </div>
             </ContentWrapper>
         </Form>
     )
