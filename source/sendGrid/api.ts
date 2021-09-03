@@ -12,7 +12,7 @@ const headers = {
   'Authorization': `Bearer ${apiKey}`,
 }
 
-type SingleSend = {
+type SingleSendList = {
   id: string
   name: string
   status: 'triggered' | 'draft'
@@ -20,7 +20,7 @@ type SingleSend = {
   send_at: string
 }
 
-type SingleSendFull = SingleSend &{
+export type SingleSend = SingleSendList &{
   email_config: {
     subject: string
     html_content: string
@@ -30,13 +30,13 @@ type SingleSendFull = SingleSend &{
   }
 }
 
-export const getSingleSends = async (): Promise<SingleSend[]> => {
+export const getSingleSends = async (): Promise<SingleSendList[]> => {
   const response = await fetch(endpoints.singleSends(), {headers})
   const data = await response.json()
   return data.result
 }
 
-export const getSingleSend = async (id:string): Promise<SingleSendFull> => {
+export const getSingleSend = async (id:string): Promise<SingleSend> => {
   const response = await fetch(endpoints.singleSend(id), {headers})
   return await response.json()
 }

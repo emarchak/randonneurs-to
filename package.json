@@ -69,7 +69,6 @@
     "serve": "gatsby serve",
     "build:production": "gatsby build",
     "build:schema": "dotenv -c development -- bash -c 'echo \"$GRAPHQL_URL\"' | xargs ./node_modules/.bin/gq --introspect > schema.gql",
-    "predevelop": "yarn build:schema",
     "develop": "gatsby develop -p 8000 -o -S",
     "develop:functions": "netlify functions:serve",
     "develop:live": "netlify dev --live",
