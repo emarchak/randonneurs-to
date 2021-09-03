@@ -92,6 +92,17 @@ $input-width: 40rem;
   padding-right: 0;
 }
 
+.loadingButton {
+  &:hover,
+  &:focus {
+    cursor: wait;
+  }
+
+  box-shadow: get-dropshadow(pressed);
+  outline: none;
+  border-color: get-color(text, light);
+}
+
 .fieldset {
   border: 0;
   padding-top: get-spacing();

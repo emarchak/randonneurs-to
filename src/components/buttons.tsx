@@ -3,51 +3,58 @@ import * as styles from "./styles/form.module.scss"
 import { Link, LinkProps } from 'src/components/link'
 
 type ButtonTypes = {
-    primary?: boolean,
-    secondary?: boolean,
-    small?: boolean,
-    block?: boolean,
+  primary?: boolean
+  secondary?: boolean
+  small?: boolean
+  block?: boolean
+  loading?: boolean
 }
 
-const getButtonClassName = ({ primary = false, secondary = false, block = false, small = false }) => (
-    [
-        styles.button,
-        ...(primary ? [styles.primaryButton] : []),
-        ...(secondary ? [styles.secondaryButton] : []),
-        ...(block ? [styles.blockButton] : []),
-        ...(small ? [styles.smallButton] : []),
-    ].join(' '))
+type getButtonClassNameType = ButtonTypes & { className?: string }
+
+const getButtonClassName = ({ primary, secondary, block, small, loading, className = '' }:getButtonClassNameType) => (
+  [
+    styles.button,
+    className,
+    ...(primary ? [styles.primaryButton] : []),
+    ...(secondary ? [styles.secondaryButton] : []),
+    ...(block ? [styles.blockButton] : []),
+    ...(small ? [styles.smallButton] : []),
+    ...(loading ? [styles.loadingButton] : [])
+  ].join(' '))
 
 type ButtonProps = React.PropsWithChildren<ButtonTypes & {
-    handleClick: (evt: any) => any,
-    disabled?: boolean,
-    className?: string,
+  handleClick: (evt: any) => any
+  disabled?: boolean
+  loading?: boolean
+  className?: string
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type']
 }>
 
-export const Button = ({ handleClick, disabled, className, children, ...props }: ButtonProps) => (
-    <button
-        className={className + ' ' + getButtonClassName(props)}
-        disabled={disabled}
-        onClick={handleClick}
-    >
-        {children}
-    </button>
+export const Button = ({ handleClick, type = 'button', loading, disabled, children, ...props }: ButtonProps) => (
+  <button
+    type={type}
+    className={getButtonClassName({loading, ...props})}
+    disabled={disabled || loading}
+    onClick={handleClick}
+  >
+    {children}
+  </button>
 )
 
 type SubmitButtonProps = React.PropsWithChildren<{
-    handleSubmit: (evt: any) => Promise<void>,
-    disabled?: boolean,
+  handleSubmit: (evt: any) => Promise<void>
+  loading?: boolean
+  disabled?: boolean
 }>
 
-export const SubmitButton = ({ handleSubmit, disabled = false, children }: SubmitButtonProps) => (
-    <button
-        type="submit"
-        className={getButtonClassName({ primary: true })}
-        disabled={disabled}
-        onClick={handleSubmit}
-    >
-        {children}
-    </button>
+export const SubmitButton = ({ handleSubmit, ...props }: SubmitButtonProps) => (
+  <Button
+    primary
+    type='submit'
+    handleClick={handleSubmit}
+    {...props}
+    />
 )
 
 type LinkButtonProps = ButtonTypes & LinkProps
