@@ -1,13 +1,10 @@
-import React, { useState, ChangeEvent } from "react"
-import { ContentWrapper } from "../content-wrapper"
-import { InputField, ErrorsList } from "../form/components"
-import { SubmitButton } from "../Buttons"
-import { formSubmit, FormState, RequiredFields } from "../form/utils"
-import * as styles from "../styles/form.module.scss"
-import { Form } from "../form/components"
-import { validate } from "../form/utils/validate"
+import React, { useState, ChangeEvent } from 'react'
+import { ContentWrapper } from 'src/components/content-wrapper'
+import { InputField, ErrorsList, SubmitButton, Form } from 'src/components/form/components'
+import { formSubmit, FormState, RequiredFields, validate } from 'src/components//form/utils'
+import * as styles from '../styles/form.module.scss'
 
-const formName = "clubaudaxadistance"
+const formName = 'clubaudaxadistance'
 
 const fieldLabels = {
   name: 'Your name',
@@ -29,14 +26,14 @@ type Props = {
 
 export const LonelinessForm = ({ children }: Props) => {
   const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    strava: "",
+    name: '',
+    email: '',
+    strava: '',
   })
   const [formState, setFormState] = useState<FormState>(null)
   const [formErrors, setFormErrors] = useState<string[]>([])
-  const isSubmitted = formState === "submitted"
-  const isDirty = formState === "dirty"
+  const isSubmitted = formState === 'submitted'
+  const isDirty = formState === 'dirty'
   const hasError = Boolean(formErrors.length)
 
   const handleSubmit = async evt => {
@@ -52,16 +49,16 @@ export const LonelinessForm = ({ children }: Props) => {
     const success = await formSubmit(formName, { ...formData })
 
     if (success) {
-      setFormState("submitted")
+      setFormState('submitted')
     } else {
-      setFormErrors(["Server error! Try again later."])
+      setFormErrors(['Server error! Try again later.'])
     }
   }
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const { value = "", name } = evt.target
+    const { value = '', name } = evt.target
 
-    setFormState("dirty")
+    setFormState('dirty')
     setFormData({
       ...formData,
       [name]: value,
@@ -73,7 +70,7 @@ export const LonelinessForm = ({ children }: Props) => {
       <div className={styles.form}>
         <ContentWrapper>
           {children}
-          <div aria-live="polite">
+          <div aria-live='polite'>
             Thank you for sharing your journey with us. Refresh the page to
             submit again.
           </div>
@@ -87,9 +84,9 @@ export const LonelinessForm = ({ children }: Props) => {
 
       <ContentWrapper>
         {children}
-        <InputField name="name" label="Your name" value={formData.name} onChange={handleChange} />
-        <InputField name="email" label="Your email" type="email" value={formData.email} onChange={handleChange} />
-        <InputField name="strava" label="Strava activity url" value={formData.strava} onChange={handleChange} />
+        <InputField name='name' label='Your name' value={formData.name} onChange={handleChange} />
+        <InputField name='email' label='Your email' type='email' value={formData.email} onChange={handleChange} />
+        <InputField name='strava' label='Strava activity url' value={formData.strava} onChange={handleChange} />
         <ErrorsList formErrors={formErrors} />
         <SubmitButton
           disabled={hasError && !isDirty}
