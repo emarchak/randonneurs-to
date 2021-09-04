@@ -4,7 +4,7 @@ import { SEO } from 'src/components/seo'
 import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
 import { registrationRoutes } from '.'
 import { TabMenu } from 'src/components/tabmenu'
-import { LinkButton } from 'src/components/buttons'
+import { LinkButton } from 'src/components/Buttons'
 import { Link } from 'src/components/link'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'

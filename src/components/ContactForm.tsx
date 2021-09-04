@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ReactNode, useState } from 'react'
-import { SubmitButton } from './buttons'
+import { SubmitButton } from './Buttons'
 import { ContentWrapper } from './content-wrapper'
 import { Form, InputField, TextField, ErrorsList } from './form/components'
 import { formatSlackMessage, FormState, formSubmit, RequiredFields, validate } from './form/utils'

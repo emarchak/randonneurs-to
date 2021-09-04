@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { SubmitButton } from 'src/components/buttons'
-import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
+import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form, SubmitButton } from 'src/components/form/components'
 import { Brevet } from 'src/data/brevets'
 import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
@@ -69,7 +68,7 @@ const requiredFields: RequiredFields<FormData> = [
     'roConsent'
 ]
 
-const GrandDepartWarning = ({date}: {date?: Date}) => (
+const GrandDepartWarning = ({date}: {date?: Date | ''}) => (
     date
         ? <>The <em>grand depart</em> is {getDateTimeLong(date)}. For social distancing, you may pick an alternative time.</>
         : null
@@ -96,7 +95,7 @@ export const RegistrationFormBrevet = () => {
 
     const isMissingMembership = formData.membership === 'missing'
 
-    const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime)
+    const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime || null)
 
     const dirtyForm = (newFormData: Partial<FormData>) => {
         setFormState('dirty')

@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react"
 import { ContentWrapper } from "../content-wrapper"
 import { InputField, ErrorsList } from "../form/components"
-import { SubmitButton } from "../buttons"
+import { SubmitButton } from "../Buttons"
 import { formSubmit, FormState, RequiredFields } from "../form/utils"
 import * as styles from "../styles/form.module.scss"
 import { Form } from "../form/components"
