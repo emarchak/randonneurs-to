@@ -32,7 +32,8 @@ const dateTimeLong: Intl.DateTimeFormatOptions = {
     ...dateLong
 }
 
-export const getToday = () => new Date(Date.now())
+const isSnapshot = process.env.IS_SNAPSHOT
+export const getToday = () => new Date(isSnapshot ? '01/01/2021 12:01:00' : Date.now())
 
 export const getTime = (d: Date) => new Intl.DateTimeFormat('en', time).format(d)
 
