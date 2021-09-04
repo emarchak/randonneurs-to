@@ -12,7 +12,12 @@ import { Link } from 'src/components/link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { validate, RequiredFields } from 'src/components/form/utils'
 import * as styles from 'src/components/styles/registration.module.scss'
+import { getToday } from 'src/utils'
 const formName = 'registration-permanent'
+
+const twoDaysFromToday = getToday()
+twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
+
 interface FormData {
     name: string
     email: string

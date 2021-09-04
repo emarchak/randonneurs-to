@@ -1,4 +1,3 @@
-
 const timeZone = 'America/Toronto'
 
 const time: Intl.DateTimeFormatOptions = {
@@ -32,6 +31,12 @@ const dateTimeLong: Intl.DateTimeFormatOptions = {
     ...time,
     ...dateLong
 }
+
+const isCI = process.env.CI
+export const getToday = () => {
+    console.log({isCI, process: process.env.CI})
+    return new Date(process.env.CI ? '01/01/2021 12:01:00' : Date.now())
+    }
 
 export const getTime = (d: Date) => new Intl.DateTimeFormat('en', time).format(d)
 

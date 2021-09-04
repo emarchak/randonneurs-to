@@ -7,7 +7,7 @@ import { SelectField } from "./SelectField"
 import { Label } from "./Label"
 import { ChangeEvent } from "react"
 import { InlineInputs } from "../fieldset"
-import { getTime } from "src/utils"
+import { getTime, getToday } from "src/utils"
 
 import * as styles from "../../styles/form.module.scss"
 import "react-datepicker/dist/react-datepicker.css"
@@ -65,7 +65,7 @@ type TimeFieldProps = Omit<FieldProps, 'value'> & {
 }
 
 const defaultSourceValue = () => {
-  const twoDaysFromToday = new Date(Date.now())
+  const twoDaysFromToday = getToday()
   twoDaysFromToday.setDate(twoDaysFromToday.getDate() + 2)
 
   twoDaysFromToday.setUTCHours(10, 0, 0) // 06:00 EDT

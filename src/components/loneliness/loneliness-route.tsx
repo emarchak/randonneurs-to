@@ -35,7 +35,7 @@ export const LonelinessRoute = ({
       </div>
       <iframe
         src={`https://ridewithgps.com/embeds?type=route&id=${rwgpsRouteId}`}
-        className={styles.iframe}
+        className={[styles.iframe, 'hide-in-percy'].join(' ')}
         scrolling="no"
       />
     </article>

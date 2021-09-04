@@ -3,7 +3,7 @@ import { formatSlackMessage, formSubmit } from 'src/components/form/utils'
 import { useSendMail } from 'src/hooks/useSendMail'
 import { useSlack } from 'src/hooks/useSlack'
 import { useSheets } from 'src/hooks/useSheets'
-import { getDateShort, getDateTimeLong, getTime } from 'src/utils'
+import { getDateShort, getDateTimeLong, getTime, getToday } from 'src/utils'
 import Bugsnag from '@bugsnag/js'
 import { useState } from 'react'
 
@@ -48,7 +48,7 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
             sheet: formName,
             row: {
                 ...formData,
-                submitted: getDateTimeLong(new Date(Date.now())),
+                submitted: getDateTimeLong(getToday()),
                 scheduleTime: formData.scheduleTime && getDateTimeLong(formData.scheduleTime),
                 startDate: getDateShort(formData.startTime),
                 startTime: getTime(formData.startTime),
