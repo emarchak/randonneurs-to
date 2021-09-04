@@ -59,5 +59,9 @@ export const useAllowedStartTimes = () => {
         const canRegister = brevetCancelled ? !brevetCancelled : now < registrationDeadline
         return canRegister
     }
-    return { allowedToRegister, allowedStartTimes, getBrevetRegistrationDeadline }
+    return {
+        allowedToRegister,
+        allowedStartTimes,
+        getBrevetRegistrationDeadline
+    }
 }

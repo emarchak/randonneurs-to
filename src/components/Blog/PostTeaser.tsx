@@ -1,6 +1,6 @@
 import React from 'react'
 import { Post } from "src/data/blog"
-import { LinkButton } from '../buttons'
+import { LinkButton } from '../Buttons'
 
 type PostTeaserProps = {
   post: Post,

@@ -5,6 +5,7 @@ import { useSlack } from 'src/hooks/useSlack'
 import { useSheets } from 'src/hooks/useSheets'
 import { getDateShort, getDateTimeLong, getTime } from 'src/utils'
 import Bugsnag from '@bugsnag/js'
+import { useState } from 'react'
 
 type useRegistrationFormParams = {
     formName: string,
@@ -31,13 +32,14 @@ const replyToEmails = {
     "default": "vp@randonneurs.to"
 }
 
-export const useRegistrationForm = (params: useRegistrationFormParams) => {
-    const { formName, fieldLabels } = params
+export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFormParams) => {
+    const [ loading, setLoading ] = useState(false)
     const { sendMail } = useSendMail()
     const { sendSlackMsg } = useSlack()
     const { addRow } = useSheets()
 
     const onSubmit = async (formData: FormData) => {
+        setLoading(true)
         const message = `Registration for ${formData.chapter} ${formData.route} ${formData.rideType}`
 
         const successSubmit = await formSubmit(formName, { ...formData })
@@ -65,11 +67,13 @@ export const useRegistrationForm = (params: useRegistrationFormParams) => {
             Bugsnag.notify('Registration error');
         }
 
+        setLoading(false)
         return successSubmit
     }
 
     return {
-        onSubmit,
+        loading,
+        onSubmit
     }
 
 }

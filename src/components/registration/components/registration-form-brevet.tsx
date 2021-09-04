@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { SubmitButton } from 'src/components/buttons'
-import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form } from 'src/components/form/components'
+import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form, SubmitButton } from 'src/components/form/components'
 import { Brevet } from 'src/data/brevets'
 import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
@@ -69,7 +68,7 @@ const requiredFields: RequiredFields<FormData> = [
     'roConsent'
 ]
 
-const GrandDepartWarning = ({date}: {date?: Date}) => (
+const GrandDepartWarning = ({date}: {date?: Date | ''}) => (
     date
         ? <>The <em>grand depart</em> is {getDateTimeLong(date)}. For social distancing, you may pick an alternative time.</>
         : null
@@ -86,7 +85,7 @@ export const RegistrationFormBrevet = () => {
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
-    const { onSubmit } = useRegistrationForm({ formName, fieldLabels })
+    const { onSubmit, loading } = useRegistrationForm({ formName, fieldLabels })
     const { checkMembership } = useRiders()
     const { allowedStartTimes } = useAllowedStartTimes()
 
@@ -96,7 +95,7 @@ export const RegistrationFormBrevet = () => {
 
     const isMissingMembership = formData.membership === 'missing'
 
-    const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime)
+    const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime || null)
 
     const dirtyForm = (newFormData: Partial<FormData>) => {
         setFormState('dirty')
@@ -188,14 +187,16 @@ export const RegistrationFormBrevet = () => {
                 <HiddenField name='scheduleTime' value={formData.scheduleTime?.toString()} />
                 <HiddenField name='membership' value={formData.membership} />
                 <HiddenField name='rideType' value={formData.rideType} />
-                <ErrorsList formErrors={formErrors} />
-                {isSubmitted ?
-                    <p aria-live='polite'>
-                        <strong>Thank you for registering to ride with us.</strong><br />
-                        <>A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration.</>
-                        <>Refresh the page to submit again.</>
-                    </p>
-                    : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty}>Register</SubmitButton>}
+
+                <div aria-live='polite'>
+                    <ErrorsList formErrors={formErrors} />
+                    {isSubmitted ?
+                        <p>
+                            <strong>Thank you for registering to ride with us.</strong><br />
+                            <>A copy of your registration request has been sent to your email, and the ride organizer will be in contact to confirm your registration.</>
+                        </p>
+                        : <SubmitButton handleSubmit={handleSubmit} disabled={hasError && !isDirty} loading={loading}>Register</SubmitButton>}
+                </div>
             </ContentWrapper>
         </Form>
     )
