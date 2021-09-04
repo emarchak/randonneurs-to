@@ -1,4 +1,4 @@
-import * as styles from './styles/form.module.scss'
+import * as styles from '../styles/form.module.scss'
 
 export type ButtonTypes = {
   primary?: boolean
