@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { getToday } from 'src/utils'
 
 export type Chapter = 'Toronto' | 'Huron' | 'Ottawa' | 'Simcoe'
 
@@ -45,7 +46,7 @@ type UseBrevetFilters = {
 
 const sortBrevetsAsc = (a: Brevet, b: Brevet) => (a.date < b.date ? -1 : 1)
 
-export const useBrevets = ({ chapter, after = new Date(Date.now()), limit = 20 }: UseBrevetFilters) => {
+export const useBrevets = ({ chapter, after = getToday(), limit = 20 }: UseBrevetFilters) => {
   const {
     allEvent: { nodes: events }
   } = useStaticQuery(brevetQuery)
