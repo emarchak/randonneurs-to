@@ -1,9 +1,9 @@
 import { SelectOptionType } from "src/components/form/components"
 import { Brevet } from "src/data/brevets"
-import { getDateShort } from "src/utils"
+import { getDateShort, getToday } from "src/utils"
 
 export const getEventOptions = (brevets: Brevet[]): SelectOptionType[] => {
-  const deadline = new Date(Date.now())
+  const deadline = getToday()
   deadline.setDate(deadline.getDate() + 3)
 
   const options: SelectOptionType[] = brevets.map((brevet) => ({
