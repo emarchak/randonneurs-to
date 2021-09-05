@@ -19,7 +19,8 @@ module.exports = {
       'email',
       'rideType',
       'membership',
-      'notes'
+      'gender',
+      'notes',
     ]
   },
   'registration-permanent': {

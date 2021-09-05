@@ -122,6 +122,10 @@ describe('<RegistrationForm>', () => {
             target: { value: 'foo@bar.com' },
         })
 
+        fireEvent.change(mount.getByLabelText(/gender/i), {
+            target: { value: 'F' },
+        })
+
         fireEvent.click(mount.getByLabelText(/Rouge Ramble 60/i))
 
         fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
@@ -139,6 +143,7 @@ describe('<RegistrationForm>', () => {
                 'form-name': 'registration',
                 name: 'Foo Bar',
                 email: 'foo@bar.com',
+                gender: 'F',
                 membership: 'Individual',
                 route: 'Rouge Ramble 60',
                 rideType: 'populaire',

@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form, SubmitButton } from 'src/components/form/components'
+import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form, SubmitButton, SelectField } from 'src/components/form/components'
 import { Brevet } from 'src/data/brevets'
 import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
@@ -18,6 +18,7 @@ const formName = 'registration'
 interface FormData {
     name: string
     email: string
+    gender: '' | 'M' | 'F' | 'X'
     membership: Rider['membership'] | 'missing' | ''
     route: Brevet['route']
     rideType: Brevet['event'] | ''
@@ -34,6 +35,7 @@ interface FormData {
 const defaultFormData: FormData = {
     name: '',
     email: '',
+    gender: '',
     membership: '',
     route: '',
     rideType: '',
@@ -50,6 +52,7 @@ const defaultFormData: FormData = {
 const fieldLabels = {
     name: 'Your name',
     email: 'Your email',
+    gender: 'Your gender',
     route: 'Route',
     startTime: 'Starting time',
     startLocation: 'Starting location',
@@ -105,14 +108,9 @@ export const RegistrationFormBrevet = () => {
         })
     }
 
-    const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { value = '', name } = evt.currentTarget
-        dirtyForm({ [name]: value })
-    }
-
-    const handleCheckboxChange = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { name } = evt.currentTarget
-        dirtyForm({ [name]: !formData[name] })
+    const handleInputChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { value = '', name, type } = evt.currentTarget
+        dirtyForm({ [name]: type === 'checkbox' ? !formData[name] : value })
     }
 
     const handleDateChange = (startTime: Date) => {
@@ -164,20 +162,21 @@ export const RegistrationFormBrevet = () => {
                 <Aside>
                     <p>To encourage social distancing, you can pick your own start time on the scheduled date.</p>
 
-                    <p>You'll be emailed a brevets card before each ride. Submit your brevet card and recorded activity (strava, ridewgps, garmin, etc.) to your Chapter VP when you're done.</p>
+                    <p>You'll be emailed a brevet card before each ride. Submit your brevet card and recorded activity (strava, ridewgps, garmin, etc.) to your Chapter VP when you're done.</p>
 
                     <p><Link href="http://randonneursontario.ca/who/whatis.html#COVID">Learn more about riding brevets and our COVID-19 guidelines.</Link></p>
                 </Aside>
                 <SelectBrevets onChange={handleBrevetChange} />
                 <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} disableDate help={<GrandDepartWarning date={formData.scheduleTime}/>} />
-                <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled={true} />
+                <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled />
+                <SelectField label={fieldLabels['gender']} name='gender' options={['M', 'F', 'X']} value={formData.gender} onChange={handleInputChange} optional help={<>The <em lang='fr'>Audax Club Parisien</em> uses this for ridership statistics</>}/>
                 <InputField label={fieldLabels['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>
                     <h2>COVID-19 risk awareness</h2>
-                    <CheckboxField name='ocaConsent' value={formData.ocaConsent} onChange={handleCheckboxChange}>
+                    <CheckboxField name='ocaConsent' value={formData.ocaConsent} onChange={handleInputChange}>
                         I have read the <Link href='https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/'>Ontario Cycling Association's Progressive Return to Cycling Policy</Link> and understand the risks.
                     </CheckboxField>
-                    <CheckboxField name='roConsent' value={formData.roConsent} onChange={handleCheckboxChange}>
+                    <CheckboxField name='roConsent' value={formData.roConsent} onChange={handleInputChange}>
                         I have read <Link href='http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf'>Randonneurs Ontario's Club Risk Management Policy</Link> and understand my responsibilities.
                     </CheckboxField>
                 </Callout>
