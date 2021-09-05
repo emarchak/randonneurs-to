@@ -16,8 +16,8 @@ type Mail = {
 export const createMail = (send: SingleSend) => ({
   id: send.id,
   categories: send.categories,
-  content: send.email_config.html_content,
-  teaser: send.email_config.plain_content.match(/(.{280}[^\s]*)/).pop(),
+  content: send.email_config.html_content.replace(/http:/g, 'https:'),
+  teaser: send.email_config.plain_content.match(/.{280}[^\s]*/s).pop(),
   subject: send.email_config.subject,
   name: send.name,
   sentAt: new Date(send.send_at)
