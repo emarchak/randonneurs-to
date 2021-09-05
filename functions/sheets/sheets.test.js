@@ -14,6 +14,7 @@ const rowToAdd = {
     startLocation: 'Start location',
     name: 'Test rider',
     email: 'test@example.com',
+    gender: 'F',
     membership: 'Missing',
     notes: 'This is a test registration'
   }
@@ -71,6 +72,7 @@ describe('sheets()', () => {
       'test@example.com',
       '',
       'Missing',
+      'F',
       'This is a test registration'
     ])
   })
