@@ -20,10 +20,11 @@ type SingleSendList = {
   send_at: string
 }
 
-export type SingleSend = SingleSendList &{
+export type SingleSend = SingleSendList & {
   email_config: {
     subject: string
     html_content: string
+    plain_content: string
   }
   send_to: {
     list_ids: string[]

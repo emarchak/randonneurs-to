@@ -1,21 +1,33 @@
 import React from 'react'
-import { Callout } from '../components/callout'
-import { ContentChild, ContentWrapper } from '../components/content-wrapper'
+import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { getDateTimeLong } from '../utils'
+import { getDateTimeLong } from 'src/utils'
 import { Layout } from '../components/layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { LinkButton } from 'src/components/Buttons'
 import { SEO } from '../components/seo'
 import { useBrevets } from 'src/data/brevets'
 import * as styles from './styles/index.module.scss'
-import ClubAudax from './assets/ClubAudax.svg'
 import { Link } from 'src/components/link'
 import { useBlog } from 'src/data/blog'
 import { PostTeaser } from 'src/components/Blog'
 
 const pageQuery = graphql`
 query {
+  allSitePage(
+    filter: {component: {regex: "/newsletter/i"}, id: {}, context: {}}
+    sort: {fields: context___sentAt, order: DESC}
+  ) {
+    nodes {
+      path
+      context {
+        name
+        subject
+        sentAt
+        teaser
+      }
+    }
+  }
   allFile(
     filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
     limit: 6
@@ -34,6 +46,7 @@ query {
 const IndexPage = () => {
   const {
     allFile: { nodes: images },
+    allSitePage: { nodes: newsletters}
   } = useStaticQuery(pageQuery)
   const seoImage = getImage(images[0])
   const { brevets } = useBrevets({ chapter: 'Toronto', limit: 2 })
@@ -71,7 +84,7 @@ const IndexPage = () => {
       </ContentWrapper>
 
       <ContentWrapper>
-      <ContentChild className={styles.gallery}>
+        <ContentChild className={styles.gallery}>
           {images.map(image => (
             <GatsbyImage
               className={styles.galleryTile}
@@ -87,11 +100,24 @@ const IndexPage = () => {
         <h2>Recent member reports</h2>
         <ContentWrapper container>
           {posts.map((post, i) => (
-            <ContentChild>
-              <PostTeaser post={post} key={i}/>
+            <ContentChild key={i}>
+              <PostTeaser post={post}/>
             </ContentChild>))}
         </ContentWrapper>
       </ContentWrapper>
+      <ContentWrapper>
+        <h2>Newsletters</h2>
+        <ContentWrapper container>
+          {newsletters.map(({path, context}, i) => (
+            <ContentChild key={i}>
+              <h3>{context.name}</h3>
+              <h4>{context.subject}</h4>
+              <p>{context.teaser}... <Link to={path}>{'continue reading >>'}</Link></p>
+            </ContentChild>
+          ))}
+        </ContentWrapper>
+      </ContentWrapper>
+
     </Layout >
   )
 }

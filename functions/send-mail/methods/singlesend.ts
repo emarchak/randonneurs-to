@@ -1,5 +1,5 @@
 import { HandlerEvent, HandlerResponse } from '@netlify/functions'
-import { getSingleSends, getSingleSend } from '../../../source/sendGrid/api'
+import { getSingleSends, getSingleSend } from 'gatsby/source/sendGrid/api'
 
 export const getSendsByCategory = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {

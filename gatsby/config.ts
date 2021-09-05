@@ -1,5 +1,6 @@
 
 import dotenv from 'dotenv'
+import { resolve } from 'path'
 
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -7,7 +8,6 @@ dotenv.config({
 
 export const flags = {
   DEV_SSR: true,
-  PRESERVE_WEBPACK_CACHE: true,
   FAST_DEV: true
 }
 
@@ -52,7 +52,7 @@ export const plugins = [
     resolve: 'gatsby-source-filesystem',
     options: {
       name: 'images',
-      path: `${__dirname}/src/images/`,
+      path: resolve('src/images'),
     },
   },
   {
