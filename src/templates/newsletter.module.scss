@@ -1,6 +1,8 @@
 .newsletter {
+  max-width: 600px; // sendgrid width
+  margin: 0 auto;
+
   table {
-    max-width: 100% !important;
     margin-bottom: 0;
   }
   tr {
