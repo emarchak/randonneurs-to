@@ -26,7 +26,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
     throw result.errors
   }
 
-  const {allMail: {nodes}} = result.data as any
+  const {allMail: {nodes = []}} = result.data as any
 
   nodes.forEach((mail, i) => {
     createPage({
