@@ -74,6 +74,7 @@ jobs:
         env:
           CCN_ENDPOINT: ${{ secrets.CCN_ENDPOINT }}
           GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
 
       - name: Upload snapshots to Percy
         run: yarn test:snapshot

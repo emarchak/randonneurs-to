@@ -62,9 +62,9 @@ const fetch = jest.fn().mockImplementation(async (endpoint) => {
       status: 'ok',
       json: jest.fn().mockResolvedValue({
         id: '1234',
-        name: 'example sends',
+        name: 'Example newsletter',
         status: 'triggered',
-        categories: ['category1', 'category2'],
+        categories: ['category1', 'randolist'],
         send_at: '2021-06-06T18:14:21Z'})
     }
   }
@@ -76,16 +76,16 @@ const fetch = jest.fn().mockImplementation(async (endpoint) => {
         result: [
           {
             id: '1234',
-            name: 'example sends',
+            name: 'Example newsletter',
             status: 'triggered',
-            categories: ['category1', 'category2'],
+            categories: ['category1', 'randolist'],
             send_at: '2021-06-06T18:14:21Z'
           },
           {
-            id: '1234',
-            name: 'Example sends',
-            status: 'triggered',
-            categories: ['category2'],
+            id: '4567',
+            name: 'Example draft newsletter',
+            status: 'draft',
+            categories: ['randolist'],
             send_at: '2021-06-06T18:14:21Z'
           }]
     })

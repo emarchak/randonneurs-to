@@ -6,6 +6,10 @@ export const getSendsByCategory = async (category: Categories) => {
   try {
     const response = await getSingleSends()
 
+    if (!response) {
+      throw new Error('No sends found')
+    }
+
     const singleSends = response.filter((singleSend) => (category ? singleSend.categories.includes(category) : true)
       && singleSend.status === 'triggered')
 
@@ -18,7 +22,6 @@ export const getSendsByCategory = async (category: Categories) => {
 
   }
   catch (err) {
-    console.log(err)
     return []
   }
 }
