@@ -5,6 +5,11 @@
 * ts-node register helps importing and compiling TypeScript modules into JS
 */
 require('source-map-support').install();
-require('ts-node').register();
+require('ts-node').register({
+  compilerOptions: {
+    module: 'commonjs',
+    target: 'es2017',
+  },
+})
 
-module.exports = require('./gatsby-config.ts');
+module.exports = require('./gatsby/config.ts');

@@ -1,0 +1,15 @@
+.newsletter {
+  max-width: 600px; // sendgrid width
+  margin: 0 auto;
+
+  table {
+    margin-bottom: 0;
+  }
+  tr {
+    border-color: transparent;
+  }
+  td,
+  th {
+    padding: 0 0;
+  }
+}

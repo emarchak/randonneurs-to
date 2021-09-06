@@ -4,7 +4,7 @@ import MockDate from 'mockdate'
 import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useRiders from 'src/data/riders'
-import * as useSendMail from 'src/hooks/useSendMail'
+import * as useMail from 'src/data/mail'
 import * as useSlack from 'src/hooks/useSlack'
 
 jest.mock('src/data/brevets', () => ({
@@ -100,9 +100,9 @@ describe('<RegistrationForm>', () => {
 
     it('records the registration when submitted', async () => {
         const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-        const useSendMailMock = jest.spyOn(useSendMail, 'useSendMail')
+        const useMailMock = jest.spyOn(useMail, 'useMail')
         const sendMailSpy = jest.fn().mockReturnValue(true)
-        useSendMailMock.mockReturnValue({ sendMail: sendMailSpy })
+        useMailMock.mockReturnValue({ sendMail: sendMailSpy })
 
         const useSlacklMock = jest.spyOn(useSlack, 'useSlack')
         const sendSlackMsgSpy = jest.fn().mockReturnValue(true)

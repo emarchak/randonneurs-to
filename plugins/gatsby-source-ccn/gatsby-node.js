@@ -36,8 +36,6 @@ const fetchPaginatedQuery = async (query, accumulator = []) => {
 exports.pluginOptionsSchema = ({ Joi }) => {
     return Joi.object({
         ccnEndpoint: Joi.string()
-            .required()
-            .description('The endpoint to fetch'),
     })
 }
 
@@ -47,9 +45,14 @@ exports.sourceNodes = async (api, pluginOptions) => {
         createContentDigest,
         createNodeId,
     } = api
+    const { ccnEndpoint } = pluginOptions
+
+    if (!ccnEndpoint) {
+        return
+    }
 
     try {
-        const response = await fetchPaginatedQuery(pluginOptions.ccnEndpoint)
+        const response = await fetchPaginatedQuery(ccnEndpoint)
         response.map(snakeToCamelKeys).forEach((data) => {
             const rider = {
                 id: data.id,

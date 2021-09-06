@@ -3,7 +3,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint) => {
   if (endpoint.match(/ridewithgps.com\/routes\/\d+.json/)) {
     return {
       ok: true,
-      status: 200, 
+      status: 200,
       json: jest.fn().mockResolvedValue({
         route: {
           name: 'Flat Loop',
@@ -57,6 +57,45 @@ const fetch = jest.fn().mockImplementation(async (endpoint) => {
     }
   }
 
+  if (endpoint.match(/api.sendgrid.com\/v3\/marketing\/singlesends\/\d+/)) {
+    return {
+      status: 'ok',
+      json: jest.fn().mockResolvedValue({
+        id: '1234',
+        name: 'Example newsletter',
+        status: 'triggered',
+        categories: ['category1', 'randolist'],
+        send_at: '2021-06-06T18:14:21Z',
+        email_config: {
+          html_content: 'HTML content http://google.ca'.repeat(20),
+          plain_content: 'HTML content http://google.ca'.repeat(20)
+        }
+      })
+    }
+  }
+
+  if (endpoint.match(/api.sendgrid.com\/v3\/marketing\/singlesends/)) {
+    return {
+      status: 'ok',
+      json: jest.fn().mockResolvedValue({
+        result: [
+          {
+            id: '1234',
+            name: 'Example newsletter',
+            status: 'triggered',
+            categories: ['category1', 'randolist'],
+            send_at: '2021-06-06T18:14:21Z'
+          },
+          {
+            id: '4567',
+            name: 'Example draft newsletter',
+            status: 'draft',
+            categories: ['randolist'],
+            send_at: '2021-06-06T18:14:21Z'
+          }]
+    })
+    }
+  }
   return ({
     ok: true,
     json: jest.fn().mockResolvedValue({})

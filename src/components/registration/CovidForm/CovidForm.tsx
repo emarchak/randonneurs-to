@@ -5,7 +5,7 @@ import { Form, InputField, ErrorsList, CheckboxField, SelectField, SubmitButton 
 import { formatMessage, FormState, formSubmit, RequiredFields, validate } from 'src/components/form/utils'
 import { Link } from 'src/components/link'
 import { useBrevets } from 'src/data/brevets'
-import { useSendMail } from 'src/hooks/useSendMail'
+import { useMail } from 'src/data/mail'
 import { useSheets } from 'src/hooks/useSheets'
 import { getDateTimeLong } from 'src/utils'
 import { getEventOptions } from './getEventOptions'
@@ -105,7 +105,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<string[]>([])
     const [screeningResult, setScreeningResult] = useState<boolean | null>(null)
-    const { sendMail } = useSendMail()
+    const { sendMail } = useMail()
     const { addRow } = useSheets()
 
     const isSubmitted = formState === "submitted"

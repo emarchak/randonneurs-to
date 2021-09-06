@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationFormPermanent } from './registration-form-permanent'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useRiders from 'src/data/riders'
-import * as useSendMail from 'src/hooks/useSendMail'
+import * as useMail from 'src/data/mail'
 import * as useSlack from 'src/hooks/useSlack'
 import * as Gatsby from 'gatsby'
 
@@ -116,9 +116,9 @@ describe('<RegistrationFormPermanent>', () => {
     const mount = render(<RegistrationFormPermanent />)
     const rideDate = new Date('2021-10-09T12:00:00.000Z')
 
-    const useSendMailMock = jest.spyOn(useSendMail, 'useSendMail')
+    const useMailMock = jest.spyOn(useMail, 'useMail')
     const sendMailSpy = jest.fn().mockReturnValue(true)
-    useSendMailMock.mockReturnValue({ sendMail: sendMailSpy })
+    useMailMock.mockReturnValue({ sendMail: sendMailSpy })
 
     const useSlacklMock = jest.spyOn(useSlack, 'useSlack')
     const sendSlackMsgSpy = jest.fn().mockReturnValue(true)
