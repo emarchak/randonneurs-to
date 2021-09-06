@@ -65,7 +65,12 @@ const fetch = jest.fn().mockImplementation(async (endpoint) => {
         name: 'Example newsletter',
         status: 'triggered',
         categories: ['category1', 'randolist'],
-        send_at: '2021-06-06T18:14:21Z'})
+        send_at: '2021-06-06T18:14:21Z',
+        email_config: {
+          html_content: 'HTML content http://google.ca'.repeat(20),
+          plain_content: 'HTML content http://google.ca'.repeat(20)
+        }
+      })
     }
   }
 

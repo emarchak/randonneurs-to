@@ -1,4 +1,3 @@
-import { CreatePageArgs, NodePluginArgs } from "gatsby"
 import { createPages } from "./createPage"
 
 const exampleNode1 = {
@@ -31,9 +30,17 @@ describe('createPage()', () => {
       }
     }
   })
+  const originalError = console.error
+  const consoleError = jest.fn()
+
+  beforeEach(() => {
+    console.error = consoleError
+  })
 
   afterEach(() => {
+    console.error = originalError
     createPageSpy.mockReset()
+    graphql.mockReset()
   })
 
   it('creates mail pages', async () => {
@@ -52,6 +59,14 @@ describe('createPage()', () => {
         }
       }
     })
+  })
 
+  it('throws error if unable to find result', async () => {
+    graphql.mockResolvedValueOnce({errors: true})
+
+    await Promise.all([
+      createPages({graphql, actions} as any, {} as any, jest.fn())
+    ])
+    expect(consoleError).toHaveBeenCalled()
   })
 })
