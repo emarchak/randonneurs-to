@@ -55,7 +55,7 @@
     "gatsby-plugin-root-import": "^2.0.7",
     "graphqurl": "^1.0.1",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.0.6",
+    "jest": "^27.1.1",
     "mockdate": "^3.0.5",
     "netlify-cli": "^6.7.1",
     "prettier": "^2.3.2"
