@@ -15,7 +15,7 @@
     "@shopify/buy-button-js": "^2.1.7",
     "apollo-boost": "^0.4.9",
     "date-time-format-timezone": "^1.0.22",
-    "gatsby": "^3.12.1",
+    "gatsby": "^3.13.0",
     "gatsby-plugin-google-gtag": "^3.6.0",
     "gatsby-plugin-image": "^1.13.0",
     "gatsby-plugin-react-helmet": "^4.12.0",
@@ -34,7 +34,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-burger-menu": "^3.0.6",
-    "react-datepicker": "^4.2.0",
+    "react-datepicker": "^4.2.1",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "sass": "^1.37.5"
