@@ -6,7 +6,7 @@
   "author": "Erin Marchak <erin@emarchak.com>",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
-    "@bugsnag/js": "^7.9.2",
+    "@bugsnag/js": "^7.11.0",
     "@bugsnag/plugin-react": "^7.9.2",
     "@jagi/jest-transform-graphql": "^1.0.2",
     "@loadable/component": "^5.14.1",
@@ -47,7 +47,7 @@
     "@types/gtag.js": "^0.0.7",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.19",
-    "babel-jest": "^27.1.0",
+    "babel-jest": "^27.1.1",
     "babel-preset-gatsby": "^1.13.0",
     "dotenv-cli": "^4.0.0",
     "eslint": "^7.32.0",
