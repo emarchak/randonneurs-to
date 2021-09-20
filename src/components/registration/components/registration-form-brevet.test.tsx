@@ -9,7 +9,7 @@ import * as useSlack from 'src/hooks/useSlack'
 
 jest.mock('src/data/brevets', () => ({
     __esModule: true,
-    useBrevets: jest.fn().mockReturnValue({
+    useEvents: jest.fn().mockReturnValue({
         loading: false,
         brevets:
             [{

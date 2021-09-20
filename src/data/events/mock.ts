@@ -1,4 +1,4 @@
-import { Brevet } from "./useBrevets"
+import { Brevet } from "./useEvents"
 
 export const mockBrevet: Brevet = {
   chapter: 'Toronto',

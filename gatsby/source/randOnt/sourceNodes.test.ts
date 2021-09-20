@@ -1,35 +1,17 @@
 
-import gatsbySourceRo from './gatsby-node'
+import { sourceNodes } from './sourceNodes'
 
-jest.mock('isomorphic-unfetch', () => jest.fn().mockResolvedValue({
-    json: jest.fn().mockResolvedValue({
-        status: 'ok', schedule: [
-            {
-                Sched_Id: '884',
-                Chapter: 'Toronto',
-                Event: 'Brevet',
-                Distance: '200',
-                Date: '2021-10-09',
-                Route: 'Castle',
-                StartLoc: 'Grimsby Information Center, 424 S Service Rd, Grimsby',
-                Stime: '08:00:00',
-                Organizer: 'Register',
-                Contact: 'http://randonneurs.to/registration',
-                RWGPS: 'https://ridewithgps.com/routes/25673993',
-                Unixtime: 1633780800
-            }
-        ]
-    })
-}))
-
-
-describe('gatsby-source-ro', () => {
+describe('sourceNodes', () => {
     it('processes input', async () => {
         const createNode = jest.fn()
         const createContentDigest = jest.fn()
         const createNodeId = jest.fn()
 
-        await gatsbySourceRo.sourceNodes({ actions: { createNode }, createContentDigest, createNodeId })
+        const args = { actions: { createNode }, createContentDigest, createNodeId } as any
+
+        await Promise.all([
+            sourceNodes(args, {} as any, jest.fn())
+        ]);
 
         expect(createNodeId).toHaveBeenCalledWith('event-884')
         expect(createNode).toHaveBeenCalledWith(expect.objectContaining({

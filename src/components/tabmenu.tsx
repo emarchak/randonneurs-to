@@ -15,6 +15,7 @@ type Props = {
 
 export const TabMenu = ({ tabs, activeRoute }: Props) => (
     <menu className={styles.tabmenu}>
+        {console.log(activeRoute)}
         <select
             name={'sub menu'}
             onChange={(evt) => { navigate(evt.currentTarget.value) }}

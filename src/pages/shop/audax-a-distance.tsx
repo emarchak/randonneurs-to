@@ -2,7 +2,7 @@
 import React from 'react'
 import { ContentWrapper, ContentChild } from "src/components/content-wrapper"
 import { Layout } from 'src/components/layout'
-import { lonelinessRoutes } from '../loneliness'
+import { routes as lonelinessRoutes } from '../loneliness'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/tabmenu'
 import Loadable from "@loadable/component"

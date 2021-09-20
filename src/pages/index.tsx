@@ -6,7 +6,7 @@ import { Layout } from '../components/layout'
 import { graphql, useStaticQuery } from 'gatsby'
 import { LinkButton } from 'src/components/Buttons'
 import { SEO } from '../components/seo'
-import { useBrevets } from 'src/data/brevets'
+import { useEvents } from 'src/data/events'
 import * as styles from './styles/index.module.scss'
 import { Link } from 'src/components/link'
 import { useBlog } from 'src/data/blog'
@@ -49,7 +49,7 @@ const IndexPage = () => {
     allSitePage: { nodes: newsletters}
   } = useStaticQuery(pageQuery)
   const seoImage = getImage(images[0])
-  const { brevets } = useBrevets({ chapter: 'Toronto', limit: 2 })
+  const { brevets } = useEvents({ chapter: 'Toronto', limit: 2 })
   const { posts } = useBlog({limit: 2})
 
   return (

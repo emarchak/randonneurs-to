@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, ReactChild } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form, SubmitButton, SelectField } from 'src/components/form/components'
-import { Brevet } from 'src/data/brevets'
+import { Brevet } from 'src/data/events'
 import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
 import { Aside, Callout } from 'src/components/callout'
