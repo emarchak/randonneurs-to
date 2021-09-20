@@ -20,7 +20,6 @@ export const siteMetadata = {
 
 export const plugins = [
   'gatsby-plugin-root-import',
-  'gatsby-source-ro',
   {
     resolve: 'gatsby-source-ccn',
     options: {

@@ -7,21 +7,17 @@ import { LinkButton } from 'src/components/Buttons'
 import { SEO } from 'src/components/seo'
 
 import { newsletter } from './newsletter.module.scss'
+import { PageTemplateType } from './types'
 
-type NewsletterProps = {
-  pageContext: {
-    categories: string[]
-    name: string
-    subject: string
-    sentAt: string
-    content: string
-    teaser: string
-    pageInfo: {
-      prevUrl?: string
-      nextUrl?: string
-    }
-  }
-}
+type NewsletterProps = PageTemplateType<{
+  categories: string[]
+  name: string
+  subject: string
+  sentAt: string
+  content: string
+  teaser: string
+  id: string
+}>
 
 const Newsletter = ({pageContext: {name, content, subject, teaser, sentAt, pageInfo}}: NewsletterProps) => (
   <Layout>

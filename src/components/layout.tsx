@@ -15,10 +15,9 @@ import "normalize.css"
 import * as styles from './styles/layout.module.scss'
 import "./styles/index.scss"
 
-type Props = {
+type Props = React.PropsWithChildren<{
   hideHeader?: boolean
-  children: React.ReactNode
-}
+}>
 
 export const Layout = ({ hideHeader = false, children }: Props) => {
   const [menuOpen, setMenuState] = useState(false)

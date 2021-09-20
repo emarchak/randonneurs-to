@@ -13,7 +13,7 @@ import * as style from "../styles/loneliness.module.scss"
 import { Link } from "src/components/link"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
-export const lonelinessRoutes = [
+export const routes = [
   { label: 'Club', route: '/loneliness/' },
   { label: 'Shop', route: '/shop/audax-a-distance/' },
   { label: 'Trace', route: '/registration/trace-virtuelle/' },
@@ -43,7 +43,7 @@ const Page = () => {
         image={image}
       />
       <ContentWrapper>
-        <TabMenu tabs={lonelinessRoutes} activeRoute='/loneliness/' />
+        <TabMenu tabs={routes} activeRoute='/loneliness/' />
         <GatsbyImage
           image={image}
           className={style.heading} alt="Club audax à distance"

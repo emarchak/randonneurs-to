@@ -36,8 +36,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       context: {
         ...mail,
         pageInfo: {
+          title: mail.name,
           prevUrl: i === 0 ? null : buildPath(nodes[i - 1]),
-          nextUrl: i === nodes.length - 1 ? null : buildPath(nodes[i + 1])
+          prevTitle: nodes[i - 1]?.name,
+          nextUrl: i === nodes.length - 1 ? null : buildPath(nodes[i + 1]),
+          nextTitle: nodes[i + 1]?.name,
         }
       },
     })

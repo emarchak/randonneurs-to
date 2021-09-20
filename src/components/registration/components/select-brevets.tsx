@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent, useMemo } from 'react'
 import { RadioTable, SelectField } from 'src/components/form/components'
 import { Fieldset, InlineInputs } from 'src/components/form/fieldset'
-import { useBrevets, Brevet } from 'src/data/brevets'
+import { useEvents, Brevet } from 'src/data/events'
 import { BrevetColumn } from './brevet-row'
 import { getDateLong, getTime } from 'src/utils'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
@@ -22,7 +22,7 @@ type Props = {
 }
 
 export const SelectBrevets = ({ onChange }: Props) => {
-    const { brevets } = useBrevets({})
+    const { brevets } = useEvents({})
     const { allowedToRegister, getBrevetRegistrationDeadline } = useAllowedStartTimes()
     const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['id']>('')
     const [filters, setFilters] = useState({

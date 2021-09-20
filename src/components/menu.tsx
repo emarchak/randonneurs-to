@@ -2,10 +2,11 @@ import React from 'react'
 import { slide as Burger } from 'react-burger-menu'
 import { Link } from "./link"
 
+import * as styles from './styles/menu.module.scss'
+
 export const menuConfig = {
   pageWrapId: 'pageWrap', outerContainerId: 'outerContainer',
 }
-import * as styles from './styles/menu.module.scss'
 
 const spacing = {
   large: '2.25rem',
@@ -49,34 +50,44 @@ type MenuProps = {
   onMenuChange?({ }: MenuState): void
 }
 
+const SectionTitle = (props: any) => <Link {...props} className={styles.link} />
+const SectionItem = (props: any) => <li><Link {...props} className={styles.linkSecondary} /></li>
+const List = (props: any) => <ul {...props} className={styles.list} />
+const ListItem = (props: any) => <ul {...props} className={styles.listItem} />
+
 export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
   <Burger {...menuConfig} styles={menuStyles} isOpen={isOpen} onStateChange={onMenuChange} customBurgerIcon={false} right>
-    <ul className={styles.list}>
-      <li className={styles.listItem}><Link className={styles.link} to='/'>Home</Link></li>
-      <li className={styles.listItem}>
-        <Link className={styles.link} to='/registration/'>Register for a ride</Link>
-        <ul className={styles.list}>
-          <li><Link className={styles.linkSecondary} to='/registration/membership/'>Become a member</Link></li>
-          <li><Link className={styles.linkSecondary} to='/registration/'>Scheduled rides</Link></li>
-          <li><Link className={styles.linkSecondary} to='/registration/permanent/'>Permanents</Link></li>
-          <li><Link className={styles.linkSecondary} to='/registration/trace-virtuelle/'>Trace Virtuelle</Link></li>
-        </ul>
-      </li>
-      <li className={styles.listItem}>
-        <Link className={styles.link} to='/loneliness/'>Club audax à distance</Link>
-        <ul className={styles.list}>
-          <li><Link className={styles.linkSecondary} to='/shop/audax-a-distance/'>Buy the patch</Link></li>
-        </ul>
-      </li>
-      <li className={styles.listItem}>
-        <Link className={styles.link} href='http://randonneursontario.ca'>Randonneurs Ontario</Link>
-        <ul className={styles.list}>
-          <li><Link className={styles.linkSecondary} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Events</Link></li>
-          <li><Link className={styles.linkSecondary} href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Blog</Link></li>
-        </ul>
-
-      </li>
-    </ul>
+    <List>
+      <ListItem><SectionTitle to='/'>Home</SectionTitle></ListItem>
+      <ListItem>
+        <SectionTitle to='/registration/'>Register for a ride</SectionTitle>
+        <List>
+          <SectionItem to='/registration/membership/'>Become a member</SectionItem>
+          <SectionItem to='/registration/'>SchedListed rides</SectionItem>
+          <SectionItem to='/registration/permanent/'>Permanents</SectionItem>
+          <SectionItem to='/registration/trace-virtuelle/'>Trace Virtuelle</SectionItem>
+        </List>
+      </ListItem>
+      <ListItem>
+        <SectionTitle>Seasons</SectionTitle>
+        <List>
+          <SectionItem to='/season/2021/'>2021</SectionItem>
+        </List>
+      </ListItem>
+      <ListItem>
+        <SectionTitle>Shop</SectionTitle>
+        <List>
+          <SectionItem to='/shop/audax-a-distance/'>Club audax à distance</SectionItem>
+        </List>
+      </ListItem>
+      <ListItem>
+        <SectionTitle href='http://randonneursontario.ca'>Randonneurs Ontario</SectionTitle>
+        <List>
+          <SectionItem href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Events</SectionItem>
+          <SectionItem href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Blog</SectionItem>
+        </List>
+      </ListItem>
+    </List>
   </Burger>
 )
 

@@ -1,1 +1,1 @@
-export {createPages, sourceNodes, onCreateWebpackConfig} from './gatsby-node'
+export {createPages, sourceNodes, onCreateWebpackConfig, createSchemaCustomization} from './gatsby-node'
