@@ -20,7 +20,7 @@ export type Event = {
   date: Date
 }
 
-export const brevetQuery = graphql`
+const brevetQuery = graphql`
 query {
   allEvent {
     nodes {
