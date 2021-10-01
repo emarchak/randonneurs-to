@@ -1,23 +1,5 @@
 import { createPages } from "./createPage"
 
-const exampleNode1 = {
-  categories: ['randolist'],
-  name: 'Example newsletter',
-  subject: 'Hello folks!',
-  sentAt: 'Sep 05 2021 16:30:10 GMT-0400',
-  content: 'Lorem ipsum dolor sit amet',
-  teaser: 'Lorem'
-}
-
-const exampleNode2 = {
-  categories: ['randolist'],
-  name: 'Another newsletter',
-  subject: 'Hello folks!',
-  sentAt: 'Sep 05 2021 16:30:10 GMT-0400',
-  content: 'Lorem ipsum dolor sit amet',
-  teaser: 'Lorem'
-}
-
 describe('createPage()', () => {
   const graphql = jest.fn()
   const createPageSpy = jest.fn()
@@ -25,8 +7,8 @@ describe('createPage()', () => {
 
   graphql.mockResolvedValue({
     data: {
-      allMail: {
-        nodes: [exampleNode1, exampleNode2]
+      allEvent: {
+        group: [2020, 2021, 2022].map(year => ({fieldValue: year}))
       }
     }
   })
@@ -43,22 +25,23 @@ describe('createPage()', () => {
     graphql.mockReset()
   })
 
-  it('creates mail pages', async () => {
+  it('creates event pages', async () => {
     await Promise.all([
       createPages({graphql, actions} as any, {} as any, jest.fn())
     ]);
-    expect(createPageSpy).toHaveBeenCalledTimes(2)
+    expect(createPageSpy).toHaveBeenCalledTimes(3)
     expect(createPageSpy).toHaveBeenCalledWith({
-      path: 'mail/randolist/another-newsletter',
+      path: 'seasons/2021',
       component: expect.any(String),
       context: expect.objectContaining({
-        type: 'mail',
+        id: 2021,
+        type: 'event',
         pageInfo: {
-          title: "Another newsletter",
-          nextUrl: null,
-          nextTitle: null,
-          prevTitle: "Example newsletter",
-          prevUrl: 'mail/randolist/example-newsletter',
+          title: 2021,
+          nextUrl: 'seasons/2022',
+          nextTitle: 2022,
+          prevTitle: 2020,
+          prevUrl: 'seasons/2020',
         }
       })
     })

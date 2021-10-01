@@ -2,6 +2,11 @@ import React from 'react'
 import { slide as Burger } from 'react-burger-menu'
 import { Link } from "./link"
 
+import { routes as lonelinessRoutes } from 'src/pages/loneliness'
+import { routes as seasonsRoutes } from 'src/pages/seasons'
+import { routes as registrationRoutes } from 'src/pages/registration'
+import { routes as shopRoutes } from 'src/pages/shop'
+
 import * as styles from './styles/menu.module.scss'
 
 export const menuConfig = {
@@ -55,6 +60,8 @@ const SectionItem = (props: any) => <li><Link {...props} className={styles.linkS
 const List = (props: any) => <ul {...props} className={styles.list} />
 const ListItem = (props: any) => <ul {...props} className={styles.listItem} />
 
+const renderSectionItems = page => <SectionItem key={page.route} to={page.route}>{page.description || page.label}</SectionItem>
+
 export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
   <Burger {...menuConfig} styles={menuStyles} isOpen={isOpen} onStateChange={onMenuChange} customBurgerIcon={false} right>
     <List>
@@ -62,22 +69,19 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
       <ListItem>
         <SectionTitle to='/registration/'>Register for a ride</SectionTitle>
         <List>
-          <SectionItem to='/registration/membership/'>Become a member</SectionItem>
-          <SectionItem to='/registration/'>SchedListed rides</SectionItem>
-          <SectionItem to='/registration/permanent/'>Permanents</SectionItem>
-          <SectionItem to='/registration/trace-virtuelle/'>Trace Virtuelle</SectionItem>
+          {registrationRoutes.map(renderSectionItems)}
         </List>
       </ListItem>
       <ListItem>
         <SectionTitle>Seasons</SectionTitle>
         <List>
-          <SectionItem to='/season/2021/'>2021</SectionItem>
+        {seasonsRoutes.map(renderSectionItems)}
         </List>
       </ListItem>
       <ListItem>
         <SectionTitle>Shop</SectionTitle>
         <List>
-          <SectionItem to='/shop/audax-a-distance/'>Club audax à distance</SectionItem>
+        {shopRoutes.map(renderSectionItems)}
         </List>
       </ListItem>
       <ListItem>

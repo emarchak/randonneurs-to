@@ -8,6 +8,17 @@ const lowercaseKeys = (o) => Object.keys(o).reduce((c, k) => (c[k.toLowerCase()]
 
 const rwgpsRegex = /^((?:https?:)?\/\/)?((?:www)\.)?((?:ridewithgps\.com))(\/routes\/)([\d\-]+)?$/
 
+export const getSeason = (event: Date): String => {
+    const month = event.getMonth()
+    if (month >= 10) {
+        return (event.getFullYear() + 1).toString()
+    }
+    return event.getFullYear().toString()
+}
+
+export const eventTypes = (test: string) => ['Brevet', 'Permanent', 'Fleche', 'Populaire'].find(eventType => eventType === test) || 'Other'
+export const chapters = (test: string) => ['Toronto', 'Huron', 'Ottawa', 'Simcoe'].find(chapter => test.includes(chapter)) || 'Other'
+
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
     actions,
     createContentDigest,
@@ -33,10 +44,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
                 rwgpsId: rwgps.pop(),
                 startLocation: rawEvent.startloc,
                 date: eventDate.toISOString(),
-                season: eventDate.getFullYear(),
+                season: getSeason(eventDate),
                 scheduleId: rawEvent.sched_id,
-                chapter: rawEvent.chapter,
-                eventType: rawEvent.event
+                chapter: chapters(rawEvent.chapter),
+                eventType: eventTypes(rawEvent.event)
             }
 
             createNode({

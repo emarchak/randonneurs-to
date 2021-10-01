@@ -9,10 +9,10 @@ import { TabMenu } from 'src/components/tabmenu'
 import { PageProps } from 'gatsby'
 
 export const routes = [
-  { label: 'Membership', route: '/registration/membership/' },
-  { label: 'Rides', route: '/registration/' },
+  { label: 'Membership', description: 'Become a member', route: '/registration/membership/' },
+  { label: 'Rides', description: 'Scheduled rides', route: '/registration/' },
   { label: 'Permanents', route: '/registration/permanent/' },
-  { label: 'Trace', route: '/registration/trace-virtuelle/' },
+  { label: 'Trace', description: 'Trace Virtuelle',  route: '/registration/trace-virtuelle/' },
 ]
 
 const BrevetRegistration = ({path}: PageProps) => {
