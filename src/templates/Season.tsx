@@ -1,35 +1,55 @@
 import React from 'react'
-import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
+import { ContentWrapper } from 'src/components/content-wrapper'
 import { getDateTimeLong } from 'src/utils'
 import { Layout } from 'src/components/layout'
-import { LinkButton } from 'src/components/Buttons'
 import { SEO } from 'src/components/seo'
 import { PageTemplateType } from './types'
 import { Event } from 'src/data/events'
 import { Link } from 'src/components/link'
 import { TabMenu } from 'src/components/tabmenu'
-import { routes } from 'src/pages/season'
+import { routes, SeasonsCTA } from 'src/pages/seasons'
+import { Pagination } from './components/Pagination'
+import { graphql } from 'gatsby'
 
-
-type NewsletterProps = PageTemplateType<{
-  id: string
-  events: Event[]
+type SeasonProps = PageTemplateType<{
+  allEvent: {
+    nodes: Event[]
+  }
 }>
 
-const Season = ({pageContext: {pageInfo, id, events }, uri}: NewsletterProps) => (
+export const query = graphql`
+query SeasonQuery($id: String) {
+  allEvent(filter: {season: {eq: $id}, chapter: {eq: Toronto }}) {
+    nodes {
+      chapter
+      distance
+      eventType
+      id
+      organizer
+      route
+      rwgpsUrl
+      startLocation
+      date
+      season
+    }
+  }
+}
+`
+
+const Season = ({pageContext: {pageInfo, id}, uri, data: {allEvent: {nodes: events}}}: SeasonProps) => (
   <Layout>
     <SEO
-      title={`${id} | Season`}
+      title={`${pageInfo.title} | Season`}
       description={`${id}`}
       />
       <ContentWrapper>
         <TabMenu activeRoute={`${uri}/`} tabs={routes} />
-        <h1>{id} Season</h1>
+        <h1>{pageInfo.title} Season</h1>
+        <p><Link href={`https://randonneursontario.ca/result/torres${pageInfo.title.slice(-2)}.html`}>View official results</Link></p>
 
         <table>
           <thead><tr>
             <th>Distance</th>
-            <th>Event type</th>
             <th>Route</th>
             <th>Starting time</th>
             <th>Starting location</th>
@@ -37,8 +57,7 @@ const Season = ({pageContext: {pageInfo, id, events }, uri}: NewsletterProps) =>
           <tbody>
             {events.map((event, i) => (
               <tr key={i} >
-                <td>{event.distance}</td>
-                <td>{event.eventType}</td>
+                <td>{event.distance}<br/>{event.eventType}</td>
                 <td>
                   {event.route}
                   {event.rwgpsUrl && <>
@@ -54,14 +73,10 @@ const Season = ({pageContext: {pageInfo, id, events }, uri}: NewsletterProps) =>
         </table>
       </ContentWrapper>
 
-      <ContentWrapper container>
-        <ContentChild>
-          {pageInfo.prevUrl && <LinkButton primary block to={`/${pageInfo.prevUrl}`}>{pageInfo.prevTitle}</LinkButton>}
-        </ContentChild>
-        <ContentChild>
-          {pageInfo.nextUrl && <LinkButton primary block to={`/${pageInfo.nextUrl}`}>{pageInfo.nextTitle}</LinkButton>}
-        </ContentChild>
-      </ContentWrapper>
+      <Pagination pageInfo={pageInfo} />
+
+      <SeasonsCTA />
+
   </Layout>
 )
 

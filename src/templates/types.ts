@@ -1,4 +1,8 @@
-type PageInfo = {
+import { PageProps } from 'gatsby'
+
+type PageType = 'event' | 'mail'
+
+export type PageInfo = {
   title: string
   prevUrl?: string
   prevTitle?: string
@@ -6,9 +10,11 @@ type PageInfo = {
   nextTitle?: string
 }
 
-export type PageTemplateType<T> = {
-  pageContext: T & {
+export type PageTemplateType<D> = PageProps & {
+  pageContext: {
+    id: string
+    type: PageType
     pageInfo: PageInfo
   }
-
+  data: D
 }

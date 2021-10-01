@@ -2,28 +2,16 @@ import { GatsbyNode } from 'gatsby'
 import { resolve } from 'path'
 import { nodeType } from '.'
 
-const buildSeasonPath = season => ['season', season.fieldValue].join('/')
+const buildSeasonPath = season => ['seasons', season.fieldValue].join('/')
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const result = await graphql(`
   query {
-    allEvent(filter: {chapter: {eq: "Toronto"}}) {
+    allEvent(filter: {chapter: {eq: Toronto}}) {
       group(field: season) {
         fieldValue
-        nodes {
-          chapter
-          date
-          date
-          distance
-          eventType
-          route
-          rwgpsId
-          rwgpsUrl
-          scheduleId
-          startLocation
-        }
       }
     }
   }`)
@@ -40,8 +28,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       path: buildSeasonPath(season),
       component: resolve('src/templates/Season.tsx'),
       context: {
-        year: season.fieldValue,
-        events: season.nodes,
+        id: season.fieldValue,
+        type: nodeType,
         pageInfo: {
           title: season.fieldValue,
           prevUrl: i === 0 ? null : buildSeasonPath(seasons[i - 1]),

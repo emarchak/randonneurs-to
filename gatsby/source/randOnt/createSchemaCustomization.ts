@@ -8,17 +8,20 @@ export const createSchemaCustomization:GatsbyNode['createSchemaCustomization'] =
         Huron
         Ottawa
         Simcoe
+        Other
     }
-    enum RideType {
-        brevet
-        permanent
-        fleche
-        populaire
+    enum EventType {
+        Brevet
+        Permanent
+        Fleche
+        Populaire
+        Other
     }
-    type Event implements Node {
-        rwgpsId: Int
+    type event implements Node {
+        season: String
+        rwgpsId: String
         chapter: Chapter
-        eventType: RideType
+        eventType: EventType
     }
   `)
 }

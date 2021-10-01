@@ -11,12 +11,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
   query loadMailQuery {
     allMail {
       nodes {
+        id
         categories
         name
-        subject
-        sentAt
-        content
-        teaser
       }
     }
   }
@@ -34,13 +31,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       path: buildPath(mail),
       component: resolve('src/templates/Newsletter.tsx'),
       context: {
-        ...mail,
+        id: mail.id,
+        type: nodeType,
         pageInfo: {
           title: mail.name,
           prevUrl: i === 0 ? null : buildPath(nodes[i - 1]),
-          prevTitle: nodes[i - 1]?.name,
+          prevTitle: nodes[i - 1]?.name || null,
           nextUrl: i === nodes.length - 1 ? null : buildPath(nodes[i + 1]),
-          nextTitle: nodes[i + 1]?.name,
+          nextTitle: nodes[i + 1]?.name || null,
         }
       },
     })

@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
-export type Chapter = 'Toronto' | 'Huron' | 'Ottawa' | 'Simcoe'
+export type Chapter = 'Toronto' | 'Huron' | 'Ottawa' | 'Simcoe' | 'Other'
 
-export type RideType = 'brevet' | 'permanent' | 'fleche' | 'populaire'
+export type RideType = 'Brevet' | 'Permanent' | 'Fleche' | 'Populaire' | 'Other'
 
 export type Event = {
   chapter: Chapter
@@ -22,7 +22,7 @@ export type Event = {
 
 export const brevetQuery = graphql`
 query {
-  allEvent(filter: {season: {gte:2021}}) {
+  allEvent {
     nodes {
       chapter
       distance

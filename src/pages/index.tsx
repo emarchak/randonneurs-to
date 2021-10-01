@@ -14,17 +14,23 @@ import { PostTeaser } from 'src/components/Blog'
 
 const pageQuery = graphql`
 query {
+  allMail(limit: 3, sort: {fields: sentAt, order: DESC}) {
+    nodes {
+      id
+      name
+      teaser
+      subject
+    }
+  }
   allSitePage(
-    filter: {component: {regex: "/newsletter/i"}, id: {}, context: {}}
-    sort: {fields: context___sentAt, order: DESC}
+    limit: 3
+    filter: {context: {type: {eq: "mail"}}}
+    sort: {fields: path}
   ) {
     nodes {
       path
       context {
-        name
-        subject
-        sentAt
-        teaser
+        id
       }
     }
   }
@@ -46,7 +52,8 @@ query {
 const IndexPage = () => {
   const {
     allFile: { nodes: images },
-    allSitePage: { nodes: newsletters}
+    allSitePage: { nodes: pages },
+    allMail: { nodes: newsletters }
   } = useStaticQuery(pageQuery)
   const seoImage = getImage(images[0])
   const { brevets } = useEvents({ chapter: 'Toronto', limit: 2 })
@@ -61,7 +68,7 @@ const IndexPage = () => {
       <ContentWrapper container>
         <ContentChild>
         <h3>About us</h3>
-        <p>The Toronto Randonneurs are a chapter of Randonneurs Ontario ultra-distance cycling club.</p>
+        <p>The Toronto Randonneurs are a chapter of Randonneurs Ontario ultra-distance cycling club. We've been riding 200km+ events southern Ontario since 1982.</p>
         <p><Link href='https://randonneursontario.ca/'>Randonneurs Ontario</Link> is affiliated with the <Link href='https://www.audax-club-parisien.com/en'>Audax Club Parisien</Link>, the parent organization governing the qualification of riders wishing to participate in the 1200K Paris - Brest - Paris Randonnee. The club is also affiliated with <Link href='https://www.audax-club-parisien.com/en/our-organizations/brm-world/'>Les Randonneurs Mondiaux</Link>, which provides recognition for brevets other than Paris - Brest - Paris that are longer than 1000K.</p>
         <LinkButton small secondary block href='https://randonneursontario.ca/who/index.html'>Learn more about Randonneurs Ontario</LinkButton>
         </ContentChild>
@@ -99,25 +106,25 @@ const IndexPage = () => {
       <ContentWrapper>
         <h2>Recent member reports</h2>
         <ContentWrapper container>
-          {posts.map((post, i) => (
-            <ContentChild key={i}>
+          {posts.map((post) => (
+            <ContentChild key={post.id}>
               <PostTeaser post={post}/>
             </ContentChild>))}
         </ContentWrapper>
       </ContentWrapper>
+
       <ContentWrapper>
         <h2>Newsletters</h2>
         <ContentWrapper container>
-          {newsletters.map(({path, context}, i) => (
-            <ContentChild key={i}>
-              <h3>{context.name}</h3>
-              <h4>{context.subject}</h4>
-              <p>{context.teaser}... <Link to={path}>{'continue reading >>'}</Link></p>
+          {newsletters.map(({name, subject, teaser, id}) => (
+            <ContentChild key={id}>
+              <h3>{name}</h3>
+              <h4>{subject}</h4>
+              <p>{teaser}... <Link to={pages.find(page => page.context.id === id)?.path}>{'continue reading >>'}</Link></p>
             </ContentChild>
           ))}
         </ContentWrapper>
       </ContentWrapper>
-
     </Layout >
   )
 }
