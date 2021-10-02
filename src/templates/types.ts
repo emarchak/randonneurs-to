@@ -1,6 +1,6 @@
 import { PageProps } from 'gatsby'
 
-type PageType = 'event' | 'mail'
+type PageType = 'season' | 'mail'
 
 export type PageInfo = {
   title: string

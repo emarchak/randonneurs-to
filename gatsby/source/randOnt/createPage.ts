@@ -1,6 +1,5 @@
 import { GatsbyNode } from 'gatsby'
 import { resolve } from 'path'
-import { nodeType } from '.'
 
 const buildSeasonPath = season => ['seasons', season.fieldValue].join('/')
 
@@ -29,7 +28,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       component: resolve('src/templates/Season.tsx'),
       context: {
         id: season.fieldValue,
-        type: nodeType,
+        type: 'season',
         pageInfo: {
           title: season.fieldValue,
           prevUrl: i === 0 ? null : buildSeasonPath(seasons[i - 1]),

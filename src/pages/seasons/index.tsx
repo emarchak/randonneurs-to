@@ -32,7 +32,7 @@ query {
     }
   }
   allSitePage(
-    filter: {context: {type: {eq: "event"}}}
+    filter: {context: {type: {eq: "season"}}}
     sort: {fields: context___pageInfo___title, order: DESC}
   ) {
     nodes {
