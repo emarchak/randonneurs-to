@@ -31,7 +31,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
         const data = await response.json()
 
         if (data.status !== 'ok') {
-            throw new Error(`rantOnt response ${response.status}`)
+            throw new Error(`randOnt response ${response.status}`)
         }
 
         data.schedule.map(lowercaseKeys).forEach((rawEvent) => {
@@ -61,6 +61,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
             })
         })
     } catch (error) {
-        console.error(error)
+        throw new Error(error)
     }
 }

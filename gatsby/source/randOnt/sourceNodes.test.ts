@@ -1,17 +1,25 @@
 
 import { chapters, eventTypes, getSeason, sourceNodes } from './sourceNodes'
+import * as fetch from 'isomorphic-unfetch'
 
 describe('sourceNodes', () => {
+    const createNode = jest.fn().mockName('createNode')
+    const createContentDigest = jest.fn().mockName('createContentDigest')
+    const createNodeId = jest.fn().mockName('createNodeId')
+
+    const pluginOptions = {} as any
+    const pluginCallback = jest.fn().mockName('pluginCallback')
+    const args = { actions: { createNode }, createContentDigest, createNodeId } as any
+
+    afterEach(() => {
+        createNode.mockClear()
+        createContentDigest.mockClear()
+        createNodeId.mockClear()
+    })
 
     it('processes input', async () => {
-        const createNode = jest.fn().mockName('createNode')
-        const createContentDigest = jest.fn().mockName('createContentDigest')
-        const createNodeId = jest.fn().mockName('createNodeId')
-
-        const args = { actions: { createNode }, createContentDigest, createNodeId } as any
-
         await Promise.all([
-            sourceNodes(args, {} as any, jest.fn())
+            sourceNodes(args, pluginOptions, pluginCallback)
         ]);
 
         expect(createNodeId).toHaveBeenCalledWith('event-871')
@@ -33,6 +41,24 @@ describe('sourceNodes', () => {
             'season': '2021',
             'startLocation': 'Tim Hortons, 152 Park Lawn Rd, Toronto',
         }))
+    })
+
+    it('throws on a failed response', async () => {
+        jest.spyOn(fetch, 'default').mockResolvedValueOnce({
+            status: 'not okay',
+            json: jest.fn().mockResolvedValueOnce({})
+        } as any)
+
+        await expect(async () => {
+            await sourceNodes(args, pluginOptions, pluginCallback)
+        }).rejects.toThrow('randOnt response not okay')
+    })
+
+    it('throws on a failed node creation', async () => {
+        createNode.mockImplementation(() => { throw new Error('failed') })
+        await expect(async () => {
+            await sourceNodes(args, pluginOptions, pluginCallback)
+        }).rejects.toThrow('failed')
     })
 })
 

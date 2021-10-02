@@ -1,14 +1,13 @@
 import React from 'react'
-import { Layout } from 'src/components/layout'
-import { SEO } from 'src/components/seo'
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
-import { TabMenu } from 'src/components/tabmenu'
-import { Link } from 'src/components/link'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { Callout } from 'src/components/callout'
+import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { graphql, useStaticQuery } from 'gatsby'
+import { Layout } from 'src/components/layout'
+import { Link } from 'src/components/link'
 import { LinkButton } from 'src/components/Buttons'
-
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/tabmenu'
 import { gallery, galleryTile } from '../styles/index.module.scss'
 
 export const routes = [

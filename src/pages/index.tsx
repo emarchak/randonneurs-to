@@ -7,10 +7,10 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { LinkButton } from 'src/components/Buttons'
 import { SEO } from '../components/seo'
 import { useEvents } from 'src/data/events'
-import * as styles from './styles/index.module.scss'
 import { Link } from 'src/components/link'
 import { useBlog } from 'src/data/blog'
 import { PostTeaser } from 'src/components/Blog'
+import * as styles from './styles/index.module.scss'
 
 const pageQuery = graphql`
 query {

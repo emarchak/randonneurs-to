@@ -19,6 +19,10 @@ export const routes = [
   { label: 'Trace', route: '/registration/trace-virtuelle/' },
 ]
 
+export const shopRoutes = [
+  { label: 'Club audax à distance', route: '/shop/audax-a-distance/' },
+]
+
 const imageQuery = graphql`
 query {
     file(name: {glob: "ClubAudax"}) {
