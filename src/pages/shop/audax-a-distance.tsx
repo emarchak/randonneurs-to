@@ -1,14 +1,15 @@
 
 import React from 'react'
-import { ContentWrapper, ContentChild } from "src/components/content-wrapper"
-import { Layout } from 'src/components/layout'
-import { routes as lonelinessRoutes } from '../loneliness'
-import { SEO } from 'src/components/seo'
-import { TabMenu } from 'src/components/tabmenu'
-import Loadable from "@loadable/component"
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import Loadable from "@loadable/component"
+import { ContentWrapper, ContentChild } from "src/components/content-wrapper"
+import { Layout } from 'src/components/layout'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/Menu'
 import { Link } from 'src/components/link'
+
+import { routes as lonelinessRoutes } from '../loneliness'
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
 
@@ -34,7 +35,7 @@ const AudaxShopPage = () => {
                 image={image}
             />
             <ContentWrapper>
-                <TabMenu tabs={lonelinessRoutes} activeRoute='/shop/audax-a-distance/' />
+                <TabMenu section='loneliness' activeRoute='/shop/audax-a-distance/' />
             </ContentWrapper>
             <ContentWrapper container>
                 <ContentChild>

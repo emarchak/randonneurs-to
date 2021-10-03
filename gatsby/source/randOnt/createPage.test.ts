@@ -35,7 +35,7 @@ describe('createPage()', () => {
       component: expect.any(String),
       context: expect.objectContaining({
         id: 2021,
-        type: 'event',
+        type: 'season',
         pageInfo: {
           title: 2021,
           nextUrl: 'seasons/2022',

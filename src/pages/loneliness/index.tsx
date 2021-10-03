@@ -1,26 +1,23 @@
-import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import { Layout } from "src/components/layout"
-import { SEO } from "src/components/seo"
-import { ContentWrapper } from "src/components/content-wrapper"
-import { Callout } from "src/components/callout"
-import { LonelinessForm, LonelinessRoute } from "src/components/loneliness"
-import Routes from "src/data/loneliness-routes.yaml"
-import Riders from "src/data/loneliness-riders.yaml"
-import { TabMenu } from "src/components/tabmenu"
+import React from 'react'
+import { graphql, useStaticQuery, PageProps } from 'gatsby'
+import { Callout } from 'src/components/callout'
+import { ContentWrapper } from 'src/components/content-wrapper'
+import { Link } from 'src/components/link'
+import { Layout } from 'src/components/layout'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { SEO } from 'src/components/seo'
 
-import * as style from "../styles/loneliness.module.scss"
-import { Link } from "src/components/link"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { LonelinessForm, LonelinessRoute } from 'src/components/loneliness'
+import { TabMenu, loneliness } from 'src/components/Menu'
+import Routes from 'src/data/loneliness-routes.yaml'
+import Riders from 'src/data/loneliness-riders.yaml'
+
+import * as style from '../styles/loneliness.module.scss'
 
 export const routes = [
   { label: 'Club', route: '/loneliness/' },
   { label: 'Shop', route: '/shop/audax-a-distance/' },
   { label: 'Trace', route: '/registration/trace-virtuelle/' },
-]
-
-export const shopRoutes = [
-  { label: 'Club audax à distance', route: '/shop/audax-a-distance/' },
 ]
 
 const imageQuery = graphql`
@@ -34,7 +31,7 @@ query {
 }
 `
 
-const Page = () => {
+const Page = ({path}: PageProps) => {
   const { file } = useStaticQuery(imageQuery)
   const image = getImage(file)
 
@@ -47,7 +44,7 @@ const Page = () => {
         image={image}
       />
       <ContentWrapper>
-        <TabMenu tabs={routes} activeRoute='/loneliness/' />
+        <TabMenu section='loneliness' activeRoute={path} />
         <GatsbyImage
           image={image}
           className={style.heading} alt="Club audax à distance"

@@ -1,20 +1,19 @@
 import React from 'react'
+import { PageProps } from 'gatsby'
 import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { ContentWrapper } from "src/components/content-wrapper"
 import { RegistrationFormPermanent } from 'src/components/registration'
 import { Callout } from 'src/components/callout'
-import { routes } from '.'
-import { TabMenu } from 'src/components/tabmenu'
+import { TabMenu } from 'src/components/Menu'
 import { Link } from 'src/components/link'
-import { PageProps } from 'gatsby'
 
 export const PermanentRegistration = ({path}: PageProps) => {
   return (
     <Layout hideHeader>
       <SEO title='Register for a permanent' />
       <ContentWrapper>
-        <TabMenu tabs={routes} activeRoute={path} />
+        <TabMenu section='registration' activeRoute={path} />
         <h1>Register for a permanent</h1><h2>with Randonneurs Ontario</h2>
 
         <p>You must have an OCA membership and have read the <Link href='https://ontariocycling.org/covid-19-information/'>latest OCA Return to Sport updates</Link>. Please visit the <Link href='https://www.ontariocycling.org'>OCA Website for the latest information</Link> about group riding during the pandemic.</p>

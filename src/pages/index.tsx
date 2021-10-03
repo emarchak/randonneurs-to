@@ -1,15 +1,17 @@
 import React from 'react'
-import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { getDateTimeLong } from 'src/utils'
-import { Layout } from '../components/layout'
 import { graphql, useStaticQuery } from 'gatsby'
-import { LinkButton } from 'src/components/Buttons'
-import { SEO } from '../components/seo'
-import { useEvents } from 'src/data/events'
+import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
+import { getImage } from 'gatsby-plugin-image'
+import { Gallery } from 'src/components/Gallery'
+import { getDateTimeLong } from 'src/utils'
+import { Layout } from 'src/components/layout'
 import { Link } from 'src/components/link'
-import { useBlog } from 'src/data/blog'
+import { LinkButton } from 'src/components/Buttons'
 import { PostTeaser } from 'src/components/Blog'
+import { SEO } from '../components/seo'
+import { useBlog } from 'src/data/blog'
+import { useEvents } from 'src/data/events'
+
 import * as styles from './styles/index.module.scss'
 
 const pageQuery = graphql`
@@ -91,15 +93,8 @@ const IndexPage = () => {
       </ContentWrapper>
 
       <ContentWrapper>
-        <ContentChild className={styles.gallery}>
-          {images.map(image => (
-            <GatsbyImage
-              className={styles.galleryTile}
-              key={image.name}
-              image={image.childImageSharp.gatsbyImageData}
-              alt={image.name}
-            />
-          ))}
+        <ContentChild>
+          <Gallery />
         </ContentChild>
       </ContentWrapper>
 

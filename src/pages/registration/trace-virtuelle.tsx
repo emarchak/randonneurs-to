@@ -1,15 +1,14 @@
 
 import React from 'react'
-import { Layout } from 'src/components/layout'
-import { SEO } from 'src/components/seo'
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
-import { Callout } from 'src/components/callout'
-import { routes } from '.'
-import { TabMenu } from 'src/components/tabmenu'
-import { Link } from 'src/components/link'
 import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { Callout } from 'src/components/callout'
 import { ContactForm } from 'src/components/ContactForm'
+import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
+import { Layout } from 'src/components/layout'
+import { Link } from 'src/components/link'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/Menu'
 
 const imageQuery = graphql`
 query {
@@ -33,7 +32,7 @@ const TraceVirtuelle = ({path}: PageProps) => {
                 image={image}
             />
             <ContentWrapper>
-                <TabMenu tabs={routes} activeRoute={path} />
+                <TabMenu section='registration' activeRoute={path} />
                 <h1>Trace Virtuelle</h1>
             </ContentWrapper>
             <ContentWrapper container>

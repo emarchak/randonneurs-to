@@ -1,16 +1,17 @@
-@import 'theme';
+@import "theme";
 
 .link {
-  font-family: get-font('header');
-  font-size: get-font-size('medium');
-  padding-bottom: get-spacing('small');
-  color: get-color('text');
+  font-family: get-font("header");
+  font-size: get-font-size("medium");
+  padding-bottom: get-spacing("small");
+  color: get-color("text");
   text-decoration: none;
   display: block;
   border-bottom: 1px solid transparent;
-  &:hover, &:focus {
-    background-color: get-color('primary', 'desaturate');
-    border-bottom-color: get-color('text');
+  &:hover,
+  &:focus {
+    background-color: get-color("primary", "desaturate");
+    border-bottom-color: get-color("text");
   }
 }
 
@@ -21,8 +22,8 @@
 }
 
 .listItem {
-  border-bottom: 1px solid lighten($color:get-color('text'), $amount: 50);
-  margin-bottom: get-spacing('small');
+  border-bottom: 1px solid lighten($color: get-color("text"), $amount: 50);
+  margin-bottom: get-spacing("small");
   &:last-of-type {
     border-bottom: 0;
   }
@@ -31,9 +32,10 @@
 .link--secondary {
   padding-left: get-spacing();
   text-decoration: none;
-  color: get-color('text');
+  color: get-color("text");
   border-bottom: 1px solid transparent;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: underline;
     border-bottom-color: transparent;
   }
@@ -45,26 +47,26 @@
 }
 
 .trigger-button {
-  padding: get-spacing('small');
-  color:  get-color(text);
+  padding: get-spacing("small");
+  color: get-color(text);
   border: none;
   outline: none;
   box-shadow: none;
-  font-family: get-font('header');
+  font-family: get-font("header");
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
   border: none;
   background: none;
-  &:hover, 
+  &:hover,
   &:focus {
-    background-color: get-color('primary', 'dark');
+    background-color: get-color("primary", "dark");
     cursor: pointer;
   }
 }
 
 .trigger-icon {
-  height: .65rem;
+  height: 0.65rem;
   padding-left: 0.64rem;
-  fill: get-color(text)
+  fill: get-color(text);
 }

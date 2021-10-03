@@ -1,21 +1,21 @@
 import React from 'react'
 import { Link, navigate } from 'gatsby'
+import routes from './routes'
+import * as styles from '../styles/tabmenu.module.scss'
 
-import * as styles from './styles/tabmenu.module.scss'
+type RouteSection = keyof typeof routes
 
-type tab = {
-    label: string,
-    route: string
-}
-
-type Props = {
-    tabs: tab[],
+type TabMenuProps = {
     activeRoute: string
+    section: RouteSection
 }
 
-export const TabMenu = ({ tabs, activeRoute }: Props) => (
+const isActive = (route: string, activeRoute: string) => route === activeRoute
+
+export const TabMenu = ({ activeRoute , section }: TabMenuProps) => {
+    const tabs = routes[section]
+    return (
     <menu className={styles.tabmenu}>
-        {console.log(activeRoute)}
         <select
             name={'sub menu'}
             onChange={(evt) => { navigate(evt.currentTarget.value) }}
@@ -33,7 +33,7 @@ export const TabMenu = ({ tabs, activeRoute }: Props) => (
                 <li key={tab.route} className={styles.tabmenuListItem}>
                     <Link to={tab.route} className={[
                         styles.tabmenuLink,
-                        ...(activeRoute === tab.route ? [styles.tabmenuLinkActive] : [])
+                        ...(isActive(activeRoute, tab.route) ? [styles.tabmenuLinkActive] : [])
                     ].join(' ')}>
                         {tab.label}
                     </Link>
@@ -42,5 +42,5 @@ export const TabMenu = ({ tabs, activeRoute }: Props) => (
             )}
         </ul>
     </menu>
-)
+)}
 

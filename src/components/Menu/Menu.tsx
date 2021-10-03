@@ -1,18 +1,8 @@
 import React from 'react'
 import { slide as Burger } from 'react-burger-menu'
-import { Link } from "./link"
-import { routes as seasonsRoutes } from 'src/pages/seasons'
-import { routes as registrationRoutes } from 'src/pages/registration'
-import { shopRoutes } from 'src/pages/loneliness'
-
-import * as styles from './styles/menu.module.scss'
-
-import { routes as lonelinessRoutes } from 'src/pages/loneliness'
-import { routes as seasonsRoutes } from 'src/pages/seasons'
-import { routes as registrationRoutes } from 'src/pages/registration'
-import { routes as shopRoutes } from 'src/pages/shop'
-
-import * as styles from './styles/menu.module.scss'
+import { Link } from 'src/components/link'
+import routes from './routes'
+import * as styles from '../styles/menu.module.scss'
 
 export const menuConfig = {
   pageWrapId: 'pageWrap', outerContainerId: 'outerContainer',
@@ -74,19 +64,19 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
       <ListItem>
         <SectionTitle to='/registration/'>Register for a ride</SectionTitle>
         <List>
-          {registrationRoutes.map(renderSectionItems)}
+          {routes.registration.map(renderSectionItems)}
         </List>
       </ListItem>
       <ListItem>
         <SectionTitle>Seasons</SectionTitle>
         <List>
-        {seasonsRoutes.map(renderSectionItems)}
+        {routes.seasons.map(renderSectionItems)}
         </List>
       </ListItem>
       <ListItem>
         <SectionTitle>Shop</SectionTitle>
         <List>
-        {shopRoutes.map(renderSectionItems)}
+        {routes.shop.map(renderSectionItems)}
         </List>
       </ListItem>
       <ListItem>

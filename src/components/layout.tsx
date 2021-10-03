@@ -9,7 +9,7 @@ import React, { useState } from "react"
 import { Header } from "./header"
 import { Footer } from "./footer"
 import { StaticQuery, graphql } from "gatsby"
-import { Menu, MenuState, MenuTrigger, menuConfig } from './menu'
+import { Menu, MenuState, MenuTrigger, menuConfig } from './Menu/Menu'
 
 import "normalize.css"
 import * as styles from './styles/layout.module.scss'

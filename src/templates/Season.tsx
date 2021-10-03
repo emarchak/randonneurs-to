@@ -5,11 +5,11 @@ import { Event } from 'src/data/events'
 import { getDateTimeLong } from 'src/utils'
 import { Layout } from 'src/components/layout'
 import { Link } from 'src/components/link'
-import { routes, SeasonsCTA } from 'src/pages/seasons'
 import { PageTemplateType } from './types'
 import { Pagination } from './components/Pagination'
 import { SEO } from 'src/components/seo'
-import { TabMenu } from 'src/components/tabmenu'
+import { TabMenu } from 'src/components/Menu'
+import { SeasonsCta } from 'src/components/seasons'
 
 type SeasonProps = PageTemplateType<{
   allEvent: {
@@ -43,7 +43,7 @@ const Season = ({pageContext: {pageInfo, id}, uri, data: {allEvent: {nodes: even
       description={`${id}`}
       />
       <ContentWrapper>
-        <TabMenu activeRoute={`${uri}/`} tabs={routes} />
+        <TabMenu activeRoute={`${uri}/`} section='seasons' />
         <h1>{pageInfo.title} Season</h1>
         <p><Link href={`https://randonneursontario.ca/result/torres${pageInfo.title.slice(-2)}.html`}>View official results</Link></p>
 
@@ -75,7 +75,7 @@ const Season = ({pageContext: {pageInfo, id}, uri, data: {allEvent: {nodes: even
 
       <Pagination pageInfo={pageInfo} />
 
-      <SeasonsCTA />
+      <SeasonsCta />
 
   </Layout>
 )

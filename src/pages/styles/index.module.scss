@@ -6,19 +6,6 @@
   }
 }
 
-.gallery {
-  &::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-}
-
-.gallery-tile {
-  width: 33%;
-  float: right;
-}
-
 .event-wrapper {
   @include no-space;
 }
