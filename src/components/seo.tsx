@@ -2,7 +2,7 @@
 import React from "react"
 import Helmet from "react-helmet"
 import { IGatsbyImageData } from "gatsby-plugin-image"
-import { useSiteMetadata } from "../hooks/use-site-metadata"
+import { graphql, useStaticQuery } from "gatsby"
 
 type meta = { property: string; content: any; name?: any }
 
@@ -23,9 +23,21 @@ export const SEO = ({
   image,
   title,
 }: Props) => {
-  const siteMetadata = useSiteMetadata()
+  const { site: {siteMetadata} } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+            description
+            siteURL
+          }
+        }
+      }
+    `
+  )
 
-  const metaDescription = description || siteMetadata.description
+  const metaDescription = description + ' ' + siteMetadata.description
   const metaImage: meta[] = image
     ? [
       {

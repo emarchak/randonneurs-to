@@ -1,4 +1,4 @@
-const fetch = jest.fn().mockImplementation(async (endpoint) => {
+const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
 
   if (endpoint.match(/ridewithgps.com\/routes\/\d+.json/)) {
     return {
@@ -37,22 +37,24 @@ const fetch = jest.fn().mockImplementation(async (endpoint) => {
   if (endpoint.match(/schedule\.php/)) {
     return {
       status: 'ok',
-      json: jest.fn().mockResolvedValue({schedule: [
-        {
-          Sched_Id: '871',
-          Chapter: 'Toronto',
-          Event: 'Brevet',
-          Distance: '300',
-          Date: '2021-06-19',
-          Route: 'Kissing Bridge',
-          StartLoc: 'Tim Hortons, 152 Park Lawn Rd, Toronto',
-          Stime: '06:00:00',
-          Organizer: 'Register',
-          Contact: 'http://randonneurs.to/registration',
-          RWGPS: 'https://ridewithgps.com/routes/31557200',
-          Unixtime: new Date('Sat June 19 2021 06:00 EDT').valueOf() / 1000
-        }
-      ]
+      json: jest.fn().mockResolvedValue({
+        status : 'ok',
+        schedule: [
+          {
+            Sched_Id: '871',
+            Chapter: 'Toronto',
+            Event: 'Brevet',
+            Distance: '300',
+            Date: '2021-06-19',
+            Route: 'Kissing Bridge',
+            StartLoc: 'Tim Hortons, 152 Park Lawn Rd, Toronto',
+            Stime: '06:00:00',
+            Organizer: 'Register',
+            Contact: 'http://randonneurs.to/registration',
+            RWGPS: 'https://ridewithgps.com/routes/31557200',
+            Unixtime: new Date('Sat June 19 2021 06:00 EDT').valueOf() / 1000
+          }
+        ]
       })
     }
   }

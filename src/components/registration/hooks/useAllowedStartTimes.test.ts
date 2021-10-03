@@ -1,5 +1,5 @@
 import MockDate from 'mockdate'
-import { Brevet } from 'src/data/brevets'
+import { Brevet } from 'src/data/events'
 import { useAllowedStartTimes } from "./useAllowedStartTimes"
 
 const brevet: Brevet = {

@@ -7,26 +7,40 @@ import { LinkButton } from 'src/components/Buttons'
 import { SEO } from 'src/components/seo'
 
 import { newsletter } from './newsletter.module.scss'
+import { PageTemplateType } from './types'
+import { Pagination } from './components/Pagination'
+import { graphql } from 'gatsby'
 
-type NewsletterProps = {
-  pageContext: {
+type NewsletterProps = PageTemplateType<{
+  mail: {
     categories: string[]
-    name: string
-    subject: string
-    sentAt: string
     content: string
+    id: string
+    name: string
+    sentAt: string
+    subject: string
     teaser: string
-    pageInfo: {
-      prevUrl?: string
-      nextUrl?: string
+  }
+}>
+
+export const query = graphql`
+  query NewsletterQuery($id: String) {
+    mail(id: {eq: $id}) {
+      categories
+      content
+      id
+      name
+      sentAt
+      subject
+      teaser
     }
   }
-}
+`
 
-const Newsletter = ({pageContext: {name, content, subject, teaser, sentAt, pageInfo}}: NewsletterProps) => (
+const Newsletter = ({pageContext: {id, pageInfo}, data: {mail: {subject, teaser, sentAt, content, name}}}: NewsletterProps) => (
   <Layout>
     <SEO
-      title={`${name} | ${subject} | Newsletter`}
+      title={`${pageInfo.title} | ${subject} | Newsletter`}
       description={teaser}
       />
       <ContentWrapper>
@@ -37,14 +51,7 @@ const Newsletter = ({pageContext: {name, content, subject, teaser, sentAt, pageI
         <article className={newsletter} dangerouslySetInnerHTML={{__html: content}} />
       </ContentWrapper>
 
-      <ContentWrapper container>
-        <ContentChild>
-          {pageInfo.prevUrl && <LinkButton primary block to={`/${pageInfo.prevUrl}`}>{'<< Previous newsletter'}</LinkButton>}
-        </ContentChild>
-        <ContentChild>
-          {pageInfo.nextUrl && <LinkButton primary block to={`/${pageInfo.nextUrl}`}>{'Next newsletter >>'}</LinkButton>}
-        </ContentChild>
-      </ContentWrapper>
+      <Pagination pageInfo={pageInfo} />
 
       <Callout alternative>
         <ContentWrapper>

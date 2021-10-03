@@ -1,6 +1,16 @@
 const { buildCard } = require('./buildCard')
 
 describe('buildCard()', () => {
+  const consoleSpy = jest.spyOn(console, "log")
+
+  beforeAll(() => {
+    consoleSpy.mockImplementation()
+  });
+
+  afterAll(() => {
+    consoleSpy.mockRestore();
+  })
+
   it('builds the default card', async () => {
     const card = await buildCard({riderName: 'Erin', scheduleId: 123})
     expect(card).toEqual({

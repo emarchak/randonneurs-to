@@ -1,6 +1,6 @@
 
 import { graphql, useStaticQuery } from 'gatsby'
-import { Chapter } from 'src/data/brevets'
+import { Chapter } from 'src/data/events'
 
 export type Route = {
   chapter: Chapter

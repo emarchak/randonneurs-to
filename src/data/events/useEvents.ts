@@ -1,14 +1,15 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
-export type Chapter = 'Toronto' | 'Huron' | 'Ottawa' | 'Simcoe'
+export type Chapter = 'Toronto' | 'Huron' | 'Ottawa' | 'Simcoe' | 'Other'
 
-export type RideType = 'brevet' | 'permanent' | 'fleche' | 'populaire'
+export type RideType = 'Brevet' | 'Permanent' | 'Fleche' | 'Populaire' | 'Other'
 
-export type Brevet = {
+export type Event = {
   chapter: Chapter
   distance: number
-  event: RideType
+  event: RideType // deprecated
+  eventType: RideType
   id: string
   organizer: string
   route: string
@@ -19,9 +20,9 @@ export type Brevet = {
   date: Date
 }
 
-const brevetQuery = graphql`
+export const brevetQuery = graphql`
 query {
-  allEvent(filter: {season: {gte:2021}}) {
+  allEvent {
     nodes {
       chapter
       distance
@@ -37,23 +38,23 @@ query {
 }
 `
 
-type UseBrevetFilters = {
-  chapter?: Brevet['chapter'],
+type UseEventFilters = {
+  chapter?: Event['chapter'],
   after?: Date,
   limit?: number
 }
 
-const sortBrevetsAsc = (a: Brevet, b: Brevet) => (a.date < b.date ? -1 : 1)
+const sortEventAsc = (a: Event, b: Event) => (a.date < b.date ? -1 : 1)
 
-export const useBrevets = ({ chapter, after = new Date(Date.now()), limit = 20 }: UseBrevetFilters) => {
+export const useEvents = ({ chapter, after = new Date(Date.now()), limit = 20 }: UseEventFilters) => {
   const {
     allEvent: { nodes: events }
   } = useStaticQuery(brevetQuery)
 
-  const filteredEvents: Brevet[] = useMemo(() => events.map((event: Brevet) => ({
+  const filteredEvents: Event[] = useMemo(() => events.map((event: Event) => ({
       ...event,
       date: new Date(event.date)
-    })).sort(sortBrevetsAsc).filter((event: Brevet) => {
+    })).sort(sortEventAsc).filter((event: Event) => {
       const matchDate = new Date(event.date) > after
       const matchChapter = chapter ? event.chapter === chapter : true
       return matchDate && matchChapter
@@ -61,6 +62,7 @@ export const useBrevets = ({ chapter, after = new Date(Date.now()), limit = 20 }
 
   return {
     loading: false,
+    events: filteredEvents,
     brevets: filteredEvents
   }
 }

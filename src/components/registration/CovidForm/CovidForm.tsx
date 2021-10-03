@@ -4,7 +4,7 @@ import { ContentWrapper } from 'src/components/content-wrapper'
 import { Form, InputField, ErrorsList, CheckboxField, SelectField, SubmitButton } from 'src/components/form/components'
 import { formatMessage, FormState, formSubmit, RequiredFields, validate } from 'src/components/form/utils'
 import { Link } from 'src/components/link'
-import { useBrevets } from 'src/data/brevets'
+import { useEvents } from 'src/data/events'
 import { useMail } from 'src/data/mail'
 import { useSheets } from 'src/hooks/useSheets'
 import { getDateTimeLong } from 'src/utils'
@@ -99,7 +99,7 @@ const screeningResultText = (screeningStatus) => screeningStatus
 const eventsHelp = 'You must submit a screening the day of your ride.'
 
 export const CovidForm = ({ children }: CovidFormProps) => {
-    const { brevets } = useBrevets({})
+    const { brevets } = useEvents({})
     const [formData, setFormData] = useState<FormData>(defaultData)
     const [loading, setLoading] = useState(false)
     const [formState, setFormState] = useState<FormState>(null)

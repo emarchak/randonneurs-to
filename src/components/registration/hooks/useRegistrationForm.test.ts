@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks"
-import { Chapter, RideType } from "src/data/brevets"
+import { Chapter, RideType } from "src/data/events"
 import { useRegistrationForm } from "./useRegistrationForm"
 
 const formName = 'registration'

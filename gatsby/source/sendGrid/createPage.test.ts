@@ -49,15 +49,18 @@ describe('createPage()', () => {
     ]);
     expect(createPageSpy).toHaveBeenCalledTimes(2)
     expect(createPageSpy).toHaveBeenCalledWith({
-      path: 'mail/randolist/example-newsletter',
+      path: 'mail/randolist/another-newsletter',
       component: expect.any(String),
-      context: {
-        ...exampleNode1,
+      context: expect.objectContaining({
+        type: 'mail',
         pageInfo: {
-          prevUrl: null,
-          nextUrl: 'mail/randolist/another-newsletter',
+          title: "Another newsletter",
+          nextUrl: null,
+          nextTitle: null,
+          prevTitle: "Example newsletter",
+          prevUrl: 'mail/randolist/example-newsletter',
         }
-      }
+      })
     })
   })
 

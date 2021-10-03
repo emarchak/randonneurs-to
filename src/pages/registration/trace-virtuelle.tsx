@@ -1,15 +1,14 @@
 
 import React from 'react'
-import { Layout } from 'src/components/layout'
-import { SEO } from 'src/components/seo'
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
-import { Callout } from 'src/components/callout'
-import { registrationRoutes } from '.'
-import { TabMenu } from 'src/components/tabmenu'
-import { Link } from 'src/components/link'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { Callout } from 'src/components/callout'
 import { ContactForm } from 'src/components/ContactForm'
+import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
+import { Layout } from 'src/components/layout'
+import { Link } from 'src/components/link'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/Menu'
 
 const imageQuery = graphql`
 query {
@@ -22,7 +21,7 @@ query {
 }
 `
 
-const TraceVirtuelle = () => {
+const TraceVirtuelle = ({path}: PageProps) => {
     const { file } = useStaticQuery(imageQuery)
     const image = getImage(file)
     return (
@@ -33,7 +32,7 @@ const TraceVirtuelle = () => {
                 image={image}
             />
             <ContentWrapper>
-                <TabMenu tabs={registrationRoutes} activeRoute='/registration/trace-virtuelle/' />
+                <TabMenu section='registration' activeRoute={path} />
                 <h1>Trace Virtuelle</h1>
             </ContentWrapper>
             <ContentWrapper container>

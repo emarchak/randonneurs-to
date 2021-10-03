@@ -9,16 +9,15 @@ import React, { useState } from "react"
 import { Header } from "./header"
 import { Footer } from "./footer"
 import { StaticQuery, graphql } from "gatsby"
-import { Menu, MenuState, MenuTrigger, menuConfig } from './menu'
+import { Menu, MenuState, MenuTrigger, menuConfig } from './Menu/Menu'
 
 import "normalize.css"
 import * as styles from './styles/layout.module.scss'
 import "./styles/index.scss"
 
-type Props = {
+type Props = React.PropsWithChildren<{
   hideHeader?: boolean
-  children: React.ReactNode
-}
+}>
 
 export const Layout = ({ hideHeader = false, children }: Props) => {
   const [menuOpen, setMenuState] = useState(false)

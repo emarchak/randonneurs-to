@@ -2,6 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { useMemo } from 'react'
 
 export type Post = {
+  id: string
   title: string
   link: string
   content: string
@@ -17,6 +18,7 @@ export const useBlog = ({ limit = 10 }: useBlogArgs) => {
     query {
       allFeedblog(limit: 10) {
         nodes {
+          id
           title
           link
           content {

@@ -1,8 +1,7 @@
 import React from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
-
-import {Layout} from '../components/layout'
-import {SEO} from '../components/seo'
+import { Layout } from 'src/components/layout'
+import { SEO } from 'src/components/seo'
 
 const NotFoundPage = () => (
   <Layout>

@@ -1,5 +1,5 @@
 import MockDate from 'mockdate'
-import { mockBrevet } from 'src/data/brevets'
+import { mockBrevet } from 'src/data/events'
 import { getEventOptions } from './getEventOptions'
 
 describe('getEventOptions()', () => {

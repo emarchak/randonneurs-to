@@ -1,6 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useStaticQuery } from 'gatsby'
-import { useBrevets } from './useBrevets'
+import { useEvents } from './useEvents'
 
 jest.mock('gatsby', () => ({
   __esModule: true,
@@ -29,10 +28,10 @@ jest.mock('gatsby', () => ({
   }})
 }))
 
-describe('useBrevets()', () => {
+describe('useEvents()', () => {
   it('filters by date', () => {
     const after = new Date('August 30 2021')
-    const { result: {current}  } = renderHook(() => useBrevets({after}))
+    const { result: {current}  } = renderHook(() => useEvents({after}))
 
     current.brevets.forEach((brevet) => {
       expect(brevet.date.valueOf()).toBeGreaterThan(after.valueOf())
@@ -41,7 +40,7 @@ describe('useBrevets()', () => {
 
   it('sorts by date', () => {
     const after = new Date('Jan 1 2019')
-    const { result } = renderHook(() => useBrevets({after}))
+    const { result } = renderHook(() => useEvents({after}))
 
     expect(result.current.brevets[0].date.valueOf())
       .toBeLessThan(result.current.brevets[1].date.valueOf())
@@ -49,7 +48,7 @@ describe('useBrevets()', () => {
 
   it('filters by chapter', () => {
     const chapter = 'Toronto'
-    const { result } = renderHook(() => useBrevets({chapter}))
+    const { result } = renderHook(() => useEvents({chapter}))
 
     result.current.brevets.forEach((brevet) => {
       expect(brevet.chapter).toEqual(chapter)
@@ -58,7 +57,7 @@ describe('useBrevets()', () => {
 
   it('slices by limit', () => {
     const limit = 1
-    const { result } = renderHook(() => useBrevets({limit}))
+    const { result } = renderHook(() => useEvents({limit}))
 
     expect(result.current.brevets).toHaveLength(limit)
   })

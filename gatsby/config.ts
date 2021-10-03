@@ -1,5 +1,5 @@
 
-import dotenv from 'dotenv'
+import dotenv, {} from 'dotenv'
 import { resolve } from 'path'
 
 dotenv.config({
@@ -13,14 +13,13 @@ export const flags = {
 
 export const siteMetadata = {
   title: 'Toronto Randonneurs',
-  description: 'Long distance cyclists of Toronto, Canada',
+  description: "The Toronto Randonneurs are a chapter of Randonneurs Ontario ultra-distance cycling club. We've been riding long distance rides from of Toronto and southern Ontario since 1982.",
   author: '@emarchak',
   siteURL: 'https://randonneurs.to',
 }
 
 export const plugins = [
   'gatsby-plugin-root-import',
-  'gatsby-source-ro',
   {
     resolve: 'gatsby-source-ccn',
     options: {

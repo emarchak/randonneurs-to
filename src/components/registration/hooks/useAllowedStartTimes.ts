@@ -1,4 +1,4 @@
-import { Brevet } from "src/data/brevets"
+import { Brevet } from "src/data/events"
 
 const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > new Date(after).setHours(23)
 const onDate = (date: Date, now: Date) => new Date(date).setHours(0) === new Date(now).setHours(0)

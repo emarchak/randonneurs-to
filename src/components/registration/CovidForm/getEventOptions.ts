@@ -1,5 +1,5 @@
 import { SelectOptionType } from "src/components/form/components"
-import { Brevet } from "src/data/brevets"
+import { Brevet } from "src/data/events"
 import { getDateShort } from "src/utils"
 
 export const getEventOptions = (brevets: Brevet[]): SelectOptionType[] => {

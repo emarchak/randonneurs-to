@@ -7,9 +7,9 @@ import * as useRiders from 'src/data/riders'
 import * as useMail from 'src/data/mail'
 import * as useSlack from 'src/hooks/useSlack'
 
-jest.mock('src/data/brevets', () => ({
+jest.mock('src/data/events', () => ({
     __esModule: true,
-    useBrevets: jest.fn().mockReturnValue({
+    useEvents: jest.fn().mockReturnValue({
         loading: false,
         brevets:
             [{
