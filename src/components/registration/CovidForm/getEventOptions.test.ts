@@ -6,7 +6,7 @@ describe('getEventOptions()', () => {
   it('builds array of event options', () => {
     MockDate.set(new Date(mockBrevet.date))
 
-    const eventOptions = getEventOptions([mockBrevet])
+    const eventOptions = getEventOptions([mockBrevet], null)
     expect(eventOptions[0]).toEqual({
       'label': 'Scheduled permanent',
       'value': 'permanent',
@@ -18,11 +18,11 @@ describe('getEventOptions()', () => {
     })
   })
 
-  it('disables events that are more than 2 days in the future', () => {
-    const newBrevetDate = new Date(mockBrevet.date).setDate(new Date(mockBrevet.date).getDate() - 4)
-    MockDate.set(newBrevetDate)
+  it('disables events that are before the opening time', () => {
+    const aDayBefore = new Date(mockBrevet.date)
+    aDayBefore.setDate(new Date(mockBrevet.date).getDate() - 1)
 
-    const eventOptions = getEventOptions([mockBrevet])
+    const eventOptions = getEventOptions([mockBrevet], aDayBefore)
     expect(eventOptions[1]).toEqual({
       value: expect.stringContaining(`${mockBrevet.distance} - ${mockBrevet.route}`),
       label: expect.stringContaining('screening not open'),
