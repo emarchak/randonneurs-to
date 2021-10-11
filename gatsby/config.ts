@@ -7,8 +7,7 @@ dotenv.config({
 })
 
 export const flags = {
-  DEV_SSR: true,
-  FAST_DEV: true
+  FAST_DEV: false
 }
 
 export const siteMetadata = {

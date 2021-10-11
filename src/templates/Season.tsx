@@ -1,15 +1,15 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { getDateTimeLong } from 'src/utils'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { Event } from 'src/data/events'
-import { getDateTimeLong } from 'src/utils'
 import { Layout } from 'src/components/layout'
 import { Link } from 'src/components/link'
+import { SEO } from 'src/components/seo'
+import { SeasonsCta } from 'src/components/seasons'
+import { TabMenu } from 'src/components/Menu'
 import { PageTemplateType } from './types'
 import { Pagination } from './components/Pagination'
-import { SEO } from 'src/components/seo'
-import { TabMenu } from 'src/components/Menu'
-import { SeasonsCta } from 'src/components/seasons'
 
 type SeasonProps = PageTemplateType<{
   allEvent: {

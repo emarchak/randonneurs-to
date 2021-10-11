@@ -69,10 +69,10 @@ const IndexPage = () => {
         image={seoImage} />
       <ContentWrapper container>
         <ContentChild>
-        <h3>About us</h3>
-        <p>The Toronto Randonneurs are a chapter of Randonneurs Ontario ultra-distance cycling club. We've been riding 200km+ events southern Ontario since 1982.</p>
-        <p><Link href='https://randonneursontario.ca/'>Randonneurs Ontario</Link> is affiliated with the <Link href='https://www.audax-club-parisien.com/en'>Audax Club Parisien</Link>, the parent organization governing the qualification of riders wishing to participate in the 1200K Paris - Brest - Paris Randonnee. The club is also affiliated with <Link href='https://www.audax-club-parisien.com/en/our-organizations/brm-world/'>Les Randonneurs Mondiaux</Link>, which provides recognition for brevets other than Paris - Brest - Paris that are longer than 1000K.</p>
-        <LinkButton small secondary block href='https://randonneursontario.ca/who/index.html'>Learn more about Randonneurs Ontario</LinkButton>
+          <h3>About us</h3>
+          <p>The Toronto Randonneurs are a chapter of Randonneurs Ontario ultra-distance cycling club. We've been riding 200km+ events southern Ontario since 1982.</p>
+          <p><Link href='https://randonneursontario.ca/'>Randonneurs Ontario</Link> is affiliated with the <Link href='https://www.audax-club-parisien.com/en'>Audax Club Parisien</Link>, the parent organization governing the qualification of riders wishing to participate in the 1200K Paris - Brest - Paris Randonnee. The club is also affiliated with <Link href='https://www.audax-club-parisien.com/en/our-organizations/brm-world/'>Les Randonneurs Mondiaux</Link>, which provides recognition for brevets other than Paris - Brest - Paris that are longer than 1000K.</p>
+          <LinkButton small secondary block href='https://randonneursontario.ca/who/index.html'>Learn more about Randonneurs Ontario</LinkButton>
         </ContentChild>
         <ContentChild>
           <h3>Upcoming events</h3>
