@@ -1,12 +1,12 @@
 import React from 'react'
 import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
+import { Gallery } from 'src/components/Gallery'
 import { Layout } from 'src/components/layout'
 import { Link } from 'src/components/link'
+import { SeasonsCta } from 'src/components/seasons'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
-import { Gallery } from 'src/components/Gallery'
-import { SeasonsCta } from 'src/components/seasons'
 
 const pageQuery = graphql`
 query {
