@@ -2,15 +2,16 @@ import { SelectOptionType } from "src/components/form/components"
 import { Brevet } from "src/data/events"
 import { getDateShort } from "src/utils"
 
-export const getEventOptions = (brevets: Brevet[]): SelectOptionType[] => {
-  const deadline = new Date(Date.now())
-  deadline.setDate(deadline.getDate() + 3)
+export const getEventOptions = (brevets: Brevet[], openingTime: Date | null): SelectOptionType[] => {
+  const options: SelectOptionType[] = brevets.map((brevet) => {
+    const disabled = openingTime ? brevet.date > openingTime : false
 
-  const options: SelectOptionType[] = brevets.map((brevet) => ({
+    return {
       value: `${getDateShort(brevet.date)} - ${brevet.distance} - ${brevet.route}`,
-      label: `${getDateShort(brevet.date)} - ${brevet.distance} - ${brevet.route} ${brevet.date > deadline ? ' (screening not open)': ''}`,
-      disabled: brevet.date > deadline
-  }))
+      label: `${getDateShort(brevet.date)} - ${brevet.distance} - ${brevet.route} ${disabled ? ' (screening not open)' : ''}`,
+      disabled
+    }
+  })
 
   return [
     {
