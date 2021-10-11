@@ -3,11 +3,11 @@ import React from 'react'
 import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Callout } from 'src/components/callout'
-import { ContactForm } from 'src/components/ContactForm'
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
+import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
 import { Layout } from 'src/components/layout'
-import { Link } from 'src/components/link'
 import { SEO } from 'src/components/seo'
+import { ContactForm } from 'src/components/ContactForm'
+import { Link } from 'src/components/link'
 import { TabMenu } from 'src/components/Menu'
 
 const imageQuery = graphql`

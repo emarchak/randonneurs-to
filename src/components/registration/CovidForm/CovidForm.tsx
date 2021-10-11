@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useState } from 'react'
+import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react'
 import { Callout } from 'src/components/callout'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { Form, InputField, ErrorsList, CheckboxField, SelectField, SubmitButton } from 'src/components/form/components'
@@ -99,7 +99,6 @@ const screeningResultText = (screeningStatus) => screeningStatus
 const eventsHelp = 'You must submit a screening the day of your ride.'
 
 export const CovidForm = ({ children }: CovidFormProps) => {
-    const { brevets } = useEvents({})
     const [formData, setFormData] = useState<FormData>(defaultData)
     const [loading, setLoading] = useState(false)
     const [formState, setFormState] = useState<FormState>(null)
@@ -107,6 +106,16 @@ export const CovidForm = ({ children }: CovidFormProps) => {
     const [screeningResult, setScreeningResult] = useState<boolean | null>(null)
     const { sendMail } = useMail()
     const { addRow } = useSheets()
+    const { events } = useEvents({})
+    const [ openingTime, setOpeningTime ] = useState<Date | null>(null)
+
+    useEffect(() => {
+      const deadline = new Date(Date.now())
+      deadline.setDate(deadline.getDate() + 1)
+      setOpeningTime(deadline)
+    }, [])
+
+    const eventOptions = getEventOptions(events, openingTime)
 
     const isSubmitted = formState === "submitted"
     const isDirty = formState === "dirty"
@@ -172,7 +181,7 @@ export const CovidForm = ({ children }: CovidFormProps) => {
                     {children}
                     <InputField name="name" label={fieldLabels.name} value={formData.name} onChange={handleChange} disabled={isSubmitted} />
                     <InputField name="email" label={fieldLabels.email} type="email" value={formData.email} onChange={handleChange} />
-                    <SelectField name="event" label={fieldLabels.event} value={formData.event} onChange={handleChange} options={getEventOptions(brevets)} help={eventsHelp}/>
+                    <SelectField name="event" label={fieldLabels.event} value={formData.event} onChange={handleChange} options={eventOptions} help={eventsHelp}/>
                     <Callout alternative>
                         <fieldset>
                             <legend><strong>1. {fieldLabels['symptoms']}</strong></legend>

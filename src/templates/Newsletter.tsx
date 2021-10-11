@@ -1,15 +1,14 @@
 import React from 'react'
 import { Callout } from 'src/components/callout'
-import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
+import { ContentWrapper } from 'src/components/content-wrapper'
 import { getDateLong } from 'src/utils'
+import { graphql } from 'gatsby'
 import { Layout } from 'src/components/layout'
 import { LinkButton } from 'src/components/Buttons'
 import { SEO } from 'src/components/seo'
-
-import { newsletter } from './newsletter.module.scss'
-import { PageTemplateType } from './types'
 import { Pagination } from './components/Pagination'
-import { graphql } from 'gatsby'
+import { PageTemplateType } from './types'
+import { newsletter } from './newsletter.module.scss'
 
 type NewsletterProps = PageTemplateType<{
   mail: {

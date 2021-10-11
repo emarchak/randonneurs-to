@@ -1,5 +1,5 @@
 
-import dotenv, {} from 'dotenv'
+import dotenv, { } from 'dotenv'
 import { resolve } from 'path'
 
 dotenv.config({
@@ -7,8 +7,7 @@ dotenv.config({
 })
 
 export const flags = {
-  DEV_SSR: true,
-  FAST_DEV: true
+  FAST_DEV: false
 }
 
 export const siteMetadata = {
@@ -31,7 +30,12 @@ export const plugins = [
   'gatsby-transformer-sharp',
   'gatsby-plugin-sharp',
   'gatsby-plugin-image',
-  'gatsby-plugin-sass',
+  {
+    resolve: 'gatsby-plugin-sass',
+    options: {
+      implementation: require('node-sass'),
+    },
+  },
   {
     resolve: 'gatsby-source-rss-feed',
     options: {
@@ -59,9 +63,9 @@ export const plugins = [
     options: {
       google: {
         families: [
-           'EB Garamond:400,400i,700,800',
-           'Dawning of a New Day',
-           'Roboto:400,400i,700',
+          'EB Garamond:400,400i,700,800',
+          'Dawning of a New Day',
+          'Roboto:400,400i,700',
         ],
       },
     },
