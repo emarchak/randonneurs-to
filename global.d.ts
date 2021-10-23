@@ -15,3 +15,9 @@ declare namespace NodeJS {
     gtag: any
   }
 }
+declare module '*.graphql' {
+  import { DocumentNode } from 'graphql'
+  const Schema: DocumentNode
+
+  export = Schema
+}

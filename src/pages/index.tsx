@@ -14,8 +14,7 @@ import { useEvents } from 'src/data/events'
 
 import * as styles from './styles/index.module.scss'
 
-const pageQuery = graphql`
-query {
+const pageQuery = graphql`query {
   allMail(limit: 3, sort: {fields: sentAt, order: DESC}) {
     nodes {
       id

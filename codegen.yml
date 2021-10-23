@@ -2,16 +2,16 @@ overwrite: true
 schema:
   - https://randonneurs-to.hasura.app/v1/graphql
   - http://localhost:8000/___graphql
-# documents:
-#   # - ./src/**/*.{ts,tsx}
-#   # - ./node_modules/gatsby*/!(node_modules)/**/*.js
+documents:
+  # - ./src/**/*.{ts,tsx}
+  - ./src/**/*.graphql
 generates:
-  ./src/graphql/graphql.d.ts:
+  ./graphql/graphql.d.ts:
     plugins:
       - typescript
       - typescript-operations
       # - typescript-graphql-files-modules
-  ./src/graphql/schema.graphql:
+  ./graphql/schema.graphql:
     plugins:
       - typescript
       - typescript-operations

@@ -1,15 +1,15 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { Chapter, EventType } from 'graphql/graphql'
 
-export type Chapter = 'Toronto' | 'Huron' | 'Ottawa' | 'Simcoe' | 'Other'
-
-export type RideType = 'Brevet' | 'Permanent' | 'Fleche' | 'Populaire' | 'Other'
+export { Chapter, EventType }
+export type RideType = EventType
 
 export type Event = {
   chapter: Chapter
   distance: number
-  event: RideType // deprecated
-  eventType: RideType
+  event: EventType // deprecated
+  eventType: EventType
   id: string
   organizer: string
   route: string
@@ -52,12 +52,12 @@ export const useEvents = ({ chapter, after = new Date(Date.now()), limit = 20 }:
   } = useStaticQuery(brevetQuery)
 
   const filteredEvents: Event[] = useMemo(() => events.map((event: Event) => ({
-      ...event,
-      date: new Date(event.date)
-    })).sort(sortEventAsc).filter((event: Event) => {
-      const matchDate = new Date(event.date) > after
-      const matchChapter = chapter ? event.chapter === chapter : true
-      return matchDate && matchChapter
+    ...event,
+    date: new Date(event.date)
+  })).sort(sortEventAsc).filter((event: Event) => {
+    const matchDate = new Date(event.date) > after
+    const matchChapter = chapter ? event.chapter === chapter : true
+    return matchDate && matchChapter
   }).slice(0, limit), [chapter, after, limit])
 
   return {
