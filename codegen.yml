@@ -1,0 +1,21 @@
+overwrite: true
+schema:
+  - https://randonneurs-to.hasura.app/v1/graphql
+  - http://localhost:8000/___graphql
+# documents:
+#   # - ./src/**/*.{ts,tsx}
+#   # - ./node_modules/gatsby*/!(node_modules)/**/*.js
+generates:
+  ./src/graphql/graphql.d.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      # - typescript-graphql-files-modules
+  ./src/graphql/schema.graphql:
+    plugins:
+      - typescript
+      - typescript-operations
+      # - typescript-graphql-files-modules
+  ./graphql.schema.json:
+    plugins:
+      - introspection

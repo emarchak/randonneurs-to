@@ -67,7 +67,7 @@
     "serve": "gatsby serve",
     "build:production": "gatsby build",
     "build:schema": "graphql-codegen --config codegen.yml",
-    "develop": "gatsby develop -p 8000 -o -S",
+    "develop": "gatsby develop -p 8000 -o",
     "develop:functions": "netlify functions:serve",
     "develop:live": "netlify dev --live",
     "test": "jest --watch",
