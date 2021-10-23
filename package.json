@@ -63,6 +63,7 @@
   "scripts": {
     "build": "gatsby build",
     "serve": "gatsby serve",
+    "prebuild": "npx envinfo --system --binaries --browsers --npmPackages @netlify/plugin-gatsby",
     "build:production": "gatsby build",
     "build:schema": "dotenv -c development -- bash -c 'echo \"$GRAPHQL_URL\"' | xargs ./node_modules/.bin/gq --introspect > schema.gql",
     "develop": "gatsby develop -p 8000 -o -S",
