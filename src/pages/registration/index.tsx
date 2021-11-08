@@ -1,4 +1,5 @@
 import React from 'react'
+import { PageProps } from 'gatsby'
 import { Callout } from 'src/components/callout'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { Link } from 'src/components/link'
@@ -6,7 +7,6 @@ import { Layout } from 'src/components/layout'
 import { RegistrationFormBrevet } from 'src/components/registration'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
-import { PageProps } from 'gatsby'
 
 const BrevetRegistration = ({path}: PageProps) => {
   return (
