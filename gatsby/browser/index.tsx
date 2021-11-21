@@ -1,7 +1,6 @@
 import React from "react"
 import Bugsnag from "@bugsnag/js"
 import BugsnagPluginReact from '@bugsnag/plugin-react'
-import { BuyButtonProvider } from "../../src/components/buybutton"
 
 if (process.env.NODE_ENV !== 'development') {
   Bugsnag.start({
@@ -16,9 +15,7 @@ const ErrorBoundary = process.env.NODE_ENV === 'development'
 
 export const wrapRootElement = ({ element }) => (
   <ErrorBoundary>
-    <BuyButtonProvider>
-      { element }
-    </BuyButtonProvider>
+    { element }
   </ErrorBoundary>
 )
 
