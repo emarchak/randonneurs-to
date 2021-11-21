@@ -63,13 +63,11 @@ export const BuyButton = ({ productId,
 
     const { shopifyUI } = useBuyButton()
     useEffect(() => {
-        if (shopifyUI) {
-            shopifyUI.createComponent('product', {
-                id: productId,
-                node: document.getElementById(buttonId),
-                options: bbOptions
-            })
-        }
+        shopifyUI?.createComponent('product', {
+            id: productId,
+            node: document.getElementById(buttonId),
+            options: bbOptions
+        })
     }, [])
 
     return <div id={buttonId}></div>
