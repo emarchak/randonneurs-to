@@ -18,28 +18,42 @@ type BuyButtonProviderProps = {
 }
 
 export const BuyButtonProvider = ({ children }: BuyButtonProviderProps) => {
-  const [context, setContext] = useState<ContextType>(defaultContext)
-  const buySDK = window?.ShopifyBuy
+  const [shopifyClient, setClient] = useState<ShopifyBuy.Client | null>(null)
+  const [shopifyUI, setUI] = useState<ShopifyBuy.UI | null>(null)
 
   useEffect(() => {
-    if (buySDK?.UI) {
-      const shopifyClient = buySDK.buildClient({
-        domain: 'randonneurs-ontario.myshopify.com',
-        storefrontAccessToken: process.env.GATSBY_SHOPIFY_TOKEN,
-      })
-
-      const shopifyUI = buySDK.UI.init(shopifyClient)
-
-      setContext({shopifyClient, shopifyUI})
-    }
+    setTimeout(() => {
+      const buySDK = window?.ShopifyBuy
+      if (!buySDK || shopifyClient) {
+        return
+      }
+      if (!shopifyClient) {
+        const client = buySDK.buildClient({
+          domain: 'randonneurs-ontario.myshopify.com',
+          storefrontAccessToken: process.env.GATSBY_SHOPIFY_TOKEN,
+        })
+        setClient(client)
+      }
+    }, 500)
   }, [])
+
+  useEffect(() => {
+    const buildUI = async (client) => {
+      const ui = await ShopifyBuy.UI.onReady(client)
+      setUI(ui)
+    }
+
+    if (shopifyClient && !shopifyUI) {
+      buildUI(shopifyClient)
+    }
+  }, [shopifyClient])
 
   return (
     <>
       <Helmet>
-        <script src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js" />
+        <script async src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js" />
       </Helmet>
-      <BuyButtonContext.Provider value={context}>
+      <BuyButtonContext.Provider value={{shopifyClient, shopifyUI}}>
         {children}
       </BuyButtonContext.Provider>
     </>

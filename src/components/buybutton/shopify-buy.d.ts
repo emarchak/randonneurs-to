@@ -634,9 +634,9 @@ declare namespace ShopifyBuy {
     }
 
     export const UI: BuyButtonJsLibrary
-
     interface BuyButtonJsLibrary {
-        init(client: ShopifyBuy.Client): UI
+        init(client: ShopifyBuy.Client): UI,
+        onReady(client: ShopifyBuy.Client): Promise<UI>
     }
 
     interface UI {
