@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react'
+import { Loading } from '../form/components'
 import { useBuyButton } from './buybutton-context'
 
 const bbOptions = {
@@ -70,6 +71,8 @@ export const BuyButton = ({ productId,
       options: bbOptions
     })
   }, [shopifyUI])
+
+  if (!shopifyUI) return <Loading />
 
   return <div id={buttonId}></div>
 }
