@@ -1,32 +1,63 @@
-import React, { createContext, useContext } from "react"
-import ShopifyBuy, { Client } from 'shopify-buy'
-import { UI } from '@shopify/buy-button-js'
+import React, { createContext, useContext, useEffect, useState } from "react"
+import Helmet from "react-helmet"
 
 type ContextType = {
-    shopifyClient?: Client,
-    shopifyUI?: UI
+  shopifyClient: ShopifyBuy.Client | null
+  shopifyUI: ShopifyBuy.UI | null
 }
 
-export const BuyButtonContext = createContext<ContextType>({
-    shopifyClient: null,
-    shopifyUI: null
-})
+const defaultContext: ContextType = {
+  shopifyClient: null,
+  shopifyUI: null
+}
+
+export const BuyButtonContext = createContext<ContextType>(defaultContext)
 
 type BuyButtonProviderProps = {
-    children: React.ReactChild
+  children: React.ReactChild
 }
 
 export const BuyButtonProvider = ({ children }: BuyButtonProviderProps) => {
-    const shopifyClient = ShopifyBuy.buildClient({
-        domain: 'randonneurs-ontario.myshopify.com',
-        storefrontAccessToken: process.env.GATSBY_SHOPIFY_TOKEN,
-    })
-    const shopifyUI = UI.init(shopifyClient)
-    return (
-        <BuyButtonContext.Provider value={{ shopifyClient, shopifyUI }}>
-            {children}
-        </BuyButtonContext.Provider>
-    )
+  const [shopifyClient, setClient] = useState<ShopifyBuy.Client | null>(null)
+  const [shopifyUI, setUI] = useState<ShopifyBuy.UI | null>(null)
+
+  useEffect(() => {
+    setTimeout(() => {
+      const buySDK = window?.ShopifyBuy
+      if (!buySDK || shopifyClient) {
+        return
+      }
+      if (!shopifyClient) {
+        const client = buySDK.buildClient({
+          domain: 'randonneurs-ontario.myshopify.com',
+          storefrontAccessToken: process.env.GATSBY_SHOPIFY_TOKEN,
+        })
+        setClient(client)
+      }
+    }, 500)
+  }, [])
+
+  useEffect(() => {
+    const buildUI = async (client) => {
+      const ui = await ShopifyBuy.UI.onReady(client)
+      setUI(ui)
+    }
+
+    if (shopifyClient && !shopifyUI) {
+      buildUI(shopifyClient)
+    }
+  }, [shopifyClient])
+
+  return (
+    <>
+      <Helmet>
+        <script async src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js" />
+      </Helmet>
+      <BuyButtonContext.Provider value={{shopifyClient, shopifyUI}}>
+        {children}
+      </BuyButtonContext.Provider>
+    </>
+  )
 }
 
 export const useBuyButton = () => useContext(BuyButtonContext)

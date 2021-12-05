@@ -632,6 +632,25 @@ declare namespace ShopifyBuy {
         attrs?: any
         onlineStoreUrl?: string
     }
+
+    export const UI: BuyButtonJsLibrary
+    interface BuyButtonJsLibrary {
+        init(client: ShopifyBuy.Client): UI,
+        onReady(client: ShopifyBuy.Client): Promise<UI>
+    }
+
+    interface UI {
+        createComponent(type: ComponentTypes, config: UIConfig): Promise<Component>
+        destroyComponent(type: ComponentTypes, id: Number),
+    }
+
+    type ComponentTypes = 'product' | 'cart' | 'collection' | 'productSet' | 'toggle'
+    interface Component { }
+    interface UIConfig {
+        id: number,
+        node: HTMLElement,
+        options: Object,
+    }
 }
 
 declare module 'shopify-buy' {

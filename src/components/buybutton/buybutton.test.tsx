@@ -1,15 +1,14 @@
 import React from 'react'
 import { render, waitFor } from '@testing-library/react'
-import * as ShopifyBuy from '@shopify/buy-button-js'
 import { BuyButton } from './buybutton'
 import * as BuyButtonContext from './buybutton-context'
 
 describe('<buybutton>', () => {
     const createComponent = jest.fn()
     const destroyComponent = jest.fn()
+    const buySpy = jest.spyOn(BuyButtonContext, 'useBuyButton')
 
     beforeEach(() => {
-        const buySpy = jest.spyOn(BuyButtonContext, 'useBuyButton')
         buySpy.mockReturnValue({
             shopifyClient: null,
             shopifyUI: { createComponent, destroyComponent }
@@ -17,7 +16,14 @@ describe('<buybutton>', () => {
     })
 
     afterEach(() => {
-        createComponent.mockReset()
+        buySpy.mockClear()
+        createComponent.mockClear()
+    })
+
+    it('shows loading screen on start', () => {
+        buySpy.mockReturnValueOnce({shopifyClient: null, shopifyUI: null })
+        const {getByLabelText} = render(<BuyButton productId={123} />)
+        expect(getByLabelText('Loading')).toBeInTheDocument()
     })
 
     it('calls buybutton.js with the correct product id', async () => {
@@ -29,6 +35,7 @@ describe('<buybutton>', () => {
             }))
         )
     })
+
     it('passes the contents configuration along if provided', async () => {
         render(<BuyButton productId={456} img button buttonWithQuantity title price />)
 
