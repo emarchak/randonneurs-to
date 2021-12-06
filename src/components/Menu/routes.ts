@@ -4,9 +4,9 @@ export const shop = [
 ]
 
 export const seasons = [
+  { label: '2022', route: '/seasons/2022/' },
   { label: '2021', route: '/seasons/2021/' },
   { label: '2020', route: '/seasons/2020/' },
-  { label: '2019', route: '/seasons/2019/' },
   { label: 'Archive', route: '/seasons/' }
 ]
 

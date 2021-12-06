@@ -20,7 +20,7 @@ describe('sourceNodes', () => {
     it('processes input', async () => {
         await Promise.all([
             sourceNodes(args, pluginOptions, pluginCallback)
-        ]);
+        ])
 
         expect(createNodeId).toHaveBeenCalledWith('event-871')
         expect(createNode).toHaveBeenCalledWith(expect.objectContaining({
@@ -63,13 +63,9 @@ describe('sourceNodes', () => {
 })
 
 describe('getSeason()', () => {
-    it('returns current year for events before end of October', () => {
+    it('returns current year for events', () => {
         const season = getSeason(new Date('2020-09-01T00:00:00.000Z'))
         expect(season).toBe("2020")
-    })
-    it ('returns next year for events after October', () => {
-        const season = getSeason(new Date('2020-11-02T00:00:00.000Z'))
-        expect(season).toBe("2021")
     })
 })
 
