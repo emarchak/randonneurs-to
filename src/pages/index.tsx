@@ -27,7 +27,6 @@ query {
   allSitePage(
     limit: 3
     filter: {context: {type: {eq: "mail"}}}
-    sort: {fields: path}
   ) {
     nodes {
       path

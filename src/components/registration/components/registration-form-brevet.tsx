@@ -154,9 +154,7 @@ export const RegistrationFormBrevet = () => {
                 <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={<NameHelp isMissingMembership={isMissingMembership}/>} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
                 <Aside>
-                    <p>To encourage social distancing, you can pick your own start time on the scheduled date.</p>
-
-                    <p>You'll be emailed a brevet card before each ride. Submit your brevet card and recorded activity (strava, ridewgps, garmin, etc.) to your Chapter VP when you're done.</p>
+                    <p>You'll be given a brevet card at the start of each ride. Submit your brevet card and recorded activity (strava, ridewgps, garmin, etc.) to your Chapter VP when you're done.</p>
 
                     <p><Link href="http://randonneursontario.ca/who/whatis.html#COVID">Learn more about riding brevets and our COVID-19 guidelines.</Link></p>
                 </Aside>
