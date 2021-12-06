@@ -66,6 +66,6 @@
     "develop:live": "netlify dev --live",
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:snapshot": "yarn percy snapshot public/*"
+    "test:snapshot": "yarn percy snapshot public/"
   }
 }
