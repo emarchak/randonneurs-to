@@ -22,7 +22,7 @@ type Props = {
 }
 
 export const SelectBrevets = ({ onChange }: Props) => {
-    const { brevets } = useEvents({})
+    const { brevets } = useEvents({limit: false})
     const { allowedToRegister, getBrevetRegistrationDeadline } = useAllowedStartTimes()
     const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['id']>('')
     const [filters, setFilters] = useState({

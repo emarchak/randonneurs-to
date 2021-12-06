@@ -16,7 +16,7 @@ describe('<TimeField>', () => {
   })
 
   it('passes time back to onChange event', () => {
-    const mount = render(<TimeField {...props} value={new Date('2021-08-21 06:01 EDT')} onChange={onChangeSpy} />)
+    const mount = render(<TimeField {...props} value={new Date('2021-08-21 06:01 EDT')} onChange={onChangeSpy} help={'Select the date'} />)
 
     expect(mount.getByLabelText(/time/i)).toHaveProperty('value', '06:00')
     fireEvent.change(mount.getByLabelText(/time/i), {
