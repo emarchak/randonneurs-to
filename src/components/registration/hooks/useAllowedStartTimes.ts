@@ -1,8 +1,7 @@
 import { Brevet } from "src/data/events"
 
 const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > new Date(after).setHours(23)
-const onDate = (date: Date, now: Date) => new Date(date).setHours(0) === new Date(now).setHours(0)
-const onDateTime = (date: Date, now: Date) => new Date(date) === new Date(now)
+const onDateTime = (date: Date, now: Date) => new Date(date).toUTCString() === new Date(now).toUTCString()
 const addDays = (date: Date, number: number) => new Date(new Date(date).setDate(date.getDate() + number))
 
 const weekdays = {
