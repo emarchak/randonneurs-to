@@ -2,6 +2,7 @@ import { Brevet } from "src/data/events"
 
 const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > new Date(after).setHours(23)
 const onDate = (date: Date, now: Date) => new Date(date).setHours(0) === new Date(now).setHours(0)
+const onDateTime = (date: Date, now: Date) => new Date(date) === new Date(now)
 const addDays = (date: Date, number: number) => new Date(new Date(date).setDate(date.getDate() + number))
 
 const weekdays = {
@@ -26,7 +27,7 @@ export const useAllowedStartTimes = () => {
     const allowedStartTimes = (time: Date, scheduleTime?: Date) => {
         const now = new Date(Date.now())
         if (scheduleTime) {
-            return onDate(time, scheduleTime) && inFutureDate(time, addDays(now, 6))
+            return onDateTime(time, scheduleTime) && inFutureDate(time, addDays(now, 6))
         }
         return inFutureDate(time, now)
     }

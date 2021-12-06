@@ -186,6 +186,9 @@ $input-width: 40rem;
   width: 100%;
   height: 2.41rem;
   max-width: $input-width + 1.65rem;
+  &:disabled {
+    opacity: 1;
+  }
 }
 
 .label {

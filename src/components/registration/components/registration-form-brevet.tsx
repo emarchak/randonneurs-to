@@ -71,12 +71,6 @@ const requiredFields: RequiredFields<FormData> = [
     'roConsent'
 ]
 
-const GrandDepartWarning = ({date}: {date?: Date | ''}) => (
-    date
-        ? <>The <em>grand depart</em> is {getDateTimeLong(date)}. For social distancing, you may pick an alternative time.</>
-        : null
-)
-
 const NameHelp = ({isMissingMembership}: {isMissingMembership: boolean}) => (
     isMissingMembership
         ? <MissingMembership />
@@ -167,7 +161,7 @@ export const RegistrationFormBrevet = () => {
                     <p><Link href="http://randonneursontario.ca/who/whatis.html#COVID">Learn more about riding brevets and our COVID-19 guidelines.</Link></p>
                 </Aside>
                 <SelectBrevets onChange={handleBrevetChange} />
-                <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} disableDate help={<GrandDepartWarning date={formData.scheduleTime}/>} />
+                <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} disabled />
                 <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled />
                 <SelectField label={fieldLabels['gender']} name='gender' options={['M', 'F', 'X']} value={formData.gender} onChange={handleInputChange} optional help={<>The <em lang='fr'>Audax Club Parisien</em> uses this for ridership statistics</>}/>
                 <InputField label={fieldLabels['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
