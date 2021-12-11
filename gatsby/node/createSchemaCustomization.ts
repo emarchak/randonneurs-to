@@ -1,4 +1,4 @@
-gitimport { GatsbyNode } from "gatsby"
+import { GatsbyNode } from "gatsby"
 
 export const createPageSchemaCustomization: GatsbyNode['createSchemaCustomization'] = ({ actions: { createTypes } }) => {
   createTypes(`
@@ -6,9 +6,16 @@ export const createPageSchemaCustomization: GatsbyNode['createSchemaCustomizatio
       season
       mail
     }
+    type PageInfo {
+      title: String
+      prevUrl: String
+      prevTitle: String
+      nextUrl: String
+      nextTitle: String
+    }
     type SitePageContext {
-      type: PageType
       id: String
+      type: PageType
       pageInfo: PageInfo
     }
     type SitePage implements Node {
