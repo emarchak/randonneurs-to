@@ -6,7 +6,7 @@ const ccnEndpoint = process.env.CCN_ENDPOINT || ''
 
 type Membership = 'Individual' | 'Family' | 'Trial'
 
-const TypeMembership: {[key: string]: Membership} = {
+const TypeMembership: { [key: string]: Membership } = {
   'Individual Membership': 'Individual',
   'Family Membership > PRIMARY FAMILY MEMBER': 'Family',
   'Additional Family Member': 'Family',
@@ -19,7 +19,7 @@ const snakeToCamelKeys = (o) => Object.keys(o).reduce((c, k) => (c[snakeToCamel(
 const fetchPaginatedQuery = async (query, accumulator = []) => {
   const response = await fetch(query)
   if (response.status !== 200) {
-    throw new Error(`gatsby-source-ccn response ${response.status} ${response.statusText}`)
+    throw new Error(`Ccn response ${response.status} ${response.statusText}`)
   }
 
   const data = await response.json()
@@ -46,10 +46,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
   createContentDigest,
   createNodeId,
 }) => {
-  if (!ccnEndpoint) {
-    return
-  }
-
   try {
     const response = await fetchPaginatedQuery(ccnEndpoint)
     response.map(snakeToCamelKeys).forEach((data: CcnResponse) => {
@@ -73,6 +69,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
       })
     })
   } catch (error) {
-    console.error(error)
+    throw new Error(error)
   }
 }
