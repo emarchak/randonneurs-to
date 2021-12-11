@@ -39,6 +39,8 @@ export const createPages: GatsbyNode['createPages'] = async (...args) => {
 }
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = (...args) => {
+  // All pages
+  createPageSchemaCustomization(...args)
   // Events
   createEventSchemaCustomization(...args)
   // Ccn
