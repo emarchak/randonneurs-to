@@ -98,8 +98,68 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
     })
     }
   }
+
+  if (endpoint.match(/ccnbikes.com\?pg=2/)) {
+    return {
+      status: 200,
+      json: jest.fn().mockResolvedValue({
+          results: [{
+            city: 'Toronto',
+            country: 'Canada',
+            event: 'Randonneurs Ontario Membership 2021',
+            full_name: 'Bil Bar',
+            id: 3,
+            registration_category: 'Family Membership > PRIMARY FAMILY MEMBER',
+            team_category: '',
+            team_name: '',
+          },
+          {
+            city: 'Toronto',
+            country: 'Canada',
+            event: 'Randonneurs Ontario Membership 2021',
+            full_name: 'Brill Bruiser',
+            id: 3,
+            registration_category: 'fake category',
+            team_category: '',
+            team_name: '',
+          }],
+          next: null
+        })
+    }
+  }
+
+  if (endpoint.match(/ccnbikes.com/)) {
+    return {
+      status: 200,
+      json: jest.fn() .mockResolvedValue({
+        results: [{
+          city: 'Ottawa',
+          country: 'Canada',
+          event: 'Randonneurs Ontario Membership 2021',
+          full_name: 'Foo Bar',
+          id: 1,
+          registration_category: 'Individual Membership',
+          team_category: '',
+          team_name: '',
+        },
+        {
+          city: 'Toronto',
+          country: 'Canada',
+          event: 'Randonneurs Ontario Membership 2021',
+          full_name: 'Baz Boo',
+          id: 2,
+          registration_category: 'Individual Membership',
+          team_category: '',
+          team_name: '',
+        }],
+        next: '/ccnbikes.com?pg=2'
+      })
+    }
+  }
+
   return ({
     ok: true,
+    status: 200,
     json: jest.fn().mockResolvedValue({})
   })
 })
