@@ -13,6 +13,13 @@ generates:
       - 'typescript-document-nodes'
   src/graphql.gql.d.ts:
     schema: 'https://randonneurs-to.hasura.app/v1/graphql'
+    documents:
+      - './src/**/*.{ts,tsx}'
+      - '!./src/**/*.d.ts'
     plugins:
       - 'typescript'
       - 'typescript-operations'
+      - typescript-react-query
+    config:
+      fetcher:
+        endpoint: 'https://randonneurs-to.hasura.app/v1/graphql'
