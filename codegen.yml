@@ -1,15 +1,18 @@
 overwrite: true
-schema: "http://localhost:8000/___graphql"
-documents:
-  - ./src/**/*.{ts,tsx}
-  - ./node_modules/gatsby*/!(node_modules)/**/*.js
 generates:
-  src/types.gql.d.ts:
+  src/gatsby.gql.d.ts:
+    schema: 'http://localhost:8000/___graphql'
+    documents:
+      - './src/**/*.{ts,tsx}'
+      - '!./src/**/*.d.ts'
+      - './node_modules/gatsby*/!(node_modules)/**/*.js'
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-graphql-files-modules"
-      - "typescript-document-nodes"
-  ./graphql.schema.json:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-files-modules'
+      - 'typescript-document-nodes'
+  src/graphql.gql.d.ts:
+    schema: 'https://randonneurs-to.hasura.app/v1/graphql'
     plugins:
-      - "introspection"
+      - 'typescript'
+      - 'typescript-operations'
