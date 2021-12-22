@@ -36,6 +36,7 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.3.0",
     "@percy/cli": "^1.0.0-beta.67",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^12.0.0",
@@ -54,17 +55,23 @@
     "jest": "^27.2.2",
     "mockdate": "^3.0.5",
     "netlify-cli": "^8.0.20",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "@graphql-codegen/typescript-graphql-files-modules": "2.1.0",
+    "@graphql-codegen/typescript-document-nodes": "2.2.1",
+    "@graphql-codegen/typescript": "2.4.1",
+    "@graphql-codegen/typescript-operations": "2.2.1",
+    "@graphql-codegen/introspection": "2.1.0"
   },
   "scripts": {
     "build": "gatsby build",
     "serve": "gatsby serve",
     "build:production": "gatsby build",
-    "develop": "gatsby develop -p 8000 -o -S",
+    "develop": "gatsby develop -p 8000 -o",
     "develop:functions": "netlify functions:serve",
     "develop:live": "netlify dev --live",
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:snapshot": "yarn percy snapshot public/"
+    "test:snapshot": "yarn percy snapshot public/",
+    "build:schema": "graphql-codegen --config codegen.yml"
   }
 }
