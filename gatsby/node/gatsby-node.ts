@@ -1,19 +1,20 @@
 import { GatsbyNode } from 'gatsby'
+import { createPageSchemaCustomization } from './createSchemaCustomization'
 import { createNewslettersPages, sourceNewsletterNodes } from '../source/sendGrid'
 import { createEventPages, createEventSchemaCustomization, sourceEventNodes } from '../source/randOnt'
 import { createCcnSchemaCustomization, sourceCcnNodes } from '../source/Ccn'
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ actions }) => {
   actions.setWebpackConfig({
-      module: {
-          rules: [
-            {
-              test: /\.(graphql|gql)$/,
-              exclude: /node_modules/,
-              loader: 'graphql-tag/loader',
-            },
-          ],
-        }
+    module: {
+      rules: [
+        {
+          test: /\.(graphql|gql)$/,
+          exclude: /node_modules/,
+          loader: 'graphql-tag/loader',
+        },
+      ],
+    }
   })
 }
 
@@ -38,6 +39,8 @@ export const createPages: GatsbyNode['createPages'] = async (...args) => {
 }
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = (...args) => {
+  // All pages
+  createPageSchemaCustomization(...args)
   // Events
   createEventSchemaCustomization(...args)
   // Ccn

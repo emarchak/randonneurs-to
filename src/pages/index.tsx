@@ -26,7 +26,7 @@ query {
   }
   allSitePage(
     limit: 3
-    filter: {context: {type: {eq: "mail"}}}
+    filter: {context: {type: {eq: mail}}}
   ) {
     nodes {
       path
