@@ -11,7 +11,6 @@ import { TabMenu } from 'src/components/Menu'
 const pageQuery = graphql`
 query {
   allSitePage(
-    limit: 3
     filter: {context: {type: {eq: season}}}
     sort: {fields: context___pageInfo___title, order: DESC}
   ) {
