@@ -1,7 +1,7 @@
 import React from 'react'
 import { iframe } from "./styles/route.module.scss"
 type RwgpsRouteProps = {
-    routeId: number
+    routeId: string
 }
 
 export const RwgpsRoute = ({ routeId }: RwgpsRouteProps) => (

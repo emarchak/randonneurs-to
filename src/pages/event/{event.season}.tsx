@@ -1,22 +1,18 @@
 import React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { Event } from 'src/data/events'
 import { getDateTimeLong } from 'src/utils'
 import { Layout } from 'src/components/layout'
 import { Link } from 'src/components/Link'
 import { SeasonsCta } from 'src/components/seasons'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
+import { SeasonPageQuery } from 'src/gatsby.gql'
 
-type SeasonProps = PageProps<{
-  allEvent: {
-    nodes: Event[] & {path: string}
-  }
-}>
+type SeasonProps = PageProps<SeasonPageQuery>
 
 export const query = graphql`
-query SeasonQuery($season: String) {
+query SeasonPage($season: String) {
   allEvent(filter: {season: {eq: $season}, chapter: {eq: Toronto }}) {
     nodes {
       chapter
@@ -34,7 +30,7 @@ query SeasonQuery($season: String) {
 }
 `
 
-const Season = ({ uri, params: { season }, data: { allEvent: { nodes: events } }, ...props }: SeasonProps) => (
+const Season = ({ uri, params: { season }, data: { allEvent: { nodes: events } } }: SeasonProps) => (
     <Layout>
     <SEO
       title={`${season} | Season`}

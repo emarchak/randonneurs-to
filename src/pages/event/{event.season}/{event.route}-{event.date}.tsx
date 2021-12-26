@@ -10,11 +10,12 @@ import { Event as EventType } from 'src/data/events'
 import { RwgpsRoute } from 'src/components/RwgpsRoute'
 import { LinkButton } from 'src/components/Buttons'
 import { Link, MapLink } from 'src/components/Link'
+import { EventPageQuery } from 'src/gatsby.gql'
 
-type EventProps = PageProps<{ event: EventType & {seasonPath: string}}>
+type EventProps = PageProps<EventPageQuery>
 
 export const query = graphql`
-  query EventQuery($id: String) {
+  query EventPage($id: String) {
     event(id: {eq: $id}) {
       chapter
       date
