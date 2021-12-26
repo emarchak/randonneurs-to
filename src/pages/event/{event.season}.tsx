@@ -1,25 +1,19 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, PageProps } from 'gatsby'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { Event } from 'src/data/events'
 import { getDateTimeLong } from 'src/utils'
 import { Layout } from 'src/components/layout'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 import { SeasonsCta } from 'src/components/seasons'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
-import { PageTemplateType } from './types'
-import { Pagination } from './components/Pagination'
+import { SeasonPageQuery } from 'src/gatsby.gql'
 
-type SeasonProps = PageTemplateType<{
-  allEvent: {
-    nodes: Event[]
-  }
-}>
+type SeasonProps = PageProps<SeasonPageQuery>
 
 export const query = graphql`
-query SeasonQuery($id: String) {
-  allEvent(filter: {season: {eq: $id}, chapter: {eq: Toronto }}) {
+query SeasonPage($season: String) {
+  allEvent(filter: {season: {eq: $season}, chapter: {eq: Toronto }}) {
     nodes {
       chapter
       distance
@@ -27,25 +21,25 @@ query SeasonQuery($id: String) {
       id
       organizer
       route
-      rwgpsUrl
       startLocation
       date
       season
+      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
     }
   }
 }
 `
 
-const Season = ({pageContext: {pageInfo, id}, uri, data: {allEvent: {nodes: events}}}: SeasonProps) => (
-  <Layout>
+const Season = ({ uri, params: { season }, data: { allEvent: { nodes: events } } }: SeasonProps) => (
+    <Layout>
     <SEO
-      title={`${pageInfo.title} | Season`}
-      description={`${id}`}
+      title={`${season} | Season`}
+      description={`The ${season} season of the Toronto Chapter of Randonneurs Ontario, a long distance cycling club associated with the Audax Club Parisien.`}
       />
       <ContentWrapper>
         <TabMenu activeRoute={`${uri}/`} section='seasons' />
-        <h1>{pageInfo.title} Season</h1>
-        <p><Link href={`https://randonneursontario.ca/result/torres${pageInfo.title.slice(-2)}.html`}>View official results</Link></p>
+        <h1>{season} Season</h1>
+        <p><Link href={`https://randonneursontario.ca/result/torres${season.slice(-2)}.html`}>View official results</Link></p>
 
         <table>
           <thead><tr>
@@ -59,11 +53,7 @@ const Season = ({pageContext: {pageInfo, id}, uri, data: {allEvent: {nodes: even
               <tr key={i} >
                 <td>{event.distance}<br/>{event.eventType}</td>
                 <td>
-                  {event.route}
-                  {event.rwgpsUrl && <>
-                    <br />
-                    <small>(<Link href={event.rwgpsUrl}>{`View ${event.route} route`}</Link>)</small>
-                  </>}
+                  <Link to={event.path}>{event.route}</Link>
                 </td>
                 <td>{getDateTimeLong(new Date(event.date))}</td>
                 <td>{event.startLocation}</td>
@@ -72,8 +62,6 @@ const Season = ({pageContext: {pageInfo, id}, uri, data: {allEvent: {nodes: even
           </tbody>
         </table>
       </ContentWrapper>
-
-      <Pagination pageInfo={pageInfo} />
 
       <SeasonsCta />
 

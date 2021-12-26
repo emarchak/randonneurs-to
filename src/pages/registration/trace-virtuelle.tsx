@@ -7,7 +7,7 @@ import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
 import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { ContactForm } from 'src/components/ContactForm'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 import { TabMenu } from 'src/components/Menu'
 
 const imageQuery = graphql`

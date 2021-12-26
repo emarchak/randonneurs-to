@@ -8,10 +8,9 @@ import { Aside, Callout } from 'src/components/callout'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 import { useRiders, Rider } from 'src/data/riders'
 import { MissingMembership } from './missing-membership'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, RequiredFields, validate } from 'src/components/form/utils'
-import { getDateTimeLong } from 'src/utils'
 
 const formName = 'registration'
 
@@ -21,7 +20,7 @@ interface FormData {
     gender: '' | 'M' | 'F' | 'X'
     membership: Rider['membership'] | 'missing' | ''
     route: Brevet['route']
-    rideType: Brevet['event'] | ''
+    rideType: Brevet['eventType'] | ''
     scheduleTime: Date | ''
     startTime: Date | ''
     startLocation: string
@@ -115,7 +114,7 @@ export const RegistrationFormBrevet = () => {
         const time = new Date(brevet.date)
         dirtyForm({
             route: brevet.route,
-            rideType: brevet.event,
+            rideType: brevet.eventType,
             startTime: time,
             scheduleTime: time,
             chapter: brevet.chapter,

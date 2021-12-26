@@ -1,7 +1,7 @@
 import { GatsbyNode } from 'gatsby'
 import { createPageSchemaCustomization } from './createSchemaCustomization'
 import { createNewslettersPages, sourceNewsletterNodes } from '../source/sendGrid'
-import { createEventPages, createEventSchemaCustomization, sourceEventNodes } from '../source/randOnt'
+import { createEventSchemaCustomization, sourceEventNodes } from '../source/randOnt'
 import { createCcnSchemaCustomization, sourceCcnNodes } from '../source/Ccn'
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ actions }) => {
@@ -33,8 +33,6 @@ export const createPages: GatsbyNode['createPages'] = async (...args) => {
   await Promise.all([
     // Newsletters
     createNewslettersPages(...args),
-    // Events
-    createEventPages(...args)
   ])
 }
 

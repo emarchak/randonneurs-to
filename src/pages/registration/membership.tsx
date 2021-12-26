@@ -2,7 +2,7 @@ import React from 'react'
 import { PageProps } from 'gatsby'
 import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
 import { Layout } from 'src/components/layout'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 import { LinkButton } from 'src/components/Buttons'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'

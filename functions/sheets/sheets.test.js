@@ -38,7 +38,7 @@ jest.mock('./sheetData', () => {
 describe('sheets()', () => {
   const sheetSpy = jest.spyOn(sheetAPI, 'GoogleSpreadsheet')
   const addRowSpy = jest.fn().mockReturnValue({rowIndex: 202})
-
+  const consoleSpy = jest.spyOn(console, "log")
   sheetSpy.mockReturnValue({
     useServiceAccountAuth: jest.fn(),
     loadInfo: jest.fn(),
@@ -47,6 +47,14 @@ describe('sheets()', () => {
         addRow: addRowSpy
       }
     }
+  })
+
+  beforeAll(() => {
+    consoleSpy.mockImplementation()
+  });
+
+  afterAll(() => {
+    consoleSpy.mockRestore();
   })
 
   afterEach(() => {

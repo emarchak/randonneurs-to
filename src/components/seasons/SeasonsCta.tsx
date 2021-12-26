@@ -2,7 +2,7 @@ import React from 'react'
 import { LinkButton } from '../Buttons'
 import { Callout } from "../callout"
 import { ContentWrapper } from "../content-wrapper"
-import { Link } from '../link'
+import { Link } from '../Link'
 
 export const SeasonsCta = () => (
   <Callout alternative>

@@ -3,7 +3,7 @@ import { graphql, useStaticQuery, PageProps } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { Callout } from 'src/components/callout'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 

@@ -3,7 +3,7 @@ import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { ContentWrapper } from "src/components/content-wrapper"
 import CovidForm from 'src/components/registration/CovidForm'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 
 const CovidScreening = () => {
     return (
