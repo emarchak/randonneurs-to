@@ -42,8 +42,7 @@ jobs:
 
   snapshot:
     runs-on: ubuntu-latest
-    if: ${{ false }}  # disable for now
-
+    if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -70,8 +69,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --production=false
 
-      - name: Build screenshots
-        run: yarn build
+      - name: Build site
+        run: yarn build:test
         env:
           CCN_ENDPOINT: ${{ secrets.CCN_ENDPOINT }}
           GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
