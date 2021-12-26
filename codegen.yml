@@ -1,0 +1,25 @@
+overwrite: true
+generates:
+  src/gatsby.gql.d.ts:
+    schema: 'http://localhost:8000/___graphql'
+    documents:
+      - './src/**/*.{ts,tsx}'
+      - '!./src/**/*.d.ts'
+      - './node_modules/gatsby*/!(node_modules)/**/*.js'
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-files-modules'
+      - 'typescript-document-nodes'
+  src/graphql.gql.d.ts:
+    schema: 'https://randonneurs-to.hasura.app/v1/graphql'
+    documents:
+      - './src/**/*.{ts,tsx}'
+      - '!./src/**/*.d.ts'
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - typescript-react-query
+    config:
+      fetcher:
+        endpoint: 'https://randonneurs-to.hasura.app/v1/graphql'
