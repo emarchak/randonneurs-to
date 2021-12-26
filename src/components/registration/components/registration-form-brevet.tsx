@@ -8,7 +8,7 @@ import { Aside, Callout } from 'src/components/callout'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 import { useRiders, Rider } from 'src/data/riders'
 import { MissingMembership } from './missing-membership'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, RequiredFields, validate } from 'src/components/form/utils'
 

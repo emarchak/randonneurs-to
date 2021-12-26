@@ -3,7 +3,7 @@ import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
 import { Gallery } from 'src/components/Gallery'
 import { Layout } from 'src/components/layout'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 import { SeasonsCta } from 'src/components/seasons'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'

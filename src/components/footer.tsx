@@ -1,6 +1,6 @@
 import React from "react"
 import * as styles from "./styles/layout.module.scss"
-import { Link } from "./link"
+import { Link } from "./Link"
 
 const CopyLeft = () => (
   <span aria-label={"Copyleft"} className={styles.copyleft}>

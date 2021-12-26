@@ -1,7 +1,7 @@
 import React from 'react'
 import { Brevet } from 'src/data/events'
 import { getDateTimeShort } from 'src/utils'
-import { Link, MapLink } from 'src/components/link'
+import { Link, MapLink } from 'src/components/Link'
 
 type BrevetColumnType = {
     brevet: Brevet,

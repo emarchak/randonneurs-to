@@ -1,6 +1,6 @@
 import React from 'react'
 import { slide as Burger } from 'react-burger-menu'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 import routes from './routes'
 import * as styles from '../styles/menu.module.scss'
 

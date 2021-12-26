@@ -9,7 +9,7 @@ import { TabMenu } from 'src/components/Menu'
 import { Event as EventType } from 'src/data/events'
 import { RwgpsRoute } from 'src/components/RwgpsRoute'
 import { LinkButton } from 'src/components/Buttons'
-import { Link, MapLink } from 'src/components/link'
+import { Link, MapLink } from 'src/components/Link'
 
 type EventProps = PageProps<{ event: EventType & {seasonPath: string}}>
 

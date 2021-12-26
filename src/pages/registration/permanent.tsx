@@ -6,7 +6,7 @@ import { ContentWrapper } from "src/components/content-wrapper"
 import { RegistrationFormPermanent } from 'src/components/registration'
 import { Callout } from 'src/components/callout'
 import { TabMenu } from 'src/components/Menu'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 
 export const PermanentRegistration = ({path}: PageProps) => {
   return (
