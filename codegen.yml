@@ -1,10 +1,10 @@
 overwrite: true
 generates:
-  src/gatsby.gql.d.ts:
+  src/gatsby.gql.ts:
     schema: 'http://localhost:8000/___graphql'
     documents:
       - './src/**/*.{ts,tsx}'
-      - '!./src/**/*.d.ts'
+      - '!./src/**/*.gql.ts'
       - './node_modules/gatsby*/!(node_modules)/**/*.js'
     plugins:
       - 'typescript'
@@ -14,7 +14,7 @@ generates:
   src/graphql.gql.d.ts:
     schema: 'https://randonneurs-to.hasura.app/v1/graphql'
     documents:
-      - '!./src/**/*.d.ts'
+      - '!./src/**/*.gql.ts'
     plugins:
       - 'typescript'
       - 'typescript-operations'
