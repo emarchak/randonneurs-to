@@ -10,6 +10,10 @@ $footer-height: 4.3rem;
     padding-right: 0;
     padding-bottom: 0;
   }
+
+  + .content {
+    padding-top: 0;
+  }
 }
 
 .contentContainer {
@@ -19,7 +23,7 @@ $footer-height: 4.3rem;
 }
 
 .contentContainerChild {
-  margin-bottom: get-spacing(large);
+  margin-bottom: get-spacing(medium);
   @include media(large) {
     flex: 1;
   }

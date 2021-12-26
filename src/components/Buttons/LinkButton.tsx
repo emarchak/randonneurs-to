@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, LinkProps } from 'src/components/link'
+import { Link, LinkProps } from 'src/components/Link'
 import { ButtonTypes, getButtonClassName } from './utils'
 
 type LinkButtonProps = ButtonTypes & LinkProps

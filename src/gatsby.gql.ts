@@ -2466,6 +2466,7 @@ export type QueryEventArgs = {
   distance?: InputMaybe<IntQueryOperatorInput>;
   event?: InputMaybe<StringQueryOperatorInput>;
   eventType?: InputMaybe<EventTypeQueryOperatorInput>;
+  gatsbyPath?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
   organizer?: InputMaybe<StringQueryOperatorInput>;
@@ -4104,6 +4105,7 @@ export type Event = Node & {
   distance?: Maybe<Scalars['Int']>;
   event?: Maybe<Scalars['String']>;
   eventType?: Maybe<EventType>;
+  gatsbyPath?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   internal: Internal;
   organizer?: Maybe<Scalars['String']>;
@@ -4127,6 +4129,11 @@ export type EventDateArgs = {
   formatString?: InputMaybe<Scalars['String']>;
   fromNow?: InputMaybe<Scalars['Boolean']>;
   locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type EventGatsbyPathArgs = {
+  filePath?: InputMaybe<Scalars['String']>;
 };
 
 export type EventConnection = {
@@ -4222,6 +4229,7 @@ export enum EventFieldsEnum {
   Distance = 'distance',
   Event = 'event',
   EventType = 'eventType',
+  GatsbyPath = 'gatsbyPath',
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
@@ -4291,6 +4299,7 @@ export type EventFilterInput = {
   distance?: InputMaybe<IntQueryOperatorInput>;
   event?: InputMaybe<StringQueryOperatorInput>;
   eventType?: InputMaybe<EventTypeQueryOperatorInput>;
+  gatsbyPath?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
   organizer?: InputMaybe<StringQueryOperatorInput>;
@@ -4843,20 +4852,39 @@ export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 export type Unnamed_2_Query = { __typename?: 'Query', allFeedblog: { __typename?: 'FeedblogConnection', nodes: Array<{ __typename?: 'Feedblog', id: string, title?: string | null | undefined, link?: string | null | undefined, content?: { __typename?: 'FeedblogContent', encodedSnippet?: string | null | undefined } | null | undefined }> } };
 
+export type EventDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null | undefined, distance?: number | null | undefined, eventType?: EventType | null | undefined, id: string, organizer?: string | null | undefined, route?: string | null | undefined, rwgpsUrl?: string | null | undefined, startLocation?: string | null | undefined, date?: any | null | undefined, path?: string | null | undefined }> } };
+
 export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_3_Query = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null | undefined, distance?: number | null | undefined, event?: string | null | undefined, id: string, organizer?: string | null | undefined, route?: string | null | undefined, rwgpsUrl?: string | null | undefined, startLocation?: string | null | undefined, date?: any | null | undefined }> } };
+export type Unnamed_3_Query = { __typename?: 'Query', allRider: { __typename?: 'riderConnection', nodes: Array<{ __typename?: 'rider', id: string, membership?: Membership | null | undefined, seasons?: Array<number | null | undefined> | null | undefined, fullName?: string | null | undefined }> } };
 
 export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_4_Query = { __typename?: 'Query', allRider: { __typename?: 'riderConnection', nodes: Array<{ __typename?: 'rider', id: string, membership?: Membership | null | undefined, seasons?: Array<number | null | undefined> | null | undefined, fullName?: string | null | undefined }> } };
+export type Unnamed_4_Query = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null | undefined, name?: string | null | undefined, id?: number | null | undefined, distance?: number | null | undefined, chapter?: string | null | undefined }> } };
 
 export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_5_Query = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null | undefined, name?: string | null | undefined, id?: number | null | undefined, distance?: number | null | undefined, chapter?: string | null | undefined }> } };
+export type Unnamed_5_Query = { __typename?: 'Query', allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, id: string, context?: { __typename?: 'SitePageContext', pageInfo?: { __typename?: 'PageInfo', title?: string | null | undefined } | null | undefined } | null | undefined }> } };
+
+export type SeasonPageQueryVariables = Exact<{
+  season?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type SeasonPageQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null | undefined, distance?: number | null | undefined, eventType?: EventType | null | undefined, id: string, organizer?: string | null | undefined, route?: string | null | undefined, startLocation?: string | null | undefined, date?: any | null | undefined, season?: string | null | undefined, path?: string | null | undefined }> } };
+
+export type EventPageQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type EventPageQuery = { __typename?: 'Query', event?: { __typename?: 'event', chapter?: Chapter | null | undefined, date?: any | null | undefined, distance?: number | null | undefined, eventType?: EventType | null | undefined, id: string, route?: string | null | undefined, rwgpsId?: string | null | undefined, rwgpsUrl?: string | null | undefined, scheduleId?: string | null | undefined, season?: string | null | undefined, startLocation?: string | null | undefined } | null | undefined };
 
 export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4876,17 +4904,12 @@ export type Unnamed_8_Query = { __typename?: 'Query', file?: { __typename?: 'Fil
 export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_9_Query = { __typename?: 'Query', allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, id: string, context?: { __typename?: 'SitePageContext', pageInfo?: { __typename?: 'PageInfo', title?: string | null | undefined } | null | undefined } | null | undefined }> } };
+export type Unnamed_9_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null | undefined } | null | undefined };
 
 export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Unnamed_10_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null | undefined } | null | undefined };
-
-export type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_11_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null | undefined } | null | undefined };
 
 export type NewsletterQueryQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
@@ -4894,13 +4917,6 @@ export type NewsletterQueryQueryVariables = Exact<{
 
 
 export type NewsletterQueryQuery = { __typename?: 'Query', mail?: { __typename?: 'mail', categories?: Array<string | null | undefined> | null | undefined, content?: string | null | undefined, id: string, name?: string | null | undefined, sentAt?: any | null | undefined, subject?: string | null | undefined, teaser?: string | null | undefined } | null | undefined };
-
-export type SeasonQueryQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type SeasonQueryQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null | undefined, distance?: number | null | undefined, eventType?: EventType | null | undefined, id: string, organizer?: string | null | undefined, route?: string | null | undefined, rwgpsUrl?: string | null | undefined, startLocation?: string | null | undefined, date?: any | null | undefined, season?: string | null | undefined }> } };
 
 
 declare module '*/fragments.js' {
@@ -4972,7 +4988,7 @@ declare module '*/useBlog.tsx' {
 declare module '*/useEvents.ts' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const EventData: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5000,6 +5016,24 @@ declare module '*/index.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/{event.season}.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SeasonPage: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/{event.route}-{event.date}.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const EventPage: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5036,15 +5070,6 @@ declare module '*/Newsletter.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const NewsletterQuery: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/Season.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const SeasonQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5212,10 +5237,62 @@ export const SiteTitleQuery = gql`
     `;
 
 
+export const EventData = gql`
+    query EventData {
+  allEvent {
+    nodes {
+      chapter
+      distance
+      eventType
+      id
+      organizer
+      route
+      rwgpsUrl
+      startLocation
+      date
+      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
+    }
+  }
+}
+    `;
 
 
 
-
+export const SeasonPage = gql`
+    query SeasonPage($season: String) {
+  allEvent(filter: {season: {eq: $season}, chapter: {eq: Toronto}}) {
+    nodes {
+      chapter
+      distance
+      eventType
+      id
+      organizer
+      route
+      startLocation
+      date
+      season
+      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
+    }
+  }
+}
+    `;
+export const EventPage = gql`
+    query EventPage($id: String) {
+  event(id: {eq: $id}) {
+    chapter
+    date
+    distance
+    eventType
+    id
+    route
+    rwgpsId
+    rwgpsUrl
+    scheduleId
+    season
+    startLocation
+  }
+}
+    `;
 
 
 
@@ -5231,24 +5308,6 @@ export const NewsletterQuery = gql`
     sentAt
     subject
     teaser
-  }
-}
-    `;
-export const SeasonQuery = gql`
-    query SeasonQuery($id: String) {
-  allEvent(filter: {season: {eq: $id}, chapter: {eq: Toronto}}) {
-    nodes {
-      chapter
-      distance
-      eventType
-      id
-      organizer
-      route
-      rwgpsUrl
-      startLocation
-      date
-      season
-    }
   }
 }
     `;

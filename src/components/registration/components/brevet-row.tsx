@@ -1,9 +1,7 @@
 import React from 'react'
 import { Brevet } from 'src/data/events'
 import { getDateTimeShort } from 'src/utils'
-import { Link } from 'src/components/link'
-
-const mapURL = (location: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
+import { Link, MapLink } from 'src/components/Link'
 
 type BrevetColumnType = {
     brevet: Brevet,
@@ -12,14 +10,11 @@ type BrevetColumnType = {
 }
 
 export const BrevetColumn = ({ brevet, canRegister, registrationDeadline }: BrevetColumnType) => (<>
-    <strong>{brevet.route}</strong>
+    <strong><Link to={brevet.path}>{brevet.route}</Link></strong>
     <br />
-    <small>Start: <Link href={mapURL(brevet.startLocation)}>{brevet.startLocation}</Link></small>
-    {brevet.rwgpsUrl && <>
-        <br />
-        <small>(<Link href={brevet.rwgpsUrl}>{`View ${brevet.route} route`}</Link>)</small>
-    </>}
-    <small><br />
+    <small>Start: <MapLink location={brevet.startLocation}>{brevet.startLocation}</MapLink></small>
+    <br />
+    <small>
         {canRegister && 'Registration deadline: ' + getDateTimeShort(registrationDeadline)}
         {!canRegister && 'Registration closed'}
     </small>

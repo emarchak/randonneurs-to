@@ -1,0 +1,13 @@
+@import "theme";
+
+.iframe {
+    min-width: 100%;
+    min-height: 80vh;
+    max-width: 100%;
+    max-height: 100vh;
+    border: none;
+    @include media(large) {
+      height: 24rem;
+      min-height: auto;
+    }
+  }

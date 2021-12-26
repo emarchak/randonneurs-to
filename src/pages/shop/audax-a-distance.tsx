@@ -7,7 +7,7 @@ import { ContentWrapper, ContentChild } from "src/components/content-wrapper"
 import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
-import { Link } from 'src/components/link'
+import { Link } from 'src/components/Link'
 
 import { routes as lonelinessRoutes } from '../loneliness'
 
