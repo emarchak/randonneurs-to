@@ -10,6 +10,16 @@ const event = {
 }
 
 describe('getControls()', () => {
+  const consoleSpy = jest.spyOn(console, "log")
+
+  beforeAll(() => {
+    consoleSpy.mockImplementation()
+  })
+
+  afterAll(() => {
+    consoleSpy.mockRestore()
+  })
+
   it('gets the controls', async () => {
     const controls = await getControls({event})
     expect(controls).toEqual([

@@ -8,7 +8,6 @@ export type RideType = 'Brevet' | 'Permanent' | 'Fleche' | 'Populaire' | 'Other'
 export type Event = {
   chapter: Chapter
   distance: number
-  event: RideType // deprecated
   eventType: RideType
   id: string
   organizer: string
@@ -18,6 +17,7 @@ export type Event = {
   season: number
   startLocation: string
   date: Date
+  path: string
 }
 
 export const brevetQuery = graphql`
@@ -26,13 +26,14 @@ query {
     nodes {
       chapter
       distance
-      event
+      eventType
       id
       organizer
       route
       rwgpsUrl
       startLocation
       date
+      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
     }
   }
 }

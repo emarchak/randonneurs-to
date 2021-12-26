@@ -34,10 +34,10 @@ const Seasons = ({path}: PageProps) => {
 
     return (
       <Layout>
-        <SEO title='Seasons' />
+        <SEO title='Events' />
         <ContentWrapper>
         <TabMenu section='registration' activeRoute={path} />
-          <h1>Seasons</h1><h2>of Randonneurs Ontario</h2>
+          <h1>Events of </h1><h2>of Randonneurs Ontario</h2>
 
           <p>Randonneurs Ontario have been running ACP approved brevets since at least 1982. Here are some of our past seasons.</p>
           <p>To view the full results of these seasons, <Link href="https://randonneursontario.ca/history/heath.html">visit our results archive</Link>.</p>
@@ -47,7 +47,7 @@ const Seasons = ({path}: PageProps) => {
             <ul>
             {seasons.map(({ path, id, context: { pageInfo: { title } } }) => (
               <li key={id}>
-                <Link to={path}>{title}</Link>
+                <Link to={path}>{title} Season</Link>
               </li>
             ))}
             </ul>

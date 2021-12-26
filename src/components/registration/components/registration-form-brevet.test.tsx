@@ -14,7 +14,7 @@ jest.mock('src/data/events', () => ({
         brevets:
             [{
                 chapter: 'Toronto',
-                event: 'populaire',
+                eventType: 'populaire',
                 distance: '60',
                 date: new Date('Sat August 7 2021 09:20:00 EDT'),
                 route: 'Rouge Ramble 60',
