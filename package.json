@@ -8,7 +8,7 @@
     "@bugsnag/js": "^7.13.2",
     "@bugsnag/plugin-react": "^7.13.2",
     "@jagi/jest-transform-graphql": "^1.0.2",
-    "@loadable/component": "^5.14.1",
+    "@loadable/component": "^5.15.2",
     "@netlify/functions": "^0.7.2",
     "@sendgrid/mail": "^7.4.7",
     "date-time-format-timezone": "^1.0.22",
