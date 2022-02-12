@@ -2,6 +2,8 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { Chapter } from 'src/data/events'
 
+Route
+
 export type Route = {
   chapter: Chapter
   distance: number
