@@ -4,6 +4,8 @@ const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > n
 const onDateTime = (date: Date, now: Date) => new Date(date).toUTCString() === new Date(now).toUTCString()
 const addDays = (date: Date, number: number) => new Date(new Date(date).setDate(date.getDate() + number))
 
+const cancelledUntil = process.env.CANCELLED_UNTIL ? new Date(process.env.CANCELLED_UNTIL) : false
+
 const weekdays = {
     'Sun': 0,
     'Mon': 1,
@@ -13,6 +15,8 @@ const weekdays = {
     'Fri': 5,
     'Sat': 6,
 }
+
+const isGrandBrevet = (brevet: Brevet) => brevet.route.includes('GA2022')
 
 function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
     const weekday = weekdays[day]
@@ -47,18 +51,16 @@ export const useAllowedStartTimes = () => {
                 return deadline
         }
     }
-    const cancelledUntil = new Date('June 2 2021')
-    const isBrevetCancelled = (brevet: Brevet) => brevet.date < cancelledUntil
+    const isNotRegisterable = (brevet: Brevet) => brevet.date < cancelledUntil || isGrandBrevet(brevet)
 
     const allowedToRegister = (brevet: Brevet) => {
         const now = new Date(Date.now())
         const registrationDeadline = getBrevetRegistrationDeadline(brevet)
-        const brevetCancelled = isBrevetCancelled(brevet)
+        const brevetCancelled = isNotRegisterable(brevet)
 
-
-        const canRegister = brevetCancelled ? !brevetCancelled : now < registrationDeadline
-        return canRegister
+        return brevetCancelled ? !brevetCancelled : now < registrationDeadline
     }
+
     return {
         allowedToRegister,
         allowedStartTimes,
