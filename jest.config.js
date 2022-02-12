@@ -7,7 +7,8 @@ module.exports = {
   moduleNameMapper: {
     ".+\\.(scss|css)$": `identity-obj-proxy`,
     '^src/(.*)$': '<rootDir>/src/$1',
-    '^gatsby/(.*)$': '<rootDir>/gatsby/$1'
+    '^gatsby/(.*)$': '<rootDir>/gatsby/$1',
+    "^gatsby-page-utils/(.*)$": `gatsby-page-utils/dist/$1`, // Workaround for https://github.com/facebook/jest/issues/9771
   },
   testPathIgnorePatterns: [`node_modules`, `\\.cache`, `<rootDir>.*/public`],
   transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],

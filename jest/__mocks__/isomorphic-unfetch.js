@@ -1,6 +1,6 @@
 const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
 
-  if (endpoint.match(/ridewithgps.com\/routes\/\d+.json/)) {
+  if (endpoint.match(/ridewithgps\.com\/routes\/\d+.json/)) {
     return {
       ok: true,
       status: 200,
@@ -59,7 +59,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
     }
   }
 
-  if (endpoint.match(/api.sendgrid.com\/v3\/marketing\/singlesends\/\d+/)) {
+  if (endpoint.match(/api\.sendgrid\.com\/v3\/marketing\/singlesends\/\d+/)) {
     return {
       status: 'ok',
       json: jest.fn().mockResolvedValue({
@@ -76,7 +76,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
     }
   }
 
-  if (endpoint.match(/api.sendgrid.com\/v3\/marketing\/singlesends/)) {
+  if (endpoint.match(/api\.sendgrid\.com\/v3\/marketing\/singlesends/)) {
     return {
       status: 'ok',
       json: jest.fn().mockResolvedValue({
@@ -99,7 +99,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
     }
   }
 
-  if (endpoint.match(/ccnbikes.com\?pg=2/)) {
+  if (endpoint.match(/ccnbikes\.com\?pg=2/)) {
     return {
       status: 200,
       json: jest.fn().mockResolvedValue({
@@ -128,7 +128,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
     }
   }
 
-  if (endpoint.match(/ccnbikes.com/)) {
+  if (endpoint.match(/ccnbikes\.com/)) {
     return {
       status: 200,
       json: jest.fn() .mockResolvedValue({

@@ -19,15 +19,14 @@ export const useRiders = () => {
         nodes {
           id
           membership
-          seasons
           fullName
         }
       }
     }
     `)
 
-    const checkMembership = (filter: { fullName: string }) =>
-      riders.find(rider => normalize(rider.fullName) === normalize(filter.fullName))
+  const checkMembership = (filter: { fullName: string }) =>
+    riders.find(rider => normalize(rider.fullName) === normalize(filter.fullName))
 
   return ({ checkMembership })
 }
