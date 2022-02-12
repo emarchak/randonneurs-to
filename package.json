@@ -30,7 +30,7 @@
     "google-spreadsheet": "^3.1.15",
     "graphql": "^15.0.0",
     "isomorphic-unfetch": "^3.0.0",
-    "node-sass": "^6.0.0",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.6",
     "prop-types": "^15.8.1",
