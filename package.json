@@ -6,6 +6,7 @@
   "author": "Erin Marchak <erin@emarchak.com>",
   "dependencies": {
     "@babel/core": "^7.0.0-0",
+    "@babel/preset-typescript": "^7.16.7",
     "@bugsnag/core": "^7.0.0",
     "@bugsnag/js": "^7.16.1",
     "@bugsnag/plugin-react": "^7.16.1",
@@ -38,7 +39,8 @@
     "react-datepicker": "^4.6.0",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "react-query": "^3.34.15"
+    "react-query": "^3.34.15",
+    "typescript": ">=2.7"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.6.1",
