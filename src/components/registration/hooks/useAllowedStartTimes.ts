@@ -16,7 +16,7 @@ const weekdays = {
     'Sat': 6,
 }
 
-const isGrandBrevet = (brevet: Brevet) => brevet.route.includes('GA2022')
+const isAllClub = (brevet: Brevet) => brevet.chapter.includes('Club')
 
 function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
     const weekday = weekdays[day]
@@ -55,7 +55,7 @@ export const useAllowedStartTimes = () => {
                 return deadline
         }
     }
-    const isNotRegisterable = (brevet: Brevet) => brevet.date < cancelledUntil || isGrandBrevet(brevet)
+    const isNotRegisterable = (brevet: Brevet) => brevet.date < cancelledUntil || isAllClub(brevet)
 
     const allowedToRegister = (brevet: Brevet) => {
         const now = new Date(Date.now())
