@@ -1,5 +1,5 @@
 import React from 'react'
-import { iframe } from "./styles/route.module.scss"
+import { iframe } from "./styles/iframe.module.scss"
 type RwgpsRouteProps = {
     routeId: string
 }

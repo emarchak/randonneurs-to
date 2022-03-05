@@ -23,7 +23,13 @@ export const loneliness = [
   { label: 'Trace', route: '/registration/trace-virtuelle/' },
 ]
 
+export const symposium = [
+  { label: '2020', description: '2020 Virtual Symposium', route: '/symposium/2020' },
+  { label: '2021', description: '2021 Virtual Symposium', route: '/symposium/2021' },
+]
+
 export default {
+  symposium,
   registration,
   seasons,
   loneliness,
