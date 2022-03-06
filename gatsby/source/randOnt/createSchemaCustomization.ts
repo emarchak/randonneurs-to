@@ -1,9 +1,10 @@
 import { GatsbyNode } from "gatsby"
 
-export const createSchemaCustomization:GatsbyNode['createSchemaCustomization'] = ({ actions }) => {
+export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = ({ actions }) => {
   const { createTypes } = actions
   createTypes(`
     enum Chapter {
+        Club
         Toronto
         Huron
         Ottawa

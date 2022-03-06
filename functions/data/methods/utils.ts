@@ -43,9 +43,9 @@ export const eventtypeKey = (test: string) => {
 }
 
 export const chapterKey = (test: string) => {
-    const chapterNames = ['Toronto', 'Ottawa', 'Simcoe', 'Huron', 'Other']
+    const chapterNames = ['Club', 'Toronto', 'Ottawa', 'Simcoe', 'Huron']
 
-    return chapterNames.indexOf(chapterNames.find(chapter => test.includes(chapter)) || 'Other') + 1
+    return chapterNames.indexOf(chapterNames.find(chapter => test.includes(chapter)) || 'Other')
 }
 
 export const brevetDistance = (dist: number): number | undefined => {
