@@ -20,6 +20,7 @@ export type RawEvent = {
 }
 
 export type RemoteRoute = {
+    route_id?: number
     route_brevet_distance?: number
     route_chapter?: number
     route_cuesheet?: string
@@ -29,6 +30,7 @@ export type RemoteRoute = {
 }
 
 export type RemoteEvent = {
+    event_id?: number
     event_date?: string
     event_eventtype?: number
     event_name?: string
