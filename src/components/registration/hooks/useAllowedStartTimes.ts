@@ -14,7 +14,7 @@ const weekdays = {
     'Sat': 6,
 }
 
-const isAllClub = (brevet: Brevet) => brevet.chapter.includes('Club')
+const isAllClub = (brevet: Brevet) => brevet.chapter.includes('Other')
 
 function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
     const weekday = weekdays[day]
