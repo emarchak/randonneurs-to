@@ -10,6 +10,8 @@ import { RwgpsRoute } from 'src/components/RwgpsRoute'
 import { LinkButton } from 'src/components/Buttons'
 import { Link, MapLink } from 'src/components/Link'
 import { EventPageQuery } from 'src/gatsby.gql'
+import { useEvent } from 'src/data/events'
+import { Loading } from 'src/components/form/components'
 
 type EventProps = PageProps<EventPageQuery>
 
@@ -31,7 +33,10 @@ export const query = graphql`
   }
 `
 
-const Event = ({ data: { event }}: EventProps) => (
+const Event = ({ data: { event } }: EventProps) => {
+  const {isLoading, data } = useEvent(parseInt(event.scheduleId));
+
+  return (
   <Layout>
     <SEO
       title={`${event.route} | ${getDateTimeShort(new Date(event.date))}`}
@@ -72,10 +77,18 @@ const Event = ({ data: { event }}: EventProps) => (
             </LinkButton>
           </p>}
       </ContentChild>
-    </ContentWrapper>
+      </ContentWrapper>
+      <ContentWrapper>
+        <h2>Registered riders</h2>
+        {isLoading && <Loading />}
+        {data && <ul>
+          {data.riders.length === 0 && <li>No riders registered</li>}
+          {data.riders.map(({rider}) => (<li>{rider.riderName}</li>))}
+        </ul>}
+      </ContentWrapper>
     <SeasonsCta />
   </Layout>
-)
+)}
 
 
 export default Event

@@ -50,6 +50,6 @@ export const useEvents = ({ chapter, after = new Date(Date.now()), limit = 20 }:
   return {
     loading: false,
     events: filteredEvents,
-    brevets: filteredEvents
+    brevets: filteredEvents,
   }
 }
