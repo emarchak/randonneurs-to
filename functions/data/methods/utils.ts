@@ -39,6 +39,9 @@ export type RemoteEvent = {
     event_start_time?: string
 }
 
+export type RemoteQuery<QueryResponse> = { data: QueryResponse, errors?: Error[] }
+
+
 export const eventtypeKey = (test: string) => {
     const eventtypeNames = ['Brevet', 'Populaire', 'Fleche', 'Trace', 'Permanent', 'Grand brevet']
     return eventtypeNames.indexOf(eventtypeNames.find(chapter => test.includes(chapter)) || 'Other') + 1

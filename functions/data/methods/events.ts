@@ -1,7 +1,5 @@
 import { HandlerEvent, HandlerResponse } from '@netlify/functions'
-import { fetchEvents, RemoteEvent, eventtypeKey, fetchQuery, RemoteRoute, buildRoute } from './utils'
-
-type RemoteQuery<QueryResponse> = { data: QueryResponse, errors?: Error[] }
+import { fetchEvents, RemoteEvent, eventtypeKey, fetchQuery, RemoteRoute, buildRoute, RemoteQuery } from './utils'
 
 type BuildEventRoutesArgs = {
   event: RemoteEvent
