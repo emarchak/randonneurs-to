@@ -1,5 +1,5 @@
 import { Brevet } from "src/data/events"
-
+import { cancelledUntil } from './utils'
 const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > new Date(after).setHours(23)
 const onDateTime = (date: Date, now: Date) => new Date(date).toUTCString() === new Date(now).toUTCString()
 const addDays = (date: Date, number: number) => new Date(new Date(date).setDate(date.getDate() + number))
@@ -13,6 +13,8 @@ const weekdays = {
     'Fri': 5,
     'Sat': 6,
 }
+
+const isAllClub = (brevet: Brevet) => brevet.chapter.includes('Other')
 
 function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
     const weekday = weekdays[day]
@@ -41,24 +43,32 @@ export const useAllowedStartTimes = () => {
                 const huronDeadline = getWeekdayBefore('Fri', brevet.date)
                 huronDeadline.setUTCHours(24, 0, 0)
                 return huronDeadline
+            case 'Toronto':
+                const torontoDeadline = getWeekdayBefore('Fri', brevet.date)
+                torontoDeadline.setUTCHours(22, 0, 0)
+                return torontoDeadline
             default:
                 const deadline = addDays(brevet.date, -3)
                 deadline.setUTCHours(27, 59, 0)
                 return deadline
         }
     }
-    const cancelledUntil = new Date('June 2 2021')
-    const isBrevetCancelled = (brevet: Brevet) => brevet.date < cancelledUntil
+    const isNotRegisterable = (brevet: Brevet) => {
+        const cancelled = cancelledUntil()
+        if (cancelled) {
+            return brevet.date.valueOf() < cancelled.valueOf()
+        }
+        return isAllClub(brevet)
+    }
 
     const allowedToRegister = (brevet: Brevet) => {
         const now = new Date(Date.now())
         const registrationDeadline = getBrevetRegistrationDeadline(brevet)
-        const brevetCancelled = isBrevetCancelled(brevet)
+        const brevetCancelled = isNotRegisterable(brevet)
 
-
-        const canRegister = brevetCancelled ? !brevetCancelled : now < registrationDeadline
-        return canRegister
+        return brevetCancelled ? !brevetCancelled : now < registrationDeadline
     }
+
     return {
         allowedToRegister,
         allowedStartTimes,

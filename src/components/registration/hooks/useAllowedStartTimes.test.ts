@@ -1,9 +1,10 @@
 import MockDate from 'mockdate'
 import { Brevet } from 'src/data/events'
 import { useAllowedStartTimes } from "./useAllowedStartTimes"
+import * as utils from './utils'
 
 const brevet: Brevet = {
-    chapter: 'Toronto',
+    chapter: 'Simcoe',
     event: 'brevet',
     distance: 200,
     date: new Date('Sat April 3 2021 09:20:00 EDT'),
@@ -18,6 +19,7 @@ const brevet: Brevet = {
 
 const ottawaBrevet: Brevet = { ...brevet, chapter: 'Ottawa' }
 const huronBrevet: Brevet = { ...brevet, chapter: 'Huron' }
+const torontoBrevet: Brevet = { ...brevet, chapter: 'Toronto' }
 
 const rideOnSaturday = new Date('Sat August 7 2021 09:20:00 EDT')
 const rideNextSaturday = new Date('Sat August 14 2021 09:20:00 EDT')
@@ -46,6 +48,12 @@ describe('useAllowedStartTimes', () => {
     })
 
     describe('allowedToRegister()', () => {
+        const cancelledUntilMock = jest.spyOn(utils, 'cancelledUntil')
+
+        afterEach(() => {
+            cancelledUntilMock.mockClear()
+        })
+
         it('allows riders to register three days before scheduled date', () => {
             MockDate.set(new Date('Wed August 4 2021 12:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
@@ -77,6 +85,27 @@ describe('useAllowedStartTimes', () => {
             MockDate.set(new Date('Fri August 6 2021 20:01:30 EDT'))
             expect(allowedToRegister({ ...huronBrevet, date: rideOnSaturday })).toBeFalsy()
         })
+
+        it('allows Toronto riders to register before Friday at 6pm ET before scheduled date', () => {
+            MockDate.set(new Date('Fri August 6 2021 5:59:30 EDT'))
+            const { allowedToRegister } = useAllowedStartTimes()
+
+            expect(allowedToRegister({ ...torontoBrevet, date: rideOnSaturday })).toBeTruthy()
+
+            MockDate.set(new Date('Fri August 6 2021 18:01:30 EDT'))
+            expect(allowedToRegister({ ...torontoBrevet, date: rideOnSaturday })).toBeFalsy()
+        })
+
+        it('cancels rides when configuration is set', () => {
+            MockDate.set(new Date('August 1 2021 19:59:30 EDT'))
+            cancelledUntilMock.mockReturnValueOnce(rideNextSaturday)
+
+            const { allowedToRegister } = useAllowedStartTimes()
+
+            expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeFalsy()
+
+            expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeTruthy()
+        })
     })
 
     describe('getBrevetRegistrationDeadline()', () => {
@@ -102,6 +131,14 @@ describe('useAllowedStartTimes', () => {
             const d = getBrevetRegistrationDeadline({ ...huronBrevet, date: rideOnSaturday })
 
             expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 20:00')
+        })
+
+
+        it('shows Friday at 6pm ET for Toronto brevets date', () => {
+            const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
+            const d = getBrevetRegistrationDeadline({ ...torontoBrevet, date: rideOnSaturday })
+
+            expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 18:00')
         })
 
         it('shows 3 days before at 11:59pm ET for brevets', () => {

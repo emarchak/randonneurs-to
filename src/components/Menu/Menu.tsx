@@ -82,6 +82,7 @@ export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
       <ListItem>
         <SectionTitle href='http://randonneursontario.ca'>Randonneurs Ontario</SectionTitle>
         <List>
+          {routes.symposium.map(renderSectionItems)}
           <SectionItem href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Events</SectionItem>
           <SectionItem href='https://ridewithgps.com/organizations/1406-randonneurs-ontario/events'>Blog</SectionItem>
         </List>

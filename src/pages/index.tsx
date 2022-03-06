@@ -13,6 +13,7 @@ import { useBlog } from 'src/data/blog'
 import { useEvents } from 'src/data/events'
 
 import * as styles from './styles/index.module.scss'
+import { iframe } from 'src/components/styles/iframe.module.scss'
 
 const pageQuery = graphql`
 query {
@@ -104,6 +105,23 @@ const IndexPage = () => {
             <ContentChild key={post.id}>
               <PostTeaser post={post}/>
             </ContentChild>))}
+        </ContentWrapper>
+      </ContentWrapper>
+      <ContentWrapper>
+        <h2>2021 Virtual Symposium</h2>
+        <ContentWrapper container>
+          <ContentChild>
+            <iframe
+              className={iframe}
+              title='2021 Symposium video recording'
+              src='https://www.youtube.com/embed/1_QZSRRFpP4?start=203'
+              frameBorder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowFullScreen></iframe>
+          </ContentChild>
+          <ContentChild>
+            <p>On 16 February 2022 we held our second Virtual Symposium! A perfect way to get better acquainted with randonneuring and to help you pull through the winter to get to the season start.</p>
+            <p>Topics included: Hardware: The right stuff for randonneuring; Software: Nutrition, night riding, and mental toughness; Categories of rides: Brevets, Devil's Week and the flèche; Grand Brevets: Granite Anvil and Paris-Brest-Paris; Randonneurs Ontario awards; A first-hand experience riding a 1,000km brevet; Moderated Q&A with the speakers</p>
+            <p><Link to='symposium/2021'>{'View the full recording and slide deck >>'}</Link></p>
+          </ContentChild>
         </ContentWrapper>
       </ContentWrapper>
 
