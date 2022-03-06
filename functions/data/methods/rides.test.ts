@@ -3,22 +3,19 @@ import * as Utils from './utils'
 import { createRide } from './rides'
 
 const registrationData = {
-    event_id: 10,
-    hidden: false,
+    eventId: 10,
+    hidden: true,
     email: 'test@email.com',
-    firstname: 'Lael',
-    lastname: 'Wilcox',
+    firstName: 'Lael',
+    lastName: 'Wilcox',
     gender: 'F',
-    startime: '2020-01-01T00:00:00Z',
 }
 
 describe('createRide', () => {
     const fetchQueryMock = jest.spyOn(Utils, 'fetchQuery')
     fetchQueryMock.mockImplementation((query) => {
-        if (query.match(/query FindRider/)) {
-            return Promise.resolve({
-                data: { riders: [{ rider_id: 1 }] },
-            })
+        if (query.match(/mutation CreateRider/)) {
+            return Promise.resolve({ data: { insert_rider_one: { rider_id: 1 } } })
         }
         if (query.match(/mutation RegisterRider/)) {
             return Promise.resolve({
@@ -45,19 +42,17 @@ describe('createRide', () => {
                 response: true,
             }),
         })
-        expect(fetchQueryMock).toHaveBeenNthCalledWith(1, expect.stringContaining(registrationData.firstname))
-        expect(fetchQueryMock).toHaveBeenNthCalledWith(1, expect.stringContaining(registrationData.lastname))
-        expect(fetchQueryMock).toHaveBeenNthCalledWith(2, expect.stringContaining(JSON.stringify({
-            ride_event: registrationData.event_id,
-            ride_rider: 1,
-            ride_hidden: registrationData.hidden,
-            ride_startime: registrationData.startime,
+
+        expect(fetchQueryMock).toHaveBeenNthCalledWith(1, expect.stringContaining(JSON.stringify({
+            rider_email: registrationData.email,
+            rider_firstname: registrationData.firstName,
+            rider_lastname: registrationData.lastName,
+            rider_gender: registrationData.gender
         })))
         expect(fetchQueryMock).toHaveBeenNthCalledWith(2, expect.stringContaining(JSON.stringify({
-            rider_email: registrationData.email,
-            rider_firstname: registrationData.firstname,
-            rider_lastname: registrationData.lastname,
-            rider_gender: registrationData.gender
+            ride_event: registrationData.eventId,
+            ride_rider: 1,
+            ride_hidden: registrationData.hidden,
         })))
     })
 
