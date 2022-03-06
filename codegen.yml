@@ -1,6 +1,6 @@
 overwrite: true
 generates:
-  src/gatsby.gql.ts:
+  src/gatsby.gql.d.ts:
     schema: 'http://localhost:8000/___graphql'
     documents:
       - './src/**/*.{ts,tsx}'

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { EventDataQuery } from 'src/gatsby.gql'
-export { Chapter, EventType } from 'src/gatsby.gql'
+import { EventDataQuery } from 'src/gatsby.gql.d'
+export { Chapter, EventType } from 'src/gatsby.gql.d'
 
 export type Event = Omit<EventDataQuery['allEvent']['nodes'][0], 'date'> & { date: Date }
 
@@ -36,6 +36,7 @@ export const useEvents = ({ chapter, after = new Date(Date.now()), limit = 20 }:
   const {
     allEvent: { nodes: events }
   } = useStaticQuery<EventDataQuery>(brevetQuery)
+
 
   const filteredEvents: Event[] = useMemo(() => events.map((event: Event) => ({
     ...event,
