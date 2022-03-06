@@ -1,7 +1,7 @@
 import { Handler } from '@netlify/functions'
 import routes from './methods/routes'
 import events from './methods/events'
-import { createRide, getRide } from './methods/rides'
+import { createRide } from './methods/rides'
 
 const ROOT = '/.netlify/functions/data/'
 
@@ -15,8 +15,6 @@ const handler: Handler = async (event) => {
             return events(event)
         case `${ROOT}ride:POST`:
             return createRide(event)
-        case `${ROOT}ride:GET`:
-            return getRide(event)
         default:
             return {
                 statusCode: 404,
