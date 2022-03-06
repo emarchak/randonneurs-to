@@ -1,10 +1,8 @@
 import { Brevet } from "src/data/events"
-
+import { cancelledUntil } from './utils'
 const inFutureDate = (date: Date, after: Date) => new Date(date).setHours(0) > new Date(after).setHours(23)
 const onDateTime = (date: Date, now: Date) => new Date(date).toUTCString() === new Date(now).toUTCString()
 const addDays = (date: Date, number: number) => new Date(new Date(date).setDate(date.getDate() + number))
-
-const cancelledUntil = process.env.CANCELLED_UNTIL ? new Date(process.env.CANCELLED_UNTIL) : false
 
 const weekdays = {
     'Sun': 0,
@@ -55,7 +53,13 @@ export const useAllowedStartTimes = () => {
                 return deadline
         }
     }
-    const isNotRegisterable = (brevet: Brevet) => brevet.date < cancelledUntil || isAllClub(brevet)
+    const isNotRegisterable = (brevet: Brevet) => {
+        const cancelled = cancelledUntil()
+        if (cancelled) {
+            return brevet.date.valueOf() < cancelled.valueOf()
+        }
+        return isAllClub(brevet)
+    }
 
     const allowedToRegister = (brevet: Brevet) => {
         const now = new Date(Date.now())

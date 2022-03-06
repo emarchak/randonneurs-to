@@ -1,6 +1,7 @@
 import MockDate from 'mockdate'
 import { Brevet } from 'src/data/events'
 import { useAllowedStartTimes } from "./useAllowedStartTimes"
+import * as utils from './utils'
 
 const brevet: Brevet = {
     chapter: 'Simcoe',
@@ -47,6 +48,12 @@ describe('useAllowedStartTimes', () => {
     })
 
     describe('allowedToRegister()', () => {
+        const cancelledUntilMock = jest.spyOn(utils, 'cancelledUntil')
+
+        afterEach(() => {
+            cancelledUntilMock.mockClear()
+        })
+
         it('allows riders to register three days before scheduled date', () => {
             MockDate.set(new Date('Wed August 4 2021 12:59:30 EDT'))
             const { allowedToRegister } = useAllowedStartTimes()
@@ -87,6 +94,17 @@ describe('useAllowedStartTimes', () => {
 
             MockDate.set(new Date('Fri August 6 2021 18:01:30 EDT'))
             expect(allowedToRegister({ ...torontoBrevet, date: rideOnSaturday })).toBeFalsy()
+        })
+
+        it('cancels rides when configuration is set', () => {
+            MockDate.set(new Date('August 1 2021 19:59:30 EDT'))
+            cancelledUntilMock.mockReturnValueOnce(rideNextSaturday)
+
+            const { allowedToRegister } = useAllowedStartTimes()
+
+            expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeFalsy()
+
+            expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeTruthy()
         })
     })
 
