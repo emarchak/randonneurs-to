@@ -1,22 +1,28 @@
-import React from 'react'
 import { useQuery } from 'react-query'
 import { request, gql } from "graphql-request"
 
-export const useEvent = (scheduleId: number) => (useQuery(['findEvent', scheduleId], async () => {
-  const { events } = await request(
-    process.env.GRAPHQL_URL,
-    gql`
-      query findEvent {
-        events (where: {event_id: {_eq: ${scheduleId}}}) {
-          riders {
-            rider {
-              riderName
+export const useEvent = (eventId: number) => {
+  const query = useQuery(['findEvent', eventId], async () => {
+    const { events } = await request(
+      process.env.GRAPHQL_URL,
+      gql`
+        query findEvent {
+          events (where: {event_id: {_eq: ${eventId}}}) {
+            riders {
+              rider {
+                riderName
+              }
             }
+            name
           }
-          name
         }
-      }
-    `
-  )
-  return events?.pop()
-}))
+      `
+    )
+    return events?.pop()
+  })
+
+  return {
+    ...query,
+  }
+}
+

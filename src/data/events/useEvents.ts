@@ -18,6 +18,7 @@ query EventData{
       rwgpsUrl
       startLocation
       date
+      scheduleId
       path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
     }
   }

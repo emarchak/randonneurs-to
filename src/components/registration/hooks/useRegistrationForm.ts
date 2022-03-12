@@ -1,8 +1,9 @@
-import { Brevet } from 'src/data/events'
+import { Brevet, useEvent } from 'src/data/events'
 import { formatSlackMessage, formSubmit } from 'src/components/form/utils'
 import { useMail } from 'src/data/mail'
 import { useSlack } from 'src/hooks/useSlack'
 import { useSheets } from 'src/hooks/useSheets'
+import { createEventRegistration } from 'src/data/events'
 import { getDateShort, getDateTimeLong, getTime } from 'src/utils'
 import Bugsnag from '@bugsnag/js'
 import { useState } from 'react'
@@ -18,7 +19,7 @@ type FormData = {
     name: string
     email: string
     route: Brevet['route']
-    rideType: Brevet['event'] | ''
+    rideType: Brevet['eventType'] | ''
     chapter: Brevet['chapter'] | '',
     [keyof: string]: any
 }
@@ -33,7 +34,7 @@ const replyToEmails = {
 }
 
 export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFormParams) => {
-    const [ loading, setLoading ] = useState(false)
+    const [loading, setLoading] = useState(false)
     const { sendMail } = useMail()
     const { sendSlackMsg } = useSlack()
     const { addRow } = useSheets()
@@ -42,7 +43,16 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         setLoading(true)
         const message = `Registration for ${formData.chapter} ${formData.route} ${formData.rideType}`
 
-        const successSubmit = await formSubmit(formName, { ...formData })
+        const [firstName, ...lastName] = formData.name.split(' ')
+
+        const successRegistration = await createEventRegistration({
+            eventId: formData.eventId,
+            hidden: false,
+            email: formData.email,
+            firstName: firstName,
+            lastName: lastName.join(' '),
+            gender: formData.gender
+        })
         const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData, message }), 'registration')
         const successSheet = await addRow({
             sheet: formName,
@@ -65,11 +75,11 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         }, 'brevetRegistration')
 
         if (!successSlack || !successMail || !successSheet) {
-            Bugsnag.notify('Registration error');
+            Bugsnag.notify('Registration error')
         }
 
         setLoading(false)
-        return successSubmit
+        return successRegistration || true
     }
 
     return {

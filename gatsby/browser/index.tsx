@@ -17,14 +17,7 @@ const ErrorBoundary = process.env.NODE_ENV === 'development'
   : Bugsnag.getPlugin('react').createErrorBoundary(React)
 
 export const wrapRootElement = ({ element }) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-
-      }
-
-    }
-  });
+  const queryClient = new QueryClient()
 
   return (
     <ErrorBoundary>
