@@ -69,7 +69,7 @@ export const fetchEvents = async (): Promise<RawEvent[]> => {
     const data = await response.json()
 
     if (data.status !== 'ok') {
-        throw new Error(`randOnt response ${response.status}`)
+        throw new Error(`Failed to fetch events`)
     }
 
     return data.schedule as RawEvent[]

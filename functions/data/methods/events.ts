@@ -1,7 +1,7 @@
 import { HandlerEvent, HandlerResponse } from '@netlify/functions'
 import { fetchEvents, RemoteEvent, eventtypeKey, fetchQuery, RemoteRoute, buildRoute, RemoteQuery, headers } from './utils'
 
-const events = async (event: HandlerEvent): Promise<HandlerResponse> => {
+export const syncEvents = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
     const rawEvents = await fetchEvents()
     const routes = new Map<string, RemoteRoute>()
@@ -13,17 +13,15 @@ const events = async (event: HandlerEvent): Promise<HandlerResponse> => {
         event_name: rawEvent.Route,
         event_date: new Date(rawEvent.Unixtime * 1000).toISOString(),
         event_eventtype: eventtypeKey(rawEvent.Event),
-        event_schedule_id: rawEvent.Sched_Id,
       }
       routes.set(rawEvent.Route, buildRoute(rawEvent))
 
       return event
     })
-
     // 2. Upsert the routes
     const { data: { insert_route: { returning: remoteRoutes } } }: RemoteQuery<{ insert_route: { returning: RemoteRoute[] } }> = await fetchQuery(`
       mutation CreateRoutes {
-        insert_route(objects: ${JSON.stringify(routes.values())},
+        insert_route(objects: ${JSON.stringify(Array.from(routes.values()))},
         on_conflict: {constraint: route_route_name_route_active_key, update_columns: []}) {
           returning {
             route_id
@@ -39,7 +37,7 @@ const events = async (event: HandlerEvent): Promise<HandlerResponse> => {
 
     // 3. Insert the events
     const { data, errors }: RemoteQuery<{ insert_event: { returning: RemoteEvent[] } }> = await fetchQuery(`
-      mutation upsertEvents {
+      mutation CreateEvents {
         insert_event(
           objects: ${JSON.stringify(eventsWithRoutes)}
         ) {
@@ -67,5 +65,3 @@ const events = async (event: HandlerEvent): Promise<HandlerResponse> => {
     }
   }
 }
-
-export default events

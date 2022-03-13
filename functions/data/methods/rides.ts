@@ -1,10 +1,6 @@
 import { HandlerEvent, HandlerResponse } from '@netlify/functions'
 import { RemoteEvent, fetchQuery, RemoteQuery, headers } from './utils'
 
-const headers = {
-  'Content-Type': 'application/json',
-}
-
 export const createRide = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
     const {

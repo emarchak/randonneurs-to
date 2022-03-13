@@ -19,7 +19,7 @@ describe('createRide', () => {
         }
         if (query.match(/mutation RegisterRider/)) {
             return Promise.resolve({
-                data: true,
+                data: { response: true },
             })
         }
     })

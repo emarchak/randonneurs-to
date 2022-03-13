@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions'
-import events from './methods/events'
+import { syncEvents } from './methods/events'
 import { createRide } from './methods/rides'
 
 const ROOT = '/.netlify/functions/data/'
@@ -9,7 +9,7 @@ const handler: Handler = async (event) => {
 
     switch (`${path}:${httpMethod}`) {
         case `${ROOT}events:POST`:
-            return events(event)
+            return syncEvents(event)
         case `${ROOT}ride:POST`:
             return createRide(event)
         default:
