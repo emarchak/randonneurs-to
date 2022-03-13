@@ -63,7 +63,17 @@ describe('createRide', () => {
   })
 
   it('handles errors', async () => {
-    fetchQueryMock.mockRejectedValueOnce({ errors: true })
+    fetchQueryMock.mockImplementation((query) => {
+      if (query.match(/mutation CreateRoutes/)) {
+        return Promise.resolve({ data: { insert_route: { returning: [{ route_id: 101, route_name: rawEvent.Route }] } } })
+      }
+      if (query.match(/mutation CreateEvents/)) {
+        return Promise.resolve({
+          data: null,
+          errors: [{ message: 'error' }],
+        })
+      }
+    })
 
     const response = await syncEvents({} as HandlerEvent)
     expect(response).toMatchObject({

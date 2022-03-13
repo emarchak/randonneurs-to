@@ -57,7 +57,18 @@ describe('createRide', () => {
     })
 
     it('handles errors', async () => {
-        fetchQueryMock.mockResolvedValue({ errors: true })
+        fetchQueryMock.mockImplementation((query) => {
+            if (query.match(/mutation CreateRider/)) {
+                return Promise.resolve({ data: { insert_rider_one: { rider_id: 1 } } })
+            }
+            if (query.match(/mutation RegisterRider/)) {
+                return Promise.resolve({
+                    data: null,
+                    errors: [{ message: 'error' }],
+                })
+            }
+        })
+
         const event: Partial<HandlerEvent> = {
             body: JSON.stringify(registrationData)
         }

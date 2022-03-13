@@ -47,7 +47,6 @@ export const syncEvents = async (event: HandlerEvent): Promise<HandlerResponse> 
           }
         }
       }`)
-
     if (errors) {
       throw new Error(JSON.stringify(errors))
     }
@@ -61,7 +60,7 @@ export const syncEvents = async (event: HandlerEvent): Promise<HandlerResponse> 
     return {
       headers,
       statusCode: 500,
-      body: typeof error === 'string' ? error : JSON.stringify(error)
+      body: JSON.stringify(error)
     }
   }
 }

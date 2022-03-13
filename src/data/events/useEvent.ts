@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useQuery, UseQueryResult } from 'react-query'
-import { request, gql } from "graphql-request"
+import { request } from "graphql-request"
 import findEvent from './api/findEvent.gql'
 
 

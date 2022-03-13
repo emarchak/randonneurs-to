@@ -10,10 +10,6 @@ export type registerRiderParams = {
 }
 
 export const registerRider = async (params: registerRiderParams) => {
-    if (!params.eventId) {
-        return true
-    }
-
     try {
         const response = await fetch('/.netlify/functions/data/ride', {
             method: "POST",
