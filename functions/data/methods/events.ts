@@ -1,22 +1,5 @@
 import { HandlerEvent, HandlerResponse } from '@netlify/functions'
-import { fetchEvents, RemoteEvent, eventtypeKey, fetchQuery, RemoteRoute, buildRoute, RemoteQuery } from './utils'
-
-type BuildEventRoutesArgs = {
-  event: RemoteEvent
-  newRoutes: RemoteRoute[]
-  routes: Map<string, RemoteRoute>
-}
-
-const buildEventRoute = ({ newRoutes, event, routes }: BuildEventRoutesArgs) => {
-  const existingRoute = newRoutes.find((route) => route.route_name === event.event_name)
-
-  if (existingRoute) {
-    event.event_route = existingRoute.route_id
-    return undefined
-  }
-
-  return routes.get(event.event_name)
-}
+import { fetchEvents, RemoteEvent, eventtypeKey, fetchQuery, RemoteRoute, buildRoute, RemoteQuery, headers } from './utils'
 
 const events = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
@@ -37,28 +20,11 @@ const events = async (event: HandlerEvent): Promise<HandlerResponse> => {
       return event
     })
 
-    // TODO make 2+3+4 recursive
-    // 2. Fetch the existing routes from the graphql endpoint
-    const { data: { route: existingRoutes } }: RemoteQuery<{ route: RemoteRoute[] }> = await fetchQuery(`
-          query findRoutes {
-            route(where: {route_name: {_in: ${JSON.stringify([...routes.keys()])}}}) {
-              route_id
-              route_name
-            }
-          }
-      `)
-
-    // 3. Associate existing routes with events, and build new routes
-    const newRoutes: RemoteRoute[] = events.map((event) => buildEventRoute({ newRoutes: existingRoutes, event, routes })).filter(Boolean)
-
-
-    // 4. Insert the new routes and rebuild events
-    if (newRoutes.length) {
-      const { data: { insert_route: { returning: remoteRoutes } }, errors }: RemoteQuery<{ insert_route: { returning: RemoteRoute[] } }> = await fetchQuery(`
-      mutation upsertEvents {
-        insert_route (
-          objects: ${JSON.stringify(newRoutes)}
-        ) {
+    // 2. Upsert the routes
+    const { data: { insert_route: { returning: remoteRoutes } } }: RemoteQuery<{ insert_route: { returning: RemoteRoute[] } }> = await fetchQuery(`
+      mutation CreateRoutes {
+        insert_route(objects: ${JSON.stringify(routes.values())},
+        on_conflict: {constraint: route_route_name_route_active_key, update_columns: []}) {
           returning {
             route_id
             route_name
@@ -66,18 +32,16 @@ const events = async (event: HandlerEvent): Promise<HandlerResponse> => {
         }
       }`)
 
+    const eventsWithRoutes = events.map((event) => ({
+      ...event,
+      event_route: remoteRoutes.find((route) => route.route_name === event.event_name)?.route_id
+    }))
 
-      const newerRoutes: RemoteRoute[] = events.map((event) => buildEventRoute({ newRoutes: remoteRoutes, event, routes })).filter(Boolean)
-      if (errors || newerRoutes.length) {
-        throw new Error(JSON.stringify(errors) || JSON.stringify(`routelength problem`))
-      }
-    }
-
-    // 5. Insert the events
+    // 3. Insert the events
     const { data, errors }: RemoteQuery<{ insert_event: { returning: RemoteEvent[] } }> = await fetchQuery(`
       mutation upsertEvents {
         insert_event(
-          objects: ${JSON.stringify(events)}
+          objects: ${JSON.stringify(eventsWithRoutes)}
         ) {
           returning {
             event_id
@@ -87,26 +51,19 @@ const events = async (event: HandlerEvent): Promise<HandlerResponse> => {
       }`)
 
     if (errors) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify(errors)
-      }
+      throw new Error(JSON.stringify(errors))
     }
 
     return {
+      headers,
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        eventCount: events.length,
-        response: data,
-      }),
+      body: JSON.stringify(data),
     }
   } catch (error) {
     return {
+      headers,
       statusCode: 500,
-      body: JSON.stringify(error)
+      body: typeof error === 'string' ? error : JSON.stringify(error)
     }
   }
 }

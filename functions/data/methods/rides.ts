@@ -1,5 +1,9 @@
 import { HandlerEvent, HandlerResponse } from '@netlify/functions'
-import { RemoteEvent, fetchQuery, RemoteQuery } from './utils'
+import { RemoteEvent, fetchQuery, RemoteQuery, headers } from './utils'
+
+const headers = {
+  'Content-Type': 'application/json',
+}
 
 export const createRide = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
@@ -19,7 +23,9 @@ export const createRide = async (event: HandlerEvent): Promise<HandlerResponse> 
       rider_firstname: firstName,
       rider_lastname: lastName,
       rider_gender: gender
-    })}, on_conflict: {constraint: rider_rider_firstname_rider_lastname_key, update_columns: [rider_email, rider_gender]}) {
+    })},
+      on_conflict: {constraint: rider_rider_firstname_rider_lastname_key,
+      update_columns: [rider_email, rider_gender]}) {
           rider_id
       }
       }`)
@@ -36,25 +42,19 @@ export const createRide = async (event: HandlerEvent): Promise<HandlerResponse> 
     }`)
 
     if (errors) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify(errors)
-      }
+      throw new Error(JSON.stringify(errors))
     }
 
     return {
+      headers,
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        response: data,
-      }),
+      body: JSON.stringify(data),
     }
   } catch (error) {
     return {
+      headers,
       statusCode: 500,
-      body: JSON.stringify(error)
+      body: typeof error === 'string' ? error : JSON.stringify(error)
     }
   }
 }

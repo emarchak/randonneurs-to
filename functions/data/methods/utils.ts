@@ -3,6 +3,9 @@ import fetch from 'isomorphic-unfetch'
 export const endpoint = process.env.RO_ENDPOINT || ''
 export const dbUrl = process.env.GRAPHQL_URL || ''
 export const rwgpsRegex = /^((?:https?:)?\/\/)?((?:www)\.)?((?:ridewithgps\.com))(\/routes\/)([\d\-]+)?$/
+export const headers = {
+    'Content-Type': 'application/json',
+}
 
 export type RawEvent = {
     Sched_Id?: string
@@ -27,6 +30,7 @@ export type RemoteRoute = {
     route_distance?: number
     route_name?: string
     route_start_location?: string
+    route_active?: boolean
 }
 
 export type RemoteEvent = {
@@ -75,9 +79,8 @@ export const fetchQuery = async (query: string) => {
     const response = await fetch(dbUrl, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            [process.env.GRAPHQL_SECRETKEY]: process.env.GRAPHQL_SECRET,
-
+            ...headers,
+            [process.env.GRAPHQL_SECRETKEY]: process.env.GRAPHQL_SECRET
         },
         body: JSON.stringify({ query: query.replace(/"([^"]+)":/g, '$1:') })
     })
@@ -92,4 +95,5 @@ export const buildRoute = (rawEvent: RawEvent): RemoteRoute => ({
     route_start_location: rawEvent.StartLoc,
     route_cuesheet: rawEvent.RWGPS || undefined,
     route_chapter: chapterKey(rawEvent.Chapter),
+    route_active: true
 })
