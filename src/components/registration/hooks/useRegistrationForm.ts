@@ -87,7 +87,7 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         trackEvent("sign_up", { method: formName, ...data })
 
         setLoading(false)
-        return successRegistration
+        return successRegistration && successSheet
     }
     return {
         loading,

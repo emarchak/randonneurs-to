@@ -5,26 +5,8 @@ import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import * as useRiders from 'src/data/riders'
 import * as useMail from 'src/data/mail'
+import * as Events from 'src/data/events'
 import * as useSlack from 'src/hooks/useSlack'
-
-jest.mock('src/data/events', () => ({
-    __esModule: true,
-    useEvents: jest.fn().mockReturnValue({
-        loading: false,
-        brevets:
-            [{
-                chapter: 'Toronto',
-                eventType: 'populaire',
-                distance: '60',
-                date: new Date('Sat August 7 2021 09:20:00 EDT'),
-                route: 'Rouge Ramble 60',
-                startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
-                id: 1,
-                rwgpsUrl: 'https://rwgps.com',
-                scheduleId: '123',
-            }]
-    })
-}))
 
 jest.mock('src/data/riders', () => ({
     __esModule: true,
@@ -40,8 +22,30 @@ jest.mock('src/data/riders', () => ({
 }))
 
 describe('<RegistrationForm>', () => {
+    const useEventsMock = jest.spyOn(Events, 'useEvents')
+
     beforeEach(() => {
         MockDate.set(new Date('Wed August 4 2021 09:00:00 EDT'))
+        useEventsMock.mockReturnValue({
+            loading: false,
+            events: [],
+            brevets:
+                [{
+                    chapter: 'Toronto' as any,
+                    eventType: 'populaire' as any,
+                    distance: 60,
+                    date: new Date('Sat August 7 2021 09:20:00 EDT'),
+                    route: 'Rouge Ramble 60',
+                    startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
+                    id: '1',
+                    rwgpsUrl: 'https://rwgps.com',
+                    scheduleId: '123',
+                }]
+        })
+    })
+
+    afterEach(() => {
+        useEventsMock.mockClear()
     })
 
     it('renders all the required fields to the user', () => {
@@ -138,30 +142,34 @@ describe('<RegistrationForm>', () => {
         fireEvent.click(mount.getByText('Register'))
 
         await waitFor(() => {
-            const fetchBody = fetchSpy.mock.calls[0][1]?.body
-            const expectedFields = {
-                'form-name': 'registration',
-                name: 'Foo Bar',
-                email: 'foo@bar.com',
-                gender: 'F',
-                membership: 'Individual',
-                route: 'Rouge Ramble 60',
-                rideType: 'populaire',
-                startTime: rideDate.toString(),
-                scheduleTime: rideDate.toString(),
-                startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
-                chapter: 'Toronto',
-                distance: 60,
-                notes: 'notes',
-                ocaConsent: true,
-                roConsent: true,
-            }
             expect(sendMailSpy).toHaveBeenCalled()
             expect(sendSlackMsgSpy).toHaveBeenCalled()
-            expect(fetchSpy).toHaveBeenCalled()
-            Object.keys(expectedFields).forEach((label) => {
-                expect(fetchBody).toMatch(`${label}=${encodeURIComponent(expectedFields[label])}`)
-            })
+            expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/sheets', expect.objectContaining({
+                method: 'POST',
+                body: JSON.stringify({
+                    sheet: 'registration',
+                    row: {
+                        name: 'Foo Bar',
+                        email: 'foo@bar.com',
+                        gender: 'F',
+                        membership: 'Individual',
+                        route: 'Rouge Ramble 60',
+                        eventId: '123',
+                        rideType: 'populaire',
+                        startTime: '09:20',
+                        scheduleTime: 'Sat August 7 2021 09:20',
+                        startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
+                        chapter: 'Toronto',
+                        distance: 60,
+                        notes: 'notes',
+                        ocaConsent: 'Yes',
+                        roConsent: 'Yes',
+                        hideRide: 'No',
+                        submitted: 'Wed August 4 2021 09:00',
+                        startDate: 'Sat August 7'
+                    }
+                }),
+            }))
             expect(mount.getByText(/Thank you for registering to ride/)).toBeTruthy()
         })
     })
