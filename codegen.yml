@@ -15,10 +15,11 @@ generates:
     schema: 'https://randonneurs-to.hasura.app/v1/graphql'
     documents:
       - '!./src/**/*.gql.ts'
+      - './src/**/*.gql'
     plugins:
       - 'typescript'
       - 'typescript-operations'
-      - typescript-react-query
+      - 'typescript-react-query'
     config:
       fetcher:
         endpoint: 'https://randonneurs-to.hasura.app/v1/graphql'

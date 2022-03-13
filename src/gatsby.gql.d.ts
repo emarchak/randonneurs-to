@@ -5115,7 +5115,7 @@ export type Unnamed_2_Query = { __typename?: 'Query', allFeedblog: { __typename?
 export type EventDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, rwgpsUrl?: string | null, startLocation?: string | null, date?: any | null, path?: string | null }> } };
+export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, rwgpsUrl?: string | null, startLocation?: string | null, date?: any | null, scheduleId?: string | null, path?: string | null }> } };
 
 export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5510,6 +5510,7 @@ export const EventData = gql`
       rwgpsUrl
       startLocation
       date
+      scheduleId
       path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
     }
   }

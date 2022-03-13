@@ -1,8 +1,28 @@
+import { useQuery, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+
+function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
+  return async (): Promise<TData> => {
+    const res = await fetch("https://randonneurs-to.hasura.app/v1/graphql", {
+    method: "POST",
+      body: JSON.stringify({ query, variables }),
+    });
+
+    const json = await res.json();
+
+    if (json.errors) {
+      const { message } = json.errors[0];
+
+      throw new Error(message);
+    }
+
+    return json.data;
+  }
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -521,3 +541,36 @@ export type Subscription_RootRoutesArgs = {
   order_by?: InputMaybe<Array<Routes_Order_By>>;
   where?: InputMaybe<Routes_Bool_Exp>;
 };
+
+export type FindEventQueryVariables = Exact<{
+  eventId?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type FindEventQuery = { __typename?: 'query_root', events: Array<{ __typename?: 'events', name?: string | null, riders: Array<{ __typename?: 'rides', rider?: { __typename?: 'riders', riderName?: string | null } | null }> }> };
+
+
+export const FindEventDocument = `
+    query findEvent($eventId: Int) {
+  events(where: {event_id: {_eq: $eventId}}) {
+    riders {
+      rider {
+        riderName
+      }
+    }
+    name
+  }
+}
+    `;
+export const useFindEventQuery = <
+      TData = FindEventQuery,
+      TError = unknown
+    >(
+      variables?: FindEventQueryVariables,
+      options?: UseQueryOptions<FindEventQuery, TError, TData>
+    ) =>
+    useQuery<FindEventQuery, TError, TData>(
+      variables === undefined ? ['findEvent'] : ['findEvent', variables],
+      fetcher<FindEventQuery, FindEventQueryVariables>(FindEventDocument, variables),
+      options
+    );
