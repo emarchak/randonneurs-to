@@ -1,11 +1,11 @@
 import React from 'react'
 import { PageProps } from 'gatsby'
 import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
-import { iframe } from 'src/components/styles/iframe.module.scss'
 import { Layout } from 'src/components/layout'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
 
+import { iframe } from 'src/components/styles/iframe.module.scss'
 
 const Page = ({path}: PageProps) => {
 
