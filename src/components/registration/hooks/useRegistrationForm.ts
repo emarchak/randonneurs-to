@@ -1,12 +1,11 @@
-import { Brevet, useEvent } from 'src/data/events'
-import { formatSlackMessage, formSubmit } from 'src/components/form/utils'
+import { useState } from 'react'
+import Bugsnag from '@bugsnag/js'
+import { formatSlackMessage } from 'src/components/form/utils'
 import { useMail } from 'src/data/mail'
 import { useSlack } from 'src/hooks/useSlack'
 import { useSheets } from 'src/hooks/useSheets'
-import { createEventRegistration } from 'src/data/events'
-import { getDateShort, getDateTimeLong, getTime } from 'src/utils'
-import Bugsnag from '@bugsnag/js'
-import { useState } from 'react'
+import { registerRider, Brevet } from 'src/data/events'
+import { getDateShort, getDateTimeLong, getTime, trackEvent } from 'src/utils'
 
 type useRegistrationFormParams = {
     formName: string,
@@ -33,55 +32,63 @@ const replyToEmails = {
     "default": "vp@randonneurs.to"
 }
 
+const registerBrevet = async (data: FormData) => {
+    if (!data.eventId) {
+        return true
+    }
+
+    const [firstName, ...lastName] = data.name.split(' ')
+    const successRegistration = await registerRider({
+        eventId: data.eventId,
+        hidden: false,
+        email: data.email,
+        firstName: firstName,
+        lastName: lastName.join(' '),
+        gender: data.gender
+    })
+    return successRegistration
+}
+
 export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFormParams) => {
     const [loading, setLoading] = useState(false)
     const { sendMail } = useMail()
     const { sendSlackMsg } = useSlack()
     const { addRow } = useSheets()
 
-    const onSubmit = async (formData: FormData) => {
+    const onSubmit = async (data: FormData) => {
         setLoading(true)
-        const message = `Registration for ${formData.chapter} ${formData.route} ${formData.rideType}`
+        const message = `Registration for ${data.chapter} ${data.route} ${data.rideType}`
 
-        const [firstName, ...lastName] = formData.name.split(' ')
-
-        const successRegistration = await createEventRegistration({
-            eventId: formData.eventId,
-            hidden: false,
-            email: formData.email,
-            firstName: firstName,
-            lastName: lastName.join(' '),
-            gender: formData.gender
-        })
-        const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData, message }), 'registration')
+        const successRegistration = await registerBrevet(data)
+        const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData: data, message }), 'registration')
         const successSheet = await addRow({
             sheet: formName,
             row: {
-                ...formData,
+                ...data,
                 submitted: getDateTimeLong(new Date(Date.now())),
-                scheduleTime: formData.scheduleTime && getDateTimeLong(formData.scheduleTime),
-                startDate: getDateShort(formData.startTime),
-                startTime: getTime(formData.startTime),
+                scheduleTime: data.scheduleTime && getDateTimeLong(data.scheduleTime),
+                startDate: data.startTime && getDateShort(data.startTime),
+                startTime: data.startTime && getTime(data.startTime),
             }
         })
-        const replyTo = replyToEmails[formData.chapter.toLowerCase() || 'default']
-        const memberAtLarge = formData.chapter === 'Huron' ? 'director1@randonneursontario.ca' : undefined
-        const vpPermanent = formData.rideType === 'permanent' ? permEmail : undefined
+        const replyTo = replyToEmails[data.chapter.toLowerCase() || 'default']
+        const memberAtLarge = data.chapter === 'Huron' ? 'director1@randonneursontario.ca' : undefined
+        const vpPermanent = data.rideType === 'permanent' ? permEmail : undefined
         const successMail = await sendMail({
-            to: [formData.email, replyTo, vpPermanent, memberAtLarge].filter(Boolean),
+            to: [data.email, replyTo, vpPermanent, memberAtLarge].filter(Boolean),
             replyTo,
-
-            data: formData,
+            data
         }, 'brevetRegistration')
 
         if (!successSlack || !successMail || !successSheet) {
             Bugsnag.notify('Registration error')
         }
 
-        setLoading(false)
-        return successRegistration || true
-    }
+        trackEvent("sign_up", { method: formName, ...data })
 
+        setLoading(false)
+        return successRegistration
+    }
     return {
         loading,
         onSubmit

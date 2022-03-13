@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 
-export type createEventRegistrationParams = {
+export type registerRiderParams = {
     eventId: number
     hidden: boolean
     email: string
@@ -9,7 +9,7 @@ export type createEventRegistrationParams = {
     gender?: 'F' | 'M' | 'X'
 }
 
-export const createEventRegistration = async (params: createEventRegistrationParams) => {
+export const registerRider = async (params: registerRiderParams) => {
     if (!params.eventId) {
         return true
     }
