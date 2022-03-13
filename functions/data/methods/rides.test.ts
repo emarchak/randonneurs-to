@@ -57,7 +57,7 @@ describe('createRide', () => {
     })
 
     it('handles errors', async () => {
-        fetchQueryMock.mockRejectedValueOnce({ errors: true })
+        fetchQueryMock.mockResolvedValue({ errors: true })
         const event: Partial<HandlerEvent> = {
             body: JSON.stringify(registrationData)
         }
@@ -66,4 +66,5 @@ describe('createRide', () => {
             statusCode: 500,
         })
     })
+
 })

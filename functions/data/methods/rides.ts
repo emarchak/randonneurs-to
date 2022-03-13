@@ -5,7 +5,7 @@ export const createRide = async (event: HandlerEvent): Promise<HandlerResponse> 
   try {
     const {
       eventId,
-      hideRide = false,
+      hideRide,
       email,
       firstName,
       lastName,
