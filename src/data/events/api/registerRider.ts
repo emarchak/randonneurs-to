@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 
 export type registerRiderParams = {
     eventId: number
-    hidden: boolean
+    hideRide: boolean
     email: string
     firstName: string
     lastName: string

@@ -21,7 +21,8 @@ const formData = {
   chapter: 'Toronto' as Chapter,
   eventId: '123',
   gender: 'X',
-  startTime: new Date('Sat Aug 28 2021 05:01 EDT')
+  startTime: new Date('Sat Aug 28 2021 05:01 EDT'),
+  hideRide: false
 }
 
 describe('useRegistrationForm', () => {
@@ -73,12 +74,12 @@ describe('useRegistrationForm', () => {
         eventId: '123',
         firstName: 'Lael',
         gender: 'X',
-        hidden: false,
+        hideRide: false,
         lastName: 'de Silva',
       })
       expect(sendSlackMsgSpy).toHaveBeenCalledWith({
         'attachments': [
-          'Name: Lael de Silva \nEmail: rider@example.com \nRoute: 200 \nRide Type: brevet \nChapter: Toronto \nEvent Id: 123 \nGender: X \nStart Time: Sat August 28 05:01',
+          'Name: Lael de Silva \nEmail: rider@example.com \nRoute: 200 \nRide Type: brevet \nChapter: Toronto \nEvent Id: 123 \nGender: X \nStart Time: Sat August 28 05:01 \nHide Ride: false',
         ],
         'message': 'Registration for Toronto 200 brevet',
       },
@@ -89,6 +90,7 @@ describe('useRegistrationForm', () => {
           'email': 'rider@example.com',
           'eventId': '123',
           'gender': 'X',
+          'hideRide': false,
           'name': 'Lael de Silva',
           'rideType': 'brevet',
           'route': '200',
@@ -105,6 +107,7 @@ describe('useRegistrationForm', () => {
           'email': 'rider@example.com',
           'eventId': '123',
           'gender': 'X',
+          'hideRide': false,
           'name': 'Lael de Silva',
           'rideType': 'brevet',
           'route': '200',

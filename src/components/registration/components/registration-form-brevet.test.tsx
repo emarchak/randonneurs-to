@@ -21,7 +21,7 @@ jest.mock('src/data/events', () => ({
                 startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
                 id: 1,
                 rwgpsUrl: 'https://rwgps.com',
-
+                scheduleId: '123',
             }]
     })
 }))

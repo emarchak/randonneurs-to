@@ -5,7 +5,7 @@ export const createRide = async (event: HandlerEvent): Promise<HandlerResponse> 
   try {
     const {
       eventId,
-      hidden = false,
+      hideRide = false,
       email,
       firstName,
       lastName,
@@ -31,7 +31,7 @@ export const createRide = async (event: HandlerEvent): Promise<HandlerResponse> 
         insert_ride_one(object: ${JSON.stringify({
       ride_event: eventId,
       ride_rider: riderId,
-      ride_hidden: hidden,
+      ride_hidden: hideRide,
     })}, on_conflict: {constraint: ride_unique, update_columns: [ride_hidden]}) {
           ride_id
         }

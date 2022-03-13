@@ -79,7 +79,7 @@ const Event = ({ data: { event } }: EventProps) => {
       </ContentChild>
       </ContentWrapper>
       <ContentWrapper>
-        <h2>Registered riders</h2>
+        <h2>Who's riding</h2>
         {isLoading && <Loading />}
         {data && <ul>
           {data.riders.length === 0 && <li>No riders registered</li>}

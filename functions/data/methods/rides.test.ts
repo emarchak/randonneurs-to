@@ -4,7 +4,7 @@ import { createRide } from './rides'
 
 const registrationData = {
     eventId: 10,
-    hidden: true,
+    hideRide: true,
     email: 'test@email.com',
     firstName: 'Lael',
     lastName: 'Wilcox',
@@ -52,7 +52,7 @@ describe('createRide', () => {
         expect(fetchQueryMock).toHaveBeenNthCalledWith(2, expect.stringContaining(JSON.stringify({
             ride_event: registrationData.eventId,
             ride_rider: 1,
-            ride_hidden: registrationData.hidden,
+            ride_hidden: registrationData.hideRide,
         })))
     })
 

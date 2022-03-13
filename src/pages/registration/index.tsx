@@ -19,8 +19,7 @@ const BrevetRegistration = ({path}: PageProps) => {
         <p>You must have an OCA membership and have read the <Link href='https://ontariocycling.org/covid-19-information/'>latest OCA Return to Sport updates</Link>. Please visit the <Link href='https://www.ontariocycling.org'>OCA Website for the latest information</Link> about group riding during the pandemic.</p>
 
         <Callout alternative>
-          <p>Your ride is not approved until your Chapter VP has confirmed with you.</p>
-          <p><Link href='http://randonneursontario.ca/who/board.html'>Contact your Chapter VP</Link> if you have any questions.</p>
+          <p>Your ride is not approved until your Chapter VP has confirmed with you. <Link href='http://randonneursontario.ca/who/board.html'>Contact your Chapter VP</Link> if you have any questions.</p>
         </Callout>
 
       </ContentWrapper>
