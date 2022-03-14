@@ -5,7 +5,7 @@ import findEvent from './api/findEvent.gql'
 export const useEvent = (eventId: number) => {
   const query = useQuery(['findEvent', eventId], async () => {
     const { events } = await request(
-      process.env.GRAPHQL_URL,
+      'https://randonneurs-to.hasura.app/v1/graphql',
       findEvent,
       { eventId }
     )
