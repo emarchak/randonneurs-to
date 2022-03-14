@@ -75,6 +75,7 @@ describe('chapters()', () => {
         expect(chapters('Huron')).toBe('Huron')
         expect(chapters('Simcoe-Muskoka')).toBe('Simcoe')
         expect(chapters('XOttawa')).toBe('Ottawa')
+        expect(chapters('Club')).toBe('Club')
         expect(chapters('Something weird')).toBe('Other')
     })
 })

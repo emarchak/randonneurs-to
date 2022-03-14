@@ -117,11 +117,11 @@ describe('<RegistrationFormPermanent>', () => {
     const rideDate = new Date('2021-10-09T12:00:00.000Z')
 
     const useMailMock = jest.spyOn(useMail, 'useMail')
-    const sendMailSpy = jest.fn().mockReturnValue(true)
+    const sendMailSpy = jest.fn().mockName('sendMail').mockReturnValue(true)
     useMailMock.mockReturnValue({ sendMail: sendMailSpy })
 
     const useSlacklMock = jest.spyOn(useSlack, 'useSlack')
-    const sendSlackMsgSpy = jest.fn().mockReturnValue(true)
+    const sendSlackMsgSpy = jest.fn().mockName('sendSlackMsg').mockReturnValue(true)
     useSlacklMock.mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
 
     fireEvent.change(mount.getByLabelText(/name/i), {
@@ -155,34 +155,38 @@ describe('<RegistrationFormPermanent>', () => {
     fireEvent.click(mount.getByText('Register'))
 
     await waitFor(() => {
-      const fetchBody = fetchSpy.mock.calls[0][1]?.body
-      const expectedFields = {
-        'form-name': 'registration',
-        name: 'Foo Bar',
-        email: 'foo@bar.com',
-        membership: 'Individual',
-        route: 'Urban',
-        startTime: rideDate.toString(),
-        startLocation: 'Starbucks',
-        chapter: 'Toronto',
-        distance: 200,
-        notes: 'notes',
-        ocaConsent: true,
-        roConsent: true,
-      }
       expect(sendMailSpy).toHaveBeenCalled()
       expect(sendSlackMsgSpy).toHaveBeenCalled()
-      expect(fetchSpy).toHaveBeenCalled()
-      Object.keys(expectedFields).forEach((label) => {
-        expect(fetchBody).toMatch(`${label}=${encodeURIComponent(expectedFields[label])}`)
-      })
+      expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/sheets', expect.objectContaining({
+        body: JSON.stringify({
+          sheet: 'registration-permanent',
+          row: {
+            name: 'Foo Bar',
+            email: 'foo@bar.com',
+            membership: 'Individual',
+            route: 'Urban',
+            startTime: '08:00',
+            startLocation: 'Starbucks',
+            chapter: 'Toronto',
+            distance: 200,
+            notes: 'notes',
+            ocaConsent: 'Yes',
+            roConsent: 'Yes',
+            rideType: 'permanent',
+            submitted: 'Thu December 31 2020 19:00',
+            startDate: 'Sat October 9'
+          }
+        }),
+        method: 'POST'
+      }))
+
       expect(mount.getByText(/Thank you for registering to ride/)).toBeTruthy()
     })
   })
 
   it('shows an error when unable to submit', async () => {
     const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-    fetchSpy.mockRejectedValue({ ok: false })
+    fetchSpy.mockRejectedValue(new Error('nope'))
 
     const mount = render(<RegistrationFormPermanent />)
     fireEvent.change(mount.getByLabelText(/name/i), {

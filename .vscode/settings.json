@@ -9,4 +9,5 @@
         "enable": true
     },
     "eslint.debug": true,
+    "editor.tabSize": 2,
 }

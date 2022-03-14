@@ -1,0 +1,10 @@
+query findEvent($eventId: Int) {
+  events(where: {event_id: {_eq: $eventId}}) {
+    riders {
+      rider {
+        riderName
+      }
+    }
+    name
+  }
+}

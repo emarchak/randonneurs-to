@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { EventDataQuery } from 'src/gatsby.gql'
-export { Chapter, EventType } from 'src/gatsby.gql'
+import { EventDataQuery } from 'src/gatsby.gql.d'
+export { Chapter, EventType } from 'src/gatsby.gql.d'
 
 export type Event = Omit<EventDataQuery['allEvent']['nodes'][0], 'date'> & { date: Date }
 
@@ -18,6 +18,7 @@ query EventData{
       rwgpsUrl
       startLocation
       date
+      scheduleId
       path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
     }
   }
@@ -37,6 +38,7 @@ export const useEvents = ({ chapter, after = new Date(Date.now()), limit = 20 }:
     allEvent: { nodes: events }
   } = useStaticQuery<EventDataQuery>(brevetQuery)
 
+
   const filteredEvents: Event[] = useMemo(() => events.map((event: Event) => ({
     ...event,
     date: new Date(event.date)
@@ -49,6 +51,6 @@ export const useEvents = ({ chapter, after = new Date(Date.now()), limit = 20 }:
   return {
     loading: false,
     events: filteredEvents,
-    brevets: filteredEvents
+    brevets: filteredEvents,
   }
 }

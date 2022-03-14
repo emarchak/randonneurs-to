@@ -18,7 +18,7 @@ query {
       file(name: {glob: "audax-a-distance"}) {
         name
         childImageSharp {
-          gatsbyImageData(aspectRatio:1, width:500, layout: FULL_WIDTH)
+          gatsbyImageData(aspectRatio:1, width:500)
         }
       }
 }

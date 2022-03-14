@@ -20,6 +20,7 @@ interface FormData {
     gender: '' | 'M' | 'F' | 'X'
     membership: Rider['membership'] | 'missing' | ''
     route: Brevet['route']
+    eventId: Brevet['scheduleId']
     rideType: Brevet['eventType'] | ''
     scheduleTime: Date | ''
     startTime: Date | ''
@@ -29,6 +30,7 @@ interface FormData {
     notes: string,
     ocaConsent: boolean,
     roConsent: boolean,
+    hideRide: boolean
 }
 
 const defaultFormData: FormData = {
@@ -37,6 +39,7 @@ const defaultFormData: FormData = {
     gender: '',
     membership: '',
     route: '',
+    eventId: '',
     rideType: '',
     startTime: '',
     scheduleTime: '',
@@ -46,6 +49,7 @@ const defaultFormData: FormData = {
     notes: '',
     ocaConsent: false,
     roConsent: false,
+    hideRide: false
 }
 
 const fieldLabels = {
@@ -58,6 +62,7 @@ const fieldLabels = {
     notes: 'Notes for the organizer',
     ocaConsent: 'OCA risk awareness',
     roConsent: 'Randonneurs Ontario risk policy',
+    hideRide: 'Hide my registration'
 }
 
 const requiredFields: RequiredFields<FormData> = [
@@ -114,6 +119,7 @@ export const RegistrationFormBrevet = () => {
         const time = new Date(brevet.date)
         dirtyForm({
             route: brevet.route,
+            eventId: brevet.scheduleId,
             rideType: brevet.eventType,
             startTime: time,
             scheduleTime: time,
@@ -161,6 +167,9 @@ export const RegistrationFormBrevet = () => {
                 <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} disabled />
                 <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled />
                 <SelectField label={fieldLabels['gender']} name='gender' options={['M', 'F', 'X']} value={formData.gender} onChange={handleInputChange} optional help={<>The <em lang='fr'>Audax Club Parisien</em> uses this for ridership statistics</>}/>
+                <CheckboxField name='hideRide' value={formData.hideRide} onChange={handleInputChange} optional help={<>Don't include your name on the riders list before the event. Your name will still appear on the results after the event.</>}>
+                    {fieldLabels['hideRide']}
+                </CheckboxField>
                 <InputField label={fieldLabels['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>
                     <h2>COVID-19 risk awareness</h2>
@@ -177,6 +186,7 @@ export const RegistrationFormBrevet = () => {
                 <HiddenField name='scheduleTime' value={formData.scheduleTime?.toString()} />
                 <HiddenField name='membership' value={formData.membership} />
                 <HiddenField name='rideType' value={formData.rideType} />
+                <HiddenField name='eventId' value={formData.eventId} />
 
                 <div aria-live='polite'>
                     <ErrorsList formErrors={formErrors} />

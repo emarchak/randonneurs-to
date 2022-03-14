@@ -1,12 +1,12 @@
 import React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { ContentWrapper } from 'src/components/content-wrapper'
-import { getDateTimeLong } from 'src/utils'
+import { getDateTimeLong, } from 'src/utils'
 import { Layout } from 'src/components/layout'
-import { Link } from 'src/components/Link'
 import { SeasonsCta } from 'src/components/seasons'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
+import { Link } from 'src/components/Link'
 import { SeasonPageQuery } from 'src/gatsby.gql'
 
 type SeasonProps = PageProps<SeasonPageQuery>

@@ -1,6 +1,6 @@
 overwrite: true
 generates:
-  src/gatsby.gql.ts:
+  src/gatsby.gql.d.ts:
     schema: 'http://localhost:8000/___graphql'
     documents:
       - './src/**/*.{ts,tsx}'
@@ -15,10 +15,11 @@ generates:
     schema: 'https://randonneurs-to.hasura.app/v1/graphql'
     documents:
       - '!./src/**/*.gql.ts'
+      - './src/**/*.gql'
     plugins:
       - 'typescript'
       - 'typescript-operations'
-      - typescript-react-query
+      - 'typescript-react-query'
     config:
       fetcher:
         endpoint: 'https://randonneurs-to.hasura.app/v1/graphql'
