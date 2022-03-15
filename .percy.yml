@@ -9,8 +9,5 @@ discovery:
   allowedHostnames: []
   networkIdleTimeout: 100
 static:
-  cleanUrls: false
-upload:
-  files: "**/*.{png,jpg,jpeg}"
-  ignore: "/events/*/*"
-  stripExtensions: false
+  include: "**/*.{html,htm}"
+  exclude: "/event/*/*"
