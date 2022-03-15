@@ -113,7 +113,6 @@ describe('<RegistrationForm>', () => {
         useSlacklMock.mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
 
         const mount = render(<RegistrationFormBrevet />)
-        const rideDate = new Date('Sat August 7 2021 09:20:00 EDT')
 
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
@@ -134,6 +133,7 @@ describe('<RegistrationForm>', () => {
 
         fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
         fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
+        fireEvent.click(mount.getByLabelText(/Share my registration/i))
 
         fireEvent.change(mount.getByLabelText(/notes/i), {
             target: { value: 'notes' },
@@ -164,7 +164,7 @@ describe('<RegistrationForm>', () => {
                         notes: 'notes',
                         ocaConsent: 'Yes',
                         roConsent: 'Yes',
-                        hideRide: 'No',
+                        shareRide: 'Yes',
                         submitted: 'Wed August 4 2021 09:00',
                         startDate: 'Sat August 7'
                     }

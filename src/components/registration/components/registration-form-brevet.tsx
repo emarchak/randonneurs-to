@@ -30,7 +30,7 @@ interface FormData {
     notes: string,
     ocaConsent: boolean,
     roConsent: boolean,
-    hideRide: boolean
+    shareRide: boolean
 }
 
 const defaultFormData: FormData = {
@@ -49,7 +49,7 @@ const defaultFormData: FormData = {
     notes: '',
     ocaConsent: false,
     roConsent: false,
-    hideRide: false
+    shareRide: false
 }
 
 const fieldLabels = {
@@ -62,7 +62,7 @@ const fieldLabels = {
     notes: 'Notes for the organizer',
     ocaConsent: 'OCA risk awareness',
     roConsent: 'Randonneurs Ontario risk policy',
-    hideRide: 'Hide my registration'
+    shareRide: 'Share my registration'
 }
 
 const requiredFields: RequiredFields<FormData> = [
@@ -167,8 +167,8 @@ export const RegistrationFormBrevet = () => {
                 <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} disabled />
                 <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled />
                 <SelectField label={fieldLabels['gender']} name='gender' options={['M', 'F', 'X']} value={formData.gender} onChange={handleInputChange} optional help={<>The <em lang='fr'>Audax Club Parisien</em> uses this for ridership statistics</>}/>
-                <CheckboxField name='hideRide' value={formData.hideRide} onChange={handleInputChange} optional help={<>Don't include your name on the riders list before the event. Your name will still appear on the results after the event.</>}>
-                    {fieldLabels['hideRide']}
+                <CheckboxField name='shareRide' value={formData.shareRide} onChange={handleInputChange} optional help={<>Share your name with other riders before the event. All riders will appear on the results after the event.</>}>
+                    {fieldLabels['shareRide']}
                 </CheckboxField>
                 <InputField label={fieldLabels['notes']} name='notes' value={formData.notes} onChange={handleInputChange} optional />
                 <Callout alternative>
