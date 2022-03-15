@@ -16,7 +16,6 @@ export const useRoutes = () => {
       db {
         routes(
           order_by: {chapter: asc, distance: asc}
-          where: {active: {_eq: true}}
         ) {
           startLocation
           name
