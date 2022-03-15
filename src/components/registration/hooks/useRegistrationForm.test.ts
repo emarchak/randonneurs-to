@@ -22,7 +22,7 @@ const formData = {
   eventId: '123',
   gender: 'X',
   startTime: new Date('Sat Aug 28 2021 05:01 EDT'),
-  hideRide: false
+  shareRide: true
 }
 
 describe('useRegistrationForm', () => {
@@ -49,7 +49,7 @@ describe('useRegistrationForm', () => {
   })
 
   it('sets loading to true on submit', async () => {
-    const { result, waitForNextUpdate, waitForValueToChange } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+    const { result, waitForValueToChange } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
 
     expect(result.current.loading).toBeFalsy()
 
@@ -79,7 +79,7 @@ describe('useRegistrationForm', () => {
       })
       expect(sendSlackMsgSpy).toHaveBeenCalledWith({
         'attachments': [
-          'Name: Lael de Silva \nEmail: rider@example.com \nRoute: 200 \nRide Type: brevet \nChapter: Toronto \nEvent Id: 123 \nGender: X \nStart Time: Sat August 28 05:01 \nHide Ride: false',
+          'Name: Lael de Silva \nEmail: rider@example.com \nRoute: 200 \nRide Type: brevet \nChapter: Toronto \nEvent Id: 123 \nGender: X \nStart Time: Sat August 28 05:01 \nShare Ride: true',
         ],
         'message': 'Registration for Toronto 200 brevet',
       },
@@ -90,7 +90,7 @@ describe('useRegistrationForm', () => {
           'email': 'rider@example.com',
           'eventId': '123',
           'gender': 'X',
-          'hideRide': false,
+          'shareRide': true,
           'name': 'Lael de Silva',
           'rideType': 'brevet',
           'route': '200',
@@ -107,7 +107,7 @@ describe('useRegistrationForm', () => {
           'email': 'rider@example.com',
           'eventId': '123',
           'gender': 'X',
-          'hideRide': false,
+          'shareRide': true,
           'name': 'Lael de Silva',
           'rideType': 'brevet',
           'route': '200',

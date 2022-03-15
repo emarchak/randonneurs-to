@@ -34,19 +34,6 @@ export type Scalars = {
   timestamptz: any;
 };
 
-/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
-export type Boolean_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['Boolean']>;
-  _gt?: InputMaybe<Scalars['Boolean']>;
-  _gte?: InputMaybe<Scalars['Boolean']>;
-  _in?: InputMaybe<Array<Scalars['Boolean']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['Boolean']>;
-  _lte?: InputMaybe<Scalars['Boolean']>;
-  _neq?: InputMaybe<Scalars['Boolean']>;
-  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
-};
-
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']>;
@@ -328,7 +315,9 @@ export enum Riders_Select_Column {
 /** columns and relationships of "rides" */
 export type Rides = {
   __typename?: 'rides';
+  resultType?: Maybe<Scalars['String']>;
   ride_event?: Maybe<Scalars['Int']>;
+  ride_id?: Maybe<Scalars['Int']>;
   ride_rider?: Maybe<Scalars['Int']>;
   /** An object relationship */
   rider?: Maybe<Riders>;
@@ -352,6 +341,7 @@ export type Rides_Aggregate_Order_By = {
 /** order by avg() on columns of table "rides" */
 export type Rides_Avg_Order_By = {
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
@@ -360,26 +350,34 @@ export type Rides_Bool_Exp = {
   _and?: InputMaybe<Array<Rides_Bool_Exp>>;
   _not?: InputMaybe<Rides_Bool_Exp>;
   _or?: InputMaybe<Array<Rides_Bool_Exp>>;
+  resultType?: InputMaybe<String_Comparison_Exp>;
   ride_event?: InputMaybe<Int_Comparison_Exp>;
+  ride_id?: InputMaybe<Int_Comparison_Exp>;
   ride_rider?: InputMaybe<Int_Comparison_Exp>;
   rider?: InputMaybe<Riders_Bool_Exp>;
 };
 
 /** order by max() on columns of table "rides" */
 export type Rides_Max_Order_By = {
+  resultType?: InputMaybe<Order_By>;
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** order by min() on columns of table "rides" */
 export type Rides_Min_Order_By = {
+  resultType?: InputMaybe<Order_By>;
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "rides". */
 export type Rides_Order_By = {
+  resultType?: InputMaybe<Order_By>;
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
   rider?: InputMaybe<Riders_Order_By>;
 };
@@ -387,7 +385,11 @@ export type Rides_Order_By = {
 /** select columns of table "rides" */
 export enum Rides_Select_Column {
   /** column name */
+  ResultType = 'resultType',
+  /** column name */
   RideEvent = 'ride_event',
+  /** column name */
+  RideId = 'ride_id',
   /** column name */
   RideRider = 'ride_rider'
 }
@@ -395,49 +397,55 @@ export enum Rides_Select_Column {
 /** order by stddev() on columns of table "rides" */
 export type Rides_Stddev_Order_By = {
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** order by stddev_pop() on columns of table "rides" */
 export type Rides_Stddev_Pop_Order_By = {
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** order by stddev_samp() on columns of table "rides" */
 export type Rides_Stddev_Samp_Order_By = {
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** order by sum() on columns of table "rides" */
 export type Rides_Sum_Order_By = {
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** order by var_pop() on columns of table "rides" */
 export type Rides_Var_Pop_Order_By = {
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** order by var_samp() on columns of table "rides" */
 export type Rides_Var_Samp_Order_By = {
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** order by variance() on columns of table "rides" */
 export type Rides_Variance_Order_By = {
   ride_event?: InputMaybe<Order_By>;
+  ride_id?: InputMaybe<Order_By>;
   ride_rider?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "routes" */
 export type Routes = {
   __typename?: 'routes';
-  active?: Maybe<Scalars['Boolean']>;
   brevetDistance?: Maybe<Scalars['Int']>;
   chapter?: Maybe<Scalars['String']>;
   cuesheet?: Maybe<Scalars['String']>;
@@ -452,7 +460,6 @@ export type Routes_Bool_Exp = {
   _and?: InputMaybe<Array<Routes_Bool_Exp>>;
   _not?: InputMaybe<Routes_Bool_Exp>;
   _or?: InputMaybe<Array<Routes_Bool_Exp>>;
-  active?: InputMaybe<Boolean_Comparison_Exp>;
   brevetDistance?: InputMaybe<Int_Comparison_Exp>;
   chapter?: InputMaybe<String_Comparison_Exp>;
   cuesheet?: InputMaybe<String_Comparison_Exp>;
@@ -464,7 +471,6 @@ export type Routes_Bool_Exp = {
 
 /** Ordering options when selecting data from "routes". */
 export type Routes_Order_By = {
-  active?: InputMaybe<Order_By>;
   brevetDistance?: InputMaybe<Order_By>;
   chapter?: InputMaybe<Order_By>;
   cuesheet?: InputMaybe<Order_By>;
@@ -476,8 +482,6 @@ export type Routes_Order_By = {
 
 /** select columns of table "routes" */
 export enum Routes_Select_Column {
-  /** column name */
-  Active = 'active',
   /** column name */
   BrevetDistance = 'brevetDistance',
   /** column name */

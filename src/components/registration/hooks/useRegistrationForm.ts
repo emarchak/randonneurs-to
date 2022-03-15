@@ -40,7 +40,7 @@ const registerBrevet = async (data: FormData) => {
     const [firstName, ...lastName] = data.name.split(' ')
     const successRegistration = await registerRider({
         eventId: data.eventId,
-        hideRide: data.hideRide,
+        hideRide: !data.shareRide,
         email: data.email,
         firstName: firstName,
         lastName: lastName.join(' '),
