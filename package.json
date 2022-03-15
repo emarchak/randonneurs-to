@@ -72,7 +72,7 @@
     "prettier": "^2.4.1"
   },
   "scripts": {
-    "build:test": "gatsby build && gatsby serve",
+    "build:test": "gatsby build",
     "build:schema": "graphql-codegen --config codegen.yml",
     "build:production": "gatsby build",
     "develop": "gatsby develop -p 8000 -o",
