@@ -51,6 +51,7 @@ jobs:
           GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           RO_ENDPOINT: ${{ secrets.RO_ENDPOINT }}
+          GATSBY_BUGSNAG_API_KEY: ${{ secrets.GATSBY_BUGSNAG_API_KEY }}
 
       - name: Upload snapshots to Percy
         run: yarn test:snapshot
