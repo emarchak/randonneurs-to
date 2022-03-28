@@ -19,6 +19,24 @@ describe('transformResponse', () => {
       membership: 'Family',
     })
   })
+
+  it('fallsback to individual membership if unknown ', () => {
+    const data = {
+      id: '123',
+      city: 'city',
+      country: 'country',
+      full_name: 'full name',
+      registration_category: 'unknown',
+    }
+
+    expect(transformResponse(data)).toMatchObject({
+      id: '123',
+      city: 'city',
+      country: 'country',
+      fullName: 'full name',
+      membership: 'Individual',
+    })
+  })
 })
 
 describe('fetchMemberships', () => {
