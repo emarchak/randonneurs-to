@@ -8,8 +8,8 @@ export type Membership = {
   id: string,
   city: string,
   country: string,
-  fullName: string,
-  membership: MembershipType,
+  riderName: string,
+  type: MembershipType,
 }
 
 const TypeMembership: { [key: string]: MembershipType } = {
@@ -47,6 +47,6 @@ export const transformResponse = (data: CcnResponse): Membership => ({
   id: data.id,
   city: data.city,
   country: data.country,
-  fullName: data.full_name,
-  membership: TypeMembership[data.registration_category] || TypeMembership['Individual Membership'],
+  riderName: data.full_name,
+  type: TypeMembership[data.registration_category] || TypeMembership['Individual Membership'],
 })

@@ -1,6 +1,5 @@
 import { Handler } from '@netlify/functions'
 import { ApolloServer, gql, } from 'apollo-server-lambda'
-import { getMembership } from './methods/getMembership'
 import { getMemberships } from './methods/getMemberships'
 
 const typeDefs = gql`
@@ -13,34 +12,26 @@ const typeDefs = gql`
     id: String,
     city: String,
     country: String,
-    fullName: String,
-    membership: MembershipType
+    riderName: String,
+    type: MembershipType
   }
+  input QueryInput {riderName: String},
   type Query {
-    getMemberships: [Membership],
-    getMembership(fullName: String!): Membership
+    memberships(where: QueryInput): [Membership]
   }
 `
 
 const resolvers = {
   Query: {
-    getMemberships: async () => {
+    memberships: async (parent, { where }) => {
       try {
-        const memberships = await getMemberships()
+        const memberships = await getMemberships({ search: where?.riderName })
         return memberships
       } catch (error) {
         throw new Error(error)
       }
-    },
-    getMembership: async (parent, { fullName }) => {
-      try {
-        const membership = await getMembership({ search: fullName })
-        return membership
-      } catch (error) {
-        throw new Error(error)
-      }
     }
-  },
+  }
 }
 
 export const handler: Handler = (event, context, callback) => {

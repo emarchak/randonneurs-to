@@ -15,8 +15,8 @@ describe('transformResponse', () => {
       id: '123',
       city: 'city',
       country: 'country',
-      fullName: 'full name',
-      membership: 'Family',
+      riderName: 'full name',
+      type: 'Family',
     })
   })
 
@@ -33,8 +33,8 @@ describe('transformResponse', () => {
       id: '123',
       city: 'city',
       country: 'country',
-      fullName: 'full name',
-      membership: 'Individual',
+      riderName: 'full name',
+      type: 'Individual',
     })
   })
 })
