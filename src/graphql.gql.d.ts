@@ -47,6 +47,25 @@ export type Int_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
 
+export type Membership = {
+  __typename?: 'Membership';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  riderName?: Maybe<Scalars['String']>;
+  type?: Maybe<MembershipType>;
+};
+
+export enum MembershipType {
+  Family = 'Family',
+  Individual = 'Individual',
+  Trial = 'Trial'
+}
+
+export type QueryInput = {
+  riderName?: InputMaybe<Scalars['String']>;
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['String']>;
@@ -202,6 +221,7 @@ export type Query_Root = {
   __typename?: 'query_root';
   /** fetch data from the table: "events" */
   events: Array<Events>;
+  memberships?: Maybe<Array<Maybe<Membership>>>;
   /** fetch data from the table: "riders" */
   riders: Array<Riders>;
   /** fetch data from the table: "rides" */
@@ -217,6 +237,11 @@ export type Query_RootEventsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Events_Order_By>>;
   where?: InputMaybe<Events_Bool_Exp>;
+};
+
+
+export type Query_RootMembershipsArgs = {
+  where?: InputMaybe<QueryInput>;
 };
 
 
@@ -553,6 +578,13 @@ export type FindEventQueryVariables = Exact<{
 
 export type FindEventQuery = { __typename?: 'query_root', events: Array<{ __typename?: 'events', name?: string | null, riders: Array<{ __typename?: 'rides', rider?: { __typename?: 'riders', riderName?: string | null } | null }> }> };
 
+export type FindMembershipQueryVariables = Exact<{
+  riderName?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type FindMembershipQuery = { __typename?: 'query_root', memberships?: Array<{ __typename?: 'Membership', riderName?: string | null, type?: MembershipType | null, id?: string | null } | null> | null };
+
 
 export const FindEventDocument = `
     query findEvent($eventId: Int) {
@@ -576,5 +608,26 @@ export const useFindEventQuery = <
     useQuery<FindEventQuery, TError, TData>(
       variables === undefined ? ['findEvent'] : ['findEvent', variables],
       fetcher<FindEventQuery, FindEventQueryVariables>(FindEventDocument, variables),
+      options
+    );
+export const FindMembershipDocument = `
+    query findMembership($riderName: String) {
+  memberships(where: {riderName: $riderName}) {
+    riderName
+    type
+    id
+  }
+}
+    `;
+export const useFindMembershipQuery = <
+      TData = FindMembershipQuery,
+      TError = unknown
+    >(
+      variables?: FindMembershipQueryVariables,
+      options?: UseQueryOptions<FindMembershipQuery, TError, TData>
+    ) =>
+    useQuery<FindMembershipQuery, TError, TData>(
+      variables === undefined ? ['findMembership'] : ['findMembership', variables],
+      fetcher<FindMembershipQuery, FindMembershipQueryVariables>(FindMembershipDocument, variables),
       options
     );

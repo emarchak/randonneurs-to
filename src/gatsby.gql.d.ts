@@ -3921,6 +3921,8 @@ export type Db = {
   __typename?: 'db';
   /** fetch data from the table: "events" */
   events: Array<Db_Events>;
+  getMembership?: Maybe<Db_Membership>;
+  getMemberships?: Maybe<Array<Maybe<Db_Membership>>>;
   /** fetch data from the table: "riders" */
   riders: Array<Db_Riders>;
   /** fetch data from the table: "rides" */
@@ -3936,6 +3938,11 @@ export type DbEventsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Db_Events_Order_By>>;
   where?: InputMaybe<Db_Events_Bool_Exp>;
+};
+
+
+export type DbGetMembershipArgs = {
+  fullName: Scalars['String'];
 };
 
 
@@ -3965,19 +3972,6 @@ export type DbRoutesArgs = {
   where?: InputMaybe<Db_Routes_Bool_Exp>;
 };
 
-/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
-export type Db_Boolean_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['Boolean']>;
-  _gt?: InputMaybe<Scalars['Boolean']>;
-  _gte?: InputMaybe<Scalars['Boolean']>;
-  _in?: InputMaybe<Array<Scalars['Boolean']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['Boolean']>;
-  _lte?: InputMaybe<Scalars['Boolean']>;
-  _neq?: InputMaybe<Scalars['Boolean']>;
-  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
-};
-
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Db_Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']>;
@@ -3990,6 +3984,21 @@ export type Db_Int_Comparison_Exp = {
   _neq?: InputMaybe<Scalars['Int']>;
   _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
+
+export type Db_Membership = {
+  __typename?: 'db_Membership';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  fullName?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  membership?: Maybe<Db_MembershipType>;
+};
+
+export enum Db_MembershipType {
+  Family = 'Family',
+  Individual = 'Individual',
+  Trial = 'Trial'
+}
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type Db_String_Comparison_Exp = {
@@ -4321,7 +4330,6 @@ export type Db_Rides_Variance_Order_By = {
 /** columns and relationships of "routes" */
 export type Db_Routes = {
   __typename?: 'db_routes';
-  active?: Maybe<Scalars['Boolean']>;
   brevetDistance?: Maybe<Scalars['Int']>;
   chapter?: Maybe<Scalars['String']>;
   cuesheet?: Maybe<Scalars['String']>;
@@ -4336,7 +4344,6 @@ export type Db_Routes_Bool_Exp = {
   _and?: InputMaybe<Array<Db_Routes_Bool_Exp>>;
   _not?: InputMaybe<Db_Routes_Bool_Exp>;
   _or?: InputMaybe<Array<Db_Routes_Bool_Exp>>;
-  active?: InputMaybe<Db_Boolean_Comparison_Exp>;
   brevetDistance?: InputMaybe<Db_Int_Comparison_Exp>;
   chapter?: InputMaybe<Db_String_Comparison_Exp>;
   cuesheet?: InputMaybe<Db_String_Comparison_Exp>;
@@ -4348,7 +4355,6 @@ export type Db_Routes_Bool_Exp = {
 
 /** Ordering options when selecting data from "routes". */
 export type Db_Routes_Order_By = {
-  active?: InputMaybe<Db_Order_By>;
   brevetDistance?: InputMaybe<Db_Order_By>;
   chapter?: InputMaybe<Db_Order_By>;
   cuesheet?: InputMaybe<Db_Order_By>;
@@ -4360,8 +4366,6 @@ export type Db_Routes_Order_By = {
 
 /** select columns of table "routes" */
 export enum Db_Routes_Select_Column {
-  /** column name */
-  Active = 'active',
   /** column name */
   BrevetDistance = 'brevetDistance',
   /** column name */
@@ -5142,17 +5146,12 @@ export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'e
 export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_3_Query = { __typename?: 'Query', allRider: { __typename?: 'riderConnection', nodes: Array<{ __typename?: 'rider', id: string, membership?: Membership | null, fullName?: string | null }> } };
+export type Unnamed_3_Query = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null, name?: string | null, id?: number | null, distance?: number | null, chapter?: string | null }> } };
 
 export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_4_Query = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null, name?: string | null, id?: number | null, distance?: number | null, chapter?: string | null }> } };
-
-export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_5_Query = { __typename?: 'Query', allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, id: string, context?: { __typename?: 'SitePageContext', pageInfo?: { __typename?: 'PageInfo', title?: string | null } | null } | null }> } };
+export type Unnamed_4_Query = { __typename?: 'Query', allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, id: string, context?: { __typename?: 'SitePageContext', pageInfo?: { __typename?: 'PageInfo', title?: string | null } | null } | null }> } };
 
 export type SeasonPageQueryVariables = Exact<{
   season?: InputMaybe<Scalars['String']>;
@@ -5168,10 +5167,15 @@ export type EventPageQueryVariables = Exact<{
 
 export type EventPageQuery = { __typename?: 'Query', event?: { __typename?: 'event', chapter?: Chapter | null, date?: any | null, distance?: number | null, eventType?: EventType | null, id: string, route?: string | null, rwgpsId?: string | null, rwgpsUrl?: string | null, scheduleId?: string | null, season?: string | null, startLocation?: string | null } | null };
 
+export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_5_Query = { __typename?: 'Query', allMail: { __typename?: 'mailConnection', nodes: Array<{ __typename?: 'mail', id: string, name?: string | null, teaser?: string | null, subject?: string | null }> }, allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, context?: { __typename?: 'SitePageContext', id?: string | null } | null }> }, allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
+
 export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_6_Query = { __typename?: 'Query', allMail: { __typename?: 'mailConnection', nodes: Array<{ __typename?: 'mail', id: string, name?: string | null, teaser?: string | null, subject?: string | null }> }, allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, context?: { __typename?: 'SitePageContext', id?: string | null } | null }> }, allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
+export type Unnamed_6_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
 
 export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5187,11 +5191,6 @@ export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Unnamed_9_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
-
-export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_10_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
 
 export type NewsletterQueryQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
@@ -5271,15 +5270,6 @@ declare module '*/useEvents.ts' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const EventData: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/useRiders.ts' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
 
   export default defaultDocument;
 }
@@ -5538,7 +5528,6 @@ export const EventData = gql`
   }
 }
     `;
-
 
 
 export const SeasonPage = gql`
