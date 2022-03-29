@@ -5,7 +5,7 @@ import { useRegistrationForm } from './useRegistrationForm'
 import * as Mail from 'src/data/mail'
 import * as Slack from 'src/hooks/useSlack'
 import * as Sheets from 'src/hooks/useSheets'
-import * as Events from 'src/data/events'
+import * as Riders from 'src/data/riders'
 
 const formName = 'registration'
 const fieldLabels = {
@@ -26,7 +26,7 @@ const formData = {
 }
 
 describe('useRegistrationForm', () => {
-  const registerRiderSpy = jest.spyOn(Events, 'registerRider')
+  const registerRiderSpy = jest.spyOn(Riders, 'registerRider')
 
   const sendSlackMsgSpy = jest.fn().mockName('sendSlackMsg')
   jest.spyOn(Slack, 'useSlack').mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })

@@ -1,5 +1,4 @@
 export { useEvents } from './useEvents'
 export { useEvent } from './useEvent'
-export { registerRider } from './api/registerRider'
 export type { Chapter, EventType, Event as Brevet, Event } from './useEvents'
 export { mockBrevet } from './mock'
