@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Erin Marchak <erin@emarchak.com>",
   "dependencies": {
-    "@babel/core": "^7.0.0-0",
+    "@babel/core": "^7.17.9",
     "@babel/preset-typescript": "^7.16.7",
     "@bugsnag/core": "^7.0.0",
     "@bugsnag/js": "^7.16.1",
