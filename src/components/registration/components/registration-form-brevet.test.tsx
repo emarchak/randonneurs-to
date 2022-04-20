@@ -3,27 +3,13 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import MockDate from 'mockdate'
 import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
-import * as useRiders from 'src/data/riders'
 import * as useMail from 'src/data/mail'
 import * as Events from 'src/data/events'
 import * as useSlack from 'src/hooks/useSlack'
 
-jest.mock('src/data/riders', () => ({
-    __esModule: true,
-    useRiders: jest.fn().mockReturnValue({
-        checkMembership: jest.fn().mockImplementation((fullName) => ({
-            fullName,
-            city: 'Toronto',
-            country: 'Canada',
-            seasons: [2021],
-            membership: 'Individual',
-        }))
-    })
-}))
-
 describe('<RegistrationForm>', () => {
     const useEventsMock = jest.spyOn(Events, 'useEvents')
-
+    const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
     beforeEach(() => {
         MockDate.set(new Date('Wed August 4 2021 09:00:00 EDT'))
         useEventsMock.mockReturnValue({
@@ -45,6 +31,7 @@ describe('<RegistrationForm>', () => {
     })
 
     afterEach(() => {
+        fetchSpy.mockClear()
         useEventsMock.mockClear()
     })
 
@@ -152,7 +139,7 @@ describe('<RegistrationForm>', () => {
                         name: 'Foo Bar',
                         email: 'foo@bar.com',
                         gender: 'F',
-                        membership: 'Individual',
+                        membership: 'Individual Membership',
                         route: 'Rouge Ramble 60',
                         eventId: '123',
                         rideType: 'populaire',
@@ -174,9 +161,8 @@ describe('<RegistrationForm>', () => {
         })
     })
 
-    it('shows an error when unable to submit', async () => {
-        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-        fetchSpy.mockRejectedValue({ ok: false })
+    it.skip('shows an error when unable to submit', async () => {
+        fetchSpy.mockImplementation(async () => {throw new Error()})
 
         const mount = render(<RegistrationFormBrevet />)
         fireEvent.change(mount.getByLabelText(/name/i), {
@@ -216,28 +202,5 @@ describe('<RegistrationForm>', () => {
 
         expect(mount.queryByLabelText(/Rouge Ramble 60/i)).toBeNull()
         expect(mount.getByRole('textbox', { name: 'Starting location' })).not.toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
-    })
-
-    it('warns riders if they are not a member', () => {
-        const checkMembershipMock = jest.fn()
-            .mockReturnValueOnce(null)
-            .mockReturnValueOnce({ membership: 'Trial' })
-        const useCheckRiderMembershipSpy = jest.spyOn(useRiders, 'useRiders')
-        useCheckRiderMembershipSpy.mockReturnValue({ checkMembership: checkMembershipMock })
-
-        const mount = render(<RegistrationFormBrevet />)
-
-        fireEvent.blur(mount.getByLabelText(/name/i),
-            { target: { value: 'Foo Bar' } }
-        )
-        expect(checkMembershipMock).toHaveBeenCalledTimes(1)
-        expect(checkMembershipMock).toHaveBeenCalledWith({ 'fullName': 'Foo Bar' })
-        expect(mount.getByText(/We can't find your name/)).toBeTruthy()
-
-        fireEvent.blur(mount.getByLabelText(/name/i))
-        expect(checkMembershipMock).toHaveBeenCalledTimes(2)
-        expect(mount.queryByText(/We can't find your name/)).toBeFalsy()
-
-        useCheckRiderMembershipSpy.mockRestore()
     })
 })

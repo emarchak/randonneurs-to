@@ -5,13 +5,14 @@ import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form
 import { Callout } from 'src/components/callout'
 import { SelectPermanents } from './select-permanents'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
-import { useRiders, Rider } from 'src/data/riders'
-import { MissingMembership } from './missing-membership'
+import { Rider } from 'src/data/riders'
 import { Route } from 'src/data/routes'
 import { Link } from 'src/components/Link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { validate, RequiredFields } from 'src/components/form/utils'
 import * as styles from 'src/components/styles/registration.module.scss'
+import { NameField } from 'src/components/form/components/NameField'
+import { MembershipType } from 'src/graphql.gql'
 const formName = 'registration-permanent'
 interface FormData {
     name: string
@@ -68,18 +69,12 @@ export const RegistrationFormPermanent = () => {
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
     const { onSubmit, loading } = useRegistrationForm({ formName, fieldLabels })
-    const { checkMembership } = useRiders()
     const { allowedStartTimes } = useAllowedStartTimes()
 
     const isSubmitted = formState === 'submitted'
     const isDirty = formState === 'dirty'
     const hasError = Boolean(formErrors.length)
 
-    const isMissingMembership = formData.membership === 'missing'
-
-    const NameHelp = isMissingMembership
-        ? <MissingMembership />
-        : 'Must match what you used to register with the OCA'
 
     const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime)
 
@@ -114,10 +109,8 @@ export const RegistrationFormPermanent = () => {
         })
     }
 
-    const handleNameBlur = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { value = '' } = evt.currentTarget
-        const riderData = checkMembership({ fullName: value })
-        setFormData({ ...formData, membership: riderData?.membership || 'missing' })
+    const handleNameChange = (name: string, membership: MembershipType) => {
+        setFormData({ ...formData, name, membership })
     }
 
     const handleSubmit = async evt => {
@@ -140,7 +133,7 @@ export const RegistrationFormPermanent = () => {
     return (
         <Form name={formName} className={styles.registrationForm}>
             <ContentWrapper>
-                <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={NameHelp} />
+                <NameField label={fieldLabels['name']} value={formData.name} onChange={handleNameChange} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
                 <SelectPermanents onChange={handlePermanentChange} />
                 <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} />

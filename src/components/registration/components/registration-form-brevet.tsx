@@ -6,11 +6,11 @@ import { SelectBrevets } from './select-brevets'
 import * as styles from 'src/components/styles/registration.module.scss'
 import { Aside, Callout } from 'src/components/callout'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
-import { useRiders, Rider } from 'src/data/riders'
-import { MissingMembership } from './missing-membership'
 import { Link } from 'src/components/Link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, RequiredFields, validate } from 'src/components/form/utils'
+import { NameField } from '../../form/components/NameField'
+import { MembershipType } from 'src/graphql.gql'
 
 const formName = 'registration'
 
@@ -18,7 +18,7 @@ interface FormData {
     name: string
     email: string
     gender: '' | 'M' | 'F' | 'X'
-    membership: Rider['membership'] | 'missing' | ''
+    membership: MembershipType | 'missing' | ''
     route: Brevet['route']
     eventId: Brevet['scheduleId']
     rideType: Brevet['eventType'] | ''
@@ -75,26 +75,17 @@ const requiredFields: RequiredFields<FormData> = [
     'roConsent'
 ]
 
-const NameHelp = ({isMissingMembership}: {isMissingMembership: boolean}) => (
-    isMissingMembership
-        ? <MissingMembership />
-        : <>Must match what you used to register with the OCA</>
-)
-
 export const RegistrationFormBrevet = () => {
     const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
     const { onSubmit, loading } = useRegistrationForm({ formName, fieldLabels })
-    const { checkMembership } = useRiders()
     const { allowedStartTimes } = useAllowedStartTimes()
 
     const isSubmitted = formState === 'submitted'
     const isDirty = formState === 'dirty'
     const hasError = Boolean(formErrors.length)
-
-    const isMissingMembership = formData.membership === 'missing'
 
     const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime || null)
 
@@ -129,10 +120,8 @@ export const RegistrationFormBrevet = () => {
         })
     }
 
-    const handleNameBlur = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { value = '' } = evt.currentTarget
-        const riderData = checkMembership({ fullName: value })
-        setFormData({ ...formData, membership: riderData?.membership || 'missing' })
+    const handleNameChange = (name: string, membership: MembershipType) => {
+        setFormData({ ...formData, name, membership })
     }
 
     const handleSubmit = async evt => {
@@ -156,7 +145,7 @@ export const RegistrationFormBrevet = () => {
     return (
         <Form name={formName} className={styles.registrationForm}>
             <ContentWrapper>
-                <InputField label={fieldLabels['name']} name='name' value={formData.name} onChange={handleInputChange} onBlur={handleNameBlur} help={<NameHelp isMissingMembership={isMissingMembership}/>} />
+                <NameField label={fieldLabels['name']} value={formData.name} onChange={handleNameChange} />
                 <InputField label={fieldLabels['email']} name='email' type='email' value={formData.email} onChange={handleInputChange} />
                 <Aside>
                     <p>You'll be given a brevet card at the start of each ride. Submit your brevet card and recorded activity (strava, ridewgps, garmin, etc.) to your Chapter VP when you're done.</p>

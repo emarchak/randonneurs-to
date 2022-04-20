@@ -1,8 +1,7 @@
-import React from 'react'
 import { useQuery } from 'react-query'
 import { request } from "graphql-request"
-import findMembership from './api/findMembership.gql'
-import { FindMembershipQuery } from 'src/graphql.gql'
+import getMemberships from './api/getMemberships.gql'
+import { GetMembershipsQuery } from 'src/graphql.gql'
 
 type MemberType = 'Individual' | 'Family' | 'Trial'
 export type Rider = {
@@ -14,28 +13,19 @@ export type Rider = {
   seasons: Number[]
 }
 
-const normalize = (str: String): String => str.toLowerCase().replace(/\s|-|'|’|(\(.*\))/g, '')
+const normalize = str => str.toLowerCase().replace(/\s|-|'|’|(\(.*\))/g, '')
 
 export const useRiders = () => {
-  const checkMembership = ({ fullName }: { fullName: string }) => {
-    const riderName = normalize(fullName)
-    const { data } = useQuery(['findMembership', riderName], async (): Promise<FindMembershipQuery | null> => {
-      const query = await request(
-        'https://randonneurs-to.hasura.app/v1/graphql',
-        findMembership,
-        { riderName }
-      )
-      return query
-    })
+  const { data, isLoading } = useQuery(['findMembership'], async (): Promise<GetMembershipsQuery | null> => {
+    const query = await request(
+      'https://randonneurs-to.hasura.app/v1/graphql',
+      getMemberships,
+    )
+    return query
+  })
 
-    console.log(data)
-    if (data?.memberships) {
-      return data?.memberships?.pop()
-    }
-
-    return undefined
-  }
-
-
-  return ({ checkMembership })
+  return ({
+    data,
+    isLoading,
+  })
 }

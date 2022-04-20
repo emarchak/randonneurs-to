@@ -1,0 +1,7 @@
+query getMembership($riderName: String!) {
+  memberships(where: {riderName: $riderName}) {
+    riderName
+    type
+    id
+  }
+}

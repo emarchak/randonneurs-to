@@ -7,6 +7,11 @@ declare module '*.scss' {
   export = content
 }
 
+declare module '*.gql' {
+  const content: string
+  export = content
+}
+
 declare namespace NodeJS {
   export interface Global {
     fetch: any
