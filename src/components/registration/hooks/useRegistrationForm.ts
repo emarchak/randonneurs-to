@@ -4,7 +4,8 @@ import { formatSlackMessage } from 'src/components/form/utils'
 import { useMail } from 'src/data/mail'
 import { useSlack } from 'src/hooks/useSlack'
 import { useSheets } from 'src/hooks/useSheets'
-import { registerRider, Brevet } from 'src/data/events'
+import { Brevet } from 'src/data/events'
+import { registerRider } from 'src/data/riders'
 import { getDateShort, getDateTimeLong, getTime, trackEvent } from 'src/utils'
 
 type useRegistrationFormParams = {

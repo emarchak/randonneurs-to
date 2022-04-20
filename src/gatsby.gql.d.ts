@@ -2606,14 +2606,10 @@ export type QueryMailArgs = {
 
 export type QueryRiderArgs = {
   children?: InputMaybe<NodeFilterListInput>;
-  city?: InputMaybe<StringQueryOperatorInput>;
-  country?: InputMaybe<StringQueryOperatorInput>;
-  fullName?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
   membership?: InputMaybe<MembershipQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
-  seasons?: InputMaybe<IntQueryOperatorInput>;
 };
 
 
@@ -3921,6 +3917,8 @@ export type Db = {
   __typename?: 'db';
   /** fetch data from the table: "events" */
   events: Array<Db_Events>;
+  getMembership?: Maybe<Db_Membership>;
+  getMemberships?: Maybe<Array<Maybe<Db_Membership>>>;
   /** fetch data from the table: "riders" */
   riders: Array<Db_Riders>;
   /** fetch data from the table: "rides" */
@@ -3936,6 +3934,11 @@ export type DbEventsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Db_Events_Order_By>>;
   where?: InputMaybe<Db_Events_Bool_Exp>;
+};
+
+
+export type DbGetMembershipArgs = {
+  fullName: Scalars['String'];
 };
 
 
@@ -3965,19 +3968,6 @@ export type DbRoutesArgs = {
   where?: InputMaybe<Db_Routes_Bool_Exp>;
 };
 
-/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
-export type Db_Boolean_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['Boolean']>;
-  _gt?: InputMaybe<Scalars['Boolean']>;
-  _gte?: InputMaybe<Scalars['Boolean']>;
-  _in?: InputMaybe<Array<Scalars['Boolean']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['Boolean']>;
-  _lte?: InputMaybe<Scalars['Boolean']>;
-  _neq?: InputMaybe<Scalars['Boolean']>;
-  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
-};
-
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Db_Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']>;
@@ -3990,6 +3980,21 @@ export type Db_Int_Comparison_Exp = {
   _neq?: InputMaybe<Scalars['Int']>;
   _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
+
+export type Db_Membership = {
+  __typename?: 'db_Membership';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  fullName?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  membership?: Maybe<Db_MembershipType>;
+};
+
+export enum Db_MembershipType {
+  Family = 'Family',
+  Individual = 'Individual',
+  Trial = 'Trial'
+}
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type Db_String_Comparison_Exp = {
@@ -4321,7 +4326,6 @@ export type Db_Rides_Variance_Order_By = {
 /** columns and relationships of "routes" */
 export type Db_Routes = {
   __typename?: 'db_routes';
-  active?: Maybe<Scalars['Boolean']>;
   brevetDistance?: Maybe<Scalars['Int']>;
   chapter?: Maybe<Scalars['String']>;
   cuesheet?: Maybe<Scalars['String']>;
@@ -4336,7 +4340,6 @@ export type Db_Routes_Bool_Exp = {
   _and?: InputMaybe<Array<Db_Routes_Bool_Exp>>;
   _not?: InputMaybe<Db_Routes_Bool_Exp>;
   _or?: InputMaybe<Array<Db_Routes_Bool_Exp>>;
-  active?: InputMaybe<Db_Boolean_Comparison_Exp>;
   brevetDistance?: InputMaybe<Db_Int_Comparison_Exp>;
   chapter?: InputMaybe<Db_String_Comparison_Exp>;
   cuesheet?: InputMaybe<Db_String_Comparison_Exp>;
@@ -4348,7 +4351,6 @@ export type Db_Routes_Bool_Exp = {
 
 /** Ordering options when selecting data from "routes". */
 export type Db_Routes_Order_By = {
-  active?: InputMaybe<Db_Order_By>;
   brevetDistance?: InputMaybe<Db_Order_By>;
   chapter?: InputMaybe<Db_Order_By>;
   cuesheet?: InputMaybe<Db_Order_By>;
@@ -4360,8 +4362,6 @@ export type Db_Routes_Order_By = {
 
 /** select columns of table "routes" */
 export enum Db_Routes_Select_Column {
-  /** column name */
-  Active = 'active',
   /** column name */
   BrevetDistance = 'brevetDistance',
   /** column name */
@@ -4873,14 +4873,10 @@ export type MailSortInput = {
 export type Rider = Node & {
   __typename?: 'rider';
   children: Array<Node>;
-  city?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  fullName?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   internal: Internal;
   membership?: Maybe<Membership>;
   parent?: Maybe<Node>;
-  seasons?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
 export type RiderConnection = {
@@ -4970,9 +4966,6 @@ export enum RiderFieldsEnum {
   ChildrenParentInternalType = 'children___parent___internal___type',
   ChildrenParentParentChildren = 'children___parent___parent___children',
   ChildrenParentParentId = 'children___parent___parent___id',
-  City = 'city',
-  Country = 'country',
-  FullName = 'fullName',
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
@@ -5020,20 +5013,15 @@ export enum RiderFieldsEnum {
   ParentParentInternalOwner = 'parent___parent___internal___owner',
   ParentParentInternalType = 'parent___parent___internal___type',
   ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  Seasons = 'seasons'
+  ParentParentParentId = 'parent___parent___parent___id'
 }
 
 export type RiderFilterInput = {
   children?: InputMaybe<NodeFilterListInput>;
-  city?: InputMaybe<StringQueryOperatorInput>;
-  country?: InputMaybe<StringQueryOperatorInput>;
-  fullName?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
   membership?: InputMaybe<MembershipQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
-  seasons?: InputMaybe<IntQueryOperatorInput>;
 };
 
 export type RiderGroupConnection = {
@@ -5082,515 +5070,3 @@ export type RiderSortInput = {
   fields?: InputMaybe<Array<InputMaybe<RiderFieldsEnum>>>;
   order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
 };
-
-export type GatsbyImageSharpFixedFragment = { __typename?: 'ImageSharpFixed', base64?: string | null, width: number, height: number, src: string, srcSet: string };
-
-export type GatsbyImageSharpFixed_TracedSvgFragment = { __typename?: 'ImageSharpFixed', tracedSVG?: string | null, width: number, height: number, src: string, srcSet: string };
-
-export type GatsbyImageSharpFixed_WithWebpFragment = { __typename?: 'ImageSharpFixed', base64?: string | null, width: number, height: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null };
-
-export type GatsbyImageSharpFixed_WithWebp_TracedSvgFragment = { __typename?: 'ImageSharpFixed', tracedSVG?: string | null, width: number, height: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null };
-
-export type GatsbyImageSharpFixed_NoBase64Fragment = { __typename?: 'ImageSharpFixed', width: number, height: number, src: string, srcSet: string };
-
-export type GatsbyImageSharpFixed_WithWebp_NoBase64Fragment = { __typename?: 'ImageSharpFixed', width: number, height: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null };
-
-export type GatsbyImageSharpFluidFragment = { __typename?: 'ImageSharpFluid', base64?: string | null, aspectRatio: number, src: string, srcSet: string, sizes: string };
-
-export type GatsbyImageSharpFluidLimitPresentationSizeFragment = { __typename?: 'ImageSharpFluid', maxHeight: number, maxWidth: number };
-
-export type GatsbyImageSharpFluid_TracedSvgFragment = { __typename?: 'ImageSharpFluid', tracedSVG?: string | null, aspectRatio: number, src: string, srcSet: string, sizes: string };
-
-export type GatsbyImageSharpFluid_WithWebpFragment = { __typename?: 'ImageSharpFluid', base64?: string | null, aspectRatio: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null, sizes: string };
-
-export type GatsbyImageSharpFluid_WithWebp_TracedSvgFragment = { __typename?: 'ImageSharpFluid', tracedSVG?: string | null, aspectRatio: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null, sizes: string };
-
-export type GatsbyImageSharpFluid_NoBase64Fragment = { __typename?: 'ImageSharpFluid', aspectRatio: number, src: string, srcSet: string, sizes: string };
-
-export type GatsbyImageSharpFluid_WithWebp_NoBase64Fragment = { __typename?: 'ImageSharpFluid', aspectRatio: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null, sizes: string };
-
-export type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PagesQueryQuery = { __typename?: 'Query', allSiteFunction: { __typename?: 'SiteFunctionConnection', nodes: Array<{ __typename?: 'SiteFunction', functionRoute: string }> }, allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string }> } };
-
-export type GalleryQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GalleryQueryQuery = { __typename?: 'Query', allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
-
-export type SiteTitleQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SiteTitleQueryQuery = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', title?: string | null } | null } | null };
-
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_1_Query = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', title?: string | null, description?: string | null, siteURL?: string | null } | null } | null };
-
-export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_2_Query = { __typename?: 'Query', allFeedblog: { __typename?: 'FeedblogConnection', nodes: Array<{ __typename?: 'Feedblog', id: string, title?: string | null, link?: string | null, content?: { __typename?: 'FeedblogContent', encodedSnippet?: string | null } | null }> } };
-
-export type EventDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, rwgpsUrl?: string | null, startLocation?: string | null, date?: any | null, scheduleId?: string | null, path?: string | null }> } };
-
-export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_3_Query = { __typename?: 'Query', allRider: { __typename?: 'riderConnection', nodes: Array<{ __typename?: 'rider', id: string, membership?: Membership | null, fullName?: string | null }> } };
-
-export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_4_Query = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null, name?: string | null, id?: number | null, distance?: number | null, chapter?: string | null }> } };
-
-export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_5_Query = { __typename?: 'Query', allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, id: string, context?: { __typename?: 'SitePageContext', pageInfo?: { __typename?: 'PageInfo', title?: string | null } | null } | null }> } };
-
-export type SeasonPageQueryVariables = Exact<{
-  season?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type SeasonPageQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, path?: string | null }> } };
-
-export type EventPageQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type EventPageQuery = { __typename?: 'Query', event?: { __typename?: 'event', chapter?: Chapter | null, date?: any | null, distance?: number | null, eventType?: EventType | null, id: string, route?: string | null, rwgpsId?: string | null, rwgpsUrl?: string | null, scheduleId?: string | null, season?: string | null, startLocation?: string | null } | null };
-
-export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_6_Query = { __typename?: 'Query', allMail: { __typename?: 'mailConnection', nodes: Array<{ __typename?: 'mail', id: string, name?: string | null, teaser?: string | null, subject?: string | null }> }, allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, context?: { __typename?: 'SitePageContext', id?: string | null } | null }> }, allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
-
-export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_7_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
-
-export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_8_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
-
-export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_9_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
-
-export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_10_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
-
-export type NewsletterQueryQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type NewsletterQueryQuery = { __typename?: 'Query', mail?: { __typename?: 'mail', categories?: Array<string | null> | null, content?: string | null, id: string, name?: string | null, sentAt?: any | null, subject?: string | null, teaser?: string | null } | null };
-
-
-declare module '*/fragments.js' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const GatsbyImageSharpFixed: DocumentNode;
-export const GatsbyImageSharpFixed_tracedSVG: DocumentNode;
-export const GatsbyImageSharpFixed_withWebp: DocumentNode;
-export const GatsbyImageSharpFixed_withWebp_tracedSVG: DocumentNode;
-export const GatsbyImageSharpFixed_noBase64: DocumentNode;
-export const GatsbyImageSharpFixed_withWebp_noBase64: DocumentNode;
-export const GatsbyImageSharpFluid: DocumentNode;
-export const GatsbyImageSharpFluidLimitPresentationSize: DocumentNode;
-export const GatsbyImageSharpFluid_tracedSVG: DocumentNode;
-export const GatsbyImageSharpFluid_withWebp: DocumentNode;
-export const GatsbyImageSharpFluid_withWebp_tracedSVG: DocumentNode;
-export const GatsbyImageSharpFluid_noBase64: DocumentNode;
-export const GatsbyImageSharpFluid_withWebp_noBase64: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/raw_dev-404-page.js' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const PagesQuery: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/Gallery.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const GalleryQuery: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/layout.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const SiteTitleQuery: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/seo.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/useBlog.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/useEvents.ts' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const EventData: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/useRiders.ts' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/useRoutes.ts' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/index.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/{event.season}.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const SeasonPage: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/{event.route}-{event.date}.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const EventPage: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/trace-virtuelle.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/audax-a-distance.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/medals.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/Newsletter.tsx' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const NewsletterQuery: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-export const GatsbyImageSharpFixed = gql`
-    fragment GatsbyImageSharpFixed on ImageSharpFixed {
-  base64
-  width
-  height
-  src
-  srcSet
-}
-    `;
-export const GatsbyImageSharpFixed_TracedSvg = gql`
-    fragment GatsbyImageSharpFixed_tracedSVG on ImageSharpFixed {
-  tracedSVG
-  width
-  height
-  src
-  srcSet
-}
-    `;
-export const GatsbyImageSharpFixed_WithWebp = gql`
-    fragment GatsbyImageSharpFixed_withWebp on ImageSharpFixed {
-  base64
-  width
-  height
-  src
-  srcSet
-  srcWebp
-  srcSetWebp
-}
-    `;
-export const GatsbyImageSharpFixed_WithWebp_TracedSvg = gql`
-    fragment GatsbyImageSharpFixed_withWebp_tracedSVG on ImageSharpFixed {
-  tracedSVG
-  width
-  height
-  src
-  srcSet
-  srcWebp
-  srcSetWebp
-}
-    `;
-export const GatsbyImageSharpFixed_NoBase64 = gql`
-    fragment GatsbyImageSharpFixed_noBase64 on ImageSharpFixed {
-  width
-  height
-  src
-  srcSet
-}
-    `;
-export const GatsbyImageSharpFixed_WithWebp_NoBase64 = gql`
-    fragment GatsbyImageSharpFixed_withWebp_noBase64 on ImageSharpFixed {
-  width
-  height
-  src
-  srcSet
-  srcWebp
-  srcSetWebp
-}
-    `;
-export const GatsbyImageSharpFluid = gql`
-    fragment GatsbyImageSharpFluid on ImageSharpFluid {
-  base64
-  aspectRatio
-  src
-  srcSet
-  sizes
-}
-    `;
-export const GatsbyImageSharpFluidLimitPresentationSize = gql`
-    fragment GatsbyImageSharpFluidLimitPresentationSize on ImageSharpFluid {
-  maxHeight: presentationHeight
-  maxWidth: presentationWidth
-}
-    `;
-export const GatsbyImageSharpFluid_TracedSvg = gql`
-    fragment GatsbyImageSharpFluid_tracedSVG on ImageSharpFluid {
-  tracedSVG
-  aspectRatio
-  src
-  srcSet
-  sizes
-}
-    `;
-export const GatsbyImageSharpFluid_WithWebp = gql`
-    fragment GatsbyImageSharpFluid_withWebp on ImageSharpFluid {
-  base64
-  aspectRatio
-  src
-  srcSet
-  srcWebp
-  srcSetWebp
-  sizes
-}
-    `;
-export const GatsbyImageSharpFluid_WithWebp_TracedSvg = gql`
-    fragment GatsbyImageSharpFluid_withWebp_tracedSVG on ImageSharpFluid {
-  tracedSVG
-  aspectRatio
-  src
-  srcSet
-  srcWebp
-  srcSetWebp
-  sizes
-}
-    `;
-export const GatsbyImageSharpFluid_NoBase64 = gql`
-    fragment GatsbyImageSharpFluid_noBase64 on ImageSharpFluid {
-  aspectRatio
-  src
-  srcSet
-  sizes
-}
-    `;
-export const GatsbyImageSharpFluid_WithWebp_NoBase64 = gql`
-    fragment GatsbyImageSharpFluid_withWebp_noBase64 on ImageSharpFluid {
-  aspectRatio
-  src
-  srcSet
-  srcWebp
-  srcSetWebp
-  sizes
-}
-    `;
-export const PagesQuery = gql`
-    query PagesQuery {
-  allSiteFunction {
-    nodes {
-      functionRoute
-    }
-  }
-  allSitePage(filter: {path: {regex: "/^(?!/dev-404-page).+$/"}}) {
-    nodes {
-      path
-    }
-  }
-}
-    `;
-export const GalleryQuery = gql`
-    query GalleryQuery {
-  allFile(
-    filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
-    limit: 6
-    sort: {fields: birthTime, order: DESC}
-  ) {
-    nodes {
-      name
-      childImageSharp {
-        gatsbyImageData(aspectRatio: 1, height: 300, formats: JPG)
-      }
-    }
-  }
-}
-    `;
-export const SiteTitleQuery = gql`
-    query SiteTitleQuery {
-  site {
-    siteMetadata {
-      title
-    }
-  }
-}
-    `;
-
-
-export const EventData = gql`
-    query EventData {
-  allEvent {
-    nodes {
-      chapter
-      distance
-      eventType
-      id
-      organizer
-      route
-      rwgpsUrl
-      startLocation
-      date
-      scheduleId
-      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
-    }
-  }
-}
-    `;
-
-
-
-export const SeasonPage = gql`
-    query SeasonPage($season: String) {
-  allEvent(filter: {season: {eq: $season}, chapter: {eq: Toronto}}) {
-    nodes {
-      chapter
-      distance
-      eventType
-      id
-      organizer
-      route
-      startLocation
-      date
-      season
-      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
-    }
-  }
-}
-    `;
-export const EventPage = gql`
-    query EventPage($id: String) {
-  event(id: {eq: $id}) {
-    chapter
-    date
-    distance
-    eventType
-    id
-    route
-    rwgpsId
-    rwgpsUrl
-    scheduleId
-    season
-    startLocation
-  }
-}
-    `;
-
-
-
-
-
-export const NewsletterQuery = gql`
-    query NewsletterQuery($id: String) {
-  mail(id: {eq: $id}) {
-    categories
-    content
-    id
-    name
-    sentAt
-    subject
-    teaser
-  }
-}
-    `;

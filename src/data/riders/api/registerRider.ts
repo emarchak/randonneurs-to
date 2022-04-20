@@ -16,7 +16,6 @@ export const registerRider = async (params: registerRiderParams) => {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: JSON.stringify(params),
         })
-
         return response.ok
     }
     catch (err) {
