@@ -1,4 +1,12 @@
 export { registerRider } from './api/registerRider'
-export { useRiders } from './useRiders'
 export { useRider } from './useRider'
-export type { Rider } from './useRiders'
+
+type MemberType = 'Individual' | 'Family' | 'Trial'
+export type Rider = {
+  id: string,
+  city: string,
+  country: string,
+  fullName: string,
+  membership: MemberType,
+  seasons: Number[]
+}

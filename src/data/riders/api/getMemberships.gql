@@ -1,7 +1,0 @@
-query getMemberships {
-  memberships {
-    riderName
-    type
-    id
-  }
-}

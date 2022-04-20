@@ -3,7 +3,6 @@ import { request } from "graphql-request"
 import getMembership from './api/getMembership.gql'
 import { Query_Root } from 'src/graphql.gql.d'
 
-
 export const useRider = ({ riderName }: { riderName?: string }) => {
   const { data, isLoading } = useQuery(['findMembership', riderName], async (): Promise<Query_Root | null> => {
     if (!riderName) return null
