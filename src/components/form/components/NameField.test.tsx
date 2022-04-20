@@ -7,8 +7,6 @@ import { MembershipType } from 'src/graphql.gql'
 describe('<NameField>', () => {
   it('warns riders if they are not a member', () => {
     const useRiderSpy = jest.spyOn(useRider, 'useRider')
-      // .mockReturnValueOnce({ data: undefined, isLoading: false})
-      // .mockReturnValueOnce({ data: { riderName: 'Foo Bar', type: MembershipType.Trial }, isLoading: false })
 
     const onChangeSpy = jest.fn().mockName('onChange')
 

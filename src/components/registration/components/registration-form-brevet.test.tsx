@@ -161,32 +161,36 @@ describe('<RegistrationForm>', () => {
         })
     })
 
-    it.skip('shows an error when unable to submit', async () => {
+    it('shows an error when unable to submit', async () => {
         fetchSpy.mockImplementation(async () => {throw new Error()})
 
-        const mount = render(<RegistrationFormBrevet />)
-        fireEvent.change(mount.getByLabelText(/name/i), {
+        const {getByLabelText, getByText } = render(<RegistrationFormBrevet />)
+        fireEvent.change(getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
         })
 
-        fireEvent.change(mount.getByLabelText(/email/i), {
+        fireEvent.blur(getByLabelText(/name/i), {
+            target: { value: 'Foo Bar' }
+        })
+
+        fireEvent.change(getByLabelText(/email/i), {
             target: { value: 'foo@bar.com' },
         })
 
-        fireEvent.click(mount.getByLabelText(/Rouge Ramble 60/i))
+        fireEvent.click(getByLabelText(/Rouge Ramble 60/i))
 
-        fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
-        fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
+        fireEvent.click(getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
+        fireEvent.click(getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
 
-        fireEvent.change(mount.getByLabelText(/notes/i), {
+        fireEvent.change(getByLabelText(/notes/i), {
             target: { value: 'notes' },
         })
 
-        fireEvent.click(mount.getByText('Register'))
+        fireEvent.click(getByText('Register'))
 
         await waitFor(() => {
             expect(fetchSpy).toHaveBeenCalled()
-            expect(mount.getByText(/Server error! Try again later/)).toBeTruthy()
+            expect(getByText(/Server error! Try again later/)).toBeTruthy()
         })
 
         fetchSpy.mockClear()

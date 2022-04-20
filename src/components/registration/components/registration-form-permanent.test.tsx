@@ -176,13 +176,17 @@ describe('<RegistrationFormPermanent>', () => {
     })
   })
 
-  it.skip('shows an error when unable to submit', async () => {
+  it('shows an error when unable to submit', async () => {
     fetchSpy.mockImplementation(async () => {throw new Error('nope')})
 
     const mount = render(<RegistrationFormPermanent />)
     fireEvent.change(mount.getByLabelText(/name/i), {
       target: { value: 'Foo Bar' },
     })
+    fireEvent.blur(mount.getByLabelText(/name/i), {
+      target: { value: 'Foo Bar' }
+    })
+
 
     fireEvent.change(mount.getByLabelText(/email/i), {
       target: { value: 'foo@bar.com' },
@@ -213,7 +217,7 @@ describe('<RegistrationFormPermanent>', () => {
 
     await waitFor(async () => {
       expect(fetchSpy).toHaveBeenCalled()
-      // expect(mount.getByText(/Server error! Try again later/)).toBeTruthy()
+      expect(mount.getByText(/Server error! Try again later/)).toBeTruthy()
     })
   })
 
