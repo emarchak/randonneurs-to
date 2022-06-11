@@ -8,7 +8,7 @@
     "@babel/core": "^7.17.10",
     "@babel/preset-typescript": "^7.16.7",
     "@bugsnag/core": "^7.0.0",
-    "@bugsnag/js": "^7.16.1",
+    "@bugsnag/js": "^7.16.7",
     "@bugsnag/plugin-react": "^7.16.1",
     "@jagi/jest-transform-graphql": "^1.0.2",
     "@loadable/component": "^5.15.2",
