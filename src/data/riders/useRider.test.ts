@@ -14,6 +14,13 @@ describe('useRider()', () => {
     expect(result.current.data).toBeUndefined()
   })
 
+
+  it('returns nothing if no rider', () => {
+    const { result } = renderHook(() => useRider({}))
+
+    expect(result.current.data).toBeUndefined()
+  })
+
   it('ignores non-ascii characters', () => {
     const { result } = renderHook(() => useRider({ riderName: 'María (de la) Soledad' }))
 
