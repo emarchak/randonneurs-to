@@ -14,7 +14,8 @@ const weekdays = {
     'Sat': 6,
 }
 
-const isAllClub = (brevet: Brevet) => brevet.chapter.includes('Club')
+const isAllClub = (brevet: Brevet) => Boolean(brevet.chapter.includes('Club'))
+const isPunkydoodle = (brevet: Brevet) => brevet.scheduleId === 958
 
 function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
     const weekday = weekdays[day]
@@ -53,11 +54,12 @@ export const useAllowedStartTimes = () => {
                 return deadline
         }
     }
-    const isNotRegisterable = (brevet: Brevet) => {
+    const isNotRegisterable = (brevet: Brevet): boolean => {
         const cancelled = cancelledUntil()
         if (cancelled) {
             return brevet.date.valueOf() < cancelled.valueOf()
         }
+
         return isAllClub(brevet)
     }
 
@@ -65,6 +67,10 @@ export const useAllowedStartTimes = () => {
         const now = new Date(Date.now())
         const registrationDeadline = getBrevetRegistrationDeadline(brevet)
         const brevetCancelled = isNotRegisterable(brevet)
+
+        if (isPunkydoodle(brevet)) {
+            return false
+        }
 
         return brevetCancelled ? !brevetCancelled : now < registrationDeadline
     }
