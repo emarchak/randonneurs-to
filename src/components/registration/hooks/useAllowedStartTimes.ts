@@ -15,7 +15,6 @@ const weekdays = {
 }
 
 const isAllClub = (brevet: Brevet) => Boolean(brevet.chapter.includes('Club'))
-const isPunkydoodle = (brevet: Brevet) => brevet.scheduleId === 958
 
 function getWeekdayBefore(day: keyof typeof weekdays, date: Date) {
     const weekday = weekdays[day]
@@ -45,7 +44,7 @@ export const useAllowedStartTimes = () => {
                 huronDeadline.setUTCHours(24, 0, 0)
                 return huronDeadline
             case 'Toronto':
-                const torontoDeadline = getWeekdayBefore('Fri', brevet.date)
+                const torontoDeadline = addDays(brevet.date, -1)
                 torontoDeadline.setUTCHours(22, 0, 0)
                 return torontoDeadline
             default:
@@ -67,10 +66,6 @@ export const useAllowedStartTimes = () => {
         const now = new Date(Date.now())
         const registrationDeadline = getBrevetRegistrationDeadline(brevet)
         const brevetCancelled = isNotRegisterable(brevet)
-
-        if (isPunkydoodle(brevet)) {
-            return false
-        }
 
         return brevetCancelled ? !brevetCancelled : now < registrationDeadline
     }
