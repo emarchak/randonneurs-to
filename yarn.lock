@@ -1528,21 +1528,10 @@
   dependencies:
     "@bugsnag/core" "^7.16.7"
 
-"@bugsnag/core@^7.0.0":
-  version "7.16.1"
-  resolved "https://registry.yarnpkg.com/@bugsnag/core/-/core-7.16.1.tgz#0376b5c4dd7b44f57eb503775857d974e4b5afc9"
-  integrity sha512-zuBnL7B329VldItRqhXYrp1hjmjZnltJwNXMysi9WtY4t29WKk5LVwgWb1mPM9clJ0FoObZ7kvvQMUTKh3ezFQ==
-  dependencies:
-    "@bugsnag/cuid" "^3.0.0"
-    "@bugsnag/safe-json-stringify" "^6.0.0"
-    error-stack-parser "^2.0.3"
-    iserror "0.0.2"
-    stack-generator "^2.0.3"
-
-"@bugsnag/core@^7.16.7":
-  version "7.16.7"
-  resolved "https://registry.yarnpkg.com/@bugsnag/core/-/core-7.16.7.tgz#abcea13146678c0b243d1ca717d86ed97518962c"
-  integrity sha512-F6x/VNH4qb414TIH2sKbRdlf3IyBhFhAK3vmOADOpR4rpcYCXXNPtI8Ir3urna2Doa2GxdBNw1ZR96kCsgyHlg==
+"@bugsnag/core@^7.16.7", "@bugsnag/core@^7.17.0":
+  version "7.17.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/core/-/core-7.17.0.tgz#0422b87108c7807f6e334a573213126685b6df3d"
+  integrity sha512-qt3+Ub64tspbdb6wMiJZIOFyKGv7ZSGRa66GjBmW3Y9cTb42Y8cNx1/0hxY4cDhSbwfunGTqKCcjFRrRcTlfNA==
   dependencies:
     "@bugsnag/cuid" "^3.0.0"
     "@bugsnag/safe-json-stringify" "^6.0.0"
