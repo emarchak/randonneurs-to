@@ -35,7 +35,7 @@ export const handler = async (event) => {
     return {
       statusCode: response.status,
       headers: {
-        'Content-Disposition': `filename=brevetcard-${riderName}-${scheduleId}.pdf`,
+        'Content-Disposition': `filename=brevetcard-${scheduleId}.pdf`,
       },
       body: Buffer.from(memBuffer).toString('base64'),
       isBase64Encoded: true,
