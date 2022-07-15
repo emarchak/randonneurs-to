@@ -8,12 +8,12 @@ const localeOpts = {
   useGrouping: false
 }
 type buildCardArgs = {
-  riderName: string
+  riderNames: string[]
   scheduleId: number
   customStartTime?: string
 }
 
-export const buildCard = async ({ riderName, customStartTime, scheduleId }: buildCardArgs) => {
+export const buildCard = async ({ riderNames, customStartTime, scheduleId }: buildCardArgs) => {
   const event = await getEvent(scheduleId)
   const timeLimit = getTimeLimit(event.distance)
   const controls = await getControls({ event, customStartTime })
@@ -25,7 +25,7 @@ export const buildCard = async ({ riderName, customStartTime, scheduleId }: buil
     maxhours: timeLimit.h.toLocaleString('en-US', localeOpts),
     maxminutes: timeLimit.m.toLocaleString('en-US', localeOpts),
     emergetel: "vp@randonneurs.to",
-    riderlist: [{ fname: riderName }],
+    riderlist: riderNames.map(fname => { return { fname } }),
     controllist: controls,
   }
 

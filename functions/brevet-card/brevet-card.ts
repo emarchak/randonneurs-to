@@ -5,7 +5,10 @@ const cardEndpoint = 'https://www.randonneursontario.ca/brevetcard/cardtopdf.php
 
 export const handler = async (event) => {
   try {
-    const riderName = event.queryStringParameters.name || ''
+    const riderNameParam = event.queryStringParameters.name || ''
+    const riderNamesParam = event.queryStringParameters.names || ''
+    const riderNames = [riderNameParam, ...riderNamesParam.split(',')].filter(Boolean)
+
     const scheduleId = event.queryStringParameters.scheduleId
     const customStartTime = event.queryStringParameters.start || ''
 
@@ -13,7 +16,7 @@ export const handler = async (event) => {
       throw Error('Missing scheduleId')
     }
 
-    const body = await buildCard({ riderName, scheduleId, customStartTime })
+    const body = await buildCard({ riderNames, scheduleId, customStartTime })
 
     const response = await fetch(cardEndpoint, {
       method: 'POST',
