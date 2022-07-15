@@ -1,11 +1,11 @@
-require('isomorphic-unfetch');
-const { formEncode, buildCard} = require('./utils')
+require('isomorphic-unfetch')
+import { formEncode, buildCard } from './utils'
 
 const cardEndpoint = 'https://www.randonneursontario.ca/brevetcard/cardtopdf.php'
 
-const handler = async (event) => {
+export const handler = async (event) => {
   try {
-    const riderName = event.queryStringParameters.name || ''
+    const riderNames = JSON.parse(event.queryStringParameters.names || '[]').filter(Boolean)
     const scheduleId = event.queryStringParameters.scheduleId
     const customStartTime = event.queryStringParameters.start || ''
 
@@ -13,7 +13,11 @@ const handler = async (event) => {
       throw Error('Missing scheduleId')
     }
 
-    const body = await buildCard({riderName, scheduleId, customStartTime})
+    if (!(riderNames instanceof Array)) {
+      throw Error('Rider names must be a valid JSON array ["Bob", "Dave"]')
+    }
+
+    const body = await buildCard({ riderNames, scheduleId, customStartTime })
 
     const response = await fetch(cardEndpoint, {
       method: 'POST',
@@ -26,13 +30,13 @@ const handler = async (event) => {
     if (!response.ok) {
       return { statusCode: response.status, body: response.statusText }
     }
-    
+
     const memBuffer = await response.arrayBuffer()
 
-    return { 
+    return {
       statusCode: response.status,
       headers: {
-        'Content-Disposition': `filename=brevetcard-${riderName}-${scheduleId}.pdf`,
+        'Content-Disposition': `filename=brevetcard-${scheduleId}.pdf`,
       },
       body: Buffer.from(memBuffer).toString('base64'),
       isBase64Encoded: true,
@@ -41,5 +45,3 @@ const handler = async (event) => {
     return { statusCode: 500, body: error.toString() }
   }
 }
-
-module.exports = { handler }
