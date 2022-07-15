@@ -7,7 +7,7 @@ export const handler = async (event) => {
   try {
     const riderNameParam = event.queryStringParameters.name || ''
     const riderNamesParam = event.queryStringParameters.names || ''
-    const riderNames = [riderNameParam, ...riderNamesParam.split(',')].filter(Boolean)
+    const riderNames = [riderNameParam, ...JSON.parse(riderNamesParam)].filter(Boolean)
 
     const scheduleId = event.queryStringParameters.scheduleId
     const customStartTime = event.queryStringParameters.start || ''
