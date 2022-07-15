@@ -5,15 +5,16 @@ const cardEndpoint = 'https://www.randonneursontario.ca/brevetcard/cardtopdf.php
 
 export const handler = async (event) => {
   try {
-    const riderNameParam = event.queryStringParameters.name || ''
-    const riderNamesParam = event.queryStringParameters.names || ''
-    const riderNames = [riderNameParam, ...JSON.parse(riderNamesParam)].filter(Boolean)
-
+    const riderNames = JSON.parse(event.queryStringParameters.names || '[]').filter(Boolean)
     const scheduleId = event.queryStringParameters.scheduleId
     const customStartTime = event.queryStringParameters.start || ''
 
     if (!scheduleId) {
       throw Error('Missing scheduleId')
+    }
+
+    if (!(riderNames instanceof Array)) {
+      throw Error('Rider names must be a valid JSON array ["Bob", "Dave"]')
     }
 
     const body = await buildCard({ riderNames, scheduleId, customStartTime })
