@@ -12,6 +12,7 @@ import { Link, MapLink } from 'src/components/Link'
 import { EventPageQuery } from 'src/gatsby.gql'
 import { useEvent } from 'src/data/events'
 import { Loading } from 'src/components/form/components'
+import { CancelRideForm } from 'src/components/seasons/CancelRideForm'
 
 type EventProps = PageProps<EventPageQuery>
 
@@ -34,7 +35,8 @@ export const query = graphql`
 `
 
 const Event = ({ data: { event } }: EventProps) => {
-  const {isLoading, data } = useEvent(parseInt(event.scheduleId));
+  const scheduleId = parseInt(event.scheduleId)
+  const {isLoading, data } = useEvent(scheduleId);
 
   return (
   <Layout>
@@ -78,13 +80,19 @@ const Event = ({ data: { event } }: EventProps) => {
           </p>}
       </ContentChild>
       </ContentWrapper>
-      <ContentWrapper>
+      <ContentWrapper container>
+        <ContentChild>
         <h2>Who's riding</h2>
-        {isLoading && <Loading />}
-        {data && <ul>
-          {data.riders.length === 0 && <li>No riders registered</li>}
-          {data.riders.map(({rider}) => (<li>{rider.riderName}</li>))}
-        </ul>}
+          {isLoading && <Loading />}
+          {data && <ul>
+            {data.riders.length === 0 && <li>No riders registered</li>}
+            {data.riders.map(({rider}) => (<li>{rider.riderName}</li>))}
+            </ul>}
+        </ContentChild>
+        <ContentChild>
+          <h3>Cancel your ride?</h3>
+          <CancelRideForm scheduleId={scheduleId} />
+        </ContentChild>
       </ContentWrapper>
     <SeasonsCta />
   </Layout>
