@@ -91,7 +91,7 @@ const Event = ({ data: { event } }: EventProps) => {
         </ContentChild>
         <ContentChild>
           <h3>Cancel your ride?</h3>
-          <CancelRideForm scheduleId={scheduleId} />
+          <CancelRideForm scheduleId={scheduleId} event={ event } />
         </ContentChild>
       </ContentWrapper>
     <SeasonsCta />

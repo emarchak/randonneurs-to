@@ -1,8 +1,28 @@
+import { useQuery, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+
+function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
+  return async (): Promise<TData> => {
+    const res = await fetch("https://randonneurs-to.hasura.app/v1/graphql", {
+    method: "POST",
+      body: JSON.stringify({ query, variables }),
+    });
+
+    const json = await res.json();
+
+    if (json.errors) {
+      const { message } = json.errors[0];
+
+      throw new Error(message);
+    }
+
+    return json.data;
+  }
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -173,12 +193,14 @@ export type Mutation_Root = {
 /** mutation root */
 export type Mutation_RootInsert_RideArgs = {
   objects: Array<Ride_Insert_Input>;
+  on_conflict?: InputMaybe<Ride_On_Conflict>;
 };
 
 
 /** mutation root */
 export type Mutation_RootInsert_RiderArgs = {
   objects: Array<Rider_Insert_Input>;
+  on_conflict?: InputMaybe<Rider_On_Conflict>;
 };
 
 /** column ordering options */
@@ -254,7 +276,24 @@ export type Query_RootRoutesArgs = {
 /** input type for inserting array relation for remote table "ride" */
 export type Ride_Arr_Rel_Insert_Input = {
   data: Array<Ride_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Ride_On_Conflict>;
 };
+
+/** Boolean expression to filter rows from the table "ride". All fields are combined with a logical 'AND'. */
+export type Ride_Bool_Exp = {
+  _and?: InputMaybe<Array<Ride_Bool_Exp>>;
+  _not?: InputMaybe<Ride_Bool_Exp>;
+  _or?: InputMaybe<Array<Ride_Bool_Exp>>;
+};
+
+/** unique or primary key constraints on table "ride" */
+export enum Ride_Constraint {
+  /** unique or primary key constraint on columns "ride_timestamp", "ride_id" */
+  RidePkey = 'ride_pkey',
+  /** unique or primary key constraint on columns "ride_event", "ride_rider" */
+  RideUnique = 'ride_unique'
+}
 
 /** input type for inserting data into table "ride" */
 export type Ride_Insert_Input = {
@@ -270,6 +309,34 @@ export type Ride_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
 };
+
+/** on_conflict condition type for table "ride" */
+export type Ride_On_Conflict = {
+  constraint: Ride_Constraint;
+  update_columns?: Array<Ride_Update_Column>;
+  where?: InputMaybe<Ride_Bool_Exp>;
+};
+
+/** placeholder for update columns of table "ride" (current role has no relevant permissions) */
+export enum Ride_Update_Column {
+  /** placeholder (do not use) */
+  Placeholder = '_PLACEHOLDER'
+}
+
+/** Boolean expression to filter rows from the table "rider". All fields are combined with a logical 'AND'. */
+export type Rider_Bool_Exp = {
+  _and?: InputMaybe<Array<Rider_Bool_Exp>>;
+  _not?: InputMaybe<Rider_Bool_Exp>;
+  _or?: InputMaybe<Array<Rider_Bool_Exp>>;
+};
+
+/** unique or primary key constraints on table "rider" */
+export enum Rider_Constraint {
+  /** unique or primary key constraint on columns "rider_timestamp", "rider_id" */
+  RiderPkey = 'rider_pkey',
+  /** unique or primary key constraint on columns "rider_lastname", "rider_firstname" */
+  RiderRiderFirstnameRiderLastnameKey = 'rider_rider_firstname_rider_lastname_key'
+}
 
 /** input type for inserting data into table "rider" */
 export type Rider_Insert_Input = {
@@ -290,11 +357,27 @@ export type Rider_Mutation_Response = {
 /** input type for inserting object relation for remote table "rider" */
 export type Rider_Obj_Rel_Insert_Input = {
   data: Rider_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Rider_On_Conflict>;
 };
+
+/** on_conflict condition type for table "rider" */
+export type Rider_On_Conflict = {
+  constraint: Rider_Constraint;
+  update_columns?: Array<Rider_Update_Column>;
+  where?: InputMaybe<Rider_Bool_Exp>;
+};
+
+/** placeholder for update columns of table "rider" (current role has no relevant permissions) */
+export enum Rider_Update_Column {
+  /** placeholder (do not use) */
+  Placeholder = '_PLACEHOLDER'
+}
 
 /** columns and relationships of "riders" */
 export type Riders = {
   __typename?: 'riders';
+  membership?: Maybe<Array<Maybe<Membership>>>;
   riderName?: Maybe<Scalars['String']>;
 };
 
@@ -550,3 +633,64 @@ export type Subscription_RootRoutesArgs = {
   order_by?: InputMaybe<Array<Routes_Order_By>>;
   where?: InputMaybe<Routes_Bool_Exp>;
 };
+
+export type FindEventQueryVariables = Exact<{
+  eventId?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type FindEventQuery = { __typename?: 'query_root', events: Array<{ __typename?: 'events', name?: string | null, riders: Array<{ __typename?: 'rides', rider?: { __typename?: 'riders', riderName?: string | null } | null }> }> };
+
+export type GetMembershipQueryVariables = Exact<{
+  riderName: Scalars['String'];
+}>;
+
+
+export type GetMembershipQuery = { __typename?: 'query_root', memberships?: Array<{ __typename?: 'Membership', riderName?: string | null, type?: MembershipType | null, id?: string | null } | null> | null };
+
+
+export const FindEventDocument = `
+    query findEvent($eventId: Int) {
+  events(where: {event_id: {_eq: $eventId}}) {
+    riders {
+      rider {
+        riderName
+      }
+    }
+    name
+  }
+}
+    `;
+export const useFindEventQuery = <
+      TData = FindEventQuery,
+      TError = unknown
+    >(
+      variables?: FindEventQueryVariables,
+      options?: UseQueryOptions<FindEventQuery, TError, TData>
+    ) =>
+    useQuery<FindEventQuery, TError, TData>(
+      variables === undefined ? ['findEvent'] : ['findEvent', variables],
+      fetcher<FindEventQuery, FindEventQueryVariables>(FindEventDocument, variables),
+      options
+    );
+export const GetMembershipDocument = `
+    query getMembership($riderName: String!) {
+  memberships(where: {riderName: $riderName}) {
+    riderName
+    type
+    id
+  }
+}
+    `;
+export const useGetMembershipQuery = <
+      TData = GetMembershipQuery,
+      TError = unknown
+    >(
+      variables: GetMembershipQueryVariables,
+      options?: UseQueryOptions<GetMembershipQuery, TError, TData>
+    ) =>
+    useQuery<GetMembershipQuery, TError, TData>(
+      ['getMembership', variables],
+      fetcher<GetMembershipQuery, GetMembershipQueryVariables>(GetMembershipDocument, variables),
+      options
+    );

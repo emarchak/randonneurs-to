@@ -79,10 +79,9 @@ const IndexPage = () => {
           <ul className={styles.eventWrapper}>
             {brevets.map(event => (
               <li key={event.id} className={styles.eventRow}>
-                <strong>{event.route} {event.distance}</strong><br />
+                <strong><Link to={event.path}>{event.route} {event.distance}</Link></strong><br />
                 {getDateTimeLong(new Date(event.date))}<br />
                 {event.startLocation}<br />
-                {event.rwgpsUrl && (<Link href={event.rwgpsUrl}>{`View ${event.route} route`}</Link>)}
               </li>
             ))}
           </ul>
