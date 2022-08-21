@@ -11,9 +11,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date string, such as 2007-12-03, compliant with the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: any;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
+  GatsbyImageData: any;
   JSON: any;
   db_date: any;
   db_timestamptz: any;
@@ -228,6 +227,7 @@ export enum DirectoryFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -239,6 +239,7 @@ export enum DirectoryFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -251,6 +252,7 @@ export enum DirectoryFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -270,6 +272,7 @@ export enum DirectoryFieldsEnum {
   Ino = 'ino',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -289,6 +292,7 @@ export enum DirectoryFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -300,6 +304,7 @@ export enum DirectoryFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -312,6 +317,7 @@ export enum DirectoryFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -540,6 +546,7 @@ export enum FeedblogFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -551,6 +558,7 @@ export enum FeedblogFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -563,6 +571,7 @@ export enum FeedblogFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -581,6 +590,7 @@ export enum FeedblogFieldsEnum {
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -596,6 +606,7 @@ export enum FeedblogFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -607,6 +618,7 @@ export enum FeedblogFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -619,6 +631,7 @@ export enum FeedblogFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -763,6 +776,7 @@ export enum FeedblogMetaFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -774,6 +788,7 @@ export enum FeedblogMetaFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -786,6 +801,7 @@ export enum FeedblogMetaFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -800,6 +816,7 @@ export enum FeedblogMetaFieldsEnum {
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -817,6 +834,7 @@ export enum FeedblogMetaFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -828,6 +846,7 @@ export enum FeedblogMetaFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -840,6 +859,7 @@ export enum FeedblogMetaFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -1098,6 +1118,7 @@ export enum FileFieldsEnum {
   ChildImageSharpChildrenId = 'childImageSharp___children___id',
   ChildImageSharpChildrenInternalContent = 'childImageSharp___children___internal___content',
   ChildImageSharpChildrenInternalContentDigest = 'childImageSharp___children___internal___contentDigest',
+  ChildImageSharpChildrenInternalContentFilePath = 'childImageSharp___children___internal___contentFilePath',
   ChildImageSharpChildrenInternalDescription = 'childImageSharp___children___internal___description',
   ChildImageSharpChildrenInternalFieldOwners = 'childImageSharp___children___internal___fieldOwners',
   ChildImageSharpChildrenInternalIgnoreType = 'childImageSharp___children___internal___ignoreType',
@@ -1106,32 +1127,56 @@ export enum FileFieldsEnum {
   ChildImageSharpChildrenInternalType = 'childImageSharp___children___internal___type',
   ChildImageSharpChildrenParentChildren = 'childImageSharp___children___parent___children',
   ChildImageSharpChildrenParentId = 'childImageSharp___children___parent___id',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedAspectRatio = 'childImageSharp___fixed___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedBase64 = 'childImageSharp___fixed___base64',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedHeight = 'childImageSharp___fixed___height',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedOriginalName = 'childImageSharp___fixed___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedSrc = 'childImageSharp___fixed___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedSrcSet = 'childImageSharp___fixed___srcSet',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedSrcSetWebp = 'childImageSharp___fixed___srcSetWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedSrcWebp = 'childImageSharp___fixed___srcWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedTracedSvg = 'childImageSharp___fixed___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFixedWidth = 'childImageSharp___fixed___width',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidAspectRatio = 'childImageSharp___fluid___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidBase64 = 'childImageSharp___fluid___base64',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidOriginalImg = 'childImageSharp___fluid___originalImg',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidOriginalName = 'childImageSharp___fluid___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidPresentationHeight = 'childImageSharp___fluid___presentationHeight',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidPresentationWidth = 'childImageSharp___fluid___presentationWidth',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidSizes = 'childImageSharp___fluid___sizes',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidSrc = 'childImageSharp___fluid___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidSrcSet = 'childImageSharp___fluid___srcSet',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidSrcSetWebp = 'childImageSharp___fluid___srcSetWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidSrcWebp = 'childImageSharp___fluid___srcWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpFluidTracedSvg = 'childImageSharp___fluid___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpGatsbyImageData = 'childImageSharp___gatsbyImageData',
   ChildImageSharpId = 'childImageSharp___id',
   ChildImageSharpInternalContent = 'childImageSharp___internal___content',
   ChildImageSharpInternalContentDigest = 'childImageSharp___internal___contentDigest',
+  ChildImageSharpInternalContentFilePath = 'childImageSharp___internal___contentFilePath',
   ChildImageSharpInternalDescription = 'childImageSharp___internal___description',
   ChildImageSharpInternalFieldOwners = 'childImageSharp___internal___fieldOwners',
   ChildImageSharpInternalIgnoreType = 'childImageSharp___internal___ignoreType',
@@ -1147,6 +1192,7 @@ export enum FileFieldsEnum {
   ChildImageSharpParentId = 'childImageSharp___parent___id',
   ChildImageSharpParentInternalContent = 'childImageSharp___parent___internal___content',
   ChildImageSharpParentInternalContentDigest = 'childImageSharp___parent___internal___contentDigest',
+  ChildImageSharpParentInternalContentFilePath = 'childImageSharp___parent___internal___contentFilePath',
   ChildImageSharpParentInternalDescription = 'childImageSharp___parent___internal___description',
   ChildImageSharpParentInternalFieldOwners = 'childImageSharp___parent___internal___fieldOwners',
   ChildImageSharpParentInternalIgnoreType = 'childImageSharp___parent___internal___ignoreType',
@@ -1155,11 +1201,17 @@ export enum FileFieldsEnum {
   ChildImageSharpParentInternalType = 'childImageSharp___parent___internal___type',
   ChildImageSharpParentParentChildren = 'childImageSharp___parent___parent___children',
   ChildImageSharpParentParentId = 'childImageSharp___parent___parent___id',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpResizeAspectRatio = 'childImageSharp___resize___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpResizeHeight = 'childImageSharp___resize___height',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpResizeOriginalName = 'childImageSharp___resize___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpResizeSrc = 'childImageSharp___resize___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpResizeTracedSvg = 'childImageSharp___resize___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildImageSharpResizeWidth = 'childImageSharp___resize___width',
   Children = 'children',
   ChildrenImageSharp = 'childrenImageSharp',
@@ -1170,6 +1222,7 @@ export enum FileFieldsEnum {
   ChildrenImageSharpChildrenId = 'childrenImageSharp___children___id',
   ChildrenImageSharpChildrenInternalContent = 'childrenImageSharp___children___internal___content',
   ChildrenImageSharpChildrenInternalContentDigest = 'childrenImageSharp___children___internal___contentDigest',
+  ChildrenImageSharpChildrenInternalContentFilePath = 'childrenImageSharp___children___internal___contentFilePath',
   ChildrenImageSharpChildrenInternalDescription = 'childrenImageSharp___children___internal___description',
   ChildrenImageSharpChildrenInternalFieldOwners = 'childrenImageSharp___children___internal___fieldOwners',
   ChildrenImageSharpChildrenInternalIgnoreType = 'childrenImageSharp___children___internal___ignoreType',
@@ -1178,32 +1231,56 @@ export enum FileFieldsEnum {
   ChildrenImageSharpChildrenInternalType = 'childrenImageSharp___children___internal___type',
   ChildrenImageSharpChildrenParentChildren = 'childrenImageSharp___children___parent___children',
   ChildrenImageSharpChildrenParentId = 'childrenImageSharp___children___parent___id',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedAspectRatio = 'childrenImageSharp___fixed___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedBase64 = 'childrenImageSharp___fixed___base64',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedHeight = 'childrenImageSharp___fixed___height',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedOriginalName = 'childrenImageSharp___fixed___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedSrc = 'childrenImageSharp___fixed___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedSrcSet = 'childrenImageSharp___fixed___srcSet',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedSrcSetWebp = 'childrenImageSharp___fixed___srcSetWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedSrcWebp = 'childrenImageSharp___fixed___srcWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedTracedSvg = 'childrenImageSharp___fixed___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFixedWidth = 'childrenImageSharp___fixed___width',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidAspectRatio = 'childrenImageSharp___fluid___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidBase64 = 'childrenImageSharp___fluid___base64',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidOriginalImg = 'childrenImageSharp___fluid___originalImg',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidOriginalName = 'childrenImageSharp___fluid___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidPresentationHeight = 'childrenImageSharp___fluid___presentationHeight',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidPresentationWidth = 'childrenImageSharp___fluid___presentationWidth',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidSizes = 'childrenImageSharp___fluid___sizes',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidSrc = 'childrenImageSharp___fluid___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidSrcSet = 'childrenImageSharp___fluid___srcSet',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidSrcSetWebp = 'childrenImageSharp___fluid___srcSetWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidSrcWebp = 'childrenImageSharp___fluid___srcWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpFluidTracedSvg = 'childrenImageSharp___fluid___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpGatsbyImageData = 'childrenImageSharp___gatsbyImageData',
   ChildrenImageSharpId = 'childrenImageSharp___id',
   ChildrenImageSharpInternalContent = 'childrenImageSharp___internal___content',
   ChildrenImageSharpInternalContentDigest = 'childrenImageSharp___internal___contentDigest',
+  ChildrenImageSharpInternalContentFilePath = 'childrenImageSharp___internal___contentFilePath',
   ChildrenImageSharpInternalDescription = 'childrenImageSharp___internal___description',
   ChildrenImageSharpInternalFieldOwners = 'childrenImageSharp___internal___fieldOwners',
   ChildrenImageSharpInternalIgnoreType = 'childrenImageSharp___internal___ignoreType',
@@ -1219,6 +1296,7 @@ export enum FileFieldsEnum {
   ChildrenImageSharpParentId = 'childrenImageSharp___parent___id',
   ChildrenImageSharpParentInternalContent = 'childrenImageSharp___parent___internal___content',
   ChildrenImageSharpParentInternalContentDigest = 'childrenImageSharp___parent___internal___contentDigest',
+  ChildrenImageSharpParentInternalContentFilePath = 'childrenImageSharp___parent___internal___contentFilePath',
   ChildrenImageSharpParentInternalDescription = 'childrenImageSharp___parent___internal___description',
   ChildrenImageSharpParentInternalFieldOwners = 'childrenImageSharp___parent___internal___fieldOwners',
   ChildrenImageSharpParentInternalIgnoreType = 'childrenImageSharp___parent___internal___ignoreType',
@@ -1227,11 +1305,17 @@ export enum FileFieldsEnum {
   ChildrenImageSharpParentInternalType = 'childrenImageSharp___parent___internal___type',
   ChildrenImageSharpParentParentChildren = 'childrenImageSharp___parent___parent___children',
   ChildrenImageSharpParentParentId = 'childrenImageSharp___parent___parent___id',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpResizeAspectRatio = 'childrenImageSharp___resize___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpResizeHeight = 'childrenImageSharp___resize___height',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpResizeOriginalName = 'childrenImageSharp___resize___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpResizeSrc = 'childrenImageSharp___resize___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpResizeTracedSvg = 'childrenImageSharp___resize___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ChildrenImageSharpResizeWidth = 'childrenImageSharp___resize___width',
   ChildrenChildren = 'children___children',
   ChildrenChildrenChildren = 'children___children___children',
@@ -1240,6 +1324,7 @@ export enum FileFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -1251,6 +1336,7 @@ export enum FileFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -1263,6 +1349,7 @@ export enum FileFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -1282,6 +1369,7 @@ export enum FileFieldsEnum {
   Ino = 'ino',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -1301,6 +1389,7 @@ export enum FileFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -1312,6 +1401,7 @@ export enum FileFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -1324,6 +1414,7 @@ export enum FileFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -1444,6 +1535,13 @@ export type FloatQueryOperatorInput = {
   nin?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
+export type GatsbyImageDataQueryOperatorInput = {
+  eq?: InputMaybe<Scalars['GatsbyImageData']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['GatsbyImageData']>>>;
+  ne?: InputMaybe<Scalars['GatsbyImageData']>;
+  nin?: InputMaybe<Array<InputMaybe<Scalars['GatsbyImageData']>>>;
+};
+
 export enum GatsbyImageFormat {
   Auto = 'AUTO',
   Avif = 'AVIF',
@@ -1532,6 +1630,7 @@ export enum GraphQlSourceFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -1543,6 +1642,7 @@ export enum GraphQlSourceFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -1555,6 +1655,7 @@ export enum GraphQlSourceFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -1567,6 +1668,7 @@ export enum GraphQlSourceFieldsEnum {
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -1580,6 +1682,7 @@ export enum GraphQlSourceFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -1591,6 +1694,7 @@ export enum GraphQlSourceFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -1603,6 +1707,7 @@ export enum GraphQlSourceFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -1719,7 +1824,7 @@ export type ImageSharp = Node & {
   children: Array<Node>;
   fixed?: Maybe<ImageSharpFixed>;
   fluid?: Maybe<ImageSharpFluid>;
-  gatsbyImageData: Scalars['JSON'];
+  gatsbyImageData: Scalars['GatsbyImageData'];
   id: Scalars['ID'];
   internal: Internal;
   original?: Maybe<ImageSharpOriginal>;
@@ -1876,6 +1981,7 @@ export enum ImageSharpFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -1887,6 +1993,7 @@ export enum ImageSharpFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -1899,6 +2006,7 @@ export enum ImageSharpFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -1907,32 +2015,56 @@ export enum ImageSharpFieldsEnum {
   ChildrenParentInternalType = 'children___parent___internal___type',
   ChildrenParentParentChildren = 'children___parent___parent___children',
   ChildrenParentParentId = 'children___parent___parent___id',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedAspectRatio = 'fixed___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedBase64 = 'fixed___base64',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedHeight = 'fixed___height',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedOriginalName = 'fixed___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedSrc = 'fixed___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedSrcSet = 'fixed___srcSet',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedSrcSetWebp = 'fixed___srcSetWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedSrcWebp = 'fixed___srcWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedTracedSvg = 'fixed___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FixedWidth = 'fixed___width',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidAspectRatio = 'fluid___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidBase64 = 'fluid___base64',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidOriginalImg = 'fluid___originalImg',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidOriginalName = 'fluid___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidPresentationHeight = 'fluid___presentationHeight',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidPresentationWidth = 'fluid___presentationWidth',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidSizes = 'fluid___sizes',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidSrc = 'fluid___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidSrcSet = 'fluid___srcSet',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidSrcSetWebp = 'fluid___srcSetWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidSrcWebp = 'fluid___srcWebp',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   FluidTracedSvg = 'fluid___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   GatsbyImageData = 'gatsbyImageData',
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -1949,6 +2081,7 @@ export enum ImageSharpFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -1960,6 +2093,7 @@ export enum ImageSharpFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -1972,6 +2106,7 @@ export enum ImageSharpFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -1980,11 +2115,17 @@ export enum ImageSharpFieldsEnum {
   ParentParentInternalType = 'parent___parent___internal___type',
   ParentParentParentChildren = 'parent___parent___parent___children',
   ParentParentParentId = 'parent___parent___parent___id',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ResizeAspectRatio = 'resize___aspectRatio',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ResizeHeight = 'resize___height',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ResizeOriginalName = 'resize___originalName',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ResizeSrc = 'resize___src',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ResizeTracedSvg = 'resize___tracedSVG',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   ResizeWidth = 'resize___width'
 }
 
@@ -1992,7 +2133,7 @@ export type ImageSharpFilterInput = {
   children?: InputMaybe<NodeFilterListInput>;
   fixed?: InputMaybe<ImageSharpFixedFilterInput>;
   fluid?: InputMaybe<ImageSharpFluidFilterInput>;
-  gatsbyImageData?: InputMaybe<JsonQueryOperatorInput>;
+  gatsbyImageData?: InputMaybe<GatsbyImageDataQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
   original?: InputMaybe<ImageSharpOriginalFilterInput>;
@@ -2156,6 +2297,7 @@ export type Internal = {
   __typename?: 'Internal';
   content?: Maybe<Scalars['String']>;
   contentDigest: Scalars['String'];
+  contentFilePath?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   fieldOwners?: Maybe<Array<Maybe<Scalars['String']>>>;
   ignoreType?: Maybe<Scalars['Boolean']>;
@@ -2167,6 +2309,7 @@ export type Internal = {
 export type InternalFilterInput = {
   content?: InputMaybe<StringQueryOperatorInput>;
   contentDigest?: InputMaybe<StringQueryOperatorInput>;
+  contentFilePath?: InputMaybe<StringQueryOperatorInput>;
   description?: InputMaybe<StringQueryOperatorInput>;
   fieldOwners?: InputMaybe<StringQueryOperatorInput>;
   ignoreType?: InputMaybe<BooleanQueryOperatorInput>;
@@ -2581,7 +2724,7 @@ export type QueryImageSharpArgs = {
   children?: InputMaybe<NodeFilterListInput>;
   fixed?: InputMaybe<ImageSharpFixedFilterInput>;
   fluid?: InputMaybe<ImageSharpFluidFilterInput>;
-  gatsbyImageData?: InputMaybe<JsonQueryOperatorInput>;
+  gatsbyImageData?: InputMaybe<GatsbyImageDataQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
   original?: InputMaybe<ImageSharpOriginalFilterInput>;
@@ -2606,10 +2749,14 @@ export type QueryMailArgs = {
 
 export type QueryRiderArgs = {
   children?: InputMaybe<NodeFilterListInput>;
+  city?: InputMaybe<StringQueryOperatorInput>;
+  country?: InputMaybe<StringQueryOperatorInput>;
+  fullName?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
   membership?: InputMaybe<MembershipQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
+  seasons?: InputMaybe<IntQueryOperatorInput>;
 };
 
 
@@ -2617,6 +2764,7 @@ export type QuerySiteArgs = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   children?: InputMaybe<NodeFilterListInput>;
   flags?: InputMaybe<SiteFlagsFilterInput>;
+  graphqlTypegen?: InputMaybe<BooleanQueryOperatorInput>;
   host?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
@@ -2691,6 +2839,7 @@ export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   children: Array<Node>;
   flags?: Maybe<SiteFlags>;
+  graphqlTypegen?: Maybe<Scalars['Boolean']>;
   host?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   internal: Internal;
@@ -2785,6 +2934,7 @@ export enum SiteBuildMetadataFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -2796,6 +2946,7 @@ export enum SiteBuildMetadataFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -2808,6 +2959,7 @@ export enum SiteBuildMetadataFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -2819,6 +2971,7 @@ export enum SiteBuildMetadataFieldsEnum {
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -2832,6 +2985,7 @@ export enum SiteBuildMetadataFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -2843,6 +2997,7 @@ export enum SiteBuildMetadataFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -2855,6 +3010,7 @@ export enum SiteBuildMetadataFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -2977,6 +3133,7 @@ export enum SiteFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -2988,6 +3145,7 @@ export enum SiteFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -3000,6 +3158,7 @@ export enum SiteFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -3009,10 +3168,12 @@ export enum SiteFieldsEnum {
   ChildrenParentParentChildren = 'children___parent___parent___children',
   ChildrenParentParentId = 'children___parent___parent___id',
   FlagsFastDev = 'flags___FAST_DEV',
+  GraphqlTypegen = 'graphqlTypegen',
   Host = 'host',
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -3027,6 +3188,7 @@ export enum SiteFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -3038,6 +3200,7 @@ export enum SiteFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -3050,6 +3213,7 @@ export enum SiteFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -3072,6 +3236,7 @@ export type SiteFilterInput = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   children?: InputMaybe<NodeFilterListInput>;
   flags?: InputMaybe<SiteFlagsFilterInput>;
+  graphqlTypegen?: InputMaybe<BooleanQueryOperatorInput>;
   host?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
@@ -3165,6 +3330,7 @@ export enum SiteFunctionFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -3176,6 +3342,7 @@ export enum SiteFunctionFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -3188,6 +3355,7 @@ export enum SiteFunctionFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -3200,6 +3368,7 @@ export enum SiteFunctionFieldsEnum {
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -3216,6 +3385,7 @@ export enum SiteFunctionFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -3227,6 +3397,7 @@ export enum SiteFunctionFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -3239,6 +3410,7 @@ export enum SiteFunctionFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -3439,6 +3611,7 @@ export enum SitePageFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -3450,6 +3623,7 @@ export enum SitePageFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -3462,6 +3636,7 @@ export enum SitePageFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -3483,6 +3658,7 @@ export enum SitePageFieldsEnum {
   InternalComponentName = 'internalComponentName',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -3498,6 +3674,7 @@ export enum SitePageFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -3509,6 +3686,7 @@ export enum SitePageFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -3521,6 +3699,7 @@ export enum SitePageFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -3538,6 +3717,7 @@ export enum SitePageFieldsEnum {
   PluginCreatorChildrenId = 'pluginCreator___children___id',
   PluginCreatorChildrenInternalContent = 'pluginCreator___children___internal___content',
   PluginCreatorChildrenInternalContentDigest = 'pluginCreator___children___internal___contentDigest',
+  PluginCreatorChildrenInternalContentFilePath = 'pluginCreator___children___internal___contentFilePath',
   PluginCreatorChildrenInternalDescription = 'pluginCreator___children___internal___description',
   PluginCreatorChildrenInternalFieldOwners = 'pluginCreator___children___internal___fieldOwners',
   PluginCreatorChildrenInternalIgnoreType = 'pluginCreator___children___internal___ignoreType',
@@ -3549,6 +3729,7 @@ export enum SitePageFieldsEnum {
   PluginCreatorId = 'pluginCreator___id',
   PluginCreatorInternalContent = 'pluginCreator___internal___content',
   PluginCreatorInternalContentDigest = 'pluginCreator___internal___contentDigest',
+  PluginCreatorInternalContentFilePath = 'pluginCreator___internal___contentFilePath',
   PluginCreatorInternalDescription = 'pluginCreator___internal___description',
   PluginCreatorInternalFieldOwners = 'pluginCreator___internal___fieldOwners',
   PluginCreatorInternalIgnoreType = 'pluginCreator___internal___ignoreType',
@@ -3564,6 +3745,7 @@ export enum SitePageFieldsEnum {
   PluginCreatorParentId = 'pluginCreator___parent___id',
   PluginCreatorParentInternalContent = 'pluginCreator___parent___internal___content',
   PluginCreatorParentInternalContentDigest = 'pluginCreator___parent___internal___contentDigest',
+  PluginCreatorParentInternalContentFilePath = 'pluginCreator___parent___internal___contentFilePath',
   PluginCreatorParentInternalDescription = 'pluginCreator___parent___internal___description',
   PluginCreatorParentInternalFieldOwners = 'pluginCreator___parent___internal___fieldOwners',
   PluginCreatorParentInternalIgnoreType = 'pluginCreator___parent___internal___ignoreType',
@@ -3715,6 +3897,7 @@ export enum SitePluginFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -3726,6 +3909,7 @@ export enum SitePluginFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -3738,6 +3922,7 @@ export enum SitePluginFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -3749,6 +3934,7 @@ export enum SitePluginFieldsEnum {
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -3765,6 +3951,7 @@ export enum SitePluginFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -3776,6 +3963,7 @@ export enum SitePluginFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -3788,6 +3976,7 @@ export enum SitePluginFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -3917,8 +4106,7 @@ export type Db = {
   __typename?: 'db';
   /** fetch data from the table: "events" */
   events: Array<Db_Events>;
-  getMembership?: Maybe<Db_Membership>;
-  getMemberships?: Maybe<Array<Maybe<Db_Membership>>>;
+  memberships?: Maybe<Array<Maybe<Db_Membership>>>;
   /** fetch data from the table: "riders" */
   riders: Array<Db_Riders>;
   /** fetch data from the table: "rides" */
@@ -3937,8 +4125,8 @@ export type DbEventsArgs = {
 };
 
 
-export type DbGetMembershipArgs = {
-  fullName: Scalars['String'];
+export type DbMembershipsArgs = {
+  where?: InputMaybe<Db_QueryInput>;
 };
 
 
@@ -3985,9 +4173,9 @@ export type Db_Membership = {
   __typename?: 'db_Membership';
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
-  fullName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
-  membership?: Maybe<Db_MembershipType>;
+  riderName?: Maybe<Scalars['String']>;
+  type?: Maybe<Db_MembershipType>;
 };
 
 export enum Db_MembershipType {
@@ -3995,6 +4183,10 @@ export enum Db_MembershipType {
   Individual = 'Individual',
   Trial = 'Trial'
 }
+
+export type Db_QueryInput = {
+  riderName?: InputMaybe<Scalars['String']>;
+};
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type Db_String_Comparison_Exp = {
@@ -4129,7 +4321,24 @@ export enum Db_Order_By {
 /** input type for inserting array relation for remote table "ride" */
 export type Db_Ride_Arr_Rel_Insert_Input = {
   data: Array<Db_Ride_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Db_Ride_On_Conflict>;
 };
+
+/** Boolean expression to filter rows from the table "ride". All fields are combined with a logical 'AND'. */
+export type Db_Ride_Bool_Exp = {
+  _and?: InputMaybe<Array<Db_Ride_Bool_Exp>>;
+  _not?: InputMaybe<Db_Ride_Bool_Exp>;
+  _or?: InputMaybe<Array<Db_Ride_Bool_Exp>>;
+};
+
+/** unique or primary key constraints on table "ride" */
+export enum Db_Ride_Constraint {
+  /** unique or primary key constraint on columns "ride_timestamp", "ride_id" */
+  RidePkey = 'ride_pkey',
+  /** unique or primary key constraint on columns "ride_rider", "ride_event" */
+  RideUnique = 'ride_unique'
+}
 
 /** input type for inserting data into table "ride" */
 export type Db_Ride_Insert_Input = {
@@ -4145,6 +4354,34 @@ export type Db_Ride_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
 };
+
+/** on_conflict condition type for table "ride" */
+export type Db_Ride_On_Conflict = {
+  constraint: Db_Ride_Constraint;
+  update_columns?: Array<Db_Ride_Update_Column>;
+  where?: InputMaybe<Db_Ride_Bool_Exp>;
+};
+
+/** placeholder for update columns of table "ride" (current role has no relevant permissions) */
+export enum Db_Ride_Update_Column {
+  /** placeholder (do not use) */
+  Placeholder = '_PLACEHOLDER'
+}
+
+/** Boolean expression to filter rows from the table "rider". All fields are combined with a logical 'AND'. */
+export type Db_Rider_Bool_Exp = {
+  _and?: InputMaybe<Array<Db_Rider_Bool_Exp>>;
+  _not?: InputMaybe<Db_Rider_Bool_Exp>;
+  _or?: InputMaybe<Array<Db_Rider_Bool_Exp>>;
+};
+
+/** unique or primary key constraints on table "rider" */
+export enum Db_Rider_Constraint {
+  /** unique or primary key constraint on columns "rider_timestamp", "rider_id" */
+  RiderPkey = 'rider_pkey',
+  /** unique or primary key constraint on columns "rider_lastname", "rider_firstname" */
+  RiderRiderFirstnameRiderLastnameKey = 'rider_rider_firstname_rider_lastname_key'
+}
 
 /** input type for inserting data into table "rider" */
 export type Db_Rider_Insert_Input = {
@@ -4165,11 +4402,27 @@ export type Db_Rider_Mutation_Response = {
 /** input type for inserting object relation for remote table "rider" */
 export type Db_Rider_Obj_Rel_Insert_Input = {
   data: Db_Rider_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Db_Rider_On_Conflict>;
 };
+
+/** on_conflict condition type for table "rider" */
+export type Db_Rider_On_Conflict = {
+  constraint: Db_Rider_Constraint;
+  update_columns?: Array<Db_Rider_Update_Column>;
+  where?: InputMaybe<Db_Rider_Bool_Exp>;
+};
+
+/** placeholder for update columns of table "rider" (current role has no relevant permissions) */
+export enum Db_Rider_Update_Column {
+  /** placeholder (do not use) */
+  Placeholder = '_PLACEHOLDER'
+}
 
 /** columns and relationships of "riders" */
 export type Db_Riders = {
   __typename?: 'db_riders';
+  membership?: Maybe<Array<Maybe<Db_Membership>>>;
   riderName?: Maybe<Scalars['String']>;
 };
 
@@ -4475,6 +4728,7 @@ export enum EventFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -4486,6 +4740,7 @@ export enum EventFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -4498,6 +4753,7 @@ export enum EventFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -4511,10 +4767,12 @@ export enum EventFieldsEnum {
   Distance = 'distance',
   Event = 'event',
   EventType = 'eventType',
+  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
   GatsbyPath = 'gatsbyPath',
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -4529,6 +4787,7 @@ export enum EventFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -4540,6 +4799,7 @@ export enum EventFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -4552,6 +4812,7 @@ export enum EventFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -4725,6 +4986,7 @@ export enum MailFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -4736,6 +4998,7 @@ export enum MailFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -4748,6 +5011,7 @@ export enum MailFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -4760,6 +5024,7 @@ export enum MailFieldsEnum {
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -4774,6 +5039,7 @@ export enum MailFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -4785,6 +5051,7 @@ export enum MailFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -4797,6 +5064,7 @@ export enum MailFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -4873,10 +5141,14 @@ export type MailSortInput = {
 export type Rider = Node & {
   __typename?: 'rider';
   children: Array<Node>;
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  fullName?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   internal: Internal;
   membership?: Maybe<Membership>;
   parent?: Maybe<Node>;
+  seasons?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
 export type RiderConnection = {
@@ -4935,6 +5207,7 @@ export enum RiderFieldsEnum {
   ChildrenChildrenId = 'children___children___id',
   ChildrenChildrenInternalContent = 'children___children___internal___content',
   ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
   ChildrenChildrenInternalDescription = 'children___children___internal___description',
   ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
   ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
@@ -4946,6 +5219,7 @@ export enum RiderFieldsEnum {
   ChildrenId = 'children___id',
   ChildrenInternalContent = 'children___internal___content',
   ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
   ChildrenInternalDescription = 'children___internal___description',
   ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
   ChildrenInternalIgnoreType = 'children___internal___ignoreType',
@@ -4958,6 +5232,7 @@ export enum RiderFieldsEnum {
   ChildrenParentId = 'children___parent___id',
   ChildrenParentInternalContent = 'children___parent___internal___content',
   ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
   ChildrenParentInternalDescription = 'children___parent___internal___description',
   ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
   ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
@@ -4966,9 +5241,13 @@ export enum RiderFieldsEnum {
   ChildrenParentInternalType = 'children___parent___internal___type',
   ChildrenParentParentChildren = 'children___parent___parent___children',
   ChildrenParentParentId = 'children___parent___parent___id',
+  City = 'city',
+  Country = 'country',
+  FullName = 'fullName',
   Id = 'id',
   InternalContent = 'internal___content',
   InternalContentDigest = 'internal___contentDigest',
+  InternalContentFilePath = 'internal___contentFilePath',
   InternalDescription = 'internal___description',
   InternalFieldOwners = 'internal___fieldOwners',
   InternalIgnoreType = 'internal___ignoreType',
@@ -4983,6 +5262,7 @@ export enum RiderFieldsEnum {
   ParentChildrenId = 'parent___children___id',
   ParentChildrenInternalContent = 'parent___children___internal___content',
   ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
   ParentChildrenInternalDescription = 'parent___children___internal___description',
   ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
   ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
@@ -4994,6 +5274,7 @@ export enum RiderFieldsEnum {
   ParentId = 'parent___id',
   ParentInternalContent = 'parent___internal___content',
   ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
   ParentInternalDescription = 'parent___internal___description',
   ParentInternalFieldOwners = 'parent___internal___fieldOwners',
   ParentInternalIgnoreType = 'parent___internal___ignoreType',
@@ -5006,6 +5287,7 @@ export enum RiderFieldsEnum {
   ParentParentId = 'parent___parent___id',
   ParentParentInternalContent = 'parent___parent___internal___content',
   ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
   ParentParentInternalDescription = 'parent___parent___internal___description',
   ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
   ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
@@ -5013,15 +5295,20 @@ export enum RiderFieldsEnum {
   ParentParentInternalOwner = 'parent___parent___internal___owner',
   ParentParentInternalType = 'parent___parent___internal___type',
   ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id'
+  ParentParentParentId = 'parent___parent___parent___id',
+  Seasons = 'seasons'
 }
 
 export type RiderFilterInput = {
   children?: InputMaybe<NodeFilterListInput>;
+  city?: InputMaybe<StringQueryOperatorInput>;
+  country?: InputMaybe<StringQueryOperatorInput>;
+  fullName?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   internal?: InputMaybe<InternalFilterInput>;
   membership?: InputMaybe<MembershipQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
+  seasons?: InputMaybe<IntQueryOperatorInput>;
 };
 
 export type RiderGroupConnection = {
@@ -5070,3 +5357,500 @@ export type RiderSortInput = {
   fields?: InputMaybe<Array<InputMaybe<RiderFieldsEnum>>>;
   order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
 };
+
+export type GatsbyImageSharpFixedFragment = { __typename?: 'ImageSharpFixed', base64?: string | null, width: number, height: number, src: string, srcSet: string };
+
+export type GatsbyImageSharpFixed_TracedSvgFragment = { __typename?: 'ImageSharpFixed', tracedSVG?: string | null, width: number, height: number, src: string, srcSet: string };
+
+export type GatsbyImageSharpFixed_WithWebpFragment = { __typename?: 'ImageSharpFixed', base64?: string | null, width: number, height: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null };
+
+export type GatsbyImageSharpFixed_WithWebp_TracedSvgFragment = { __typename?: 'ImageSharpFixed', tracedSVG?: string | null, width: number, height: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null };
+
+export type GatsbyImageSharpFixed_NoBase64Fragment = { __typename?: 'ImageSharpFixed', width: number, height: number, src: string, srcSet: string };
+
+export type GatsbyImageSharpFixed_WithWebp_NoBase64Fragment = { __typename?: 'ImageSharpFixed', width: number, height: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null };
+
+export type GatsbyImageSharpFluidFragment = { __typename?: 'ImageSharpFluid', base64?: string | null, aspectRatio: number, src: string, srcSet: string, sizes: string };
+
+export type GatsbyImageSharpFluidLimitPresentationSizeFragment = { __typename?: 'ImageSharpFluid', maxHeight: number, maxWidth: number };
+
+export type GatsbyImageSharpFluid_TracedSvgFragment = { __typename?: 'ImageSharpFluid', tracedSVG?: string | null, aspectRatio: number, src: string, srcSet: string, sizes: string };
+
+export type GatsbyImageSharpFluid_WithWebpFragment = { __typename?: 'ImageSharpFluid', base64?: string | null, aspectRatio: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null, sizes: string };
+
+export type GatsbyImageSharpFluid_WithWebp_TracedSvgFragment = { __typename?: 'ImageSharpFluid', tracedSVG?: string | null, aspectRatio: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null, sizes: string };
+
+export type GatsbyImageSharpFluid_NoBase64Fragment = { __typename?: 'ImageSharpFluid', aspectRatio: number, src: string, srcSet: string, sizes: string };
+
+export type GatsbyImageSharpFluid_WithWebp_NoBase64Fragment = { __typename?: 'ImageSharpFluid', aspectRatio: number, src: string, srcSet: string, srcWebp?: string | null, srcSetWebp?: string | null, sizes: string };
+
+export type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PagesQueryQuery = { __typename?: 'Query', allSiteFunction: { __typename?: 'SiteFunctionConnection', nodes: Array<{ __typename?: 'SiteFunction', functionRoute: string }> }, allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string }> } };
+
+export type GalleryQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GalleryQueryQuery = { __typename?: 'Query', allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
+
+export type SiteTitleQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SiteTitleQueryQuery = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', title?: string | null } | null } | null };
+
+export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_1_Query = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', title?: string | null, description?: string | null, siteURL?: string | null } | null } | null };
+
+export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_2_Query = { __typename?: 'Query', allFeedblog: { __typename?: 'FeedblogConnection', nodes: Array<{ __typename?: 'Feedblog', id: string, title?: string | null, link?: string | null, content?: { __typename?: 'FeedblogContent', encodedSnippet?: string | null } | null }> } };
+
+export type EventDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, rwgpsUrl?: string | null, startLocation?: string | null, date?: any | null, scheduleId?: string | null, path?: string | null }> } };
+
+export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_3_Query = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null, name?: string | null, id?: number | null, distance?: number | null, chapter?: string | null }> } };
+
+export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_4_Query = { __typename?: 'Query', allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, id: string, context?: { __typename?: 'SitePageContext', pageInfo?: { __typename?: 'PageInfo', title?: string | null } | null } | null }> } };
+
+export type SeasonPageQueryVariables = Exact<{
+  season?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type SeasonPageQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, path?: string | null }> } };
+
+export type EventPageQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type EventPageQuery = { __typename?: 'Query', event?: { __typename?: 'event', chapter?: Chapter | null, date?: any | null, distance?: number | null, eventType?: EventType | null, id: string, route?: string | null, rwgpsId?: string | null, rwgpsUrl?: string | null, scheduleId?: string | null, season?: string | null, startLocation?: string | null } | null };
+
+export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_5_Query = { __typename?: 'Query', allMail: { __typename?: 'mailConnection', nodes: Array<{ __typename?: 'mail', id: string, name?: string | null, teaser?: string | null, subject?: string | null }> }, allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, context?: { __typename?: 'SitePageContext', id?: string | null } | null }> }, allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
+
+export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_6_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+
+export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_7_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+
+export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_8_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+
+export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_9_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+
+export type NewsletterQueryQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type NewsletterQueryQuery = { __typename?: 'Query', mail?: { __typename?: 'mail', categories?: Array<string | null> | null, content?: string | null, id: string, name?: string | null, sentAt?: any | null, subject?: string | null, teaser?: string | null } | null };
+
+
+declare module '*/fragments.js' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GatsbyImageSharpFixed: DocumentNode;
+export const GatsbyImageSharpFixed_tracedSVG: DocumentNode;
+export const GatsbyImageSharpFixed_withWebp: DocumentNode;
+export const GatsbyImageSharpFixed_withWebp_tracedSVG: DocumentNode;
+export const GatsbyImageSharpFixed_noBase64: DocumentNode;
+export const GatsbyImageSharpFixed_withWebp_noBase64: DocumentNode;
+export const GatsbyImageSharpFluid: DocumentNode;
+export const GatsbyImageSharpFluidLimitPresentationSize: DocumentNode;
+export const GatsbyImageSharpFluid_tracedSVG: DocumentNode;
+export const GatsbyImageSharpFluid_withWebp: DocumentNode;
+export const GatsbyImageSharpFluid_withWebp_tracedSVG: DocumentNode;
+export const GatsbyImageSharpFluid_noBase64: DocumentNode;
+export const GatsbyImageSharpFluid_withWebp_noBase64: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/raw_dev-404-page.js' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const PagesQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/Gallery.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GalleryQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/layout.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SiteTitleQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/seo.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/useBlog.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/useEvents.ts' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const EventData: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/useRoutes.ts' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/index.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/{event.season}.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SeasonPage: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/{event.route}-{event.date}.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const EventPage: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/trace-virtuelle.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/audax-a-distance.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/medals.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/Newsletter.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const NewsletterQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+export const GatsbyImageSharpFixed = gql`
+    fragment GatsbyImageSharpFixed on ImageSharpFixed {
+  base64
+  width
+  height
+  src
+  srcSet
+}
+    `;
+export const GatsbyImageSharpFixed_TracedSvg = gql`
+    fragment GatsbyImageSharpFixed_tracedSVG on ImageSharpFixed {
+  tracedSVG
+  width
+  height
+  src
+  srcSet
+}
+    `;
+export const GatsbyImageSharpFixed_WithWebp = gql`
+    fragment GatsbyImageSharpFixed_withWebp on ImageSharpFixed {
+  base64
+  width
+  height
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+}
+    `;
+export const GatsbyImageSharpFixed_WithWebp_TracedSvg = gql`
+    fragment GatsbyImageSharpFixed_withWebp_tracedSVG on ImageSharpFixed {
+  tracedSVG
+  width
+  height
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+}
+    `;
+export const GatsbyImageSharpFixed_NoBase64 = gql`
+    fragment GatsbyImageSharpFixed_noBase64 on ImageSharpFixed {
+  width
+  height
+  src
+  srcSet
+}
+    `;
+export const GatsbyImageSharpFixed_WithWebp_NoBase64 = gql`
+    fragment GatsbyImageSharpFixed_withWebp_noBase64 on ImageSharpFixed {
+  width
+  height
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+}
+    `;
+export const GatsbyImageSharpFluid = gql`
+    fragment GatsbyImageSharpFluid on ImageSharpFluid {
+  base64
+  aspectRatio
+  src
+  srcSet
+  sizes
+}
+    `;
+export const GatsbyImageSharpFluidLimitPresentationSize = gql`
+    fragment GatsbyImageSharpFluidLimitPresentationSize on ImageSharpFluid {
+  maxHeight: presentationHeight
+  maxWidth: presentationWidth
+}
+    `;
+export const GatsbyImageSharpFluid_TracedSvg = gql`
+    fragment GatsbyImageSharpFluid_tracedSVG on ImageSharpFluid {
+  tracedSVG
+  aspectRatio
+  src
+  srcSet
+  sizes
+}
+    `;
+export const GatsbyImageSharpFluid_WithWebp = gql`
+    fragment GatsbyImageSharpFluid_withWebp on ImageSharpFluid {
+  base64
+  aspectRatio
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+  sizes
+}
+    `;
+export const GatsbyImageSharpFluid_WithWebp_TracedSvg = gql`
+    fragment GatsbyImageSharpFluid_withWebp_tracedSVG on ImageSharpFluid {
+  tracedSVG
+  aspectRatio
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+  sizes
+}
+    `;
+export const GatsbyImageSharpFluid_NoBase64 = gql`
+    fragment GatsbyImageSharpFluid_noBase64 on ImageSharpFluid {
+  aspectRatio
+  src
+  srcSet
+  sizes
+}
+    `;
+export const GatsbyImageSharpFluid_WithWebp_NoBase64 = gql`
+    fragment GatsbyImageSharpFluid_withWebp_noBase64 on ImageSharpFluid {
+  aspectRatio
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+  sizes
+}
+    `;
+export const PagesQuery = gql`
+    query PagesQuery {
+  allSiteFunction {
+    nodes {
+      functionRoute
+    }
+  }
+  allSitePage(filter: {path: {regex: "/^(?!/dev-404-page).+$/"}}) {
+    nodes {
+      path
+    }
+  }
+}
+    `;
+export const GalleryQuery = gql`
+    query GalleryQuery {
+  allFile(
+    filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
+    limit: 6
+    sort: {fields: birthTime, order: DESC}
+  ) {
+    nodes {
+      name
+      childImageSharp {
+        gatsbyImageData(aspectRatio: 1, height: 300, formats: JPG)
+      }
+    }
+  }
+}
+    `;
+export const SiteTitleQuery = gql`
+    query SiteTitleQuery {
+  site {
+    siteMetadata {
+      title
+    }
+  }
+}
+    `;
+
+
+export const EventData = gql`
+    query EventData {
+  allEvent {
+    nodes {
+      chapter
+      distance
+      eventType
+      id
+      organizer
+      route
+      rwgpsUrl
+      startLocation
+      date
+      scheduleId
+      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
+    }
+  }
+}
+    `;
+
+
+export const SeasonPage = gql`
+    query SeasonPage($season: String) {
+  allEvent(filter: {season: {eq: $season}, chapter: {eq: Toronto}}) {
+    nodes {
+      chapter
+      distance
+      eventType
+      id
+      organizer
+      route
+      startLocation
+      date
+      season
+      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
+    }
+  }
+}
+    `;
+export const EventPage = gql`
+    query EventPage($id: String) {
+  event(id: {eq: $id}) {
+    chapter
+    date
+    distance
+    eventType
+    id
+    route
+    rwgpsId
+    rwgpsUrl
+    scheduleId
+    season
+    startLocation
+  }
+}
+    `;
+
+
+
+
+
+export const NewsletterQuery = gql`
+    query NewsletterQuery($id: String) {
+  mail(id: {eq: $id}) {
+    categories
+    content
+    id
+    name
+    sentAt
+    subject
+    teaser
+  }
+}
+    `;
