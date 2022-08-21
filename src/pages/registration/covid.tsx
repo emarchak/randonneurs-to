@@ -8,7 +8,6 @@ import { Link } from 'src/components/Link'
 const CovidScreening = () => {
     return (
         <Layout hideHeader>
-            <SEO title='COVID screening form' />
             <ContentWrapper>
                 <h1>COVID screening form</h1><h2>for Randonneurs Ontario</h2>
                 <p>All riders must complete self-screen before starting a ride. A missing screening will result in a DNS. <Link href="https://www.randonneursontario.ca/who/whatis.html#COVID">Learn more about our COVID-19 policies</Link>.</p>
@@ -20,4 +19,7 @@ const CovidScreening = () => {
         </Layout >
     )
 }
+
+export const Head = () => (<SEO title='COVID screening form' />)
+
 export default CovidScreening

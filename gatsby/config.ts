@@ -19,7 +19,6 @@ export const siteMetadata = {
 
 export const plugins = [
   'gatsby-plugin-root-import',
-  'gatsby-plugin-react-helmet',
   'gatsby-plugin-typescript',
   'gatsby-transformer-sharp',
   'gatsby-plugin-sharp',

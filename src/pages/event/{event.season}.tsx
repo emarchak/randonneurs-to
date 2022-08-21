@@ -32,10 +32,6 @@ query SeasonPage($season: String) {
 
 const Season = ({ uri, params: { season }, data: { allEvent: { nodes: events } } }: SeasonProps) => (
     <Layout>
-    <SEO
-      title={`${season} | Season`}
-      description={`The ${season} season of the Toronto Chapter of Randonneurs Ontario, a long distance cycling club associated with the Audax Club Parisien.`}
-      />
       <ContentWrapper>
         <TabMenu activeRoute={`${uri}/`} section='seasons' />
         <h1>{season} Season</h1>
@@ -67,5 +63,10 @@ const Season = ({ uri, params: { season }, data: { allEvent: { nodes: events } }
 
   </Layout>
 )
+
+export const Head = ({ params: { season } }: SeasonProps) => (<SEO
+    title={`${season} | Season`}
+    description={`The ${season} season of the Toronto Chapter of Randonneurs Ontario, a long distance cycling club associated with the Audax Club Parisien.`}
+  />)
 
 export default Season

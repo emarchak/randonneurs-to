@@ -38,10 +38,6 @@ export const query = graphql`
 
 const Newsletter = ({pageContext: {id, pageInfo}, data: {mail: {subject, teaser, sentAt, content, name}}}: NewsletterProps) => (
   <Layout>
-    <SEO
-      title={`${pageInfo.title} | ${subject} | Newsletter`}
-      description={teaser}
-      />
       <ContentWrapper>
         <h1>{name}</h1>
         <p><em>Sent on {getDateLong(new Date(sentAt))}</em></p>
@@ -61,5 +57,11 @@ const Newsletter = ({pageContext: {id, pageInfo}, data: {mail: {subject, teaser,
       </Callout>
   </Layout>
 )
+
+export const Head = ({data: {mail: {subject, teaser, name}}}: NewsletterProps) => (
+  <SEO
+    title={`${name} | ${subject} | Newsletter`}
+    description={teaser}
+  />)
 
 export default Newsletter

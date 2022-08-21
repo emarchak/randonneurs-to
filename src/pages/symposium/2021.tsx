@@ -11,10 +11,6 @@ const Page = ({path}: PageProps) => {
 
   return (
     <Layout>
-      <SEO
-        title='2021 Virtual Symposium'
-        description='Randonneurs Ontario is a long distance cycling club that has been riding out of Toronto since 1983. We normally do an in-person New Members night for folks to learn more about our long distance rides, but are going fully remote this year!</p>'
-      />
       <ContentWrapper>
         <TabMenu section='symposium' activeRoute={path} />
       </ContentWrapper>
@@ -56,5 +52,11 @@ const Page = ({path}: PageProps) => {
     </Layout>
   )
 }
+
+export const Head = () => (
+  <SEO
+    title='2021 Virtual Symposium'
+    description='Randonneurs Ontario is a long distance cycling club that has been riding out of Toronto since 1983. We normally do an in-person New Members night for folks to learn more about our long distance rides, but are going fully remote this year!</p>'
+  />)
 
 export default Page

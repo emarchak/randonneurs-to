@@ -11,7 +11,6 @@ import { TabMenu } from 'src/components/Menu'
 const BrevetRegistration = ({path}: PageProps) => {
   return (
     <Layout hideHeader>
-      <SEO title='Register for a ride' description="Register for a brevet with Randonneurs Ontario, an memmber of the Audax Club Parisien" />
       <ContentWrapper>
         <TabMenu section='registration' activeRoute={path} />
         <h1>Register to ride</h1><h2>with Randonneurs Ontario</h2>
@@ -28,5 +27,7 @@ const BrevetRegistration = ({path}: PageProps) => {
     </Layout>
   )
 }
+
+export const Head = () => (<SEO title='Register for a ride' description="Register for a brevet with Randonneurs Ontario, an memmber of the Audax Club Parisien" />)
 
 export default BrevetRegistration

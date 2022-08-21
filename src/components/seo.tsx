@@ -1,6 +1,5 @@
 
 import React from "react"
-import Helmet from "react-helmet"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
@@ -11,14 +10,13 @@ type Props = {
   lang?: string
   meta?: meta[]
   image?: IGatsbyImageData,
-  title: string
+  title?: string
 }
 
 const getImage = (image: IGatsbyImageData) => image.images.fallback.src
 
 export const SEO = ({
   description = "",
-  lang = "en",
   meta = [],
   image,
   title,
@@ -50,45 +48,41 @@ export const SEO = ({
       },
     ]
     : []
-
+    const pageMeta = [
+      {
+        name: "description",
+        content: metaDescription,
+      },
+      {
+        property: "og:title",
+        content: title,
+      },
+      {
+        property: "og:description",
+        content: metaDescription,
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        name: "twitter:card",
+        content: "summary",
+      },
+      {
+        name: "twitter:title",
+        content: title,
+      },
+      {
+        name: "twitter:description",
+        content: metaDescription,
+      },
+      ...metaImage,
+    ].concat(meta)
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${siteMetadata.title}`}
-      meta={[
-        {
-          name: "description",
-          content: metaDescription,
-        },
-        {
-          property: "og:title",
-          content: title,
-        },
-        {
-          property: "og:description",
-          content: metaDescription,
-        },
-        {
-          property: "og:type",
-          content: "website",
-        },
-        {
-          name: "twitter:card",
-          content: "summary",
-        },
-        {
-          name: "twitter:title",
-          content: title,
-        },
-        {
-          name: "twitter:description",
-          content: metaDescription,
-        },
-        ...metaImage,
-      ].concat(meta)}
-    />
+    <>
+      <title>{title ? `${title} | ${siteMetadata.title}` : siteMetadata.title}</title>
+      {pageMeta.map((meta) => (<meta key={meta.name} id={meta.name} {...meta} />))}
+    </>
   )
 }

@@ -9,7 +9,7 @@ import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
 import { Link } from 'src/components/Link'
 
-import { routes as lonelinessRoutes } from '../loneliness'
+import { BuyButtonHead } from '../../components/buybutton'
 
 const BuyButton = Loadable(() => import('../../components/buybutton'))
 
@@ -29,11 +29,6 @@ const AudaxShopPage = () => {
     const image = getImage(file)
     return (
         <Layout>
-            <SEO
-                title="Club audax à distance patches"
-                description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
-                image={image}
-            />
             <ContentWrapper>
                 <TabMenu section='loneliness' activeRoute='/shop/audax-a-distance/' />
             </ContentWrapper>
@@ -59,4 +54,20 @@ const AudaxShopPage = () => {
     )
 
 }
+
+export const Head = () => {
+    const { file } = useStaticQuery(imageQuery)
+    const image = getImage(file)
+    return (
+        <>
+            <BuyButtonHead/>
+        <SEO
+            title="Club audax à distance patches"
+            description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
+            image={image}
+            />
+        </>)
+
+}
+
 export default AudaxShopPage

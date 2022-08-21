@@ -34,7 +34,6 @@ const Seasons = ({path}: PageProps) => {
 
     return (
       <Layout>
-        <SEO title='Events' />
         <ContentWrapper>
         <TabMenu section='registration' activeRoute={path} />
           <h1>Events of </h1><h2>of Randonneurs Ontario</h2>
@@ -58,5 +57,7 @@ const Seasons = ({path}: PageProps) => {
       </Layout >
     )
 }
+
+export const Head = () => (<SEO title='Events' />)
 
 export default Seasons

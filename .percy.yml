@@ -9,5 +9,5 @@ discovery:
   allowedHostnames: []
   networkIdleTimeout: 100
 static:
-  include: "**/*.{html,htm}"
-  exclude: "/event/*/*"
+  include: ['**/*.{html,htm}']
+  exclude: '/event/**'
