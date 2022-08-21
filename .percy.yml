@@ -10,4 +10,4 @@ discovery:
   networkIdleTimeout: 100
 static:
   include: ['**/*.{html,htm}']
-  exclude: ['**/event/*/*']
+  exclude: '/event/**'
