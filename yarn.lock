@@ -3609,7 +3609,7 @@
     fast-glob "^3.2.11"
     image-size "^1.0.0"
 
-"@percy/cli@^1.0.0-beta.76":
+"@percy/cli@^1.9.1":
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/@percy/cli/-/cli-1.9.1.tgz#0df5b6af5dd848ed1c2a57db4f6e2b547583fe3c"
   integrity sha512-B62SYu2vHGcR1lkQzP2RHHJRjuEBoWwgeccwBf3mYSzwl4fEB6n1feBRKDx7UNCazRnAzXKrL+g4X7FIesHqnA==
@@ -12957,9 +12957,9 @@ keyv@^3.0.0:
     json-buffer "3.0.0"
 
 keyv@^4.0.0:
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.3.3.tgz#6c1bcda6353a9e96fc1b4e1aeb803a6e35090ba9"
-  integrity sha512-AcysI17RvakTh8ir03+a3zJr5r0ovnAH/XTXei/4HIv3bL2K/jzvgivLK9UuI/JbU1aJjM3NSAnVvVVd3n+4DQ==
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.4.0.tgz#8415fa45948201bb1a0bf4ed83dad7ae6babe866"
+  integrity sha512-BYafwt3p7j3Nczk/4IHsCXVV10Qy+pjPC6fpu91bmQl7d8XCrcmttI+dFb7qvp+5wq3QYl1tpL1YdwElzeMiLA==
   dependencies:
     compress-brotli "^1.3.8"
     json-buffer "3.0.1"
