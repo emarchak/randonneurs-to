@@ -53,20 +53,14 @@ query {
 
 const IndexPage = () => {
   const {
-    allFile: { nodes: images },
     allSitePage: { nodes: pages },
     allMail: { nodes: newsletters }
   } = useStaticQuery(pageQuery)
-  const seoImage = getImage(images[0])
   const { brevets } = useEvents({ chapter: 'Toronto', limit: 2 })
   const { posts } = useBlog({limit: 2})
 
   return (
     <Layout>
-      <SEO
-        title='Home'
-        description='Part of Randonneurs Ontario, a long distance cycling club affiliated with the Audax Club Parisien'
-        image={seoImage} />
       <ContentWrapper container>
         <ContentChild>
           <h3>About us</h3>
@@ -139,6 +133,17 @@ const IndexPage = () => {
       </ContentWrapper>
     </Layout >
   )
+}
+
+export const Head = () => {
+  const {
+    allFile: { nodes: images },
+  } = useStaticQuery(pageQuery)
+  const seoImage = getImage(images[0])
+
+  return (<SEO
+    description='Part of Randonneurs Ontario, a long distance cycling club affiliated with the Audax Club Parisien'
+    image={seoImage} />)
 }
 
 export default IndexPage

@@ -11,7 +11,6 @@ import { Link } from 'src/components/Link'
 export const PermanentRegistration = ({path}: PageProps) => {
   return (
     <Layout hideHeader>
-      <SEO title='Register for a permanent' />
       <ContentWrapper>
         <TabMenu section='registration' activeRoute={path} />
         <h1>Register for a permanent</h1><h2>with Randonneurs Ontario</h2>
@@ -30,5 +29,7 @@ export const PermanentRegistration = ({path}: PageProps) => {
     </Layout>
   )
 }
+
+export const Head = () => (<SEO title='Register for a permanent' />)
 
 export default PermanentRegistration

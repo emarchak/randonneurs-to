@@ -26,11 +26,6 @@ const TraceVirtuelle = ({path}: PageProps) => {
     const image = getImage(file)
     return (
         <Layout>
-            <SEO
-                title='Trace Virtuelle'
-                description='The Trace Virtuelle is a virtual ultra-endurance cycling event based off of the Trace Vélocio'
-                image={image}
-            />
             <ContentWrapper>
                 <TabMenu section='registration' activeRoute={path} />
                 <h1>Trace Virtuelle</h1>
@@ -92,5 +87,16 @@ const TraceVirtuelle = ({path}: PageProps) => {
         </Layout>
     )
 }
+
+export const Head = () => {
+    const { file } = useStaticQuery(imageQuery)
+    const image = getImage(file)
+    return (
+        <SEO
+            title='Trace Virtuelle'
+            description='The Trace Virtuelle is a virtual ultra-endurance cycling event based off of the Trace Vélocio'
+            image={image}
+        />
+    )}
 
 export default TraceVirtuelle

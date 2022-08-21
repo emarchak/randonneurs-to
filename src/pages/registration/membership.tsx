@@ -10,7 +10,6 @@ import { TabMenu } from 'src/components/Menu'
 const MemberRegistration = ({path}: PageProps) => {
     return (
         < Layout >
-            <SEO title='Become a member of Randonneurs Ontario' />
             <ContentWrapper>
                 <TabMenu section='registration' activeRoute={path} />
                 <h1>Become a member</h1><h2>of Randonneurs Ontario</h2>
@@ -44,5 +43,6 @@ const MemberRegistration = ({path}: PageProps) => {
     )
 }
 
+export const Head = () => (<SEO title='Become a member of Randonneurs Ontario' />)
 
 export default MemberRegistration

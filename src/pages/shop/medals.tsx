@@ -25,11 +25,6 @@ const MedalsShopPage = ({path}: PageProps) => {
   const image = getImage(file)
   return (
     <Layout>
-      <SEO
-        title="Brevets Randonneurs Mondiaux medals"
-        description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
-        image={image}
-      />
       <ContentWrapper>
         <TabMenu section='shop' activeRoute={path} />
         <h1>Brevets Randonneurs Mondiaux</h1><h2>medals</h2>
@@ -63,6 +58,18 @@ const MedalsShopPage = ({path}: PageProps) => {
         </ContentChild>
       </ContentWrapper>
     </Layout >
+  )
+}
+
+export const Head = () => {
+  const { file } = useStaticQuery(imageQuery)
+  const image = getImage(file)
+  return (
+      <SEO
+        title="Brevets Randonneurs Mondiaux medals"
+        description="A custom patch to celebrate riding by your lonesome! Club Audax à Distance is a play on long distance relationships and the time we spend together."
+        image={image}
+    />
   )
 }
 

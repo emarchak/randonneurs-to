@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
-import Helmet from "react-helmet"
 
 type ContextType = {
   shopifyClient: ShopifyBuy.Client | null
@@ -50,14 +49,13 @@ export const BuyButtonProvider = ({ children }: BuyButtonProviderProps) => {
 
   return (
     <>
-      <Helmet>
-        <script async src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js" />
-      </Helmet>
       <BuyButtonContext.Provider value={{shopifyClient, shopifyUI}}>
         {children}
       </BuyButtonContext.Provider>
     </>
   )
 }
+
+export const BuyButtonHead = () =>  <script async src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js" />
 
 export const useBuyButton = () => useContext(BuyButtonContext)

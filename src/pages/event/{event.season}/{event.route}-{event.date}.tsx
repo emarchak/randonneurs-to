@@ -38,10 +38,6 @@ const Event = ({ data: { event } }: EventProps) => {
 
   return (
   <Layout>
-    <SEO
-      title={`${event.route} | ${getDateTimeShort(new Date(event.date))}`}
-      description={`A ${event.distance}km ride starting from ${event.startLocation} with the ${event.chapter} Chapter of Randonneurs Ontario, a long distance cycling club associated with the Audax Club Parisien.`}
-    />
     <ContentWrapper>
       <TabMenu activeRoute={`/event/${event.season}/`} section='seasons' />
        <h1>{event.route}</h1>
@@ -90,5 +86,9 @@ const Event = ({ data: { event } }: EventProps) => {
   </Layout>
 )}
 
+export const Head = ({ data: { event } }: EventProps) => (<SEO
+  title={`${event.route} | ${getDateTimeShort(new Date(event.date))}`}
+  description={`A ${event.distance}km ride starting from ${event.startLocation} with the ${event.chapter} Chapter of Randonneurs Ontario, a long distance cycling club associated with the Audax Club Parisien.`}
+/>)
 
 export default Event
