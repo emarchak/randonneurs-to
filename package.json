@@ -27,7 +27,7 @@
     "gatsby-source-rss-feed": "^1.2.2",
     "gatsby-transformer-sharp": "^4.21.0",
     "google-spreadsheet": "^3.1.15",
-    "graphql": "15.8.0",
+    "graphql": "16.6.0",
     "isomorphic-unfetch": "^3.0.0",
     "node-sass": "^7.0.1",
     "normalize.css": "^8.0.1",
