@@ -16,6 +16,7 @@ const addContact = async (event: HandlerEvent): Promise<HandlerResponse> => {
       last_name,
       email,
       customFields = {},
+      lists = []
     } = JSON.parse(event.body)
 
     if (!email) {
@@ -25,19 +26,22 @@ const addContact = async (event: HandlerEvent): Promise<HandlerResponse> => {
     const customFieldResponse = await fetch(customFieldEndpoint, { headers })
     const { custom_fields: fieldDefinitions } = await customFieldResponse.json()
 
-    const contactCustomFields = {}
     Object.keys(customFields).forEach((fieldName) => {
       const definition = fieldDefinitions.find((definition) => fieldName === definition.name)
       if (!definition) {
         throw new Error(`Could not find field definition for ${fieldName}`)
       }
-      contactCustomFields[definition.id] = customFields[fieldName]
     })
+
+    const contactCustomFields = fieldDefinitions.reduce((accFields, { id, name }) => {
+      return { ...accFields, [id]: customFields[name] }
+    }, {})
 
     const response = await fetch(contactEndpoint, {
       method: 'PUT',
       headers,
       body: JSON.stringify({
+        list_ids: lists,
         contacts: [{
           first_name,
           last_name,
@@ -49,7 +53,7 @@ const addContact = async (event: HandlerEvent): Promise<HandlerResponse> => {
 
     return {
       statusCode: response.status,
-      body: response.statusText
+      body: JSON.stringify(response)
     }
   } catch (error) {
     return {

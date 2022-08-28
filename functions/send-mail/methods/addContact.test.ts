@@ -82,6 +82,6 @@ describe('send', () => {
           }]
         })
       }))
-    expect(response).toEqual({ statusCode: 200, body: 'OK' })
+    expect(response).toEqual({ statusCode: 200, body: '{\"status\":200,\"statusText\":\"OK\"}' })
   })
 })
