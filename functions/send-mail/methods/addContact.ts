@@ -12,8 +12,9 @@ const headers = {
 const addContact = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
     const {
+      first_name,
+      last_name,
       email,
-      name,
       customFields = {},
     } = JSON.parse(event.body)
 
@@ -28,7 +29,7 @@ const addContact = async (event: HandlerEvent): Promise<HandlerResponse> => {
     Object.keys(customFields).forEach((fieldName) => {
       const definition = fieldDefinitions.find((definition) => fieldName === definition.name)
       if (!definition) {
-        throw new Error(`Could not find field defitiion for ${fieldName}`)
+        throw new Error(`Could not find field definition for ${fieldName}`)
       }
       contactCustomFields[definition.id] = customFields[fieldName]
     })
@@ -38,27 +39,22 @@ const addContact = async (event: HandlerEvent): Promise<HandlerResponse> => {
       headers,
       body: JSON.stringify({
         contacts: [{
-          first_name: name.substring(0, name.indexOf(' ')),
-          last_name: name.substring(name.indexOf(' ') + 1),
+          first_name,
+          last_name,
           email,
           custom_fields: contactCustomFields
         }],
       })
     })
-    if (!(response.statusText === 'OK')) {
-      throw new Error(response.statusText)
-    }
-
-    const data = await response.json()
 
     return {
       statusCode: response.status,
-      body: JSON.stringify(data)
+      body: response.statusText
     }
   } catch (error) {
     return {
       statusCode: 500,
-      body: error.response ? JSON.stringify(error.response.body) : ''
+      body: JSON.stringify(error?.message)
     }
   }
 }
