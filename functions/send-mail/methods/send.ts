@@ -1,7 +1,7 @@
-import sgMail, { MailDataRequired } from '@sendgrid/mail'
+import { send as sgSend, setApiKey, MailDataRequired } from '@sendgrid/mail'
 import { HandlerEvent, HandlerResponse } from '@netlify/functions'
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+setApiKey(process.env.SENDGRID_API_KEY)
 
 const send = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
@@ -15,7 +15,7 @@ const send = async (event: HandlerEvent): Promise<HandlerResponse> => {
       data = {}
     } = JSON.parse(event.body)
 
-    const [response] = await sgMail.send({
+    const [response] = await sgSend({
       to,
       subject,
       from,
@@ -24,16 +24,16 @@ const send = async (event: HandlerEvent): Promise<HandlerResponse> => {
       html: body,
       templateId: templateId || undefined,
       dynamic_template_data: data
-    } as MailDataRequired);
+    } as MailDataRequired)
 
     return {
       statusCode: response.statusCode || 200,
-      body: JSON.stringify(response.body) || '',
+      body: JSON.stringify(response.body),
     }
   } catch (error) {
     return {
       statusCode: 500,
-      body: error.response ? JSON.stringify(error.response.body) : ''
+      body: JSON.stringify(error)
     }
   }
 }
