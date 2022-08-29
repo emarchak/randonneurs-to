@@ -74,6 +74,7 @@ describe('send', () => {
       expect.objectContaining({
         method: 'PUT',
         body: JSON.stringify({
+          list_ids: [],
           contacts: [{
             first_name: 'Test',
             last_name: 'User',

@@ -1,7 +1,7 @@
-import { send as sgSend, setApiKey, MailDataRequired } from '@sendgrid/mail'
+import sgSend, { MailDataRequired } from '@sendgrid/mail'
 import { HandlerEvent, HandlerResponse } from '@netlify/functions'
 
-setApiKey(process.env.SENDGRID_API_KEY)
+sgSend.setApiKey(process.env.SENDGRID_API_KEY)
 
 const send = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
@@ -15,7 +15,7 @@ const send = async (event: HandlerEvent): Promise<HandlerResponse> => {
       data = {}
     } = JSON.parse(event.body)
 
-    const [response] = await sgSend({
+    const [response] = await sgSend.send({
       to,
       subject,
       from,
