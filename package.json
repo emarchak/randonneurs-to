@@ -50,7 +50,7 @@
     "@graphql-codegen/typescript-graphql-files-modules": "2.2.1",
     "@graphql-codegen/typescript-operations": "2.5.3",
     "@graphql-codegen/typescript-react-query": "^4.0.1",
-    "@graphql-tools/jest-transform": "^1.2.1",
+    "@graphql-tools/jest-transform": "^1.2.2",
     "@percy/cli": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
