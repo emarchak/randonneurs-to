@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-unfetch'
 import { HandlerEvent, HandlerResponse } from "@netlify/functions"
 
-const listsEndpoint = 'https://api.sendgrid.com/v3/marketing/lists'
+const getListsEndpoint = 'https://api.sendgrid.com/v3/marketing/lists'
+const createListsEndpoint = 'https://api.sendgrid.com/v3/marketing/lists'
 const headers = {
   'Content-Type': 'application/json',
   'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
@@ -25,7 +26,7 @@ type ContactList = {
 
 const getLists = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
-    const response = await fetch(listsEndpoint, {
+    const response = await fetch(getListsEndpoint, {
       method: 'GET',
       headers
     })
@@ -62,6 +63,29 @@ export const getListByScheduleId = async (event: HandlerEvent): Promise<HandlerR
     return {
       statusCode: statusCode,
       body: JSON.stringify(list || {})
+    }
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify(error?.message)
+    }
+  }
+}
+
+export const createList = async (event: HandlerEvent): Promise<HandlerResponse> => {
+  try {
+    const { name } = JSON.parse(event.body)
+
+    const response = await fetch(createListsEndpoint, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        name
+      })
+    })
+    return {
+      statusCode: response.status,
+      body: JSON.stringify(response)
     }
   } catch (error) {
     return {
