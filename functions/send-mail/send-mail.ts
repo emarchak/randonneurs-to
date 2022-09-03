@@ -1,7 +1,7 @@
 import { Handler } from '@netlify/functions'
 import addContact from './methods/addContact'
 import send from './methods/send'
-import list from './methods/list'
+import lists, { getListByScheduleId } from './methods/lists'
 
 const handler: Handler = async (event) => {
   const { path, httpMethod } = event
@@ -12,7 +12,9 @@ const handler: Handler = async (event) => {
     case '/.netlify/functions/send-mail/contact:PUT':
       return addContact(event)
     case '/.netlify/functions/send-mail/lists:GET':
-      return list(event)
+      return lists(event)
+    case '/.netlify/functions/send-mail/list:GET':
+      return getListByScheduleId(event)
     default:
       return {
         statusCode: 404,

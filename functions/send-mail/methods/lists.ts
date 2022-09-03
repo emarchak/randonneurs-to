@@ -7,10 +7,20 @@ const headers = {
   'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
 }
 
-type ContactList = {
+type RemoteContactList = {
   name: string,
   id: string,
   contact_count: number,
+  _metadata: {
+    self: string
+  }
+}
+type ContactList = {
+  name: string,
+  id: string,
+  scheduleId?: string,
+  contactCount: number
+  url: string
 }
 
 const getLists = async (event: HandlerEvent): Promise<HandlerResponse> => {
@@ -19,11 +29,19 @@ const getLists = async (event: HandlerEvent): Promise<HandlerResponse> => {
       method: 'GET',
       headers
     })
+
     const data = await response.json()
+    const lists: ContactList[] = data?.result?.map(({ name, id, contact_count, _metadata }: RemoteContactList) => ({
+      name,
+      id,
+      scheduleId: name.match(/^\d{3,}/)?.pop(),
+      contactCount: contact_count,
+      url: _metadata.self
+    }))
 
     return {
       statusCode: response.status,
-      body: JSON.stringify(data?.result)
+      body: JSON.stringify(lists)
     }
   } catch (error) {
     return {
@@ -35,16 +53,15 @@ const getLists = async (event: HandlerEvent): Promise<HandlerResponse> => {
 
 export const getListByScheduleId = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
-    const { scheduleId } = JSON.parse(event.body)
+    const { scheduleId = '' } = JSON.parse(event.body)
     const { statusCode, body } = await getLists(event)
 
-    const lists = JSON.parse(body)
-
-    lists.find(({ name, id }) => { })
+    const lists: ContactList[] = JSON.parse(body)
+    const list = lists.find(list => (list.scheduleId === scheduleId))
 
     return {
       statusCode: statusCode,
-      body: JSON.stringify(lists)
+      body: JSON.stringify(list || {})
     }
   } catch (error) {
     return {
