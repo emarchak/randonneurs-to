@@ -1,4 +1,4 @@
-const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
+const fetch = jest.fn().mockImplementation(async (endpoint = '', body = {}) => {
 
   if (endpoint.match(/ridewithgps\.com\/routes\/\d+.json/)) {
     return {
@@ -179,6 +179,19 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
       })
     }
   }
+
+  if (endpoint.match(/functions\/send-mail\/list/) && body.method === 'GET') {
+    return {
+      status: 200,
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        id: '1234',
+        name: '420 - Example list',
+        scheduleId: '420'
+      })
+    }
+  }
+
 
   return ({
     ok: true,

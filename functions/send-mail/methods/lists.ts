@@ -72,7 +72,7 @@ export const getListByScheduleId = async (event: HandlerEvent): Promise<HandlerR
   }
 }
 
-export const createList = async (event: HandlerEvent): Promise<HandlerResponse> => {
+export const addList = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
     const { name } = JSON.parse(event.body)
 

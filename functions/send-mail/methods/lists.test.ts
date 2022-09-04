@@ -1,6 +1,6 @@
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 import { HandlerEvent } from '@netlify/functions'
-import getLists, { createList, getListByScheduleId } from './lists'
+import getLists, { addList, getListByScheduleId } from './lists'
 
 const event: HandlerEvent = {} as any
 
@@ -44,7 +44,7 @@ describe('getListByScheduleId', () => {
   })
 })
 
-describe('createList', () => {
+describe('addList', () => {
   const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
 
   beforeEach(() => {
@@ -52,7 +52,7 @@ describe('createList', () => {
   })
 
   it('should create a list', async () => {
-    const { statusCode } = await createList({ ...event, body: JSON.stringify({ name: 'Example list' }) })
+    const { statusCode } = await addList({ ...event, body: JSON.stringify({ name: 'Example list' }) })
     expect(statusCode).toEqual(200)
     expect(fetchSpy).toHaveBeenCalledWith(
       expect.stringContaining('marketing/lists'),
