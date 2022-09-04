@@ -43,7 +43,8 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         setLoading(true)
         const message = `Registration for ${data.chapter} ${data.route} ${data.rideType}`
 
-        const successRegistration = await registerEvent(data)
+        const successRegistration = await registerEvent(data as any)
+
         const successSlack = await sendSlackMsg(formatSlackMessage({ fieldLabels, formData: data, message }), 'registration')
         const successSheet = await addRow({
             sheet: formName,

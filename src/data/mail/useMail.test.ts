@@ -67,50 +67,51 @@ describe('useMail()', () => {
             name: '420 - Example list',
             scheduleId: '420'
         })
-        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list', expect.objectContaining({
-            method: 'GET',
-            body: JSON.stringify({ scheduleId: '420' })
-        }))
+        expect(fetchSpy).toHaveBeenCalledWith(
+            '/.netlify/functions/send-mail/list?scheduleId=420',
+            { method: 'GET' }
+        )
     })
 
     it('fetches list with errors', async () => {
         fetchSpy.mockRejectedValueOnce({ ok: false })
         const { result } = renderHook(() => useMail())
-        const response = await result.current.getList({ scheduleId: '420' })
+        const response = await result.current.getList({ scheduleId: '999' })
 
-        expect(response).toEqual({})
+        expect(response).toBeUndefined()
         expect(notifySpy).toHaveBeenCalledWith({ ok: false })
-        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list', expect.objectContaining({
+        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list?scheduleId=999', expect.objectContaining({
             method: 'GET',
-            body: JSON.stringify({ scheduleId: '420' })
         }))
     })
 
     it('creates list', async () => {
         const { result } = renderHook(() => useMail())
-        const response = await result.current.createList({ scheduleId: '420', name: 'Example list' })
+        await result.current.createList({ scheduleId: 999, name: 'Example list' })
 
-        expect(response).toEqual({
-            id: '1234',
-            name: '420 - Example list',
-            scheduleId: '420'
-        })
-        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list', expect.objectContaining({
-            method: 'POST',
-            body: JSON.stringify({ name: '420 - Example list' })
-        }))
+        expect(fetchSpy).toHaveBeenCalledWith(
+            '/.netlify/functions/send-mail/list?scheduleId=999', expect.objectContaining({
+                method: 'GET',
+            }))
+        expect(fetchSpy).toHaveBeenCalledWith(
+            '/.netlify/functions/send-mail/list',
+            expect.objectContaining({
+                method: 'POST',
+                body: JSON.stringify({ name: '999 - Example list' })
+            }))
     })
 
     it('creates list with errors', async () => {
-        fetchSpy.mockRejectedValueOnce({ ok: false })
+        fetchSpy.mockRejectedValue({ ok: false })
         const { result } = renderHook(() => useMail())
-        const response = await result.current.createList({ scheduleId: 420, name: 'Example list' })
+        const response = await result.current.createList({ scheduleId: 999, name: 'Example list' })
 
-        expect(response).toEqual({})
+        expect(response).toBeNull()
         expect(notifySpy).toHaveBeenCalledWith({ ok: false })
-        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list', expect.objectContaining({
+        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list?scheduleId=999', { method: 'GET' })
+        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list', {
             method: 'POST',
-            body: JSON.stringify({ name: '420 - Example list' })
-        }))
+            body: JSON.stringify({ name: '999 - Example list' })
+        })
     })
 })

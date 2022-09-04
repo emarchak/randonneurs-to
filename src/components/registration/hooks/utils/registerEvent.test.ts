@@ -3,7 +3,7 @@ import { registerEvent } from "./registerEvent"
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
 
 const event = {
-  eventId: '123',
+  eventId: '420',
   name: 'John de la Doe',
   route: '200',
   shareRide: true,
@@ -31,7 +31,7 @@ describe('registerEvent', () => {
           last_name: 'de la Doe',
           email: 'test@test.com',
           lists: ['1234'],
-          customFields: { chapter: 'Toronto' }
+          custom_fields: { chapter: 'Toronto' }
         })
       })
     )
@@ -40,7 +40,7 @@ describe('registerEvent', () => {
       expect.objectContaining({
         method: 'POST',
         body: JSON.stringify({
-          eventId: 123,
+          eventId: 420,
           hideRide: false,
           email: 'test@test.com',
           firstName: 'John',

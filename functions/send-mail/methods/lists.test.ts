@@ -26,7 +26,7 @@ describe('getLists', () => {
 
 describe('getListByScheduleId', () => {
   it('should return a list by scheduleId', async () => {
-    const { statusCode, body } = await getListByScheduleId({ ...event, body: JSON.stringify({ scheduleId: '420' }) })
+    const { statusCode, body } = await getListByScheduleId({ ...event, queryStringParameters: { scheduleId: '420' } })
     expect(statusCode).toEqual(200)
     expect(JSON.parse(body)).toEqual({
       id: '1234',
@@ -38,7 +38,7 @@ describe('getListByScheduleId', () => {
   })
 
   it('should an empty object if no scheduleId', async () => {
-    const { statusCode, body } = await getListByScheduleId({ ...event, body: JSON.stringify({ scheduleId: '000' }) })
+    const { statusCode, body } = await getListByScheduleId({ ...event, queryStringParameters: { scheduleId: '000' } })
     expect(statusCode).toEqual(200)
     expect(JSON.parse(body)).toEqual({})
   })

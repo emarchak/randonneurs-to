@@ -180,7 +180,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '', body = {}) => {
     }
   }
 
-  if (endpoint.match(/functions\/send-mail\/list/) && body.method === 'GET') {
+  if (endpoint.match(/functions\/send-mail\/list\?scheduleId=420/) && body.method === 'GET') {
     return {
       status: 200,
       ok: true,
