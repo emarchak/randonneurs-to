@@ -55,4 +55,10 @@ describe('registerEvent', () => {
     expect(response).toBeTruthy()
     expect(fetchSpy).not.toHaveBeenCalledWith()
   })
+
+  it('should return false if list.id is missing', async () => {
+    const response = await registerEvent({ ...event, eventId: '999' })
+    expect(response).toBeFalsy()
+    expect(fetchSpy).not.toHaveBeenCalledWith()
+  })
 })

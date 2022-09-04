@@ -3,9 +3,14 @@ import { HandlerEvent } from '@netlify/functions'
 import getLists, { addList, getListByScheduleId } from './lists'
 
 const event: HandlerEvent = {} as any
+describe('send-mail', () => {
+  const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
 
-describe('getLists', () => {
-  it('should return a list of lists', async () => {
+  afterEach(() => {
+    fetchSpy.mockClear()
+  })
+
+  it('should getLists', async () => {
     const { statusCode, body } = await getLists(event)
     expect(statusCode).toEqual(200)
     expect(JSON.parse(body)).toEqual([{
@@ -22,10 +27,15 @@ describe('getLists', () => {
       scheduleId: '421'
     }])
   })
-})
 
-describe('getListByScheduleId', () => {
-  it('should return a list by scheduleId', async () => {
+  it('should handle errors with getLists', async () => {
+    fetchSpy.mockRejectedValueOnce(new Error('Something went wrong'))
+    const { statusCode } = await getLists(event)
+
+    expect(statusCode).toEqual(500)
+  })
+
+  it('should getListByScheduleId', async () => {
     const { statusCode, body } = await getListByScheduleId({ ...event, queryStringParameters: { scheduleId: '420' } })
     expect(statusCode).toEqual(200)
     expect(JSON.parse(body)).toEqual({
@@ -37,21 +47,14 @@ describe('getListByScheduleId', () => {
     })
   })
 
-  it('should an empty object if no scheduleId', async () => {
+
+  it('should return an empty object if no getListByScheduleId', async () => {
     const { statusCode, body } = await getListByScheduleId({ ...event, queryStringParameters: { scheduleId: '000' } })
     expect(statusCode).toEqual(200)
     expect(JSON.parse(body)).toEqual({})
   })
-})
 
-describe('addList', () => {
-  const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-
-  beforeEach(() => {
-    fetchSpy.mockClear()
-  })
-
-  it('should create a list', async () => {
+  it('should addlist', async () => {
     const { statusCode } = await addList({ ...event, body: JSON.stringify({ name: 'Example list' }) })
     expect(statusCode).toEqual(200)
     expect(fetchSpy).toHaveBeenCalledWith(
@@ -60,5 +63,22 @@ describe('addList', () => {
         body: JSON.stringify({ name: 'Example list' })
       })
     )
+  })
+
+  it('should handle errors with getListByScheduleId', async () => {
+    fetchSpy
+      .mockRejectedValueOnce(new Error('Something went wrong'))
+    const { statusCode } = await getListByScheduleId(event)
+
+    expect(statusCode).toEqual(500)
+    fetchSpy.mockClear()
+  })
+
+  it('should handle errors with addList', async () => {
+    fetchSpy.mockRejectedValueOnce(new Error('Something went wrong'))
+    const { statusCode } = await addList({ ...event, body: JSON.stringify({ name: 'Example list' }) })
+
+    expect(statusCode).toEqual(500)
+    fetchSpy.mockClear()
   })
 })
