@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions'
-import addContact from './methods/addContact'
+import addContact from './methods/contact'
 import send from './methods/send'
 import lists, { addList, getListByScheduleId } from './methods/lists'
 

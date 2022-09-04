@@ -1,4 +1,5 @@
 export { useEvents } from './useEvents'
 export { useEvent } from './useEvent'
-export type { Chapter, EventType, Event as Brevet, Event } from './useEvents'
+export type { Chapter as ChapterType, EventType, EventType as EventKindType, Event as Brevet, Event } from './useEvents'
+export { Chapter, EventType as EventKind } from './useEvents'
 export { mockBrevet } from './mock'

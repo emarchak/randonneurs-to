@@ -1,17 +1,18 @@
 import Bugsnag from '@bugsnag/js'
 import fetch from 'isomorphic-unfetch'
+import { Event } from 'src/data/events'
 
 type GetListParams = {
-  scheduleId?: string
+  scheduleId?: Event['scheduleId']
 }
 
 type ContactList = {
   name: string,
   id: string,
-  scheduleId: string,
+  scheduleId: Event['scheduleId'],
 }
 
-export const getList = async ({ scheduleId }: GetListParams): Promise<ContactList | {}> => {
+export const getList = async ({ scheduleId }: GetListParams): Promise<ContactList> => {
   try {
     const response = await fetch('/.netlify/functions/send-mail/list', {
       method: 'GET',
@@ -34,19 +35,24 @@ export const getList = async ({ scheduleId }: GetListParams): Promise<ContactLis
   }
   catch (err) {
     Bugsnag.notify(err)
-    return {}
   }
 }
 
 type CreateListParams = {
-  scheduleId: string
+  scheduleId: Event['scheduleId'],
   name?: string
 }
 
 const buildListName = ({ scheduleId, name }: CreateListParams): string => `${scheduleId} - ${name}`
 
-export const createList = async ({ scheduleId, name }): Promise<ContactList | {}> => {
+export const createList = async ({ scheduleId, name }): Promise<ContactList> => {
   try {
+    const originalList = await getList({ scheduleId })
+
+    if (originalList.id) {
+      return originalList
+    }
+
     const response = await fetch('/.netlify/functions/send-mail/list', {
       method: 'POST',
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -66,6 +72,5 @@ export const createList = async ({ scheduleId, name }): Promise<ContactList | {}
   }
   catch (err) {
     Bugsnag.notify(err)
-    return {}
   }
 }

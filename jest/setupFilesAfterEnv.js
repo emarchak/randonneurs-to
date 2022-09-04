@@ -3,6 +3,7 @@ import MockDate from 'mockdate'
 const originalError = console.error
 const originalLog = console.log
 
+const isCI = process.env.NODE_ENV === 'ci'
 
 beforeAll(() => {
   MockDate.set(new Date(2021, 0, 1, 0, 0, 0, 0))
@@ -13,11 +14,14 @@ beforeAll(() => {
       }
       originalError.call(console, ...args);
     }
-
+  if (isCI) {
     console.log = jest.fn()
+  }
 })
 
 afterAll(() => {
-    console.error = originalError;
-    console.log = originalLog;
+  console.error = originalError;
+  if (isCI) {
+    console.log = originalLog
+  }
 })

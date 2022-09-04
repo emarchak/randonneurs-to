@@ -104,7 +104,7 @@ describe('useMail()', () => {
     it('creates list with errors', async () => {
         fetchSpy.mockRejectedValueOnce({ ok: false })
         const { result } = renderHook(() => useMail())
-        const response = await result.current.createList({ scheduleId: '420', name: 'Example list' })
+        const response = await result.current.createList({ scheduleId: 420, name: 'Example list' })
 
         expect(response).toEqual({})
         expect(notifySpy).toHaveBeenCalledWith({ ok: false })

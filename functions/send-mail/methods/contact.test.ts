@@ -1,7 +1,7 @@
 import { HandlerEvent } from '@netlify/functions'
 import * as fetch from 'isomorphic-unfetch'
 import customFields from '../customFields'
-import addContact from './addContact'
+import addContact from './contact'
 
 describe('send', () => {
   const fetchMock = jest.spyOn(fetch, 'default')

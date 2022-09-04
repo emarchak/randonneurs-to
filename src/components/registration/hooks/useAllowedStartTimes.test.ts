@@ -1,7 +1,7 @@
 import MockDate from 'mockdate'
 import { Brevet } from 'src/data/events'
 import { useAllowedStartTimes } from "./useAllowedStartTimes"
-import * as utils from './utils'
+import * as utils from '.'
 
 const brevet: Brevet = {
     chapter: 'Simcoe',
