@@ -54,7 +54,7 @@ const getLists = async (event: HandlerEvent): Promise<HandlerResponse> => {
 
 export const getListByScheduleId = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
-    const { scheduleId = '' } = JSON.parse(event.body)
+    const scheduleId = event.queryStringParameters.scheduleId
     const { statusCode, body } = await getLists(event)
 
     const lists: ContactList[] = JSON.parse(body)

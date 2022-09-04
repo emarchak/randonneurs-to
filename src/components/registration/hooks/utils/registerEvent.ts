@@ -23,10 +23,14 @@ export const registerEvent = async ({ eventId, name, route, shareRide, email, ge
   const [firstName, ...rest] = name.split(' ')
   const lastName = rest.join(' ')
 
-  const { id } = await createList({ scheduleId: eventId, name: route })
+  const list = await createList({ scheduleId: eventId, name: route })
+
+  if (!list.id) {
+    return false
+  }
 
   const success = await Promise.all([
-    createContact({ firstName, lastName, email, chapter, lists: [id] }),
+    createContact({ firstName, lastName, email, chapter, lists: [list.id] }),
     registerRider({
       eventId: parseInt(eventId),
       hideRide: !shareRide,
@@ -36,6 +40,5 @@ export const registerEvent = async ({ eventId, name, route, shareRide, email, ge
       gender
     })
   ])
-  console.log(success)
   return success.every(Boolean)
 }

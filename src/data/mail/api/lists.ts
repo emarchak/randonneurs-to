@@ -7,28 +7,23 @@ type GetListParams = {
 }
 
 type ContactList = {
-  name: string,
-  id: string,
+  name?: string,
+  id?: string,
   scheduleId: Event['scheduleId'],
 }
 
 export const getList = async ({ scheduleId }: GetListParams): Promise<ContactList> => {
   try {
-    const response = await fetch('/.netlify/functions/send-mail/list', {
+    const response = await fetch(`/.netlify/functions/send-mail/list?scheduleId=${scheduleId}`, {
       method: 'GET',
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: JSON.stringify({
-        scheduleId
-      }),
     })
-
     if (!response.ok) {
       throw new Error(`Could not get list ${scheduleId}`)
     }
 
     const list = await response.json()
     return {
-      id: list.id,
+      id: list?.id,
       name: list?.name || '',
       scheduleId
     }
@@ -45,17 +40,15 @@ type CreateListParams = {
 
 const buildListName = ({ scheduleId, name }: CreateListParams): string => `${scheduleId} - ${name}`
 
-export const createList = async ({ scheduleId, name }): Promise<ContactList> => {
+export const createList = async ({ scheduleId, name }): Promise<ContactList | null> => {
   try {
     const originalList = await getList({ scheduleId })
-
-    if (originalList.id) {
+    if (originalList?.id) {
       return originalList
     }
 
     const response = await fetch('/.netlify/functions/send-mail/list', {
       method: 'POST',
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: JSON.stringify({
         name: buildListName({ scheduleId, name }),
       }),
@@ -72,5 +65,6 @@ export const createList = async ({ scheduleId, name }): Promise<ContactList> => 
   }
   catch (err) {
     Bugsnag.notify(err)
+    return null
   }
 }

@@ -20,7 +20,7 @@ export const createContact = async ({ firstName, lastName, email, lists = [], ..
         last_name: lastName,
         email: email,
         lists: lists,
-        customFields,
+        custom_fields: customFields,
       }),
     })
 
@@ -31,7 +31,6 @@ export const createContact = async ({ firstName, lastName, email, lists = [], ..
     return true
   }
   catch (err) {
-    console.log(err)
     Bugsnag.notify(err)
     return false
   }

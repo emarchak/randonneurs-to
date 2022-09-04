@@ -5,7 +5,6 @@ import { useMail } from 'src/data/mail'
 import { useSlack } from 'src/hooks/useSlack'
 import { useSheets } from 'src/hooks/useSheets'
 import { Brevet } from 'src/data/events'
-import { registerRider } from 'src/data/riders'
 import { getDateShort, getDateTimeLong, getTime, trackEvent } from 'src/utils'
 import { registerEvent } from './utils'
 
