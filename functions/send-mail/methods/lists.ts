@@ -39,7 +39,6 @@ const getLists = async (event: HandlerEvent): Promise<HandlerResponse> => {
       contactCount: contact_count,
       url: _metadata.self
     }))
-
     return {
       statusCode: response.status,
       body: JSON.stringify(lists)

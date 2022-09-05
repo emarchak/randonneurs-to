@@ -31,7 +31,7 @@ export const createContact = async ({ firstName, lastName, email, lists = [], ..
     return true
   }
   catch (err) {
-    Bugsnag.notify(err)
+    Bugsnag.notify(err.message)
     return false
   }
 }
