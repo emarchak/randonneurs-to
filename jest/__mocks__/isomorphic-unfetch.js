@@ -1,4 +1,4 @@
-const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
+const fetch = jest.fn().mockImplementation(async (endpoint = '', body = {}) => {
 
   if (endpoint.match(/ridewithgps\.com\/routes\/\d+.json/)) {
     return {
@@ -131,7 +131,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
   if (endpoint.match(/ccnbikes\.com/)) {
     return {
       status: 200,
-      json: jest.fn() .mockResolvedValue({
+      json: jest.fn().mockResolvedValue({
         results: [{
           city: 'Ottawa',
           country: 'Canada',
@@ -156,6 +156,42 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '') => {
       })
     }
   }
+
+  if (endpoint.match(/v3\/marketing\/lists/)) {
+    return {
+      status: 200,
+      json: jest.fn().mockResolvedValue({
+        result: [{
+          id: '1234',
+          name: '420 - Example list',
+          contact_count: 1,
+          _metadata: {
+            self: 'https://api.sendgrid.com/v3/marketing/lists/1234'
+          }
+        }, {
+          id: '5678',
+          name: '421 - Example list',
+          contact_count: 1,
+          _metadata: {
+            self: 'https://api.sendgrid.com/v3/marketing/lists/5678'
+          }
+        }]
+      })
+    }
+  }
+
+  if (endpoint.match(/functions\/send-mail\/list\?scheduleId=420/) && body.method === 'GET') {
+    return {
+      status: 200,
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        id: '1234',
+        name: '420 - Example list',
+        scheduleId: '420'
+      })
+    }
+  }
+
 
   return ({
     ok: true,

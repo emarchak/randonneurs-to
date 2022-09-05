@@ -8,4 +8,8 @@ coverage:
     project:
       default:
         target: 90%
-        threshold: 1%
+        threshold: 2%
+    branch:
+      default:
+        target: 80%
+        threshold: 2%

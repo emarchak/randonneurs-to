@@ -35,7 +35,13 @@ describe('useRegistrationForm', () => {
   jest.spyOn(Sheets, 'useSheets').mockReturnValue({ addRow: addRowSpy })
 
   const sendMailSpy = jest.fn().mockName('sendMail')
-  jest.spyOn(Mail, 'useMail').mockReturnValue({ sendMail: sendMailSpy })
+  jest.spyOn(Mail, 'useMail').mockReturnValue({
+    sendMail: sendMailSpy,
+    createList: jest.fn().mockResolvedValue({ id: 'listid' }),
+    getList: jest.fn().mockResolvedValue({ id: 'listid' }),
+    createContact: jest.fn().mockResolvedValue({ id: 'contactid' })
+  })
+
 
   beforeEach(() => {
     MockDate.set(new Date('Sun August 22 2021 05:01'))
@@ -71,12 +77,13 @@ describe('useRegistrationForm', () => {
 
       expect(registerRiderSpy).toHaveBeenCalledWith({
         email: 'rider@example.com',
-        eventId: '123',
+        eventId: 123,
         firstName: 'Lael',
         gender: 'X',
         hideRide: false,
         lastName: 'de Silva',
       })
+      await waitForNextUpdate()
       expect(sendSlackMsgSpy).toHaveBeenCalledWith({
         'attachments': [
           'Name: Lael de Silva \nEmail: rider@example.com \nRoute: 200 \nRide Type: brevet \nChapter: Toronto \nEvent Id: 123 \nGender: X \nStart Time: Sat August 28 05:01 \nShare Ride: true',

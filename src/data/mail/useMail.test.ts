@@ -1,16 +1,19 @@
 
 import { renderHook } from '@testing-library/react-hooks'
 import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import Bugsnag from '@bugsnag/js'
 import { useMail } from './useMail'
 
 describe('useMail()', () => {
     const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+    const notifySpy = jest.spyOn(Bugsnag, 'notify')
 
     afterEach(() => {
         fetchSpy.mockClear()
+        notifySpy.mockClear()
     })
 
-    it('calls lambda function', async () => {
+    it('calls send mail function', async () => {
         const { result } = renderHook(() => useMail())
         const emailContent = {
             to: 'foo@bar.com',
@@ -53,5 +56,62 @@ describe('useMail()', () => {
                 templateId: 'd-6d0774ec805f41e09c68b2da5e79978a'
             })
         }))
+    })
+
+    it('fetches list', async () => {
+        const { result } = renderHook(() => useMail())
+        const response = await result.current.getList({ scheduleId: '420' })
+
+        expect(response).toEqual({
+            id: '1234',
+            name: '420 - Example list',
+            scheduleId: '420'
+        })
+        expect(fetchSpy).toHaveBeenCalledWith(
+            '/.netlify/functions/send-mail/list?scheduleId=420',
+            { method: 'GET' }
+        )
+    })
+
+    it('fetches list with errors', async () => {
+        fetchSpy.mockRejectedValueOnce({ ok: false })
+        const { result } = renderHook(() => useMail())
+        const response = await result.current.getList({ scheduleId: '999' })
+
+        expect(response).toBeUndefined()
+        expect(notifySpy).toHaveBeenCalledWith({ ok: false })
+        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list?scheduleId=999', expect.objectContaining({
+            method: 'GET',
+        }))
+    })
+
+    it('creates list', async () => {
+        const { result } = renderHook(() => useMail())
+        await result.current.createList({ scheduleId: 999, name: 'Example list' })
+
+        expect(fetchSpy).toHaveBeenCalledWith(
+            '/.netlify/functions/send-mail/list?scheduleId=999', expect.objectContaining({
+                method: 'GET',
+            }))
+        expect(fetchSpy).toHaveBeenCalledWith(
+            '/.netlify/functions/send-mail/list',
+            expect.objectContaining({
+                method: 'POST',
+                body: JSON.stringify({ name: '999 - Example list' })
+            }))
+    })
+
+    it('creates list with errors', async () => {
+        fetchSpy.mockRejectedValue({ ok: false })
+        const { result } = renderHook(() => useMail())
+        const response = await result.current.createList({ scheduleId: 999, name: 'Example list' })
+
+        expect(response).toBeNull()
+        expect(notifySpy).toHaveBeenCalledWith({ ok: false })
+        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list?scheduleId=999', { method: 'GET' })
+        expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/list', {
+            method: 'POST',
+            body: JSON.stringify({ name: '999 - Example list' })
+        })
     })
 })

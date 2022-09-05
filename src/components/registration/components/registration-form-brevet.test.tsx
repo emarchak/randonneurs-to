@@ -10,8 +10,19 @@ import * as useSlack from 'src/hooks/useSlack'
 describe('<RegistrationForm>', () => {
     const useEventsMock = jest.spyOn(Events, 'useEvents')
     const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+    const useMailMock = jest.spyOn(useMail, 'useMail')
+    const sendMailSpy = jest.fn().mockReturnValue(true)
+    const createListMock = jest.fn().mockResolvedValue({ id: 'listid' })
+
+
     beforeEach(() => {
         MockDate.set(new Date('Wed August 4 2021 09:00:00 EDT'))
+        useMailMock.mockReturnValue({
+            sendMail: sendMailSpy,
+            createContact: jest.fn().mockResolvedValue(true),
+            getList: createListMock,
+            createList: createListMock,
+        })
         useEventsMock.mockReturnValue({
             loading: false,
             events: [],
@@ -33,6 +44,8 @@ describe('<RegistrationForm>', () => {
     afterEach(() => {
         fetchSpy.mockClear()
         useEventsMock.mockClear()
+        sendMailSpy.mockClear()
+        createListMock.mockClear()
     })
 
     it('renders all the required fields to the user', () => {
@@ -90,11 +103,6 @@ describe('<RegistrationForm>', () => {
     })
 
     it('records the registration when submitted', async () => {
-        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
-        const useMailMock = jest.spyOn(useMail, 'useMail')
-        const sendMailSpy = jest.fn().mockReturnValue(true)
-        useMailMock.mockReturnValue({ sendMail: sendMailSpy })
-
         const useSlacklMock = jest.spyOn(useSlack, 'useSlack')
         const sendSlackMsgSpy = jest.fn().mockReturnValue(true)
         useSlacklMock.mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
