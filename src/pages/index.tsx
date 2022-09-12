@@ -10,7 +10,7 @@ import { LinkButton } from 'src/components/Buttons'
 import { PostTeaser } from 'src/components/Blog'
 import { SEO } from 'src/components/seo'
 import { useBlog } from 'src/data/blog'
-import { useEvents } from 'src/data/events'
+import { Chapter, useEvents } from 'src/data/events'
 
 import * as styles from './styles/index.module.scss'
 import { iframe } from 'src/components/styles/iframe.module.scss'
@@ -53,7 +53,7 @@ const IndexPage = () => {
     allSitePage: { nodes: pages },
     allMail: { nodes: newsletters }
   } = useStaticQuery(pageQuery)
-  const { brevets } = useEvents({ chapter: 'Toronto', limit: 2 })
+  const { brevets } = useEvents({ chapter: Chapter.Toronto, limit: 2 })
   const { posts } = useBlog({limit: 2})
 
   return (
@@ -70,10 +70,9 @@ const IndexPage = () => {
           <ul className={styles.eventWrapper}>
             {brevets.map(event => (
               <li key={event.id} className={styles.eventRow}>
-                <strong>{event.route} {event.distance}</strong><br />
+                <Link to={event.path} ><strong>{event.route} {event.distance}</strong></Link><br />
                 {getDateTimeLong(new Date(event.date))}<br />
-                {event.startLocation}<br />
-                {event.rwgpsUrl && (<Link href={event.rwgpsUrl}>{`View ${event.route} route`}</Link>)}
+                {event.startLocation}
               </li>
             ))}
           </ul>
