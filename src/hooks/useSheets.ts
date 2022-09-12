@@ -9,7 +9,7 @@ const sheets = [
 type addRowParams = {
   sheet: string,
   row: {
-    [key: string]: string | boolean
+    [key: string]: string | boolean | number
   }
 }
 

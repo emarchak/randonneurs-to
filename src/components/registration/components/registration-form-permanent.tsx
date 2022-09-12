@@ -13,6 +13,7 @@ import { validate, RequiredFields } from 'src/components/form/utils'
 import * as styles from 'src/components/styles/registration.module.scss'
 import { NameField } from 'src/components/form/components/NameField'
 import { MembershipType } from 'src/graphql.gql'
+import { Chapter, EventType } from 'src/gatsby.gql'
 const formName = 'registration-permanent'
 interface FormData {
     name: string
@@ -68,7 +69,7 @@ export const RegistrationFormPermanent = () => {
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
-    const { onSubmit, loading } = useRegistrationForm({ formName, fieldLabels })
+    const { onSubmit, loading } = useRegistrationForm({ fieldLabels })
     const { allowedStartTimes } = useAllowedStartTimes()
 
     const isSubmitted = formState === 'submitted'
@@ -104,7 +105,7 @@ export const RegistrationFormPermanent = () => {
         dirtyForm({
             route: permanent.name || '',
             startLocation: permanent.startLocation || '',
-            chapter: permanent.chapter || 'Toronto',
+            chapter: permanent.chapter || Chapter.Toronto,
             distance: permanent.distance || 0
         })
     }
@@ -122,7 +123,7 @@ export const RegistrationFormPermanent = () => {
             setFormState(null)
             return
         }
-        const success = await onSubmit({ ...formData, rideType: 'permanent' })
+        const success = await onSubmit({ ...formData, rideType: EventType.Permanent })
         if (success) {
             setFormState('submitted')
         } else {

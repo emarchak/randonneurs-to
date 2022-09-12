@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, ReactChild } from 'react'
+import React, { useState, ChangeEvent, ReactChild, PropsWithChildren } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form, SubmitButton, SelectField } from 'src/components/form/components'
 import { Brevet } from 'src/data/events'
@@ -11,16 +11,18 @@ import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, RequiredFields, validate } from 'src/components/form/utils'
 import { NameField } from '../../form/components/NameField'
 import { MembershipType } from 'src/graphql.gql'
+import { useEventRegistrationForm } from '../hooks/useEventRegistrationForm'
 
 const formName = 'registration'
 
-interface FormData {
+export type FormData = {
     name: string
     email: string
     gender: '' | 'M' | 'F' | 'X'
     membership: MembershipType | 'missing' | ''
     route: Brevet['route']
     eventId: Brevet['scheduleId']
+    eventUrl: Brevet['path']
     rideType: Brevet['eventType'] | ''
     scheduleTime: Date | ''
     startTime: Date | ''
@@ -40,6 +42,7 @@ const defaultFormData: FormData = {
     membership: '',
     route: '',
     eventId: '',
+    eventUrl: '',
     rideType: '',
     startTime: '',
     scheduleTime: '',
@@ -75,12 +78,14 @@ const requiredFields: RequiredFields<FormData> = [
     'roConsent'
 ]
 
-export const RegistrationFormBrevet = () => {
-    const [formData, setFormData] = useState<FormData>(defaultFormData)
+export const EventRegistrationForm = () => {
+    const [formData, setFormData] = useState<FormData>({
+        ...defaultFormData,
+    })
     const [formState, setFormState] = useState<FormState>(null)
     const [formErrors, setFormErrors] = useState<ReactChild[]>([])
 
-    const { onSubmit, loading } = useRegistrationForm({ formName, fieldLabels })
+    const { onSubmit, loading } = useEventRegistrationForm({ fieldLabels })
     const { allowedStartTimes } = useAllowedStartTimes()
 
     const isSubmitted = formState === 'submitted'
@@ -116,7 +121,8 @@ export const RegistrationFormBrevet = () => {
             scheduleTime: time,
             chapter: brevet.chapter,
             distance: brevet.distance,
-            startLocation: brevet.startLocation
+            startLocation: brevet.startLocation,
+            eventUrl: brevet.path
         })
     }
 
@@ -176,6 +182,7 @@ export const RegistrationFormBrevet = () => {
                 <HiddenField name='membership' value={formData.membership} />
                 <HiddenField name='rideType' value={formData.rideType} />
                 <HiddenField name='eventId' value={formData.eventId} />
+                <HiddenField name='eventUrl' value={formData.eventUrl} />
 
                 <div aria-live='polite'>
                     <ErrorsList formErrors={formErrors} />

@@ -1,2 +1,2 @@
-export { RegistrationFormBrevet } from "./components/registration-form-brevet"
+export { RegistrationFormBrevet } from "./components/EventRegistrationForm"
 export { RegistrationFormPermanent } from "./components/registration-form-permanent"

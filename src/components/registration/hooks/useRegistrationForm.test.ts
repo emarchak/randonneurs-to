@@ -7,7 +7,6 @@ import * as Slack from 'src/hooks/useSlack'
 import * as Sheets from 'src/hooks/useSheets'
 import * as Riders from 'src/data/riders'
 
-const formName = 'registration'
 const fieldLabels = {
   name: 'Name',
   email: 'Email',
@@ -26,8 +25,6 @@ const formData = {
 }
 
 describe('useRegistrationForm', () => {
-  const registerRiderSpy = jest.spyOn(Riders, 'registerRider')
-
   const sendSlackMsgSpy = jest.fn().mockName('sendSlackMsg')
   jest.spyOn(Slack, 'useSlack').mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
 
@@ -51,11 +48,10 @@ describe('useRegistrationForm', () => {
     sendSlackMsgSpy.mockClear()
     addRowSpy.mockClear()
     sendMailSpy.mockClear()
-    registerRiderSpy.mockClear()
   })
 
   it('sets loading to true on submit', async () => {
-    const { result, waitForValueToChange } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+    const { result, waitForValueToChange } = renderHook(() => useRegistrationForm({ fieldLabels }))
 
     expect(result.current.loading).toBeFalsy()
 
@@ -69,20 +65,11 @@ describe('useRegistrationForm', () => {
   })
 
   it('submits expected data to slack, row, mail and registration', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+    const { result, waitForNextUpdate } = renderHook(() => useRegistrationForm({ fieldLabels }))
 
     await act(async () => {
       result.current.onSubmit(formData)
-      await waitForNextUpdate()
 
-      expect(registerRiderSpy).toHaveBeenCalledWith({
-        email: 'rider@example.com',
-        eventId: 123,
-        firstName: 'Lael',
-        gender: 'X',
-        hideRide: false,
-        lastName: 'de Silva',
-      })
       await waitForNextUpdate()
       expect(sendSlackMsgSpy).toHaveBeenCalledWith({
         'attachments': [
@@ -106,7 +93,7 @@ describe('useRegistrationForm', () => {
           'startTime': '05:01',
           'submitted': 'Sun August 22 2021 01:01',
         },
-        'sheet': 'registration',
+        'sheet': 'registration-permanent',
       })
       expect(sendMailSpy).toHaveBeenCalledWith({
         'data': {
@@ -136,7 +123,7 @@ describe('useRegistrationForm', () => {
       ...formData,
       eventId: undefined
     }
-    const { result, waitForNextUpdate } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+    const { result, waitForNextUpdate } = renderHook(() => useRegistrationForm({ fieldLabels }))
 
     await act(async () => {
       result.current.onSubmit(permFormData)
@@ -144,7 +131,6 @@ describe('useRegistrationForm', () => {
       expect(sendSlackMsgSpy).toHaveBeenCalled()
       expect(addRowSpy).toHaveBeenCalled()
       expect(sendMailSpy).toHaveBeenCalled()
-      expect(registerRiderSpy).not.toHaveBeenCalled()
     })
   })
 })

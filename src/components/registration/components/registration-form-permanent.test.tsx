@@ -42,14 +42,27 @@ const db =  {
 describe('<RegistrationFormPermanent>', () => {
   const fetchSpy = jest.spyOn(fetch, 'default')
   const staticQuerySpy = jest.spyOn(Gatsby, 'useStaticQuery')
+  const useMailMock = jest.spyOn(useMail, 'useMail')
+  const sendMailSpy = jest.fn().mockReturnValue(true)
+  const useSlackMock = jest.spyOn(useSlack, 'useSlack')
+  const sendSlackMsgSpy = jest.fn().mockName('sendSlackMsg').mockReturnValue(true)
 
   beforeEach(() => {
+    useSlackMock.mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
+    useMailMock.mockReturnValue({
+      sendMail: sendMailSpy,
+      createContact: jest.fn().mockResolvedValue(true),
+      getList: jest.fn().mockResolvedValue(true),
+      createList: jest.fn().mockResolvedValue(true),
+    })
     staticQuerySpy.mockReturnValue({db})
   });
 
   afterEach(() => {
     fetchSpy.mockClear()
     staticQuerySpy.mockClear()
+    sendMailSpy.mockClear()
+    useSlackMock.mockClear()
   })
 
   it('renders all the required fields to the user', () => {
@@ -107,14 +120,6 @@ describe('<RegistrationFormPermanent>', () => {
   it('records the registration when submitted', async () => {
     const mount = render(<RegistrationFormPermanent />)
     const rideDate = new Date('2021-10-09T12:00:00.000Z')
-
-    const useMailMock = jest.spyOn(useMail, 'useMail')
-    const sendMailSpy = jest.fn().mockName('sendMail').mockReturnValue(true)
-    useMailMock.mockReturnValue({ sendMail: sendMailSpy })
-
-    const useSlacklMock = jest.spyOn(useSlack, 'useSlack')
-    const sendSlackMsgSpy = jest.fn().mockName('sendSlackMsg').mockReturnValue(true)
-    useSlacklMock.mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
 
     fireEvent.change(mount.getByLabelText(/name/i), {
       target: { value: 'Foo Bar' },

@@ -1,19 +1,18 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import MockDate from 'mockdate'
-import { RegistrationFormBrevet } from './registration-form-brevet'
 import * as fetch from 'cross-fetch'
+import { EventRegistrationForm } from './EventRegistrationForm'
 import * as useMail from 'src/data/mail'
 import * as Events from 'src/data/events'
 import * as useSlack from 'src/hooks/useSlack'
 
-describe('<RegistrationForm>', () => {
+describe('<EventRegistrationForm>', () => {
     const useEventsMock = jest.spyOn(Events, 'useEvents')
     const fetchSpy = jest.spyOn(fetch, 'default')
     const useMailMock = jest.spyOn(useMail, 'useMail')
     const sendMailSpy = jest.fn().mockReturnValue(true)
     const createListMock = jest.fn().mockResolvedValue({ id: 'listid' })
-
 
     beforeEach(() => {
         MockDate.set(new Date('Wed August 4 2021 09:00:00 EDT'))
@@ -37,6 +36,7 @@ describe('<RegistrationForm>', () => {
                     id: '1',
                     rwgpsUrl: 'https://rwgps.com',
                     scheduleId: '123',
+                    path: 'event/path'
                 }]
         })
     })
@@ -49,7 +49,7 @@ describe('<RegistrationForm>', () => {
     })
 
     it('renders all the required fields to the user', () => {
-        const mount = render(<RegistrationFormBrevet />)
+        const mount = render(<EventRegistrationForm />)
         expect(() => {
             fireEvent.change(mount.getByLabelText(/name/i), {
                 target: { value: 'Foo' },
@@ -75,7 +75,7 @@ describe('<RegistrationForm>', () => {
     })
 
     it('requires email, rider name, randonneurs ontario consent and oca consent', () => {
-        const mount = render(<RegistrationFormBrevet />)
+        const mount = render(<EventRegistrationForm />)
 
         fireEvent.change(mount.getByLabelText(/email/i), {
             target: { value: 'higgeldy-piggeldy' },
@@ -107,7 +107,7 @@ describe('<RegistrationForm>', () => {
         const sendSlackMsgSpy = jest.fn().mockReturnValue(true)
         useSlacklMock.mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
 
-        const mount = render(<RegistrationFormBrevet />)
+        const mount = render(<EventRegistrationForm />)
 
         fireEvent.change(mount.getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
@@ -150,6 +150,7 @@ describe('<RegistrationForm>', () => {
                         membership: 'Individual Membership',
                         route: 'Rouge Ramble 60',
                         eventId: '123',
+                        eventUrl: 'event/path',
                         rideType: 'populaire',
                         startTime: '09:20',
                         scheduleTime: 'Sat August 7 2021 09:20',
@@ -172,7 +173,7 @@ describe('<RegistrationForm>', () => {
     it('shows an error when unable to submit', async () => {
         fetchSpy.mockImplementation(async () => {throw new Error()})
 
-        const {getByLabelText, getByText } = render(<RegistrationFormBrevet />)
+        const {getByLabelText, getByText } = render(<EventRegistrationForm />)
         fireEvent.change(getByLabelText(/name/i), {
             target: { value: 'Foo Bar' },
         })
@@ -207,7 +208,7 @@ describe('<RegistrationForm>', () => {
     it('disables registrations for events that are not allowedToRegister', () => {
         MockDate.set(new Date('Fri August 7 2021 17:20:00 EDT'))
 
-        const mount = render(<RegistrationFormBrevet />)
+        const mount = render(<EventRegistrationForm />)
 
         expect(mount.baseElement).toHaveTextContent(/Learn more about riding brevets/i)
         expect(mount.baseElement).toHaveTextContent(/Rouge Ramble 60/i)

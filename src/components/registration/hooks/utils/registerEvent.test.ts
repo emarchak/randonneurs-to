@@ -1,16 +1,19 @@
 import { Chapter, EventKind } from "src/data/events"
 import { registerEvent } from "./registerEvent"
 import * as fetch from 'cross-fetch'
+import { FormData } from "../../components/EventRegistrationForm"
 
-const event = {
+const event: FormData = {
   eventId: '420',
   name: 'John de la Doe',
   route: '200',
   shareRide: true,
   email: 'test@test.com',
   rideType: EventKind.Brevet,
-  chapter: Chapter.Toronto
-}
+  chapter: Chapter.Toronto,
+  gender: 'X',
+  membership: 'missing',
+} as any
 
 describe('registerEvent', () => {
   const fetchSpy = jest.spyOn(fetch, 'default')
@@ -45,15 +48,10 @@ describe('registerEvent', () => {
           email: 'test@test.com',
           firstName: 'John',
           lastName: 'de la Doe',
+          gender: 'X'
         })
       })
     )
-  })
-
-  it('should return early if eventId is missing', async () => {
-    const response = await registerEvent({ ...event, eventId: '' })
-    expect(response).toBeTruthy()
-    expect(fetchSpy).not.toHaveBeenCalledWith()
   })
 
   it('should return false if list.id is missing', async () => {
