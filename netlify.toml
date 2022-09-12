@@ -4,9 +4,9 @@
   from = "/covid"
   to = "/registration/covid"
   status = 301
-  
+[functions]
+  external_node_modules = ["express"]
 [[redirects]]
   from = "/register"
   to = "/registration"
   status = 301
-  
