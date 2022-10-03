@@ -12,7 +12,6 @@ import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { validate, RequiredFields } from 'src/components/form/utils'
 import * as styles from 'src/components/styles/registration.module.scss'
 import { NameField } from 'src/components/form/components/NameField'
-import { MembershipType } from 'src/graphql.gql'
 const formName = 'registration-permanent'
 interface FormData {
     name: string
@@ -109,7 +108,7 @@ export const RegistrationFormPermanent = () => {
         })
     }
 
-    const handleNameChange = (name: string, membership: MembershipType) => {
+    const handleNameChange = (name: string, membership) => {
         setFormData({ ...formData, name, membership })
     }
 
