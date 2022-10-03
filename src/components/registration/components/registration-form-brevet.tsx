@@ -10,7 +10,6 @@ import { Link } from 'src/components/Link'
 import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, RequiredFields, validate } from 'src/components/form/utils'
 import { NameField } from '../../form/components/NameField'
-import { MembershipType } from 'src/graphql.gql'
 
 const formName = 'registration'
 
@@ -18,7 +17,7 @@ interface FormData {
     name: string
     email: string
     gender: '' | 'M' | 'F' | 'X'
-    membership: MembershipType | 'missing' | ''
+    membership: string | 'missing' | ''
     route: Brevet['route']
     eventId: Brevet['scheduleId']
     rideType: Brevet['eventType'] | ''
