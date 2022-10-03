@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, ChangeEvent, useMemo } from 'react'
+import React, { useState, FormEvent, ChangeEvent, useMemo, useEffect } from 'react'
 import { RadioTable, SelectField } from 'src/components/form/components'
 import { Fieldset, InlineInputs } from 'src/components/form/fieldset'
 import { useEvents, Brevet } from 'src/data/events'
@@ -18,17 +18,30 @@ const columns = {
 }
 
 type Props = {
+    initEventId: string,
     onChange: (Brevet) => void
 }
 
-export const SelectBrevets = ({ onChange }: Props) => {
-    const { brevets } = useEvents({limit: false})
+export const SelectBrevets = ({initEventId, onChange }: Props) => {
+    const { events } = useEvents({limit: false})
     const { allowedToRegister, getBrevetRegistrationDeadline } = useAllowedStartTimes()
-    const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['id']>('')
+    const [selectedEventId, setSelectedEventId] = useState<Brevet['id']>('')
     const [filters, setFilters] = useState({
         chapter: '',
         distance: ''
     })
+
+    useEffect(() => {
+        if (initEventId) {
+            findEvent(initEventId)
+        }
+    }, [])
+
+    const findEvent = (id: string) => {
+        const event = events.find(brevet => brevet.id === id)
+        setSelectedEventId(id)
+        onChange(event)
+    }
 
     const handleFilterChange = (evt: ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = evt.currentTarget
@@ -39,18 +52,15 @@ export const SelectBrevets = ({ onChange }: Props) => {
     }
     const handleBrevetChange = (evt: ChangeEvent<HTMLInputElement>) => {
         const { value } = evt.currentTarget
-        const brevet = brevets.find(brevet => brevet.id === value)
-
-        setSelectedBrevetId(value)
-        onChange(brevet)
+        findEvent(value)
     }
 
     const options = useMemo(() => {
         const chapters = new Set<string>()
         const distances = new Set<string>()
-        const availableBrevets = []
+        const availableEvents = []
 
-        brevets.forEach((brevet) => {
+        events.forEach((brevet) => {
             const isChapter = filters.chapter ? brevet.chapter === filters.chapter : true
             const isDistance = filters.distance ? getIsDistance(brevet.distance, filters.distance) : true
 
@@ -58,7 +68,7 @@ export const SelectBrevets = ({ onChange }: Props) => {
             distances.add(getDistanceKey(brevet.distance))
 
             if (isChapter && isDistance) {
-                availableBrevets.push({
+                availableEvents.push({
                     value: brevet.id,
                     disabled: !allowedToRegister(brevet),
                     columns: {
@@ -75,7 +85,7 @@ export const SelectBrevets = ({ onChange }: Props) => {
         return {
             chapters: Array.from(chapters).sort(),
             distances: Array.from(distances).sort(sortDistances),
-            brevets: availableBrevets
+            events: availableEvents
         }
     }, [filters.chapter, filters.distance])
 
@@ -92,8 +102,8 @@ export const SelectBrevets = ({ onChange }: Props) => {
                 hideLabel
                 labelColumn='event'
                 columns={columns}
-                options={options.brevets}
-                value={selectedBrevetId}
+                options={options.events}
+                value={selectedEventId}
                 empty='No rides available'
                 onChange={handleBrevetChange}
             />

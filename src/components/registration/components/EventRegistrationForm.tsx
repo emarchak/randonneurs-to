@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, ReactChild, PropsWithChildren } from 'react'
+import React, { useState, ChangeEvent, PropsWithChildren } from 'react'
 import { ContentWrapper } from 'src/components/content-wrapper'
 import { InputField, DateTimeField, CheckboxField, HiddenField, ErrorsList, Form, SubmitButton, SelectField } from 'src/components/form/components'
 import { Brevet } from 'src/data/events'
@@ -7,7 +7,6 @@ import * as styles from 'src/components/styles/registration.module.scss'
 import { Aside, Callout } from 'src/components/callout'
 import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
 import { Link } from 'src/components/Link'
-import { useRegistrationForm } from '../hooks/useRegistrationForm'
 import { FormState, RequiredFields, validate } from 'src/components/form/utils'
 import { NameField } from '../../form/components/NameField'
 import { MembershipType } from 'src/graphql.gql'
@@ -24,7 +23,6 @@ export type FormData = {
     eventId: Brevet['scheduleId']
     eventUrl: Brevet['path']
     rideType: Brevet['eventType'] | ''
-    scheduleTime: Date | ''
     startTime: Date | ''
     startLocation: string
     chapter: Brevet['chapter'] | '',
@@ -45,7 +43,6 @@ const defaultFormData: FormData = {
     eventUrl: '',
     rideType: '',
     startTime: '',
-    scheduleTime: '',
     startLocation: '',
     chapter: '',
     distance: 0,
@@ -78,12 +75,14 @@ const requiredFields: RequiredFields<FormData> = [
     'roConsent'
 ]
 
-export const EventRegistrationForm = () => {
-    const [formData, setFormData] = useState<FormData>({
-        ...defaultFormData,
-    })
+type EventRegistrationFormProps = PropsWithChildren<{
+    pageEventId?: string
+}>
+
+export const EventRegistrationForm = ({ pageEventId }: EventRegistrationFormProps) => {
+    const [formData, setFormData] = useState<FormData>(defaultFormData)
     const [formState, setFormState] = useState<FormState>(null)
-    const [formErrors, setFormErrors] = useState<ReactChild[]>([])
+    const [formErrors, setFormErrors] = useState<string[]>([])
 
     const { onSubmit, loading } = useEventRegistrationForm({ fieldLabels })
     const { allowedStartTimes } = useAllowedStartTimes()
@@ -91,8 +90,6 @@ export const EventRegistrationForm = () => {
     const isSubmitted = formState === 'submitted'
     const isDirty = formState === 'dirty'
     const hasError = Boolean(formErrors.length)
-
-    const handleValidStartTimes = (requestedStartTime: Date) => allowedStartTimes(requestedStartTime, formData.scheduleTime || null)
 
     const dirtyForm = (newFormData: Partial<FormData>) => {
         setFormState('dirty')
@@ -118,7 +115,6 @@ export const EventRegistrationForm = () => {
             eventId: brevet.scheduleId,
             rideType: brevet.eventType,
             startTime: time,
-            scheduleTime: time,
             chapter: brevet.chapter,
             distance: brevet.distance,
             startLocation: brevet.startLocation,
@@ -158,8 +154,8 @@ export const EventRegistrationForm = () => {
 
                     <p><Link href="http://randonneursontario.ca/who/whatis.html#COVID">Learn more about riding brevets and our COVID-19 guidelines.</Link></p>
                 </Aside>
-                <SelectBrevets onChange={handleBrevetChange} />
-                <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} allowedRange={handleValidStartTimes} disabled />
+                <SelectBrevets initEventId={pageEventId} onChange={handleBrevetChange} />
+                <DateTimeField label={fieldLabels['startTime']} name='startTime' value={formData.startTime} onChange={handleDateChange} disabled />
                 <InputField label={fieldLabels['startLocation']} name='startLocation' value={formData.startLocation} onChange={handleInputChange} disabled />
                 <SelectField label={fieldLabels['gender']} name='gender' options={['M', 'F', 'X']} value={formData.gender} onChange={handleInputChange} optional help={<>The <em lang='fr'>Audax Club Parisien</em> uses this for ridership statistics</>}/>
                 <CheckboxField name='shareRide' value={formData.shareRide} onChange={handleInputChange} optional help={<>Share your name with other riders before the event. All riders will appear on the results after the event.</>}>
@@ -178,7 +174,6 @@ export const EventRegistrationForm = () => {
                 <HiddenField name='route' value={formData.route} />
                 <HiddenField name='chapter' value={formData.chapter} />
                 <HiddenField name='distance' value={formData.distance.toString()} />
-                <HiddenField name='scheduleTime' value={formData.scheduleTime?.toString()} />
                 <HiddenField name='membership' value={formData.membership} />
                 <HiddenField name='rideType' value={formData.rideType} />
                 <HiddenField name='eventId' value={formData.eventId} />

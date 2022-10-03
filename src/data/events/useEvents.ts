@@ -38,7 +38,6 @@ export const useEvents = ({ chapter, after = new Date(Date.now()), limit = 20 }:
     allEvent: { nodes: events }
   } = useStaticQuery<EventDataQuery>(brevetQuery)
 
-
   const filteredEvents: Event[] = useMemo(() => events.map((event: Event) => ({
     ...event,
     date: new Date(event.date)

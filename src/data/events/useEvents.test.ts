@@ -1,35 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useEvents } from './useEvents'
-
-jest.mock('gatsby', () => ({
-  __esModule: true,
-  graphql: jest.fn(),
-  useStaticQuery: jest.fn().mockReturnValue({
-    allEvent: {
-      nodes: [
-        {
-          chapter: 'Toronto',
-          distance: 200,
-          event: 'brevet',
-          id: 1,
-          route: 'Waterfront East',
-          rwgpsUrl: 'https://ridewithgps.com/routes/20784084',
-          startLocation: 'Rouge GO',
-          date: 'September 7 2021 08:00 EDT'
-        },
-        {
-          chapter: 'Huron',
-          distance: 200,
-          event: 'brevet',
-          id: 1,
-          route: 'Waterfront East',
-          rwgpsUrl: 'https://ridewithgps.com/routes/20784084',
-          startLocation: 'Rouge GO',
-          date: 'August 1 2021 08:00 EDT'
-        }]
-    }
-  })
-}))
+import { useEvents, Chapter } from './useEvents'
 
 describe('useEvents()', () => {
   it('filters by date', () => {
@@ -50,11 +20,10 @@ describe('useEvents()', () => {
   })
 
   it('filters by chapter', () => {
-    const chapter = 'Toronto'
-    const { result } = renderHook(() => useEvents({ chapter }))
+    const { result } = renderHook(() => useEvents({ chapter: Chapter.Toronto }))
 
     result.current.brevets.forEach((brevet) => {
-      expect(brevet.chapter).toEqual(chapter)
+      expect(brevet.chapter).toEqual(Chapter.Toronto)
     })
   })
 

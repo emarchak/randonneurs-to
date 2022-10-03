@@ -4,11 +4,9 @@ import MockDate from 'mockdate'
 import * as fetch from 'cross-fetch'
 import { EventRegistrationForm } from './EventRegistrationForm'
 import * as useMail from 'src/data/mail'
-import * as Events from 'src/data/events'
 import * as useSlack from 'src/hooks/useSlack'
 
 describe('<EventRegistrationForm>', () => {
-    const useEventsMock = jest.spyOn(Events, 'useEvents')
     const fetchSpy = jest.spyOn(fetch, 'default')
     const useMailMock = jest.spyOn(useMail, 'useMail')
     const sendMailSpy = jest.fn().mockReturnValue(true)
@@ -22,28 +20,10 @@ describe('<EventRegistrationForm>', () => {
             getList: createListMock,
             createList: createListMock,
         })
-        useEventsMock.mockReturnValue({
-            loading: false,
-            events: [],
-            brevets:
-                [{
-                    chapter: 'Toronto' as any,
-                    eventType: 'populaire' as any,
-                    distance: 60,
-                    date: new Date('Sat August 7 2021 09:20:00 EDT'),
-                    route: 'Rouge Ramble 60',
-                    startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
-                    id: '1',
-                    rwgpsUrl: 'https://rwgps.com',
-                    scheduleId: '123',
-                    path: 'event/path'
-                }]
-        })
     })
 
     afterEach(() => {
         fetchSpy.mockClear()
-        useEventsMock.mockClear()
         sendMailSpy.mockClear()
         createListMock.mockClear()
     })
@@ -150,10 +130,10 @@ describe('<EventRegistrationForm>', () => {
                         membership: 'Individual Membership',
                         route: 'Rouge Ramble 60',
                         eventId: '123',
-                        eventUrl: 'event/path',
+                        eventUrl: 'event/path/rouge',
                         rideType: 'populaire',
                         startTime: '09:20',
-                        scheduleTime: 'Sat August 7 2021 09:20',
+                        scheduleTime: 'Sat August 7 2025 09:20',
                         startLocation: 'Second Cup, 355 Danforth Ave, Toronto',
                         chapter: 'Toronto',
                         distance: 60,
@@ -206,7 +186,7 @@ describe('<EventRegistrationForm>', () => {
     })
 
     it('disables registrations for events that are not allowedToRegister', () => {
-        MockDate.set(new Date('Fri August 7 2021 17:20:00 EDT'))
+        MockDate.set(new Date('Thu August 6 2025 18:20:00 EDT'))
 
         const mount = render(<EventRegistrationForm />)
 
