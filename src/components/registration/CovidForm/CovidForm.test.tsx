@@ -1,13 +1,13 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react"
-import * as isomorphicUnfetch from 'cross-fetch'
+import * as fetch from 'cross-fetch'
 import * as useMail from 'src/data/mail'
 import CovidForm from "."
 import MockDate from 'mockdate'
 
 
 describe("<CovidForm>", () => {
-    const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+    const fetchSpy = jest.spyOn(fetch, 'default')
     beforeAll(() =>{
       MockDate.set((new Date('August 7 2021 07:00 EDT')))
     })
@@ -159,7 +159,7 @@ describe("<CovidForm>", () => {
     })
 
     it('records the screening when submitted', async () => {
-        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+        const fetchSpy = jest.spyOn(fetch, 'default')
         const useMailMock = jest.spyOn(useMail, 'useMail')
         const sendMailSpy = jest.fn().mockReturnValue(true)
         useMailMock.mockReturnValue({ sendMail: sendMailSpy })

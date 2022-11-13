@@ -1,6 +1,6 @@
 import { Chapter, EventKind } from "src/data/events"
 import { registerEvent } from "./registerEvent"
-import * as isomorphicUnfetch from 'cross-fetch'
+import * as fetch from 'cross-fetch'
 
 const event = {
   eventId: '420',
@@ -13,7 +13,7 @@ const event = {
 }
 
 describe('registerEvent', () => {
-  const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+  const fetchSpy = jest.spyOn(fetch, 'default')
 
   afterEach(() => {
     fetchSpy.mockClear()

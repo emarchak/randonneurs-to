@@ -1,10 +1,10 @@
-import * as isomorpicUnfetch from 'cross-fetch'
+import * as fetch from 'cross-fetch'
 import Bugsnag from '@bugsnag/js'
 import { createContact } from "./contact"
 import { Chapter } from 'src/data/events'
 
 describe('createContact', () => {
-  const fetchSpy = jest.spyOn(isomorpicUnfetch, 'default')
+  const fetchSpy = jest.spyOn(fetch, 'default')
 
   afterEach(() => {
     fetchSpy.mockClear()

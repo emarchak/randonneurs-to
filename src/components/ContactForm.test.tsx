@@ -1,6 +1,6 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react"
-import * as isomorphicUnfetch from 'cross-fetch'
+import * as fetch from 'cross-fetch'
 import { ContactForm } from "./ContactForm"
 
 jest.mock('cross-fetch', () => ({
@@ -16,7 +16,7 @@ describe("<ContactForm>", () => {
     })
 
     it("requires all fields", async () => {
-        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+        const fetchSpy = jest.spyOn(fetch, 'default')
         const mount = render(<ContactForm formName="contact-form" />)
 
         expect(mount.getByText("Submit")).not.toBeDisabled()
@@ -58,7 +58,7 @@ describe("<ContactForm>", () => {
     })
 
     it("shows confirmation on submit", async () => {
-        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+        const fetchSpy = jest.spyOn(fetch, 'default')
         const mount = render(<ContactForm formName="contact-form" />)
 
         expect(mount.getByText("Submit")).not.toBeDisabled()
@@ -85,7 +85,7 @@ describe("<ContactForm>", () => {
     })
 
     it("shows error message if unable to submit", async () => {
-        const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+        const fetchSpy = jest.spyOn(fetch, 'default')
         fetchSpy.mockRejectedValue({ ok: false })
 
         const mount = render(<ContactForm formName="contact-form" />)
