@@ -10,7 +10,7 @@ import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
 
 const imageQuery = graphql`
-query {
+query medalImgQuery {
   file(name: {glob: "brm-medal-2023"}) {
     name
     childImageSharp {

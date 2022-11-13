@@ -23,7 +23,7 @@ export const SEO = ({
 }: Props) => {
   const { site: {siteMetadata} } = useStaticQuery(
     graphql`
-      query {
+      query seoImageQuery {
         site {
           siteMetadata {
             title

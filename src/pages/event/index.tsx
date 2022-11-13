@@ -9,7 +9,7 @@ import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
 
 const pageQuery = graphql`
-query {
+query eventPageQuery {
   allSitePage(
     filter: {context: {type: {eq: season}}}
     sort: {context: {pageInfo: {title: DESC}}}

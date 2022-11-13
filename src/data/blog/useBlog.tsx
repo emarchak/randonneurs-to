@@ -15,7 +15,7 @@ type useBlogArgs = {
 
 export const useBlog = ({ limit = 10 }: useBlogArgs) => {
   const { allFeedblog: { nodes } } = useStaticQuery(graphql`
-    query {
+    query useBlogQuery {
       allFeedblog(limit: 10) {
         nodes {
           id

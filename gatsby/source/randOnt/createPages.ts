@@ -1,12 +1,12 @@
 import { GatsbyNode } from "gatsby"
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
-import { EventCalendarFeedsQuery } from "src/gatsby.gql"
+// import { EventCalendarFeedsQuery } from "src/gatsby.gql"
 
 const eventPath = './public/event'
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, ...args }) => {
   console.log('hello')
-  const { data } = await graphql<EventCalendarFeedsQuery>(`
+  const { data } = await graphql(`
     query EventCalendarFeeds {
       allEvent {
         nodes {

@@ -177,29 +177,29 @@ export type DirectoryConnection = {
 
 
 export type DirectoryConnectionDistinctArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 export type DirectoryConnectionGroupArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type DirectoryConnectionMaxArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 export type DirectoryConnectionMinArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 export type DirectoryConnectionSumArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 export type DirectoryEdge = {
@@ -209,132 +209,43 @@ export type DirectoryEdge = {
   previous?: Maybe<Directory>;
 };
 
-export enum DirectoryFieldsEnum {
-  AbsolutePath = 'absolutePath',
-  AccessTime = 'accessTime',
-  Atime = 'atime',
-  AtimeMs = 'atimeMs',
-  Base = 'base',
-  BirthTime = 'birthTime',
-  Birthtime = 'birthtime',
-  BirthtimeMs = 'birthtimeMs',
-  ChangeTime = 'changeTime',
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Ctime = 'ctime',
-  CtimeMs = 'ctimeMs',
-  Dev = 'dev',
-  Dir = 'dir',
-  Ext = 'ext',
-  Extension = 'extension',
-  Gid = 'gid',
-  Id = 'id',
-  Ino = 'ino',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  Mode = 'mode',
-  ModifiedTime = 'modifiedTime',
-  Mtime = 'mtime',
-  MtimeMs = 'mtimeMs',
-  Name = 'name',
-  Nlink = 'nlink',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  PrettySize = 'prettySize',
-  Rdev = 'rdev',
-  RelativeDirectory = 'relativeDirectory',
-  RelativePath = 'relativePath',
-  Root = 'root',
-  Size = 'size',
-  SourceInstanceName = 'sourceInstanceName',
-  Uid = 'uid'
-}
+export type DirectoryFieldSelector = {
+  absolutePath?: InputMaybe<FieldSelectorEnum>;
+  accessTime?: InputMaybe<FieldSelectorEnum>;
+  atime?: InputMaybe<FieldSelectorEnum>;
+  atimeMs?: InputMaybe<FieldSelectorEnum>;
+  base?: InputMaybe<FieldSelectorEnum>;
+  birthTime?: InputMaybe<FieldSelectorEnum>;
+  birthtime?: InputMaybe<FieldSelectorEnum>;
+  birthtimeMs?: InputMaybe<FieldSelectorEnum>;
+  changeTime?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  ctime?: InputMaybe<FieldSelectorEnum>;
+  ctimeMs?: InputMaybe<FieldSelectorEnum>;
+  dev?: InputMaybe<FieldSelectorEnum>;
+  dir?: InputMaybe<FieldSelectorEnum>;
+  ext?: InputMaybe<FieldSelectorEnum>;
+  extension?: InputMaybe<FieldSelectorEnum>;
+  gid?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  ino?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  mode?: InputMaybe<FieldSelectorEnum>;
+  modifiedTime?: InputMaybe<FieldSelectorEnum>;
+  mtime?: InputMaybe<FieldSelectorEnum>;
+  mtimeMs?: InputMaybe<FieldSelectorEnum>;
+  name?: InputMaybe<FieldSelectorEnum>;
+  nlink?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  prettySize?: InputMaybe<FieldSelectorEnum>;
+  rdev?: InputMaybe<FieldSelectorEnum>;
+  relativeDirectory?: InputMaybe<FieldSelectorEnum>;
+  relativePath?: InputMaybe<FieldSelectorEnum>;
+  root?: InputMaybe<FieldSelectorEnum>;
+  size?: InputMaybe<FieldSelectorEnum>;
+  sourceInstanceName?: InputMaybe<FieldSelectorEnum>;
+  uid?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type DirectoryFilterInput = {
   absolutePath?: InputMaybe<StringQueryOperatorInput>;
@@ -391,34 +302,67 @@ export type DirectoryGroupConnection = {
 
 
 export type DirectoryGroupConnectionDistinctArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 export type DirectoryGroupConnectionGroupArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type DirectoryGroupConnectionMaxArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 export type DirectoryGroupConnectionMinArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 
 export type DirectoryGroupConnectionSumArgs = {
-  field: DirectoryFieldsEnum;
+  field: DirectoryFieldSelector;
 };
 
 export type DirectorySortInput = {
-  fields?: InputMaybe<Array<InputMaybe<DirectoryFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  absolutePath?: InputMaybe<SortOrderEnum>;
+  accessTime?: InputMaybe<SortOrderEnum>;
+  atime?: InputMaybe<SortOrderEnum>;
+  atimeMs?: InputMaybe<SortOrderEnum>;
+  base?: InputMaybe<SortOrderEnum>;
+  birthTime?: InputMaybe<SortOrderEnum>;
+  birthtime?: InputMaybe<SortOrderEnum>;
+  birthtimeMs?: InputMaybe<SortOrderEnum>;
+  changeTime?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  ctime?: InputMaybe<SortOrderEnum>;
+  ctimeMs?: InputMaybe<SortOrderEnum>;
+  dev?: InputMaybe<SortOrderEnum>;
+  dir?: InputMaybe<SortOrderEnum>;
+  ext?: InputMaybe<SortOrderEnum>;
+  extension?: InputMaybe<SortOrderEnum>;
+  gid?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  ino?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  mode?: InputMaybe<SortOrderEnum>;
+  modifiedTime?: InputMaybe<SortOrderEnum>;
+  mtime?: InputMaybe<SortOrderEnum>;
+  mtimeMs?: InputMaybe<SortOrderEnum>;
+  name?: InputMaybe<SortOrderEnum>;
+  nlink?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  prettySize?: InputMaybe<SortOrderEnum>;
+  rdev?: InputMaybe<SortOrderEnum>;
+  relativeDirectory?: InputMaybe<SortOrderEnum>;
+  relativePath?: InputMaybe<SortOrderEnum>;
+  root?: InputMaybe<SortOrderEnum>;
+  size?: InputMaybe<SortOrderEnum>;
+  sourceInstanceName?: InputMaybe<SortOrderEnum>;
+  uid?: InputMaybe<SortOrderEnum>;
 };
 
 export type DuotoneGradient = {
@@ -484,29 +428,29 @@ export type FeedblogConnection = {
 
 
 export type FeedblogConnectionDistinctArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
 };
 
 
 export type FeedblogConnectionGroupArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type FeedblogConnectionMaxArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
 };
 
 
 export type FeedblogConnectionMinArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
 };
 
 
 export type FeedblogConnectionSumArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
 };
 
 export type FeedblogContent = {
@@ -515,9 +459,19 @@ export type FeedblogContent = {
   encodedSnippet?: Maybe<Scalars['String']>;
 };
 
+export type FeedblogContentFieldSelector = {
+  encoded?: InputMaybe<FieldSelectorEnum>;
+  encodedSnippet?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type FeedblogContentFilterInput = {
   encoded?: InputMaybe<StringQueryOperatorInput>;
   encodedSnippet?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type FeedblogContentSortInput = {
+  encoded?: InputMaybe<SortOrderEnum>;
+  encodedSnippet?: InputMaybe<SortOrderEnum>;
 };
 
 export type FeedblogDc = {
@@ -525,8 +479,16 @@ export type FeedblogDc = {
   creator?: Maybe<Scalars['String']>;
 };
 
+export type FeedblogDcFieldSelector = {
+  creator?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type FeedblogDcFilterInput = {
   creator?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type FeedblogDcSortInput = {
+  creator?: InputMaybe<SortOrderEnum>;
 };
 
 export type FeedblogEdge = {
@@ -536,113 +498,23 @@ export type FeedblogEdge = {
   previous?: Maybe<Feedblog>;
 };
 
-export enum FeedblogFieldsEnum {
-  Categories = 'categories',
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Comments = 'comments',
-  ContentSnippet = 'contentSnippet',
-  ContentEncoded = 'content___encoded',
-  ContentEncodedSnippet = 'content___encodedSnippet',
-  Creator = 'creator',
-  DcCreator = 'dc___creator',
-  Guid = 'guid',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  IsoDate = 'isoDate',
-  Link = 'link',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  PubDate = 'pubDate',
-  Title = 'title'
-}
+export type FeedblogFieldSelector = {
+  categories?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  comments?: InputMaybe<FieldSelectorEnum>;
+  content?: InputMaybe<FeedblogContentFieldSelector>;
+  contentSnippet?: InputMaybe<FieldSelectorEnum>;
+  creator?: InputMaybe<FieldSelectorEnum>;
+  dc?: InputMaybe<FeedblogDcFieldSelector>;
+  guid?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  isoDate?: InputMaybe<FieldSelectorEnum>;
+  link?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  pubDate?: InputMaybe<FieldSelectorEnum>;
+  title?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type FeedblogFilterInput = {
   categories?: InputMaybe<StringQueryOperatorInput>;
@@ -679,29 +551,29 @@ export type FeedblogGroupConnection = {
 
 
 export type FeedblogGroupConnectionDistinctArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
 };
 
 
 export type FeedblogGroupConnectionGroupArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type FeedblogGroupConnectionMaxArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
 };
 
 
 export type FeedblogGroupConnectionMinArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
 };
 
 
 export type FeedblogGroupConnectionSumArgs = {
-  field: FeedblogFieldsEnum;
+  field: FeedblogFieldSelector;
 };
 
 export type FeedblogMeta = Node & {
@@ -735,29 +607,29 @@ export type FeedblogMetaConnection = {
 
 
 export type FeedblogMetaConnectionDistinctArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
 };
 
 
 export type FeedblogMetaConnectionGroupArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type FeedblogMetaConnectionMaxArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
 };
 
 
 export type FeedblogMetaConnectionMinArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
 };
 
 
 export type FeedblogMetaConnectionSumArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
 };
 
 export type FeedblogMetaEdge = {
@@ -767,109 +639,20 @@ export type FeedblogMetaEdge = {
   previous?: Maybe<FeedblogMeta>;
 };
 
-export enum FeedblogMetaFieldsEnum {
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Description = 'description',
-  FeedUrl = 'feedUrl',
-  Generator = 'generator',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  Language = 'language',
-  LastBuildDate = 'lastBuildDate',
-  Link = 'link',
-  PaginationLinksSelf = 'paginationLinks___self',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  Title = 'title'
-}
+export type FeedblogMetaFieldSelector = {
+  children?: InputMaybe<NodeFieldSelector>;
+  description?: InputMaybe<FieldSelectorEnum>;
+  feedUrl?: InputMaybe<FieldSelectorEnum>;
+  generator?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  language?: InputMaybe<FieldSelectorEnum>;
+  lastBuildDate?: InputMaybe<FieldSelectorEnum>;
+  link?: InputMaybe<FieldSelectorEnum>;
+  paginationLinks?: InputMaybe<FeedblogMetaPaginationLinksFieldSelector>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  title?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type FeedblogMetaFilterInput = {
   children?: InputMaybe<NodeFilterListInput>;
@@ -903,29 +686,29 @@ export type FeedblogMetaGroupConnection = {
 
 
 export type FeedblogMetaGroupConnectionDistinctArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
 };
 
 
 export type FeedblogMetaGroupConnectionGroupArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type FeedblogMetaGroupConnectionMaxArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
 };
 
 
 export type FeedblogMetaGroupConnectionMinArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
 };
 
 
 export type FeedblogMetaGroupConnectionSumArgs = {
-  field: FeedblogMetaFieldsEnum;
+  field: FeedblogMetaFieldSelector;
 };
 
 export type FeedblogMetaPaginationLinks = {
@@ -933,19 +716,54 @@ export type FeedblogMetaPaginationLinks = {
   self?: Maybe<Scalars['String']>;
 };
 
+export type FeedblogMetaPaginationLinksFieldSelector = {
+  self?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type FeedblogMetaPaginationLinksFilterInput = {
   self?: InputMaybe<StringQueryOperatorInput>;
 };
 
+export type FeedblogMetaPaginationLinksSortInput = {
+  self?: InputMaybe<SortOrderEnum>;
+};
+
 export type FeedblogMetaSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<FeedblogMetaFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  children?: InputMaybe<NodeSortInput>;
+  description?: InputMaybe<SortOrderEnum>;
+  feedUrl?: InputMaybe<SortOrderEnum>;
+  generator?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  language?: InputMaybe<SortOrderEnum>;
+  lastBuildDate?: InputMaybe<SortOrderEnum>;
+  link?: InputMaybe<SortOrderEnum>;
+  paginationLinks?: InputMaybe<FeedblogMetaPaginationLinksSortInput>;
+  parent?: InputMaybe<NodeSortInput>;
+  title?: InputMaybe<SortOrderEnum>;
 };
 
 export type FeedblogSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<FeedblogFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  categories?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  comments?: InputMaybe<SortOrderEnum>;
+  content?: InputMaybe<FeedblogContentSortInput>;
+  contentSnippet?: InputMaybe<SortOrderEnum>;
+  creator?: InputMaybe<SortOrderEnum>;
+  dc?: InputMaybe<FeedblogDcSortInput>;
+  guid?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  isoDate?: InputMaybe<SortOrderEnum>;
+  link?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  pubDate?: InputMaybe<SortOrderEnum>;
+  title?: InputMaybe<SortOrderEnum>;
 };
+
+export enum FieldSelectorEnum {
+  Select = 'SELECT'
+}
 
 export type File = Node & {
   __typename?: 'File';
@@ -1067,29 +885,29 @@ export type FileConnection = {
 
 
 export type FileConnectionDistinctArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 export type FileConnectionGroupArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type FileConnectionMaxArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 export type FileConnectionMinArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 export type FileConnectionSumArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 export type FileEdge = {
@@ -1099,340 +917,48 @@ export type FileEdge = {
   previous?: Maybe<File>;
 };
 
-export enum FileFieldsEnum {
-  AbsolutePath = 'absolutePath',
-  AccessTime = 'accessTime',
-  Atime = 'atime',
-  AtimeMs = 'atimeMs',
-  Base = 'base',
-  BirthTime = 'birthTime',
-  Birthtime = 'birthtime',
-  BirthtimeMs = 'birthtimeMs',
-  Blksize = 'blksize',
-  Blocks = 'blocks',
-  ChangeTime = 'changeTime',
-  ChildImageSharpChildren = 'childImageSharp___children',
-  ChildImageSharpChildrenChildren = 'childImageSharp___children___children',
-  ChildImageSharpChildrenChildrenChildren = 'childImageSharp___children___children___children',
-  ChildImageSharpChildrenChildrenId = 'childImageSharp___children___children___id',
-  ChildImageSharpChildrenId = 'childImageSharp___children___id',
-  ChildImageSharpChildrenInternalContent = 'childImageSharp___children___internal___content',
-  ChildImageSharpChildrenInternalContentDigest = 'childImageSharp___children___internal___contentDigest',
-  ChildImageSharpChildrenInternalContentFilePath = 'childImageSharp___children___internal___contentFilePath',
-  ChildImageSharpChildrenInternalDescription = 'childImageSharp___children___internal___description',
-  ChildImageSharpChildrenInternalFieldOwners = 'childImageSharp___children___internal___fieldOwners',
-  ChildImageSharpChildrenInternalIgnoreType = 'childImageSharp___children___internal___ignoreType',
-  ChildImageSharpChildrenInternalMediaType = 'childImageSharp___children___internal___mediaType',
-  ChildImageSharpChildrenInternalOwner = 'childImageSharp___children___internal___owner',
-  ChildImageSharpChildrenInternalType = 'childImageSharp___children___internal___type',
-  ChildImageSharpChildrenParentChildren = 'childImageSharp___children___parent___children',
-  ChildImageSharpChildrenParentId = 'childImageSharp___children___parent___id',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedAspectRatio = 'childImageSharp___fixed___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedBase64 = 'childImageSharp___fixed___base64',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedHeight = 'childImageSharp___fixed___height',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedOriginalName = 'childImageSharp___fixed___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedSrc = 'childImageSharp___fixed___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedSrcSet = 'childImageSharp___fixed___srcSet',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedSrcSetWebp = 'childImageSharp___fixed___srcSetWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedSrcWebp = 'childImageSharp___fixed___srcWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedTracedSvg = 'childImageSharp___fixed___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFixedWidth = 'childImageSharp___fixed___width',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidAspectRatio = 'childImageSharp___fluid___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidBase64 = 'childImageSharp___fluid___base64',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidOriginalImg = 'childImageSharp___fluid___originalImg',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidOriginalName = 'childImageSharp___fluid___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidPresentationHeight = 'childImageSharp___fluid___presentationHeight',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidPresentationWidth = 'childImageSharp___fluid___presentationWidth',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidSizes = 'childImageSharp___fluid___sizes',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidSrc = 'childImageSharp___fluid___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidSrcSet = 'childImageSharp___fluid___srcSet',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidSrcSetWebp = 'childImageSharp___fluid___srcSetWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidSrcWebp = 'childImageSharp___fluid___srcWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpFluidTracedSvg = 'childImageSharp___fluid___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpGatsbyImageData = 'childImageSharp___gatsbyImageData',
-  ChildImageSharpId = 'childImageSharp___id',
-  ChildImageSharpInternalContent = 'childImageSharp___internal___content',
-  ChildImageSharpInternalContentDigest = 'childImageSharp___internal___contentDigest',
-  ChildImageSharpInternalContentFilePath = 'childImageSharp___internal___contentFilePath',
-  ChildImageSharpInternalDescription = 'childImageSharp___internal___description',
-  ChildImageSharpInternalFieldOwners = 'childImageSharp___internal___fieldOwners',
-  ChildImageSharpInternalIgnoreType = 'childImageSharp___internal___ignoreType',
-  ChildImageSharpInternalMediaType = 'childImageSharp___internal___mediaType',
-  ChildImageSharpInternalOwner = 'childImageSharp___internal___owner',
-  ChildImageSharpInternalType = 'childImageSharp___internal___type',
-  ChildImageSharpOriginalHeight = 'childImageSharp___original___height',
-  ChildImageSharpOriginalSrc = 'childImageSharp___original___src',
-  ChildImageSharpOriginalWidth = 'childImageSharp___original___width',
-  ChildImageSharpParentChildren = 'childImageSharp___parent___children',
-  ChildImageSharpParentChildrenChildren = 'childImageSharp___parent___children___children',
-  ChildImageSharpParentChildrenId = 'childImageSharp___parent___children___id',
-  ChildImageSharpParentId = 'childImageSharp___parent___id',
-  ChildImageSharpParentInternalContent = 'childImageSharp___parent___internal___content',
-  ChildImageSharpParentInternalContentDigest = 'childImageSharp___parent___internal___contentDigest',
-  ChildImageSharpParentInternalContentFilePath = 'childImageSharp___parent___internal___contentFilePath',
-  ChildImageSharpParentInternalDescription = 'childImageSharp___parent___internal___description',
-  ChildImageSharpParentInternalFieldOwners = 'childImageSharp___parent___internal___fieldOwners',
-  ChildImageSharpParentInternalIgnoreType = 'childImageSharp___parent___internal___ignoreType',
-  ChildImageSharpParentInternalMediaType = 'childImageSharp___parent___internal___mediaType',
-  ChildImageSharpParentInternalOwner = 'childImageSharp___parent___internal___owner',
-  ChildImageSharpParentInternalType = 'childImageSharp___parent___internal___type',
-  ChildImageSharpParentParentChildren = 'childImageSharp___parent___parent___children',
-  ChildImageSharpParentParentId = 'childImageSharp___parent___parent___id',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpResizeAspectRatio = 'childImageSharp___resize___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpResizeHeight = 'childImageSharp___resize___height',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpResizeOriginalName = 'childImageSharp___resize___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpResizeSrc = 'childImageSharp___resize___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpResizeTracedSvg = 'childImageSharp___resize___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildImageSharpResizeWidth = 'childImageSharp___resize___width',
-  Children = 'children',
-  ChildrenImageSharp = 'childrenImageSharp',
-  ChildrenImageSharpChildren = 'childrenImageSharp___children',
-  ChildrenImageSharpChildrenChildren = 'childrenImageSharp___children___children',
-  ChildrenImageSharpChildrenChildrenChildren = 'childrenImageSharp___children___children___children',
-  ChildrenImageSharpChildrenChildrenId = 'childrenImageSharp___children___children___id',
-  ChildrenImageSharpChildrenId = 'childrenImageSharp___children___id',
-  ChildrenImageSharpChildrenInternalContent = 'childrenImageSharp___children___internal___content',
-  ChildrenImageSharpChildrenInternalContentDigest = 'childrenImageSharp___children___internal___contentDigest',
-  ChildrenImageSharpChildrenInternalContentFilePath = 'childrenImageSharp___children___internal___contentFilePath',
-  ChildrenImageSharpChildrenInternalDescription = 'childrenImageSharp___children___internal___description',
-  ChildrenImageSharpChildrenInternalFieldOwners = 'childrenImageSharp___children___internal___fieldOwners',
-  ChildrenImageSharpChildrenInternalIgnoreType = 'childrenImageSharp___children___internal___ignoreType',
-  ChildrenImageSharpChildrenInternalMediaType = 'childrenImageSharp___children___internal___mediaType',
-  ChildrenImageSharpChildrenInternalOwner = 'childrenImageSharp___children___internal___owner',
-  ChildrenImageSharpChildrenInternalType = 'childrenImageSharp___children___internal___type',
-  ChildrenImageSharpChildrenParentChildren = 'childrenImageSharp___children___parent___children',
-  ChildrenImageSharpChildrenParentId = 'childrenImageSharp___children___parent___id',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedAspectRatio = 'childrenImageSharp___fixed___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedBase64 = 'childrenImageSharp___fixed___base64',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedHeight = 'childrenImageSharp___fixed___height',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedOriginalName = 'childrenImageSharp___fixed___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedSrc = 'childrenImageSharp___fixed___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedSrcSet = 'childrenImageSharp___fixed___srcSet',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedSrcSetWebp = 'childrenImageSharp___fixed___srcSetWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedSrcWebp = 'childrenImageSharp___fixed___srcWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedTracedSvg = 'childrenImageSharp___fixed___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFixedWidth = 'childrenImageSharp___fixed___width',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidAspectRatio = 'childrenImageSharp___fluid___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidBase64 = 'childrenImageSharp___fluid___base64',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidOriginalImg = 'childrenImageSharp___fluid___originalImg',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidOriginalName = 'childrenImageSharp___fluid___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidPresentationHeight = 'childrenImageSharp___fluid___presentationHeight',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidPresentationWidth = 'childrenImageSharp___fluid___presentationWidth',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidSizes = 'childrenImageSharp___fluid___sizes',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidSrc = 'childrenImageSharp___fluid___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidSrcSet = 'childrenImageSharp___fluid___srcSet',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidSrcSetWebp = 'childrenImageSharp___fluid___srcSetWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidSrcWebp = 'childrenImageSharp___fluid___srcWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpFluidTracedSvg = 'childrenImageSharp___fluid___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpGatsbyImageData = 'childrenImageSharp___gatsbyImageData',
-  ChildrenImageSharpId = 'childrenImageSharp___id',
-  ChildrenImageSharpInternalContent = 'childrenImageSharp___internal___content',
-  ChildrenImageSharpInternalContentDigest = 'childrenImageSharp___internal___contentDigest',
-  ChildrenImageSharpInternalContentFilePath = 'childrenImageSharp___internal___contentFilePath',
-  ChildrenImageSharpInternalDescription = 'childrenImageSharp___internal___description',
-  ChildrenImageSharpInternalFieldOwners = 'childrenImageSharp___internal___fieldOwners',
-  ChildrenImageSharpInternalIgnoreType = 'childrenImageSharp___internal___ignoreType',
-  ChildrenImageSharpInternalMediaType = 'childrenImageSharp___internal___mediaType',
-  ChildrenImageSharpInternalOwner = 'childrenImageSharp___internal___owner',
-  ChildrenImageSharpInternalType = 'childrenImageSharp___internal___type',
-  ChildrenImageSharpOriginalHeight = 'childrenImageSharp___original___height',
-  ChildrenImageSharpOriginalSrc = 'childrenImageSharp___original___src',
-  ChildrenImageSharpOriginalWidth = 'childrenImageSharp___original___width',
-  ChildrenImageSharpParentChildren = 'childrenImageSharp___parent___children',
-  ChildrenImageSharpParentChildrenChildren = 'childrenImageSharp___parent___children___children',
-  ChildrenImageSharpParentChildrenId = 'childrenImageSharp___parent___children___id',
-  ChildrenImageSharpParentId = 'childrenImageSharp___parent___id',
-  ChildrenImageSharpParentInternalContent = 'childrenImageSharp___parent___internal___content',
-  ChildrenImageSharpParentInternalContentDigest = 'childrenImageSharp___parent___internal___contentDigest',
-  ChildrenImageSharpParentInternalContentFilePath = 'childrenImageSharp___parent___internal___contentFilePath',
-  ChildrenImageSharpParentInternalDescription = 'childrenImageSharp___parent___internal___description',
-  ChildrenImageSharpParentInternalFieldOwners = 'childrenImageSharp___parent___internal___fieldOwners',
-  ChildrenImageSharpParentInternalIgnoreType = 'childrenImageSharp___parent___internal___ignoreType',
-  ChildrenImageSharpParentInternalMediaType = 'childrenImageSharp___parent___internal___mediaType',
-  ChildrenImageSharpParentInternalOwner = 'childrenImageSharp___parent___internal___owner',
-  ChildrenImageSharpParentInternalType = 'childrenImageSharp___parent___internal___type',
-  ChildrenImageSharpParentParentChildren = 'childrenImageSharp___parent___parent___children',
-  ChildrenImageSharpParentParentId = 'childrenImageSharp___parent___parent___id',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpResizeAspectRatio = 'childrenImageSharp___resize___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpResizeHeight = 'childrenImageSharp___resize___height',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpResizeOriginalName = 'childrenImageSharp___resize___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpResizeSrc = 'childrenImageSharp___resize___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpResizeTracedSvg = 'childrenImageSharp___resize___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ChildrenImageSharpResizeWidth = 'childrenImageSharp___resize___width',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Ctime = 'ctime',
-  CtimeMs = 'ctimeMs',
-  Dev = 'dev',
-  Dir = 'dir',
-  Ext = 'ext',
-  Extension = 'extension',
-  Gid = 'gid',
-  Id = 'id',
-  Ino = 'ino',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  Mode = 'mode',
-  ModifiedTime = 'modifiedTime',
-  Mtime = 'mtime',
-  MtimeMs = 'mtimeMs',
-  Name = 'name',
-  Nlink = 'nlink',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  PrettySize = 'prettySize',
-  PublicUrl = 'publicURL',
-  Rdev = 'rdev',
-  RelativeDirectory = 'relativeDirectory',
-  RelativePath = 'relativePath',
-  Root = 'root',
-  Size = 'size',
-  SourceInstanceName = 'sourceInstanceName',
-  Uid = 'uid'
-}
+export type FileFieldSelector = {
+  absolutePath?: InputMaybe<FieldSelectorEnum>;
+  accessTime?: InputMaybe<FieldSelectorEnum>;
+  atime?: InputMaybe<FieldSelectorEnum>;
+  atimeMs?: InputMaybe<FieldSelectorEnum>;
+  base?: InputMaybe<FieldSelectorEnum>;
+  birthTime?: InputMaybe<FieldSelectorEnum>;
+  birthtime?: InputMaybe<FieldSelectorEnum>;
+  birthtimeMs?: InputMaybe<FieldSelectorEnum>;
+  blksize?: InputMaybe<FieldSelectorEnum>;
+  blocks?: InputMaybe<FieldSelectorEnum>;
+  changeTime?: InputMaybe<FieldSelectorEnum>;
+  childImageSharp?: InputMaybe<ImageSharpFieldSelector>;
+  children?: InputMaybe<NodeFieldSelector>;
+  childrenImageSharp?: InputMaybe<ImageSharpFieldSelector>;
+  ctime?: InputMaybe<FieldSelectorEnum>;
+  ctimeMs?: InputMaybe<FieldSelectorEnum>;
+  dev?: InputMaybe<FieldSelectorEnum>;
+  dir?: InputMaybe<FieldSelectorEnum>;
+  ext?: InputMaybe<FieldSelectorEnum>;
+  extension?: InputMaybe<FieldSelectorEnum>;
+  gid?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  ino?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  mode?: InputMaybe<FieldSelectorEnum>;
+  modifiedTime?: InputMaybe<FieldSelectorEnum>;
+  mtime?: InputMaybe<FieldSelectorEnum>;
+  mtimeMs?: InputMaybe<FieldSelectorEnum>;
+  name?: InputMaybe<FieldSelectorEnum>;
+  nlink?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  prettySize?: InputMaybe<FieldSelectorEnum>;
+  publicURL?: InputMaybe<FieldSelectorEnum>;
+  rdev?: InputMaybe<FieldSelectorEnum>;
+  relativeDirectory?: InputMaybe<FieldSelectorEnum>;
+  relativePath?: InputMaybe<FieldSelectorEnum>;
+  root?: InputMaybe<FieldSelectorEnum>;
+  size?: InputMaybe<FieldSelectorEnum>;
+  sourceInstanceName?: InputMaybe<FieldSelectorEnum>;
+  uid?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type FileFilterInput = {
   absolutePath?: InputMaybe<StringQueryOperatorInput>;
@@ -1494,34 +1020,72 @@ export type FileGroupConnection = {
 
 
 export type FileGroupConnectionDistinctArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 export type FileGroupConnectionGroupArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type FileGroupConnectionMaxArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 export type FileGroupConnectionMinArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 
 export type FileGroupConnectionSumArgs = {
-  field: FileFieldsEnum;
+  field: FileFieldSelector;
 };
 
 export type FileSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<FileFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  absolutePath?: InputMaybe<SortOrderEnum>;
+  accessTime?: InputMaybe<SortOrderEnum>;
+  atime?: InputMaybe<SortOrderEnum>;
+  atimeMs?: InputMaybe<SortOrderEnum>;
+  base?: InputMaybe<SortOrderEnum>;
+  birthTime?: InputMaybe<SortOrderEnum>;
+  birthtime?: InputMaybe<SortOrderEnum>;
+  birthtimeMs?: InputMaybe<SortOrderEnum>;
+  blksize?: InputMaybe<SortOrderEnum>;
+  blocks?: InputMaybe<SortOrderEnum>;
+  changeTime?: InputMaybe<SortOrderEnum>;
+  childImageSharp?: InputMaybe<ImageSharpSortInput>;
+  children?: InputMaybe<NodeSortInput>;
+  childrenImageSharp?: InputMaybe<ImageSharpSortInput>;
+  ctime?: InputMaybe<SortOrderEnum>;
+  ctimeMs?: InputMaybe<SortOrderEnum>;
+  dev?: InputMaybe<SortOrderEnum>;
+  dir?: InputMaybe<SortOrderEnum>;
+  ext?: InputMaybe<SortOrderEnum>;
+  extension?: InputMaybe<SortOrderEnum>;
+  gid?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  ino?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  mode?: InputMaybe<SortOrderEnum>;
+  modifiedTime?: InputMaybe<SortOrderEnum>;
+  mtime?: InputMaybe<SortOrderEnum>;
+  mtimeMs?: InputMaybe<SortOrderEnum>;
+  name?: InputMaybe<SortOrderEnum>;
+  nlink?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  prettySize?: InputMaybe<SortOrderEnum>;
+  publicURL?: InputMaybe<SortOrderEnum>;
+  rdev?: InputMaybe<SortOrderEnum>;
+  relativeDirectory?: InputMaybe<SortOrderEnum>;
+  relativePath?: InputMaybe<SortOrderEnum>;
+  root?: InputMaybe<SortOrderEnum>;
+  size?: InputMaybe<SortOrderEnum>;
+  sourceInstanceName?: InputMaybe<SortOrderEnum>;
+  uid?: InputMaybe<SortOrderEnum>;
 };
 
 export type FloatQueryOperatorInput = {
@@ -1589,29 +1153,29 @@ export type GraphQlSourceConnection = {
 
 
 export type GraphQlSourceConnectionDistinctArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
 };
 
 
 export type GraphQlSourceConnectionGroupArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type GraphQlSourceConnectionMaxArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
 };
 
 
 export type GraphQlSourceConnectionMinArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
 };
 
 
 export type GraphQlSourceConnectionSumArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
 };
 
 export type GraphQlSourceEdge = {
@@ -1621,103 +1185,14 @@ export type GraphQlSourceEdge = {
   previous?: Maybe<GraphQlSource>;
 };
 
-export enum GraphQlSourceFieldsEnum {
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  FieldName = 'fieldName',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  TypeName = 'typeName'
-}
+export type GraphQlSourceFieldSelector = {
+  children?: InputMaybe<NodeFieldSelector>;
+  fieldName?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  typeName?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type GraphQlSourceFilterInput = {
   children?: InputMaybe<NodeFilterListInput>;
@@ -1745,34 +1220,38 @@ export type GraphQlSourceGroupConnection = {
 
 
 export type GraphQlSourceGroupConnectionDistinctArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
 };
 
 
 export type GraphQlSourceGroupConnectionGroupArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type GraphQlSourceGroupConnectionMaxArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
 };
 
 
 export type GraphQlSourceGroupConnectionMinArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
 };
 
 
 export type GraphQlSourceGroupConnectionSumArgs = {
-  field: GraphQlSourceFieldsEnum;
+  field: GraphQlSourceFieldSelector;
 };
 
 export type GraphQlSourceSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<GraphQlSourceFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  children?: InputMaybe<NodeSortInput>;
+  fieldName?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  parent?: InputMaybe<NodeSortInput>;
+  typeName?: InputMaybe<SortOrderEnum>;
 };
 
 export enum ImageCropFocus {
@@ -1940,29 +1419,29 @@ export type ImageSharpConnection = {
 
 
 export type ImageSharpConnectionDistinctArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 export type ImageSharpConnectionGroupArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type ImageSharpConnectionMaxArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 export type ImageSharpConnectionMinArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 export type ImageSharpConnectionSumArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 export type ImageSharpEdge = {
@@ -1972,162 +1451,17 @@ export type ImageSharpEdge = {
   previous?: Maybe<ImageSharp>;
 };
 
-export enum ImageSharpFieldsEnum {
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedAspectRatio = 'fixed___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedBase64 = 'fixed___base64',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedHeight = 'fixed___height',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedOriginalName = 'fixed___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedSrc = 'fixed___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedSrcSet = 'fixed___srcSet',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedSrcSetWebp = 'fixed___srcSetWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedSrcWebp = 'fixed___srcWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedTracedSvg = 'fixed___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FixedWidth = 'fixed___width',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidAspectRatio = 'fluid___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidBase64 = 'fluid___base64',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidOriginalImg = 'fluid___originalImg',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidOriginalName = 'fluid___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidPresentationHeight = 'fluid___presentationHeight',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidPresentationWidth = 'fluid___presentationWidth',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidSizes = 'fluid___sizes',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidSrc = 'fluid___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidSrcSet = 'fluid___srcSet',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidSrcSetWebp = 'fluid___srcSetWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidSrcWebp = 'fluid___srcWebp',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  FluidTracedSvg = 'fluid___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  GatsbyImageData = 'gatsbyImageData',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  OriginalHeight = 'original___height',
-  OriginalSrc = 'original___src',
-  OriginalWidth = 'original___width',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ResizeAspectRatio = 'resize___aspectRatio',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ResizeHeight = 'resize___height',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ResizeOriginalName = 'resize___originalName',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ResizeSrc = 'resize___src',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ResizeTracedSvg = 'resize___tracedSVG',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  ResizeWidth = 'resize___width'
-}
+export type ImageSharpFieldSelector = {
+  children?: InputMaybe<NodeFieldSelector>;
+  fixed?: InputMaybe<ImageSharpFixedFieldSelector>;
+  fluid?: InputMaybe<ImageSharpFluidFieldSelector>;
+  gatsbyImageData?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  original?: InputMaybe<ImageSharpOriginalFieldSelector>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  resize?: InputMaybe<ImageSharpResizeFieldSelector>;
+};
 
 export type ImageSharpFilterInput = {
   children?: InputMaybe<NodeFilterListInput>;
@@ -2159,6 +1493,19 @@ export type ImageSharpFixed = {
   width: Scalars['Float'];
 };
 
+export type ImageSharpFixedFieldSelector = {
+  aspectRatio?: InputMaybe<FieldSelectorEnum>;
+  base64?: InputMaybe<FieldSelectorEnum>;
+  height?: InputMaybe<FieldSelectorEnum>;
+  originalName?: InputMaybe<FieldSelectorEnum>;
+  src?: InputMaybe<FieldSelectorEnum>;
+  srcSet?: InputMaybe<FieldSelectorEnum>;
+  srcSetWebp?: InputMaybe<FieldSelectorEnum>;
+  srcWebp?: InputMaybe<FieldSelectorEnum>;
+  tracedSVG?: InputMaybe<FieldSelectorEnum>;
+  width?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type ImageSharpFixedFilterInput = {
   aspectRatio?: InputMaybe<FloatQueryOperatorInput>;
   base64?: InputMaybe<StringQueryOperatorInput>;
@@ -2170,6 +1517,19 @@ export type ImageSharpFixedFilterInput = {
   srcWebp?: InputMaybe<StringQueryOperatorInput>;
   tracedSVG?: InputMaybe<StringQueryOperatorInput>;
   width?: InputMaybe<FloatQueryOperatorInput>;
+};
+
+export type ImageSharpFixedSortInput = {
+  aspectRatio?: InputMaybe<SortOrderEnum>;
+  base64?: InputMaybe<SortOrderEnum>;
+  height?: InputMaybe<SortOrderEnum>;
+  originalName?: InputMaybe<SortOrderEnum>;
+  src?: InputMaybe<SortOrderEnum>;
+  srcSet?: InputMaybe<SortOrderEnum>;
+  srcSetWebp?: InputMaybe<SortOrderEnum>;
+  srcWebp?: InputMaybe<SortOrderEnum>;
+  tracedSVG?: InputMaybe<SortOrderEnum>;
+  width?: InputMaybe<SortOrderEnum>;
 };
 
 export type ImageSharpFluid = {
@@ -2188,6 +1548,21 @@ export type ImageSharpFluid = {
   tracedSVG?: Maybe<Scalars['String']>;
 };
 
+export type ImageSharpFluidFieldSelector = {
+  aspectRatio?: InputMaybe<FieldSelectorEnum>;
+  base64?: InputMaybe<FieldSelectorEnum>;
+  originalImg?: InputMaybe<FieldSelectorEnum>;
+  originalName?: InputMaybe<FieldSelectorEnum>;
+  presentationHeight?: InputMaybe<FieldSelectorEnum>;
+  presentationWidth?: InputMaybe<FieldSelectorEnum>;
+  sizes?: InputMaybe<FieldSelectorEnum>;
+  src?: InputMaybe<FieldSelectorEnum>;
+  srcSet?: InputMaybe<FieldSelectorEnum>;
+  srcSetWebp?: InputMaybe<FieldSelectorEnum>;
+  srcWebp?: InputMaybe<FieldSelectorEnum>;
+  tracedSVG?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type ImageSharpFluidFilterInput = {
   aspectRatio?: InputMaybe<FloatQueryOperatorInput>;
   base64?: InputMaybe<StringQueryOperatorInput>;
@@ -2201,6 +1576,21 @@ export type ImageSharpFluidFilterInput = {
   srcSetWebp?: InputMaybe<StringQueryOperatorInput>;
   srcWebp?: InputMaybe<StringQueryOperatorInput>;
   tracedSVG?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type ImageSharpFluidSortInput = {
+  aspectRatio?: InputMaybe<SortOrderEnum>;
+  base64?: InputMaybe<SortOrderEnum>;
+  originalImg?: InputMaybe<SortOrderEnum>;
+  originalName?: InputMaybe<SortOrderEnum>;
+  presentationHeight?: InputMaybe<SortOrderEnum>;
+  presentationWidth?: InputMaybe<SortOrderEnum>;
+  sizes?: InputMaybe<SortOrderEnum>;
+  src?: InputMaybe<SortOrderEnum>;
+  srcSet?: InputMaybe<SortOrderEnum>;
+  srcSetWebp?: InputMaybe<SortOrderEnum>;
+  srcWebp?: InputMaybe<SortOrderEnum>;
+  tracedSVG?: InputMaybe<SortOrderEnum>;
 };
 
 export type ImageSharpGroupConnection = {
@@ -2220,29 +1610,29 @@ export type ImageSharpGroupConnection = {
 
 
 export type ImageSharpGroupConnectionDistinctArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 export type ImageSharpGroupConnectionGroupArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type ImageSharpGroupConnectionMaxArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 export type ImageSharpGroupConnectionMinArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 
 export type ImageSharpGroupConnectionSumArgs = {
-  field: ImageSharpFieldsEnum;
+  field: ImageSharpFieldSelector;
 };
 
 export type ImageSharpOriginal = {
@@ -2252,10 +1642,22 @@ export type ImageSharpOriginal = {
   width?: Maybe<Scalars['Float']>;
 };
 
+export type ImageSharpOriginalFieldSelector = {
+  height?: InputMaybe<FieldSelectorEnum>;
+  src?: InputMaybe<FieldSelectorEnum>;
+  width?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type ImageSharpOriginalFilterInput = {
   height?: InputMaybe<FloatQueryOperatorInput>;
   src?: InputMaybe<StringQueryOperatorInput>;
   width?: InputMaybe<FloatQueryOperatorInput>;
+};
+
+export type ImageSharpOriginalSortInput = {
+  height?: InputMaybe<SortOrderEnum>;
+  src?: InputMaybe<SortOrderEnum>;
+  width?: InputMaybe<SortOrderEnum>;
 };
 
 export type ImageSharpResize = {
@@ -2268,6 +1670,15 @@ export type ImageSharpResize = {
   width?: Maybe<Scalars['Int']>;
 };
 
+export type ImageSharpResizeFieldSelector = {
+  aspectRatio?: InputMaybe<FieldSelectorEnum>;
+  height?: InputMaybe<FieldSelectorEnum>;
+  originalName?: InputMaybe<FieldSelectorEnum>;
+  src?: InputMaybe<FieldSelectorEnum>;
+  tracedSVG?: InputMaybe<FieldSelectorEnum>;
+  width?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type ImageSharpResizeFilterInput = {
   aspectRatio?: InputMaybe<FloatQueryOperatorInput>;
   height?: InputMaybe<IntQueryOperatorInput>;
@@ -2277,9 +1688,25 @@ export type ImageSharpResizeFilterInput = {
   width?: InputMaybe<IntQueryOperatorInput>;
 };
 
+export type ImageSharpResizeSortInput = {
+  aspectRatio?: InputMaybe<SortOrderEnum>;
+  height?: InputMaybe<SortOrderEnum>;
+  originalName?: InputMaybe<SortOrderEnum>;
+  src?: InputMaybe<SortOrderEnum>;
+  tracedSVG?: InputMaybe<SortOrderEnum>;
+  width?: InputMaybe<SortOrderEnum>;
+};
+
 export type ImageSharpSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<ImageSharpFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  children?: InputMaybe<NodeSortInput>;
+  fixed?: InputMaybe<ImageSharpFixedSortInput>;
+  fluid?: InputMaybe<ImageSharpFluidSortInput>;
+  gatsbyImageData?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  original?: InputMaybe<ImageSharpOriginalSortInput>;
+  parent?: InputMaybe<NodeSortInput>;
+  resize?: InputMaybe<ImageSharpResizeSortInput>;
 };
 
 export type IntQueryOperatorInput = {
@@ -2306,6 +1733,18 @@ export type Internal = {
   type: Scalars['String'];
 };
 
+export type InternalFieldSelector = {
+  content?: InputMaybe<FieldSelectorEnum>;
+  contentDigest?: InputMaybe<FieldSelectorEnum>;
+  contentFilePath?: InputMaybe<FieldSelectorEnum>;
+  description?: InputMaybe<FieldSelectorEnum>;
+  fieldOwners?: InputMaybe<FieldSelectorEnum>;
+  ignoreType?: InputMaybe<FieldSelectorEnum>;
+  mediaType?: InputMaybe<FieldSelectorEnum>;
+  owner?: InputMaybe<FieldSelectorEnum>;
+  type?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type InternalFilterInput = {
   content?: InputMaybe<StringQueryOperatorInput>;
   contentDigest?: InputMaybe<StringQueryOperatorInput>;
@@ -2316,6 +1755,18 @@ export type InternalFilterInput = {
   mediaType?: InputMaybe<StringQueryOperatorInput>;
   owner?: InputMaybe<StringQueryOperatorInput>;
   type?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type InternalSortInput = {
+  content?: InputMaybe<SortOrderEnum>;
+  contentDigest?: InputMaybe<SortOrderEnum>;
+  contentFilePath?: InputMaybe<SortOrderEnum>;
+  description?: InputMaybe<SortOrderEnum>;
+  fieldOwners?: InputMaybe<SortOrderEnum>;
+  ignoreType?: InputMaybe<SortOrderEnum>;
+  mediaType?: InputMaybe<SortOrderEnum>;
+  owner?: InputMaybe<SortOrderEnum>;
+  type?: InputMaybe<SortOrderEnum>;
 };
 
 export type JpgOptions = {
@@ -2332,25 +1783,19 @@ export type JsonQueryOperatorInput = {
   regex?: InputMaybe<Scalars['JSON']>;
 };
 
-export enum Membership {
-  Family = 'Family',
-  Individual = 'Individual',
-  Trial = 'Trial'
-}
-
-export type MembershipQueryOperatorInput = {
-  eq?: InputMaybe<Membership>;
-  in?: InputMaybe<Array<InputMaybe<Membership>>>;
-  ne?: InputMaybe<Membership>;
-  nin?: InputMaybe<Array<InputMaybe<Membership>>>;
-};
-
 /** Node Interface */
 export type Node = {
   children: Array<Node>;
   id: Scalars['ID'];
   internal: Internal;
   parent?: Maybe<Node>;
+};
+
+export type NodeFieldSelector = {
+  children?: InputMaybe<NodeFieldSelector>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  parent?: InputMaybe<NodeFieldSelector>;
 };
 
 export type NodeFilterInput = {
@@ -2362,6 +1807,13 @@ export type NodeFilterInput = {
 
 export type NodeFilterListInput = {
   elemMatch?: InputMaybe<NodeFilterInput>;
+};
+
+export type NodeSortInput = {
+  children?: InputMaybe<NodeSortInput>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  parent?: InputMaybe<NodeSortInput>;
 };
 
 export type PngOptions = {
@@ -2378,12 +1830,28 @@ export type PageInfo = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type PageInfoFieldSelector = {
+  nextTitle?: InputMaybe<FieldSelectorEnum>;
+  nextUrl?: InputMaybe<FieldSelectorEnum>;
+  prevTitle?: InputMaybe<FieldSelectorEnum>;
+  prevUrl?: InputMaybe<FieldSelectorEnum>;
+  title?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type PageInfoFilterInput = {
   nextTitle?: InputMaybe<StringQueryOperatorInput>;
   nextUrl?: InputMaybe<StringQueryOperatorInput>;
   prevTitle?: InputMaybe<StringQueryOperatorInput>;
   prevUrl?: InputMaybe<StringQueryOperatorInput>;
   title?: InputMaybe<StringQueryOperatorInput>;
+};
+
+export type PageInfoSortInput = {
+  nextTitle?: InputMaybe<SortOrderEnum>;
+  nextUrl?: InputMaybe<SortOrderEnum>;
+  prevTitle?: InputMaybe<SortOrderEnum>;
+  prevUrl?: InputMaybe<SortOrderEnum>;
+  title?: InputMaybe<SortOrderEnum>;
 };
 
 export enum PageType {
@@ -2429,7 +1897,6 @@ export type Query = {
   allGraphQlSource: GraphQlSourceConnection;
   allImageSharp: ImageSharpConnection;
   allMail: MailConnection;
-  allRider: RiderConnection;
   allSite: SiteConnection;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   allSiteFunction: SiteFunctionConnection;
@@ -2444,7 +1911,6 @@ export type Query = {
   graphQlSource?: Maybe<GraphQlSource>;
   imageSharp?: Maybe<ImageSharp>;
   mail?: Maybe<Mail>;
-  rider?: Maybe<Rider>;
   site?: Maybe<Site>;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   siteFunction?: Maybe<SiteFunction>;
@@ -2457,7 +1923,7 @@ export type QueryAllDirectoryArgs = {
   filter?: InputMaybe<DirectoryFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<DirectorySortInput>;
+  sort?: InputMaybe<Array<InputMaybe<DirectorySortInput>>>;
 };
 
 
@@ -2465,7 +1931,7 @@ export type QueryAllEventArgs = {
   filter?: InputMaybe<EventFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<EventSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<EventSortInput>>>;
 };
 
 
@@ -2473,7 +1939,7 @@ export type QueryAllFeedblogArgs = {
   filter?: InputMaybe<FeedblogFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<FeedblogSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<FeedblogSortInput>>>;
 };
 
 
@@ -2481,7 +1947,7 @@ export type QueryAllFeedblogMetaArgs = {
   filter?: InputMaybe<FeedblogMetaFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<FeedblogMetaSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<FeedblogMetaSortInput>>>;
 };
 
 
@@ -2489,7 +1955,7 @@ export type QueryAllFileArgs = {
   filter?: InputMaybe<FileFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<FileSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<FileSortInput>>>;
 };
 
 
@@ -2497,7 +1963,7 @@ export type QueryAllGraphQlSourceArgs = {
   filter?: InputMaybe<GraphQlSourceFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<GraphQlSourceSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<GraphQlSourceSortInput>>>;
 };
 
 
@@ -2505,7 +1971,7 @@ export type QueryAllImageSharpArgs = {
   filter?: InputMaybe<ImageSharpFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<ImageSharpSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<ImageSharpSortInput>>>;
 };
 
 
@@ -2513,15 +1979,7 @@ export type QueryAllMailArgs = {
   filter?: InputMaybe<MailFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<MailSortInput>;
-};
-
-
-export type QueryAllRiderArgs = {
-  filter?: InputMaybe<RiderFilterInput>;
-  limit?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<RiderSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<MailSortInput>>>;
 };
 
 
@@ -2529,7 +1987,7 @@ export type QueryAllSiteArgs = {
   filter?: InputMaybe<SiteFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<SiteSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<SiteSortInput>>>;
 };
 
 
@@ -2537,7 +1995,7 @@ export type QueryAllSiteBuildMetadataArgs = {
   filter?: InputMaybe<SiteBuildMetadataFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<SiteBuildMetadataSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<SiteBuildMetadataSortInput>>>;
 };
 
 
@@ -2545,7 +2003,7 @@ export type QueryAllSiteFunctionArgs = {
   filter?: InputMaybe<SiteFunctionFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<SiteFunctionSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<SiteFunctionSortInput>>>;
 };
 
 
@@ -2553,7 +2011,7 @@ export type QueryAllSitePageArgs = {
   filter?: InputMaybe<SitePageFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<SitePageSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<SitePageSortInput>>>;
 };
 
 
@@ -2561,7 +2019,7 @@ export type QueryAllSitePluginArgs = {
   filter?: InputMaybe<SitePluginFilterInput>;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<SitePluginSortInput>;
+  sort?: InputMaybe<Array<InputMaybe<SitePluginSortInput>>>;
 };
 
 
@@ -2747,19 +2205,6 @@ export type QueryMailArgs = {
 };
 
 
-export type QueryRiderArgs = {
-  children?: InputMaybe<NodeFilterListInput>;
-  city?: InputMaybe<StringQueryOperatorInput>;
-  country?: InputMaybe<StringQueryOperatorInput>;
-  fullName?: InputMaybe<StringQueryOperatorInput>;
-  id?: InputMaybe<StringQueryOperatorInput>;
-  internal?: InputMaybe<InternalFilterInput>;
-  membership?: InputMaybe<MembershipQueryOperatorInput>;
-  parent?: InputMaybe<NodeFilterInput>;
-  seasons?: InputMaybe<IntQueryOperatorInput>;
-};
-
-
 export type QuerySiteArgs = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -2892,29 +2337,29 @@ export type SiteBuildMetadataConnection = {
 
 
 export type SiteBuildMetadataConnectionDistinctArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 export type SiteBuildMetadataConnectionGroupArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SiteBuildMetadataConnectionMaxArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 export type SiteBuildMetadataConnectionMinArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 export type SiteBuildMetadataConnectionSumArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 export type SiteBuildMetadataEdge = {
@@ -2924,102 +2369,13 @@ export type SiteBuildMetadataEdge = {
   previous?: Maybe<SiteBuildMetadata>;
 };
 
-export enum SiteBuildMetadataFieldsEnum {
-  BuildTime = 'buildTime',
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id'
-}
+export type SiteBuildMetadataFieldSelector = {
+  buildTime?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  parent?: InputMaybe<NodeFieldSelector>;
+};
 
 export type SiteBuildMetadataFilterInput = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
@@ -3046,34 +2402,37 @@ export type SiteBuildMetadataGroupConnection = {
 
 
 export type SiteBuildMetadataGroupConnectionDistinctArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 export type SiteBuildMetadataGroupConnectionGroupArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SiteBuildMetadataGroupConnectionMaxArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 export type SiteBuildMetadataGroupConnectionMinArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 
 export type SiteBuildMetadataGroupConnectionSumArgs = {
-  field: SiteBuildMetadataFieldsEnum;
+  field: SiteBuildMetadataFieldSelector;
 };
 
 export type SiteBuildMetadataSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<SiteBuildMetadataFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  buildTime?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  parent?: InputMaybe<NodeSortInput>;
 };
 
 export type SiteConnection = {
@@ -3091,29 +2450,29 @@ export type SiteConnection = {
 
 
 export type SiteConnectionDistinctArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 export type SiteConnectionGroupArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SiteConnectionMaxArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 export type SiteConnectionMinArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 export type SiteConnectionSumArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 export type SiteEdge = {
@@ -3123,114 +2482,22 @@ export type SiteEdge = {
   previous?: Maybe<Site>;
 };
 
-export enum SiteFieldsEnum {
-  BuildTime = 'buildTime',
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  FlagsFastDev = 'flags___FAST_DEV',
-  GraphqlTypegen = 'graphqlTypegen',
-  Host = 'host',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  JsxRuntime = 'jsxRuntime',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  PathPrefix = 'pathPrefix',
-  Polyfill = 'polyfill',
-  Port = 'port',
-  SiteMetadataAuthor = 'siteMetadata___author',
-  SiteMetadataDescription = 'siteMetadata___description',
-  SiteMetadataSiteUrl = 'siteMetadata___siteURL',
-  SiteMetadataTitle = 'siteMetadata___title',
-  TrailingSlash = 'trailingSlash'
-}
+export type SiteFieldSelector = {
+  buildTime?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  flags?: InputMaybe<SiteFlagsFieldSelector>;
+  graphqlTypegen?: InputMaybe<FieldSelectorEnum>;
+  host?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  jsxRuntime?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  pathPrefix?: InputMaybe<FieldSelectorEnum>;
+  polyfill?: InputMaybe<FieldSelectorEnum>;
+  port?: InputMaybe<FieldSelectorEnum>;
+  siteMetadata?: InputMaybe<SiteSiteMetadataFieldSelector>;
+  trailingSlash?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type SiteFilterInput = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
@@ -3254,8 +2521,16 @@ export type SiteFlags = {
   FAST_DEV?: Maybe<Scalars['Boolean']>;
 };
 
+export type SiteFlagsFieldSelector = {
+  FAST_DEV?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type SiteFlagsFilterInput = {
   FAST_DEV?: InputMaybe<BooleanQueryOperatorInput>;
+};
+
+export type SiteFlagsSortInput = {
+  FAST_DEV?: InputMaybe<SortOrderEnum>;
 };
 
 export type SiteFunction = Node & {
@@ -3288,29 +2563,29 @@ export type SiteFunctionConnection = {
 
 
 export type SiteFunctionConnectionDistinctArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 export type SiteFunctionConnectionGroupArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SiteFunctionConnectionMaxArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 export type SiteFunctionConnectionMinArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 export type SiteFunctionConnectionSumArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 export type SiteFunctionEdge = {
@@ -3320,108 +2595,19 @@ export type SiteFunctionEdge = {
   previous?: Maybe<SiteFunction>;
 };
 
-export enum SiteFunctionFieldsEnum {
-  AbsoluteCompiledFilePath = 'absoluteCompiledFilePath',
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  FunctionRoute = 'functionRoute',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  MatchPath = 'matchPath',
-  OriginalAbsoluteFilePath = 'originalAbsoluteFilePath',
-  OriginalRelativeFilePath = 'originalRelativeFilePath',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  PluginName = 'pluginName',
-  RelativeCompiledFilePath = 'relativeCompiledFilePath'
-}
+export type SiteFunctionFieldSelector = {
+  absoluteCompiledFilePath?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  functionRoute?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  matchPath?: InputMaybe<FieldSelectorEnum>;
+  originalAbsoluteFilePath?: InputMaybe<FieldSelectorEnum>;
+  originalRelativeFilePath?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  pluginName?: InputMaybe<FieldSelectorEnum>;
+  relativeCompiledFilePath?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type SiteFunctionFilterInput = {
   absoluteCompiledFilePath?: InputMaybe<StringQueryOperatorInput>;
@@ -3454,34 +2640,43 @@ export type SiteFunctionGroupConnection = {
 
 
 export type SiteFunctionGroupConnectionDistinctArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 export type SiteFunctionGroupConnectionGroupArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SiteFunctionGroupConnectionMaxArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 export type SiteFunctionGroupConnectionMinArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 
 export type SiteFunctionGroupConnectionSumArgs = {
-  field: SiteFunctionFieldsEnum;
+  field: SiteFunctionFieldSelector;
 };
 
 export type SiteFunctionSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<SiteFunctionFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  absoluteCompiledFilePath?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  functionRoute?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  matchPath?: InputMaybe<SortOrderEnum>;
+  originalAbsoluteFilePath?: InputMaybe<SortOrderEnum>;
+  originalRelativeFilePath?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  pluginName?: InputMaybe<SortOrderEnum>;
+  relativeCompiledFilePath?: InputMaybe<SortOrderEnum>;
 };
 
 export type SiteGroupConnection = {
@@ -3501,29 +2696,29 @@ export type SiteGroupConnection = {
 
 
 export type SiteGroupConnectionDistinctArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 export type SiteGroupConnectionGroupArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SiteGroupConnectionMaxArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 export type SiteGroupConnectionMinArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 
 export type SiteGroupConnectionSumArgs = {
-  field: SiteFieldsEnum;
+  field: SiteFieldSelector;
 };
 
 export type SitePage = Node & {
@@ -3557,29 +2752,29 @@ export type SitePageConnection = {
 
 
 export type SitePageConnectionDistinctArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 export type SitePageConnectionGroupArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SitePageConnectionMaxArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 export type SitePageConnectionMinArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 export type SitePageConnectionSumArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 export type SitePageContext = {
@@ -3589,10 +2784,22 @@ export type SitePageContext = {
   type?: Maybe<PageType>;
 };
 
+export type SitePageContextFieldSelector = {
+  id?: InputMaybe<FieldSelectorEnum>;
+  pageInfo?: InputMaybe<PageInfoFieldSelector>;
+  type?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type SitePageContextFilterInput = {
   id?: InputMaybe<StringQueryOperatorInput>;
   pageInfo?: InputMaybe<PageInfoFilterInput>;
   type?: InputMaybe<PageTypeQueryOperatorInput>;
+};
+
+export type SitePageContextSortInput = {
+  id?: InputMaybe<SortOrderEnum>;
+  pageInfo?: InputMaybe<PageInfoSortInput>;
+  type?: InputMaybe<SortOrderEnum>;
 };
 
 export type SitePageEdge = {
@@ -3602,164 +2809,20 @@ export type SitePageEdge = {
   previous?: Maybe<SitePage>;
 };
 
-export enum SitePageFieldsEnum {
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Component = 'component',
-  ComponentChunkName = 'componentChunkName',
-  ContextId = 'context___id',
-  ContextPageInfoNextTitle = 'context___pageInfo___nextTitle',
-  ContextPageInfoNextUrl = 'context___pageInfo___nextUrl',
-  ContextPageInfoPrevTitle = 'context___pageInfo___prevTitle',
-  ContextPageInfoPrevUrl = 'context___pageInfo___prevUrl',
-  ContextPageInfoTitle = 'context___pageInfo___title',
-  ContextType = 'context___type',
-  Id = 'id',
-  InternalComponentName = 'internalComponentName',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  MatchPath = 'matchPath',
-  PageContext = 'pageContext',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  Path = 'path',
-  PluginCreatorBrowserApIs = 'pluginCreator___browserAPIs',
-  PluginCreatorChildren = 'pluginCreator___children',
-  PluginCreatorChildrenChildren = 'pluginCreator___children___children',
-  PluginCreatorChildrenChildrenChildren = 'pluginCreator___children___children___children',
-  PluginCreatorChildrenChildrenId = 'pluginCreator___children___children___id',
-  PluginCreatorChildrenId = 'pluginCreator___children___id',
-  PluginCreatorChildrenInternalContent = 'pluginCreator___children___internal___content',
-  PluginCreatorChildrenInternalContentDigest = 'pluginCreator___children___internal___contentDigest',
-  PluginCreatorChildrenInternalContentFilePath = 'pluginCreator___children___internal___contentFilePath',
-  PluginCreatorChildrenInternalDescription = 'pluginCreator___children___internal___description',
-  PluginCreatorChildrenInternalFieldOwners = 'pluginCreator___children___internal___fieldOwners',
-  PluginCreatorChildrenInternalIgnoreType = 'pluginCreator___children___internal___ignoreType',
-  PluginCreatorChildrenInternalMediaType = 'pluginCreator___children___internal___mediaType',
-  PluginCreatorChildrenInternalOwner = 'pluginCreator___children___internal___owner',
-  PluginCreatorChildrenInternalType = 'pluginCreator___children___internal___type',
-  PluginCreatorChildrenParentChildren = 'pluginCreator___children___parent___children',
-  PluginCreatorChildrenParentId = 'pluginCreator___children___parent___id',
-  PluginCreatorId = 'pluginCreator___id',
-  PluginCreatorInternalContent = 'pluginCreator___internal___content',
-  PluginCreatorInternalContentDigest = 'pluginCreator___internal___contentDigest',
-  PluginCreatorInternalContentFilePath = 'pluginCreator___internal___contentFilePath',
-  PluginCreatorInternalDescription = 'pluginCreator___internal___description',
-  PluginCreatorInternalFieldOwners = 'pluginCreator___internal___fieldOwners',
-  PluginCreatorInternalIgnoreType = 'pluginCreator___internal___ignoreType',
-  PluginCreatorInternalMediaType = 'pluginCreator___internal___mediaType',
-  PluginCreatorInternalOwner = 'pluginCreator___internal___owner',
-  PluginCreatorInternalType = 'pluginCreator___internal___type',
-  PluginCreatorName = 'pluginCreator___name',
-  PluginCreatorNodeApIs = 'pluginCreator___nodeAPIs',
-  PluginCreatorPackageJson = 'pluginCreator___packageJson',
-  PluginCreatorParentChildren = 'pluginCreator___parent___children',
-  PluginCreatorParentChildrenChildren = 'pluginCreator___parent___children___children',
-  PluginCreatorParentChildrenId = 'pluginCreator___parent___children___id',
-  PluginCreatorParentId = 'pluginCreator___parent___id',
-  PluginCreatorParentInternalContent = 'pluginCreator___parent___internal___content',
-  PluginCreatorParentInternalContentDigest = 'pluginCreator___parent___internal___contentDigest',
-  PluginCreatorParentInternalContentFilePath = 'pluginCreator___parent___internal___contentFilePath',
-  PluginCreatorParentInternalDescription = 'pluginCreator___parent___internal___description',
-  PluginCreatorParentInternalFieldOwners = 'pluginCreator___parent___internal___fieldOwners',
-  PluginCreatorParentInternalIgnoreType = 'pluginCreator___parent___internal___ignoreType',
-  PluginCreatorParentInternalMediaType = 'pluginCreator___parent___internal___mediaType',
-  PluginCreatorParentInternalOwner = 'pluginCreator___parent___internal___owner',
-  PluginCreatorParentInternalType = 'pluginCreator___parent___internal___type',
-  PluginCreatorParentParentChildren = 'pluginCreator___parent___parent___children',
-  PluginCreatorParentParentId = 'pluginCreator___parent___parent___id',
-  PluginCreatorPluginFilepath = 'pluginCreator___pluginFilepath',
-  PluginCreatorPluginOptions = 'pluginCreator___pluginOptions',
-  PluginCreatorResolve = 'pluginCreator___resolve',
-  PluginCreatorSsrApIs = 'pluginCreator___ssrAPIs',
-  PluginCreatorVersion = 'pluginCreator___version'
-}
+export type SitePageFieldSelector = {
+  children?: InputMaybe<NodeFieldSelector>;
+  component?: InputMaybe<FieldSelectorEnum>;
+  componentChunkName?: InputMaybe<FieldSelectorEnum>;
+  context?: InputMaybe<SitePageContextFieldSelector>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  internalComponentName?: InputMaybe<FieldSelectorEnum>;
+  matchPath?: InputMaybe<FieldSelectorEnum>;
+  pageContext?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  path?: InputMaybe<FieldSelectorEnum>;
+  pluginCreator?: InputMaybe<SitePluginFieldSelector>;
+};
 
 export type SitePageFilterInput = {
   children?: InputMaybe<NodeFilterListInput>;
@@ -3793,34 +2856,44 @@ export type SitePageGroupConnection = {
 
 
 export type SitePageGroupConnectionDistinctArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 export type SitePageGroupConnectionGroupArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SitePageGroupConnectionMaxArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 export type SitePageGroupConnectionMinArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 
 export type SitePageGroupConnectionSumArgs = {
-  field: SitePageFieldsEnum;
+  field: SitePageFieldSelector;
 };
 
 export type SitePageSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<SitePageFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  children?: InputMaybe<NodeSortInput>;
+  component?: InputMaybe<SortOrderEnum>;
+  componentChunkName?: InputMaybe<SortOrderEnum>;
+  context?: InputMaybe<SitePageContextSortInput>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  internalComponentName?: InputMaybe<SortOrderEnum>;
+  matchPath?: InputMaybe<SortOrderEnum>;
+  pageContext?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  path?: InputMaybe<SortOrderEnum>;
+  pluginCreator?: InputMaybe<SitePluginSortInput>;
 };
 
 export type SitePlugin = Node & {
@@ -3855,29 +2928,29 @@ export type SitePluginConnection = {
 
 
 export type SitePluginConnectionDistinctArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 export type SitePluginConnectionGroupArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SitePluginConnectionMaxArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 export type SitePluginConnectionMinArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 export type SitePluginConnectionSumArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 export type SitePluginEdge = {
@@ -3887,110 +2960,21 @@ export type SitePluginEdge = {
   previous?: Maybe<SitePlugin>;
 };
 
-export enum SitePluginFieldsEnum {
-  BrowserApIs = 'browserAPIs',
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  Name = 'name',
-  NodeApIs = 'nodeAPIs',
-  PackageJson = 'packageJson',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  PluginFilepath = 'pluginFilepath',
-  PluginOptions = 'pluginOptions',
-  Resolve = 'resolve',
-  SsrApIs = 'ssrAPIs',
-  Version = 'version'
-}
+export type SitePluginFieldSelector = {
+  browserAPIs?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  name?: InputMaybe<FieldSelectorEnum>;
+  nodeAPIs?: InputMaybe<FieldSelectorEnum>;
+  packageJson?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  pluginFilepath?: InputMaybe<FieldSelectorEnum>;
+  pluginOptions?: InputMaybe<FieldSelectorEnum>;
+  resolve?: InputMaybe<FieldSelectorEnum>;
+  ssrAPIs?: InputMaybe<FieldSelectorEnum>;
+  version?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type SitePluginFilterInput = {
   browserAPIs?: InputMaybe<StringQueryOperatorInput>;
@@ -4025,34 +3009,45 @@ export type SitePluginGroupConnection = {
 
 
 export type SitePluginGroupConnectionDistinctArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 export type SitePluginGroupConnectionGroupArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type SitePluginGroupConnectionMaxArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 export type SitePluginGroupConnectionMinArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 
 export type SitePluginGroupConnectionSumArgs = {
-  field: SitePluginFieldsEnum;
+  field: SitePluginFieldSelector;
 };
 
 export type SitePluginSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<SitePluginFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  browserAPIs?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  name?: InputMaybe<SortOrderEnum>;
+  nodeAPIs?: InputMaybe<SortOrderEnum>;
+  packageJson?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  pluginFilepath?: InputMaybe<SortOrderEnum>;
+  pluginOptions?: InputMaybe<SortOrderEnum>;
+  resolve?: InputMaybe<SortOrderEnum>;
+  ssrAPIs?: InputMaybe<SortOrderEnum>;
+  version?: InputMaybe<SortOrderEnum>;
 };
 
 export type SiteSiteMetadata = {
@@ -4063,6 +3058,13 @@ export type SiteSiteMetadata = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type SiteSiteMetadataFieldSelector = {
+  author?: InputMaybe<FieldSelectorEnum>;
+  description?: InputMaybe<FieldSelectorEnum>;
+  siteURL?: InputMaybe<FieldSelectorEnum>;
+  title?: InputMaybe<FieldSelectorEnum>;
+};
+
 export type SiteSiteMetadataFilterInput = {
   author?: InputMaybe<StringQueryOperatorInput>;
   description?: InputMaybe<StringQueryOperatorInput>;
@@ -4070,9 +3072,28 @@ export type SiteSiteMetadataFilterInput = {
   title?: InputMaybe<StringQueryOperatorInput>;
 };
 
+export type SiteSiteMetadataSortInput = {
+  author?: InputMaybe<SortOrderEnum>;
+  description?: InputMaybe<SortOrderEnum>;
+  siteURL?: InputMaybe<SortOrderEnum>;
+  title?: InputMaybe<SortOrderEnum>;
+};
+
 export type SiteSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<SiteFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  buildTime?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  flags?: InputMaybe<SiteFlagsSortInput>;
+  graphqlTypegen?: InputMaybe<SortOrderEnum>;
+  host?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  jsxRuntime?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  pathPrefix?: InputMaybe<SortOrderEnum>;
+  polyfill?: InputMaybe<SortOrderEnum>;
+  port?: InputMaybe<SortOrderEnum>;
+  siteMetadata?: InputMaybe<SiteSiteMetadataSortInput>;
+  trailingSlash?: InputMaybe<SortOrderEnum>;
 };
 
 export enum SortOrderEnum {
@@ -4221,6 +3242,14 @@ export type Db_String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** ordering argument of a cursor */
+export enum Db_Cursor_Ordering {
+  /** ascending ordering of the cursor */
+  Asc = 'ASC',
+  /** descending ordering of the cursor */
+  Desc = 'DESC'
+}
+
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Db_Date_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['db_date']>;
@@ -4301,6 +3330,24 @@ export enum Db_Events_Select_Column {
   /** column name */
   Organization = 'organization'
 }
+
+/** Streaming cursor of the table "events" */
+export type Db_Events_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Db_Events_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Db_Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Db_Events_Stream_Cursor_Value_Input = {
+  chapter?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['db_date']>;
+  event_id?: InputMaybe<Scalars['Int']>;
+  eventtype?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  organization?: InputMaybe<Scalars['String']>;
+};
 
 /** column ordering options */
 export enum Db_Order_By {
@@ -4445,6 +3492,19 @@ export enum Db_Riders_Select_Column {
   RiderName = 'riderName'
 }
 
+/** Streaming cursor of the table "riders" */
+export type Db_Riders_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Db_Riders_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Db_Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Db_Riders_Stream_Cursor_Value_Input = {
+  riderName?: InputMaybe<Scalars['String']>;
+};
+
 /** columns and relationships of "rides" */
 export type Db_Rides = {
   __typename?: 'db_rides';
@@ -4548,6 +3608,22 @@ export type Db_Rides_Stddev_Samp_Order_By = {
   ride_rider?: InputMaybe<Db_Order_By>;
 };
 
+/** Streaming cursor of the table "rides" */
+export type Db_Rides_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Db_Rides_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Db_Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Db_Rides_Stream_Cursor_Value_Input = {
+  resultType?: InputMaybe<Scalars['String']>;
+  ride_event?: InputMaybe<Scalars['Int']>;
+  ride_id?: InputMaybe<Scalars['Int']>;
+  ride_rider?: InputMaybe<Scalars['Int']>;
+};
+
 /** order by sum() on columns of table "rides" */
 export type Db_Rides_Sum_Order_By = {
   ride_event?: InputMaybe<Db_Order_By>;
@@ -4631,6 +3707,25 @@ export enum Db_Routes_Select_Column {
   StartLocation = 'startLocation'
 }
 
+/** Streaming cursor of the table "routes" */
+export type Db_Routes_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Db_Routes_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Db_Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Db_Routes_Stream_Cursor_Value_Input = {
+  brevetDistance?: InputMaybe<Scalars['Int']>;
+  chapter?: InputMaybe<Scalars['String']>;
+  cuesheet?: InputMaybe<Scalars['String']>;
+  distance?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  startLocation?: InputMaybe<Scalars['String']>;
+};
+
 export type Event = Node & {
   __typename?: 'event';
   chapter?: Maybe<Chapter>;
@@ -4686,29 +3781,29 @@ export type EventConnection = {
 
 
 export type EventConnectionDistinctArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
 };
 
 
 export type EventConnectionGroupArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type EventConnectionMaxArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
 };
 
 
 export type EventConnectionMinArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
 };
 
 
 export type EventConnectionSumArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
 };
 
 export type EventEdge = {
@@ -4718,121 +3813,31 @@ export type EventEdge = {
   previous?: Maybe<Event>;
 };
 
-export enum EventFieldsEnum {
-  Chapter = 'chapter',
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Contact = 'contact',
-  Date = 'date',
-  Distance = 'distance',
-  Event = 'event',
-  EventType = 'eventType',
-  /** @deprecated Sorting on fields that need arguments to resolve is deprecated. */
-  GatsbyPath = 'gatsbyPath',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  Organizer = 'organizer',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  Route = 'route',
-  Rwgps = 'rwgps',
-  RwgpsId = 'rwgpsId',
-  RwgpsUrl = 'rwgpsUrl',
-  SchedId = 'sched_id',
-  ScheduleId = 'scheduleId',
-  Season = 'season',
-  StartLocation = 'startLocation',
-  Startloc = 'startloc',
-  Stime = 'stime',
-  Unixtime = 'unixtime'
-}
+export type EventFieldSelector = {
+  chapter?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  contact?: InputMaybe<FieldSelectorEnum>;
+  date?: InputMaybe<FieldSelectorEnum>;
+  distance?: InputMaybe<FieldSelectorEnum>;
+  event?: InputMaybe<FieldSelectorEnum>;
+  eventType?: InputMaybe<FieldSelectorEnum>;
+  gatsbyPath?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  organizer?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  route?: InputMaybe<FieldSelectorEnum>;
+  rwgps?: InputMaybe<FieldSelectorEnum>;
+  rwgpsId?: InputMaybe<FieldSelectorEnum>;
+  rwgpsUrl?: InputMaybe<FieldSelectorEnum>;
+  sched_id?: InputMaybe<FieldSelectorEnum>;
+  scheduleId?: InputMaybe<FieldSelectorEnum>;
+  season?: InputMaybe<FieldSelectorEnum>;
+  startLocation?: InputMaybe<FieldSelectorEnum>;
+  startloc?: InputMaybe<FieldSelectorEnum>;
+  stime?: InputMaybe<FieldSelectorEnum>;
+  unixtime?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type EventFilterInput = {
   chapter?: InputMaybe<ChapterQueryOperatorInput>;
@@ -4877,34 +3882,55 @@ export type EventGroupConnection = {
 
 
 export type EventGroupConnectionDistinctArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
 };
 
 
 export type EventGroupConnectionGroupArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type EventGroupConnectionMaxArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
 };
 
 
 export type EventGroupConnectionMinArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
 };
 
 
 export type EventGroupConnectionSumArgs = {
-  field: EventFieldsEnum;
+  field: EventFieldSelector;
 };
 
 export type EventSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<EventFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  chapter?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  contact?: InputMaybe<SortOrderEnum>;
+  date?: InputMaybe<SortOrderEnum>;
+  distance?: InputMaybe<SortOrderEnum>;
+  event?: InputMaybe<SortOrderEnum>;
+  eventType?: InputMaybe<SortOrderEnum>;
+  gatsbyPath?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  organizer?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  route?: InputMaybe<SortOrderEnum>;
+  rwgps?: InputMaybe<SortOrderEnum>;
+  rwgpsId?: InputMaybe<SortOrderEnum>;
+  rwgpsUrl?: InputMaybe<SortOrderEnum>;
+  sched_id?: InputMaybe<SortOrderEnum>;
+  scheduleId?: InputMaybe<SortOrderEnum>;
+  season?: InputMaybe<SortOrderEnum>;
+  startLocation?: InputMaybe<SortOrderEnum>;
+  startloc?: InputMaybe<SortOrderEnum>;
+  stime?: InputMaybe<SortOrderEnum>;
+  unixtime?: InputMaybe<SortOrderEnum>;
 };
 
 export type Mail = Node & {
@@ -4944,29 +3970,29 @@ export type MailConnection = {
 
 
 export type MailConnectionDistinctArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
 };
 
 
 export type MailConnectionGroupArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type MailConnectionMaxArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
 };
 
 
 export type MailConnectionMinArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
 };
 
 
 export type MailConnectionSumArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
 };
 
 export type MailEdge = {
@@ -4976,107 +4002,18 @@ export type MailEdge = {
   previous?: Maybe<Mail>;
 };
 
-export enum MailFieldsEnum {
-  Categories = 'categories',
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  Content = 'content',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  Name = 'name',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  SentAt = 'sentAt',
-  Subject = 'subject',
-  Teaser = 'teaser'
-}
+export type MailFieldSelector = {
+  categories?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  content?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  name?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  sentAt?: InputMaybe<FieldSelectorEnum>;
+  subject?: InputMaybe<FieldSelectorEnum>;
+  teaser?: InputMaybe<FieldSelectorEnum>;
+};
 
 export type MailFilterInput = {
   categories?: InputMaybe<StringQueryOperatorInput>;
@@ -5108,255 +4045,53 @@ export type MailGroupConnection = {
 
 
 export type MailGroupConnectionDistinctArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
 };
 
 
 export type MailGroupConnectionGroupArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type MailGroupConnectionMaxArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
 };
 
 
 export type MailGroupConnectionMinArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
 };
 
 
 export type MailGroupConnectionSumArgs = {
-  field: MailFieldsEnum;
+  field: MailFieldSelector;
 };
 
 export type MailSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<MailFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+  categories?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  content?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  name?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  sentAt?: InputMaybe<SortOrderEnum>;
+  subject?: InputMaybe<SortOrderEnum>;
+  teaser?: InputMaybe<SortOrderEnum>;
 };
 
-export type Rider = Node & {
-  __typename?: 'rider';
-  children: Array<Node>;
-  city?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  fullName?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  internal: Internal;
-  membership?: Maybe<Membership>;
-  parent?: Maybe<Node>;
-  seasons?: Maybe<Array<Maybe<Scalars['Int']>>>;
-};
-
-export type RiderConnection = {
-  __typename?: 'riderConnection';
-  distinct: Array<Scalars['String']>;
-  edges: Array<RiderEdge>;
-  group: Array<RiderGroupConnection>;
-  max?: Maybe<Scalars['Float']>;
-  min?: Maybe<Scalars['Float']>;
-  nodes: Array<Rider>;
-  pageInfo: PageInfo;
-  sum?: Maybe<Scalars['Float']>;
-  totalCount: Scalars['Int'];
-};
+export type EventCalendarFeedsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RiderConnectionDistinctArgs = {
-  field: RiderFieldsEnum;
-};
+export type EventCalendarFeedsQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, path?: string | null }> } };
+
+export type LoadMailQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RiderConnectionGroupArgs = {
-  field: RiderFieldsEnum;
-  limit?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type RiderConnectionMaxArgs = {
-  field: RiderFieldsEnum;
-};
-
-
-export type RiderConnectionMinArgs = {
-  field: RiderFieldsEnum;
-};
-
-
-export type RiderConnectionSumArgs = {
-  field: RiderFieldsEnum;
-};
-
-export type RiderEdge = {
-  __typename?: 'riderEdge';
-  next?: Maybe<Rider>;
-  node: Rider;
-  previous?: Maybe<Rider>;
-};
-
-export enum RiderFieldsEnum {
-  Children = 'children',
-  ChildrenChildren = 'children___children',
-  ChildrenChildrenChildren = 'children___children___children',
-  ChildrenChildrenChildrenChildren = 'children___children___children___children',
-  ChildrenChildrenChildrenId = 'children___children___children___id',
-  ChildrenChildrenId = 'children___children___id',
-  ChildrenChildrenInternalContent = 'children___children___internal___content',
-  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
-  ChildrenChildrenInternalContentFilePath = 'children___children___internal___contentFilePath',
-  ChildrenChildrenInternalDescription = 'children___children___internal___description',
-  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
-  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
-  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
-  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
-  ChildrenChildrenInternalType = 'children___children___internal___type',
-  ChildrenChildrenParentChildren = 'children___children___parent___children',
-  ChildrenChildrenParentId = 'children___children___parent___id',
-  ChildrenId = 'children___id',
-  ChildrenInternalContent = 'children___internal___content',
-  ChildrenInternalContentDigest = 'children___internal___contentDigest',
-  ChildrenInternalContentFilePath = 'children___internal___contentFilePath',
-  ChildrenInternalDescription = 'children___internal___description',
-  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
-  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
-  ChildrenInternalMediaType = 'children___internal___mediaType',
-  ChildrenInternalOwner = 'children___internal___owner',
-  ChildrenInternalType = 'children___internal___type',
-  ChildrenParentChildren = 'children___parent___children',
-  ChildrenParentChildrenChildren = 'children___parent___children___children',
-  ChildrenParentChildrenId = 'children___parent___children___id',
-  ChildrenParentId = 'children___parent___id',
-  ChildrenParentInternalContent = 'children___parent___internal___content',
-  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
-  ChildrenParentInternalContentFilePath = 'children___parent___internal___contentFilePath',
-  ChildrenParentInternalDescription = 'children___parent___internal___description',
-  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
-  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
-  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
-  ChildrenParentInternalOwner = 'children___parent___internal___owner',
-  ChildrenParentInternalType = 'children___parent___internal___type',
-  ChildrenParentParentChildren = 'children___parent___parent___children',
-  ChildrenParentParentId = 'children___parent___parent___id',
-  City = 'city',
-  Country = 'country',
-  FullName = 'fullName',
-  Id = 'id',
-  InternalContent = 'internal___content',
-  InternalContentDigest = 'internal___contentDigest',
-  InternalContentFilePath = 'internal___contentFilePath',
-  InternalDescription = 'internal___description',
-  InternalFieldOwners = 'internal___fieldOwners',
-  InternalIgnoreType = 'internal___ignoreType',
-  InternalMediaType = 'internal___mediaType',
-  InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  Membership = 'membership',
-  ParentChildren = 'parent___children',
-  ParentChildrenChildren = 'parent___children___children',
-  ParentChildrenChildrenChildren = 'parent___children___children___children',
-  ParentChildrenChildrenId = 'parent___children___children___id',
-  ParentChildrenId = 'parent___children___id',
-  ParentChildrenInternalContent = 'parent___children___internal___content',
-  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
-  ParentChildrenInternalContentFilePath = 'parent___children___internal___contentFilePath',
-  ParentChildrenInternalDescription = 'parent___children___internal___description',
-  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
-  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
-  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
-  ParentChildrenInternalOwner = 'parent___children___internal___owner',
-  ParentChildrenInternalType = 'parent___children___internal___type',
-  ParentChildrenParentChildren = 'parent___children___parent___children',
-  ParentChildrenParentId = 'parent___children___parent___id',
-  ParentId = 'parent___id',
-  ParentInternalContent = 'parent___internal___content',
-  ParentInternalContentDigest = 'parent___internal___contentDigest',
-  ParentInternalContentFilePath = 'parent___internal___contentFilePath',
-  ParentInternalDescription = 'parent___internal___description',
-  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
-  ParentInternalIgnoreType = 'parent___internal___ignoreType',
-  ParentInternalMediaType = 'parent___internal___mediaType',
-  ParentInternalOwner = 'parent___internal___owner',
-  ParentInternalType = 'parent___internal___type',
-  ParentParentChildren = 'parent___parent___children',
-  ParentParentChildrenChildren = 'parent___parent___children___children',
-  ParentParentChildrenId = 'parent___parent___children___id',
-  ParentParentId = 'parent___parent___id',
-  ParentParentInternalContent = 'parent___parent___internal___content',
-  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
-  ParentParentInternalContentFilePath = 'parent___parent___internal___contentFilePath',
-  ParentParentInternalDescription = 'parent___parent___internal___description',
-  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
-  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
-  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
-  ParentParentInternalOwner = 'parent___parent___internal___owner',
-  ParentParentInternalType = 'parent___parent___internal___type',
-  ParentParentParentChildren = 'parent___parent___parent___children',
-  ParentParentParentId = 'parent___parent___parent___id',
-  Seasons = 'seasons'
-}
-
-export type RiderFilterInput = {
-  children?: InputMaybe<NodeFilterListInput>;
-  city?: InputMaybe<StringQueryOperatorInput>;
-  country?: InputMaybe<StringQueryOperatorInput>;
-  fullName?: InputMaybe<StringQueryOperatorInput>;
-  id?: InputMaybe<StringQueryOperatorInput>;
-  internal?: InputMaybe<InternalFilterInput>;
-  membership?: InputMaybe<MembershipQueryOperatorInput>;
-  parent?: InputMaybe<NodeFilterInput>;
-  seasons?: InputMaybe<IntQueryOperatorInput>;
-};
-
-export type RiderGroupConnection = {
-  __typename?: 'riderGroupConnection';
-  distinct: Array<Scalars['String']>;
-  edges: Array<RiderEdge>;
-  field: Scalars['String'];
-  fieldValue?: Maybe<Scalars['String']>;
-  group: Array<RiderGroupConnection>;
-  max?: Maybe<Scalars['Float']>;
-  min?: Maybe<Scalars['Float']>;
-  nodes: Array<Rider>;
-  pageInfo: PageInfo;
-  sum?: Maybe<Scalars['Float']>;
-  totalCount: Scalars['Int'];
-};
-
-
-export type RiderGroupConnectionDistinctArgs = {
-  field: RiderFieldsEnum;
-};
-
-
-export type RiderGroupConnectionGroupArgs = {
-  field: RiderFieldsEnum;
-  limit?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type RiderGroupConnectionMaxArgs = {
-  field: RiderFieldsEnum;
-};
-
-
-export type RiderGroupConnectionMinArgs = {
-  field: RiderFieldsEnum;
-};
-
-
-export type RiderGroupConnectionSumArgs = {
-  field: RiderFieldsEnum;
-};
-
-export type RiderSortInput = {
-  fields?: InputMaybe<Array<InputMaybe<RiderFieldsEnum>>>;
-  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
-};
+export type LoadMailQueryQuery = { __typename?: 'Query', allMail: { __typename?: 'mailConnection', nodes: Array<{ __typename?: 'mail', id: string, categories?: Array<string | null> | null, name?: string | null }> } };
 
 export type GatsbyImageSharpFixedFragment = { __typename?: 'ImageSharpFixed', base64?: string | null, width: number, height: number, src: string, srcSet: string };
 
@@ -5399,30 +4134,30 @@ export type SiteTitleQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SiteTitleQueryQuery = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', title?: string | null } | null } | null };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+export type SeoImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_1_Query = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', title?: string | null, description?: string | null, siteURL?: string | null } | null } | null };
+export type SeoImageQueryQuery = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', title?: string | null, description?: string | null, siteURL?: string | null } | null } | null };
 
-export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
+export type UseBlogQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_2_Query = { __typename?: 'Query', allFeedblog: { __typename?: 'FeedblogConnection', nodes: Array<{ __typename?: 'Feedblog', id: string, title?: string | null, link?: string | null, content?: { __typename?: 'FeedblogContent', encodedSnippet?: string | null } | null }> } };
+export type UseBlogQueryQuery = { __typename?: 'Query', allFeedblog: { __typename?: 'FeedblogConnection', nodes: Array<{ __typename?: 'Feedblog', id: string, title?: string | null, link?: string | null, content?: { __typename?: 'FeedblogContent', encodedSnippet?: string | null } | null }> } };
 
 export type EventDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, rwgpsUrl?: string | null, startLocation?: string | null, date?: any | null, scheduleId?: string | null, path?: string | null }> } };
 
-export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
+export type UseRoutesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_3_Query = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null, name?: string | null, id?: number | null, distance?: number | null, chapter?: string | null }> } };
+export type UseRoutesQueryQuery = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null, name?: string | null, id?: number | null, distance?: number | null, chapter?: string | null }> } };
 
-export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+export type EventPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_4_Query = { __typename?: 'Query', allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, id: string, context?: { __typename?: 'SitePageContext', pageInfo?: { __typename?: 'PageInfo', title?: string | null } | null } | null }> } };
+export type EventPageQueryQuery = { __typename?: 'Query', allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, id: string, context?: { __typename?: 'SitePageContext', pageInfo?: { __typename?: 'PageInfo', title?: string | null } | null } | null }> } };
 
 export type SeasonPageQueryVariables = Exact<{
   season?: InputMaybe<Scalars['String']>;
@@ -5438,30 +4173,30 @@ export type EventPageQueryVariables = Exact<{
 
 export type EventPageQuery = { __typename?: 'Query', event?: { __typename?: 'event', chapter?: Chapter | null, date?: any | null, distance?: number | null, eventType?: EventType | null, id: string, route?: string | null, rwgpsId?: string | null, rwgpsUrl?: string | null, scheduleId?: string | null, season?: string | null, startLocation?: string | null } | null };
 
-export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+export type IndexPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_5_Query = { __typename?: 'Query', allMail: { __typename?: 'mailConnection', nodes: Array<{ __typename?: 'mail', id: string, name?: string | null, teaser?: string | null, subject?: string | null }> }, allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, context?: { __typename?: 'SitePageContext', id?: string | null } | null }> }, allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
+export type IndexPageQueryQuery = { __typename?: 'Query', allMail: { __typename?: 'mailConnection', nodes: Array<{ __typename?: 'mail', id: string, name?: string | null, teaser?: string | null, subject?: string | null }> }, allSitePage: { __typename?: 'SitePageConnection', nodes: Array<{ __typename?: 'SitePage', path: string, context?: { __typename?: 'SitePageContext', id?: string | null } | null }> }, allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
 
-export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_6_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
-
-export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
+export type LonelinessImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_7_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+export type LonelinessImageQueryQuery = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
 
-export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_8_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
-
-export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TraceImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_9_Query = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+export type TraceImageQueryQuery = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+
+export type AudaxImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AudaxImageQueryQuery = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+
+export type MedalImgQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MedalImgQueryQuery = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
 
 export type NewsletterQueryQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
@@ -5470,6 +4205,24 @@ export type NewsletterQueryQueryVariables = Exact<{
 
 export type NewsletterQueryQuery = { __typename?: 'Query', mail?: { __typename?: 'mail', categories?: Array<string | null> | null, content?: string | null, id: string, name?: string | null, sentAt?: any | null, subject?: string | null, teaser?: string | null } | null };
 
+
+declare module '*/createPages.ts' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const EventCalendarFeeds: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/createPage.ts' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const loadMailQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
 
 declare module '*/fragments.js' {
   import { DocumentNode } from 'graphql';
@@ -5522,7 +4275,7 @@ declare module '*/layout.tsx' {
 declare module '*/seo.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const seoImageQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5531,7 +4284,7 @@ declare module '*/seo.tsx' {
 declare module '*/useBlog.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const useBlogQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5549,7 +4302,7 @@ declare module '*/useEvents.ts' {
 declare module '*/useRoutes.ts' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const useRoutesQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5558,7 +4311,9 @@ declare module '*/useRoutes.ts' {
 declare module '*/index.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const eventPageQuery: DocumentNode;
+export const indexPageQuery: DocumentNode;
+export const lonelinessImageQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5585,7 +4340,7 @@ declare module '*/{event.route}-{event.date}.tsx' {
 declare module '*/trace-virtuelle.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const traceImageQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5594,7 +4349,7 @@ declare module '*/trace-virtuelle.tsx' {
 declare module '*/audax-a-distance.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const audaxImageQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5603,7 +4358,7 @@ declare module '*/audax-a-distance.tsx' {
 declare module '*/medals.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const medalImgQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -5739,6 +4494,35 @@ export const GatsbyImageSharpFluid_WithWebp_NoBase64 = gql`
   sizes
 }
     `;
+export const EventCalendarFeeds = gql`
+    query EventCalendarFeeds {
+  allEvent {
+    nodes {
+      chapter
+      distance
+      eventType
+      id
+      organizer
+      route
+      startLocation
+      date
+      season
+      path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
+    }
+  }
+}
+    `;
+export const LoadMailQuery = gql`
+    query loadMailQuery {
+  allMail {
+    nodes {
+      id
+      categories
+      name
+    }
+  }
+}
+    `;
 export const PagesQuery = gql`
     query PagesQuery {
   allSiteFunction {
@@ -5758,7 +4542,7 @@ export const GalleryQuery = gql`
   allFile(
     filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
     limit: 6
-    sort: {fields: birthTime, order: DESC}
+    sort: {birthTime: DESC}
   ) {
     nodes {
       name
@@ -5778,8 +4562,31 @@ export const SiteTitleQuery = gql`
   }
 }
     `;
-
-
+export const SeoImageQuery = gql`
+    query seoImageQuery {
+  site {
+    siteMetadata {
+      title
+      description
+      siteURL
+    }
+  }
+}
+    `;
+export const UseBlogQuery = gql`
+    query useBlogQuery {
+  allFeedblog(limit: 10) {
+    nodes {
+      id
+      title
+      link
+      content {
+        encodedSnippet
+      }
+    }
+  }
+}
+    `;
 export const EventData = gql`
     query EventData {
   allEvent {
@@ -5799,8 +4606,37 @@ export const EventData = gql`
   }
 }
     `;
-
-
+export const UseRoutesQuery = gql`
+    query useRoutesQuery {
+  db {
+    routes(order_by: {chapter: asc, distance: asc}) {
+      startLocation
+      name
+      id
+      distance
+      chapter
+    }
+  }
+}
+    `;
+export const EventPageQuery = gql`
+    query eventPageQuery {
+  allSitePage(
+    filter: {context: {type: {eq: season}}}
+    sort: {context: {pageInfo: {title: DESC}}}
+  ) {
+    nodes {
+      path
+      id
+      context {
+        pageInfo {
+          title
+        }
+      }
+    }
+  }
+}
+    `;
 export const SeasonPage = gql`
     query SeasonPage($season: String) {
   allEvent(filter: {season: {eq: $season}, chapter: {eq: Toronto}}) {
@@ -5836,11 +4672,78 @@ export const EventPage = gql`
   }
 }
     `;
-
-
-
-
-
+export const IndexPageQuery = gql`
+    query indexPageQuery {
+  allMail(limit: 3, sort: {sentAt: DESC}) {
+    nodes {
+      id
+      name
+      teaser
+      subject
+    }
+  }
+  allSitePage(limit: 3, filter: {context: {type: {eq: mail}}}) {
+    nodes {
+      path
+      context {
+        id
+      }
+    }
+  }
+  allFile(
+    filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
+    limit: 6
+    sort: {birthTime: DESC}
+  ) {
+    nodes {
+      name
+      childImageSharp {
+        gatsbyImageData(aspectRatio: 1, height: 300, formats: JPG)
+      }
+    }
+  }
+}
+    `;
+export const LonelinessImageQuery = gql`
+    query lonelinessImageQuery {
+  file(name: {glob: "ClubAudax"}) {
+    name
+    childImageSharp {
+      gatsbyImageData(width: 1200)
+    }
+  }
+}
+    `;
+export const TraceImageQuery = gql`
+    query traceImageQuery {
+  file(name: {glob: "TraceVirtuelle"}) {
+    name
+    childImageSharp {
+      gatsbyImageData(width: 500)
+    }
+  }
+}
+    `;
+export const AudaxImageQuery = gql`
+    query audaxImageQuery {
+  file(name: {glob: "audax-a-distance"}) {
+    name
+    childImageSharp {
+      gatsbyImageData(aspectRatio: 1, width: 500)
+    }
+  }
+}
+    `;
+export const MedalImgQuery = gql`
+    query medalImgQuery {
+  file(name: {glob: "brm-medal-2023"}) {
+    name
+    childImageSharp {
+      gatsbyImageData(layout: FULL_WIDTH)
+    }
+  }
+}
+    `;
 export const NewsletterQuery = gql`
     query NewsletterQuery($id: String) {
   mail(id: {eq: $id}) {
