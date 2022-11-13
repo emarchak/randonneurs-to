@@ -11,7 +11,7 @@ describe('createPages', () => {
   const graphql = jest.fn()
 
   beforeEach(() => {
-    existsMock.mockImplementation(jest.fn().mockReturnValue(false))
+    existsMock.mockReturnValue(false)
     mkdirMock.mockReturnValue('')
     writeFileMock.mockImplementation(jest.fn())
   })

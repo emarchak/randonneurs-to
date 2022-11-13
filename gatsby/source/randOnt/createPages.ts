@@ -2,7 +2,7 @@ import { GatsbyNode } from "gatsby"
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
 import { EventCalendarFeedsQuery } from 'src/gatsby.gql'
 import { createEvents, EventAttributes } from 'ics'
-import { getDateTimeLong } from "src/utils"
+import { getDateTimeLong } from '../../../src/utils'
 
 const eventPath = './public/event'
 const brevetTimeLimits = {
