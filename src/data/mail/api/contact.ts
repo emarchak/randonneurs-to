@@ -7,7 +7,7 @@ type Contact = {
   lastName: string
   email: string
   lists?: string[]
-  chapter?: Event['chapter']
+  chapter?: Event['chapter'] | ''
 }
 
 export const createContact = async ({ firstName, lastName, email, lists = [], ...customFields }: Contact) => {

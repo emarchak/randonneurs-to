@@ -6,7 +6,7 @@ export type registerRiderParams = {
     email: string
     firstName: string
     lastName: string
-    gender?: 'F' | 'M' | 'X'
+    gender?: 'F' | 'M' | 'X' | ''
 }
 
 export const registerRider = async (params: registerRiderParams) => {
