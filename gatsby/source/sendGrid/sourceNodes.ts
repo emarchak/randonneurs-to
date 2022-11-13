@@ -37,7 +37,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createNo
         },
       })
     })
-  } catch(err) {
+  } catch (err) {
     console.error(err)
   }
 }

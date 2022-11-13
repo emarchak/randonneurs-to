@@ -12,7 +12,7 @@ const pageQuery = graphql`
 query {
   allSitePage(
     filter: {context: {type: {eq: season}}}
-    sort: {fields: context___pageInfo___title, order: DESC}
+    sort: {context: {pageInfo: {title: DESC}}}
   ) {
     nodes {
       path

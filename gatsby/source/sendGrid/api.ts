@@ -32,12 +32,12 @@ export type SingleSend = SingleSendList & {
 }
 
 export const getSingleSends = async (): Promise<SingleSendList[]> => {
-  const response = await fetch(endpoints.singleSends(), {headers})
-  const data = await response.json()
-  return data.result
+  const response = await fetch(endpoints.singleSends(), { headers })
+  const data = await response.json() as { result: SingleSendList[] }
+  return data?.result
 }
 
-export const getSingleSend = async (id:string): Promise<SingleSend> => {
-  const response = await fetch(endpoints.singleSend(id), {headers})
-  return await response.json()
+export const getSingleSend = async (id: string): Promise<SingleSend> => {
+  const response = await fetch(endpoints.singleSend(id), { headers })
+  return await response.json() as SingleSend
 }
