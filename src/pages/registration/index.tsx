@@ -8,7 +8,8 @@ import { RegistrationFormBrevet } from 'src/components/registration'
 import { SEO } from 'src/components/seo'
 import { TabMenu } from 'src/components/Menu'
 
-const BrevetRegistration = ({path}: PageProps) => {
+const BrevetRegistration = ({ path }: PageProps) => {
+
   return (
     <Layout hideHeader>
       <ContentWrapper>
