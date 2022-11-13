@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 import { urlEncode } from 'src/utils'
 import { trackEvent } from 'src/utils/tracking'
 import { FormData } from './types'

@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 
 type Channels = 'registration' | 'default'
 

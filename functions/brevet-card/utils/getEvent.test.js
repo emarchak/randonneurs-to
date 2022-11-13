@@ -1,4 +1,4 @@
-const fetch = require('isomorphic-unfetch');
+const fetch = require('cross-fetch');
 const { getEvent } = require('./getEvent')
 
 describe('getEvent()', () => {

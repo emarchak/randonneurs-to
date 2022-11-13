@@ -1,4 +1,4 @@
-const fetch = require('isomorphic-unfetch');
+const fetch = require('cross-fetch');
 
 const scheduleEndpoint = (id) => `https://www.randonneursontario.ca/brevetcard/schedule.php?id=${id}`
 const getRwgpsId = (rwgps) => rwgps.match(/^((?:https?:)?\/\/)?((?:www)\.)?((?:ridewithgps\.com))(\/routes\/)([\d\-]+)?$/).pop();

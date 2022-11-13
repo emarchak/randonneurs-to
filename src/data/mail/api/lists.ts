@@ -1,5 +1,5 @@
 import Bugsnag from '@bugsnag/js'
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 import { Event } from 'src/data/events'
 
 type GetListParams = {

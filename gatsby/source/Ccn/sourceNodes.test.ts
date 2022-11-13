@@ -1,5 +1,5 @@
 import { sourceNodes } from './sourceNodes'
-import * as fetch from 'isomorphic-unfetch'
+import * as fetch from 'cross-fetch'
 
 describe('sourceNodes', () => {
   const createNode = jest.fn().mockName('createNode')

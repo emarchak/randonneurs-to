@@ -1,4 +1,4 @@
-import * as fetch from 'isomorphic-unfetch'
+import * as fetch from 'cross-fetch'
 import { brevetDistance, fetchEvents, fetchQuery } from './utils'
 
 describe('fetchEvents', () => {

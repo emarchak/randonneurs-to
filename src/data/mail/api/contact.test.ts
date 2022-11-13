@@ -1,4 +1,4 @@
-import * as isomorpicUnfetch from 'isomorphic-unfetch'
+import * as isomorpicUnfetch from 'cross-fetch'
 import Bugsnag from '@bugsnag/js'
 import { createContact } from "./contact"
 import { Chapter } from 'src/data/events'

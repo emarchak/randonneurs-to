@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 const apiKey = process.env.SENDGRID_API_KEY
 
 const baseUrl = 'https://api.sendgrid.com/v3'

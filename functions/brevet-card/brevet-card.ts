@@ -1,4 +1,4 @@
-require('isomorphic-unfetch')
+require('cross-fetch')
 import { formEncode, buildCard } from './utils'
 
 const cardEndpoint = 'https://www.randonneursontario.ca/brevetcard/cardtopdf.php'

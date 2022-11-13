@@ -1,6 +1,6 @@
 import Bugsnag from "@bugsnag/js"
 import { Event } from "src/data/events"
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 
 type Contact = {
   firstName: string

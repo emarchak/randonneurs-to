@@ -1,5 +1,5 @@
 import { HandlerEvent } from '@netlify/functions'
-import * as fetch from 'isomorphic-unfetch'
+import * as fetch from 'cross-fetch'
 import customFields from '../customFields'
 import addContact from './contact'
 

@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as isomorphicUnfetch from 'cross-fetch'
 import { useSheets } from './useSheets'
 
 describe('useSheets()', () => {

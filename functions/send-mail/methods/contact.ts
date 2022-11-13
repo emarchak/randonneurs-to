@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 import { HandlerEvent, HandlerResponse } from "@netlify/functions"
 
 const contactEndpoint = 'https://api.sendgrid.com/v3/marketing/contacts'

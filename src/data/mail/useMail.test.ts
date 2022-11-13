@@ -1,6 +1,6 @@
 
 import { renderHook } from '@testing-library/react-hooks'
-import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as isomorphicUnfetch from 'cross-fetch'
 import Bugsnag from '@bugsnag/js'
 import { useMail } from './useMail'
 

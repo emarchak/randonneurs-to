@@ -1,6 +1,6 @@
 import React from "react"
 import { render, fireEvent, waitFor } from "@testing-library/react"
-import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as isomorphicUnfetch from 'cross-fetch'
 import * as useMail from 'src/data/mail'
 import CovidForm from "."
 import MockDate from 'mockdate'

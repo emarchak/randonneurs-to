@@ -1,6 +1,6 @@
 import { Chapter, EventKind } from "src/data/events"
 import { registerEvent } from "./registerEvent"
-import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as isomorphicUnfetch from 'cross-fetch'
 
 const event = {
   eventId: '420',
