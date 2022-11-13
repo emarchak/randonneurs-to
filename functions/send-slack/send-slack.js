@@ -1,4 +1,4 @@
-require('isomorphic-unfetch');
+require('cross-fetch');
 const channels = require('./channels');
 
 const handler = async (event) => {

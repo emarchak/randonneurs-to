@@ -1,4 +1,4 @@
-const fetch = require('isomorphic-unfetch');
+const fetch = require('cross-fetch');
 const { getOpenTime, getCloseTime } = require('./getTime')
 const { getControlTime } = require('./date')
 

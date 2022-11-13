@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 
 export const endpoint = process.env.RO_ENDPOINT || ''
 export const dbUrl = process.env.GRAPHQL_URL || ''

@@ -41,6 +41,6 @@ export const getDateShort = (d: Date) => new Intl.DateTimeFormat('en', dateShort
 
 export const getDateString = getDateLong
 
-export const getDateTimeLong = (d: Date) => new Intl.DateTimeFormat('en', dateTimeLong).format(d).replace(/,/g, '')
+export const getDateTimeLong = (d: Date) => new Intl.DateTimeFormat('en', dateTimeLong).format(d).replace(/,|at /g, '')
 
-export const getDateTimeShort = (d: Date) => new Intl.DateTimeFormat('en', dateTimeShort).format(d).replace(/,/g, '')
+export const getDateTimeShort = (d: Date) => new Intl.DateTimeFormat('en', dateTimeShort).format(d).replace(/,|at /g, '')

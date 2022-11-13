@@ -1,4 +1,4 @@
-require('isomorphic-unfetch');
+require('cross-fetch');
 
 const handler = async (event) => {
   try {
@@ -22,7 +22,7 @@ const handler = async (event) => {
       body: JSON.stringify(data),
     }
   } catch (error) {
-    
+
     console.log(error)
     return {
       statusCode: 500,

@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 
 const ccnEndpoint = process.env.CCN_ENDPOINT || ''
 

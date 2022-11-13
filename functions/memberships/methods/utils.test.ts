@@ -1,4 +1,4 @@
-import * as fetch from 'isomorphic-unfetch'
+import * as fetch from 'cross-fetch'
 import { fetchMemberships, transformResponse } from "./utils"
 
 describe('transformResponse', () => {

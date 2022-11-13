@@ -1,4 +1,4 @@
-require('isomorphic-unfetch');
+require('cross-fetch');
 
 exports.handler = async (event, context, callback) => {
   const {email} = JSON.parse(event.body);

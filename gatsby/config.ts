@@ -23,12 +23,7 @@ export const plugins = [
   'gatsby-transformer-sharp',
   'gatsby-plugin-sharp',
   'gatsby-plugin-image',
-  {
-    resolve: 'gatsby-plugin-sass',
-    options: {
-      implementation: require('node-sass'),
-    },
-  },
+  'gatsby-plugin-sass',
   {
     resolve: 'gatsby-source-rss-feed',
     options: {

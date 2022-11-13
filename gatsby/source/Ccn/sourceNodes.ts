@@ -1,5 +1,5 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 import { nodeType } from '.'
 
 const ccnEndpoint = process.env.CCN_ENDPOINT || ''

@@ -17,7 +17,7 @@ import { iframe } from 'src/components/styles/iframe.module.scss'
 
 const pageQuery = graphql`
 query {
-  allMail(limit: 3, sort: {fields: sentAt, order: DESC}) {
+allMail(limit: 3, sort: {sentAt: DESC}) {
     nodes {
       id
       name
@@ -25,10 +25,7 @@ query {
       subject
     }
   }
-  allSitePage(
-    limit: 3
-    filter: {context: {type: {eq: mail}}}
-  ) {
+  allSitePage(limit: 3, filter: {context: {type: {eq: mail}}}) {
     nodes {
       path
       context {
@@ -39,7 +36,7 @@ query {
   allFile(
     filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
     limit: 6
-    sort: {fields: birthTime, order: DESC}
+    sort: {birthTime: DESC}
   ) {
     nodes {
       name

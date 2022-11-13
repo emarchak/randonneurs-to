@@ -10,7 +10,7 @@ query GalleryQuery {
   allFile(
     filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
     limit: 6
-    sort: {fields: birthTime, order: DESC}
+    sort: {birthTime: DESC}
   ) {
     nodes {
       name

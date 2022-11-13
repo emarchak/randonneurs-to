@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationFormPermanent } from './registration-form-permanent'
-import * as IsomorphicUnfetch from 'isomorphic-unfetch'
+import * as fetch from 'cross-fetch'
 import * as useMail from 'src/data/mail'
 import * as useSlack from 'src/hooks/useSlack'
 import * as Gatsby from 'gatsby'
@@ -40,7 +40,7 @@ const db =  {
 }
 
 describe('<RegistrationFormPermanent>', () => {
-  const fetchSpy = jest.spyOn(IsomorphicUnfetch, 'default')
+  const fetchSpy = jest.spyOn(fetch, 'default')
   const staticQuerySpy = jest.spyOn(Gatsby, 'useStaticQuery')
 
   beforeEach(() => {

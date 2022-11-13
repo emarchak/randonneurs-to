@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks'
-import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as fetch from 'cross-fetch'
 import { useSheets } from './useSheets'
 
 describe('useSheets()', () => {
-  const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+  const fetchSpy = jest.spyOn(fetch, 'default')
 
   afterEach(() => {
     fetchSpy.mockClear()

@@ -1,11 +1,11 @@
 
 import { renderHook } from '@testing-library/react-hooks'
-import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as fetch from 'cross-fetch'
 import Bugsnag from '@bugsnag/js'
 import { useMail } from './useMail'
 
 describe('useMail()', () => {
-    const fetchSpy = jest.spyOn(isomorphicUnfetch, 'default')
+    const fetchSpy = jest.spyOn(fetch, 'default')
     const notifySpy = jest.spyOn(Bugsnag, 'notify')
 
     afterEach(() => {

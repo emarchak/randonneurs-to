@@ -1,4 +1,4 @@
-import * as isomorphicUnfetch from 'isomorphic-unfetch'
+import * as isomorphicUnfetch from 'cross-fetch'
 import { HandlerEvent } from '@netlify/functions'
 import getLists, { addList, getListByScheduleId } from './lists'
 
