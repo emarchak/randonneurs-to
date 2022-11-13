@@ -29,6 +29,7 @@
     "gatsby-transformer-sharp": "^5.0.0",
     "google-spreadsheet": "^3.1.15",
     "graphql": "16.6.0",
+    "ics": "^2.41.0",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.6",
     "prop-types": "^15.8.1",
