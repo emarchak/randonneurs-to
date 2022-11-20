@@ -51,7 +51,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
   }
 
   if (!existsSync(eventPath)) {
-    mkdirSync(eventPath)
+    mkdirSync(eventPath, { recursive: true })
   }
 
   data.allEvent.nodes.forEach((event) => {

@@ -1,7 +1,6 @@
 import { createPages } from './createPages'
+import * as FS from 'fs'
 import * as ICS from 'ics'
-
-const FS = jest.genMockFromModule('fs')
 
 describe('createPages', () => {
   const existsMock = jest.spyOn(FS, 'existsSync')
