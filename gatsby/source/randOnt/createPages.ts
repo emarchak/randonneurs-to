@@ -17,13 +17,15 @@ const brevetTimeLimits = {
   2200: { hours: 220, minutes: 0 }
 }
 
+const getBrevetTimeLimit = (distance: number): typeof brevetTimeLimits.default => Object.hasOwn(brevetTimeLimits, distance) ? brevetTimeLimits[distance] : brevetTimeLimits['default']
+
 const buildCalendarDescription = (event: EventCalendarFeedsQuery['allEvent']['nodes'][0]) =>
 (`${event.route} - ${event.distance}km
   Start location: ${event.startLocation}
   Start time: ${getDateTimeLong(new Date(event.date))}
-  Brevet time limit: ${brevetTimeLimits[event.distance || 'default'].hours} hours, ${brevetTimeLimits[event.distance || 'default'].minutes} minutes
+  Brevet time limit: ${getBrevetTimeLimit(event.distance).hours} hours, ${getBrevetTimeLimit(event.distance).minutes} minutes
   Chapter: ${event.chapter}\n\
-  Visit https://randoneurs.to/event/${event.path} for more information.
+  Visit https://randoneurs.to${event.path} for more information.
 `)
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
@@ -62,7 +64,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
       description: buildCalendarDescription(event),
       location: event.startLocation,
       url: `https://randoneurs.to${event.path}`,
-      duration: brevetTimeLimits[event.distance || 'default'] || brevetTimeLimits['default'],
+      duration: getBrevetTimeLimit(event.distance),
     }])
   })
   seasons.forEach((events, season) =>
