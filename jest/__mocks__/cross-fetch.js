@@ -47,7 +47,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '', body = {}) => {
             Distance: '300',
             Date: '2021-06-19',
             Route: 'Kissing Bridge',
-            StartLoc: 'Tim Hortons, 152 Park Lawn Rd, Toronto',
+            StartLoc: 'Tim Hortons,<br> 152 Park Lawn Rd, Toronto',
             Stime: '06:00:00',
             Organizer: 'Register',
             Contact: 'http://randonneurs.to/registration',

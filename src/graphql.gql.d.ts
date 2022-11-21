@@ -99,6 +99,14 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** ordering argument of a cursor */
+export enum Cursor_Ordering {
+  /** ascending ordering of the cursor */
+  Asc = 'ASC',
+  /** descending ordering of the cursor */
+  Desc = 'DESC'
+}
+
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Date_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['date']>;
@@ -179,6 +187,24 @@ export enum Events_Select_Column {
   /** column name */
   Organization = 'organization'
 }
+
+/** Streaming cursor of the table "events" */
+export type Events_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Events_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Events_Stream_Cursor_Value_Input = {
+  chapter?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['date']>;
+  event_id?: InputMaybe<Scalars['Int']>;
+  eventtype?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  organization?: InputMaybe<Scalars['String']>;
+};
 
 /** mutation root */
 export type Mutation_Root = {
@@ -400,6 +426,19 @@ export enum Riders_Select_Column {
   RiderName = 'riderName'
 }
 
+/** Streaming cursor of the table "riders" */
+export type Riders_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Riders_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Riders_Stream_Cursor_Value_Input = {
+  riderName?: InputMaybe<Scalars['String']>;
+};
+
 /** columns and relationships of "rides" */
 export type Rides = {
   __typename?: 'rides';
@@ -503,6 +542,22 @@ export type Rides_Stddev_Samp_Order_By = {
   ride_rider?: InputMaybe<Order_By>;
 };
 
+/** Streaming cursor of the table "rides" */
+export type Rides_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Rides_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Rides_Stream_Cursor_Value_Input = {
+  resultType?: InputMaybe<Scalars['String']>;
+  ride_event?: InputMaybe<Scalars['Int']>;
+  ride_id?: InputMaybe<Scalars['Int']>;
+  ride_rider?: InputMaybe<Scalars['Int']>;
+};
+
 /** order by sum() on columns of table "rides" */
 export type Rides_Sum_Order_By = {
   ride_event?: InputMaybe<Order_By>;
@@ -586,16 +641,43 @@ export enum Routes_Select_Column {
   StartLocation = 'startLocation'
 }
 
+/** Streaming cursor of the table "routes" */
+export type Routes_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Routes_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Routes_Stream_Cursor_Value_Input = {
+  brevetDistance?: InputMaybe<Scalars['Int']>;
+  chapter?: InputMaybe<Scalars['String']>;
+  cuesheet?: InputMaybe<Scalars['String']>;
+  distance?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  startLocation?: InputMaybe<Scalars['String']>;
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "events" */
   events: Array<Events>;
+  /** fetch data from the table in a streaming manner: "events" */
+  events_stream: Array<Events>;
   /** fetch data from the table: "riders" */
   riders: Array<Riders>;
+  /** fetch data from the table in a streaming manner: "riders" */
+  riders_stream: Array<Riders>;
   /** fetch data from the table: "rides" */
   rides: Array<Rides>;
+  /** fetch data from the table in a streaming manner: "rides" */
+  rides_stream: Array<Rides>;
   /** fetch data from the table: "routes" */
   routes: Array<Routes>;
+  /** fetch data from the table in a streaming manner: "routes" */
+  routes_stream: Array<Routes>;
 };
 
 
@@ -604,6 +686,13 @@ export type Subscription_RootEventsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Events_Order_By>>;
+  where?: InputMaybe<Events_Bool_Exp>;
+};
+
+
+export type Subscription_RootEvents_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Events_Stream_Cursor_Input>>;
   where?: InputMaybe<Events_Bool_Exp>;
 };
 
@@ -617,6 +706,13 @@ export type Subscription_RootRidersArgs = {
 };
 
 
+export type Subscription_RootRiders_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Riders_Stream_Cursor_Input>>;
+  where?: InputMaybe<Riders_Bool_Exp>;
+};
+
+
 export type Subscription_RootRidesArgs = {
   distinct_on?: InputMaybe<Array<Rides_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -626,11 +722,25 @@ export type Subscription_RootRidesArgs = {
 };
 
 
+export type Subscription_RootRides_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Rides_Stream_Cursor_Input>>;
+  where?: InputMaybe<Rides_Bool_Exp>;
+};
+
+
 export type Subscription_RootRoutesArgs = {
   distinct_on?: InputMaybe<Array<Routes_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Routes_Order_By>>;
+  where?: InputMaybe<Routes_Bool_Exp>;
+};
+
+
+export type Subscription_RootRoutes_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Routes_Stream_Cursor_Input>>;
   where?: InputMaybe<Routes_Bool_Exp>;
 };
 

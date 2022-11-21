@@ -4,6 +4,7 @@ generates:
     schema: 'http://localhost:8000/___graphql'
     documents:
       - './src/**/*.{ts,tsx}'
+      - './gatsby/**/*.{ts,tsx}'
       - '!./src/**/*.gql.ts'
       - './node_modules/gatsby*/!(node_modules)/**/*.js'
     plugins:

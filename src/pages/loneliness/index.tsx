@@ -21,13 +21,13 @@ export const routes = [
 ]
 
 const imageQuery = graphql`
-query {
-    file(name: {glob: "ClubAudax"}) {
-        name
-        childImageSharp {
-          gatsbyImageData(width:1200)
-        }
+query lonelinessImageQuery {
+  file(name: {glob: "ClubAudax"}) {
+      name
+      childImageSharp {
+        gatsbyImageData(width:1200)
       }
+    }
 }
 `
 

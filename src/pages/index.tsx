@@ -16,7 +16,7 @@ import * as styles from './styles/index.module.scss'
 import { iframe } from 'src/components/styles/iframe.module.scss'
 
 const pageQuery = graphql`
-query {
+query indexPageQuery {
 allMail(limit: 3, sort: {sentAt: DESC}) {
     nodes {
       id
