@@ -36,7 +36,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
                 distance: parseInt(rawEvent.distance),
                 rwgpsUrl: rawEvent.rwgps,
                 rwgpsId: rwgps.pop(),
-                startLocation: rawEvent.startloc,
+                startLocation: rawEvent.startloc.replaceAll(/<[^>]*>/g, ''),
                 date: eventDate.toISOString(),
                 season: getSeason(eventDate),
                 scheduleId: rawEvent.sched_id,
