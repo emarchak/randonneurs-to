@@ -66,7 +66,10 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         }, 'brevetRegistration')
 
         if (!successSlack || !successMail || !successSheet) {
-            Bugsnag.notify('Registration error')
+            Bugsnag.notify('Registration error', null, (e, event) => {
+                event.addMetadata('data', { data })
+                event.addMetadata('success', { successMail, successSheet, successSlack })
+            })
         }
 
         trackEvent("sign_up", { method: formName, ...data })
