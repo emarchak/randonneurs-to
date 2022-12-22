@@ -1,4 +1,4 @@
-require('cross-fetch')
+import fetch from 'cross-fetch'
 import { formEncode, buildCard } from './utils'
 
 const cardEndpoint = 'https://www.randonneursontario.ca/brevetcard/cardtopdf.php'
