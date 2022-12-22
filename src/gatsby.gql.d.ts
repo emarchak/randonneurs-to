@@ -4496,7 +4496,7 @@ export const GatsbyImageSharpFluid_WithWebp_NoBase64 = gql`
     `;
 export const EventCalendarFeeds = gql`
     query EventCalendarFeeds {
-  allEvent {
+  allEvent(sort: {date: ASC}) {
     nodes {
       chapter
       distance

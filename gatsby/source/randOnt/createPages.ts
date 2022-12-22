@@ -17,7 +17,7 @@ const brevetTimeLimits = {
   2200: { hours: 220, minutes: 0 }
 }
 
-const getBrevetTimeLimit = (distance: number): typeof brevetTimeLimits.default => Object.hasOwn(brevetTimeLimits, distance) ? brevetTimeLimits[distance] : brevetTimeLimits['default']
+const getBrevetTimeLimit = (distance: number): typeof brevetTimeLimits.default => Boolean(brevetTimeLimits[distance]) ? brevetTimeLimits[distance] : brevetTimeLimits['default']
 
 const buildCalendarDescription = (event: EventCalendarFeedsQuery['allEvent']['nodes'][0]) =>
 (`${event.route} - ${event.distance}km
