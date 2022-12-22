@@ -82,7 +82,7 @@ export const SEO = ({
   return (
     <>
       <title>{title ? `${title} | ${siteMetadata.title}` : siteMetadata.title}</title>
-      {pageMeta.map((meta) => (<meta key={meta.name} id={meta.name} {...meta} />))}
+      {pageMeta.map((meta, i) => (<meta key={`${i}-${meta.name}`} id={meta.name} {...meta} />))}
     </>
   )
 }
