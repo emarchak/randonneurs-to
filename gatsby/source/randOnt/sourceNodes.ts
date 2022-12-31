@@ -10,7 +10,7 @@ const rwgpsRegex = /^((?:https?:)?\/\/)?((?:www)\.)?((?:ridewithgps\.com))(\/rou
 
 export const getSeason = (event: Date): String => event.getFullYear().toString()
 
-export const eventTypes = (test: string) => ['Brevet', 'Permanent', 'Fleche', 'Populaire'].find(eventType => eventType === test) || 'Other'
+export const eventTypes = (test: string) => ['Brevet', 'Permanent', 'Fleche', 'Populaire'].find(eventType => new RegExp(eventType, 'i').test(test)) || 'Other'
 export const chapters = (test: string) => ['Club', 'Toronto', 'Huron', 'Ottawa', 'Simcoe'].find(chapter => test.includes(chapter)) || 'Other'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
