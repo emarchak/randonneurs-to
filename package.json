@@ -64,7 +64,7 @@
     "babel-preset-gatsby": "^3.0.0",
     "core-js": "^3.26.1",
     "dotenv-cli": "^6.0.0",
-    "eslint": "^8.9.0",
+    "eslint": "^8.31.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": ">=2.26.0",
     "gatsby-plugin-root-import": "^2.0.7",
