@@ -17,7 +17,7 @@ type EventProps = PageProps<EventPageQuery>
 
 export const query = graphql`
   query EventPage($id: String) {
-    event(id: {eq: $id}) {
+    event(id: { eq: $id }) {
       chapter
       date
       distance
@@ -34,61 +34,122 @@ export const query = graphql`
 `
 
 const Event = ({ data: { event } }: EventProps) => {
-  const {isLoading, data } = useEvent(parseInt(event.scheduleId));
+  const { isLoading, data } = useEvent(parseInt(event.scheduleId))
 
   return (
-  <Layout>
-    <ContentWrapper>
-      <TabMenu activeRoute={`/event/${event.season}/`} section='seasons' />
-       <h1>{event.route}</h1>
-      <h2>{ event.distance } { event.eventType }</h2>
-    </ContentWrapper>
-    <ContentWrapper container>
-      {event.rwgpsId && <ContentChild><RwgpsRoute routeId={event.rwgpsId} /></ContentChild>}
-      <ContentChild>
-        <table>
-          <tbody>
-            <tr><th>Start location</th><td><MapLink location={event.startLocation}>{event.startLocation}</MapLink></td></tr>
-            <tr><th>Start time</th><td>{getDateTimeLong(new Date(event.date))}</td></tr>
-            {event.rwgpsUrl && <tr><th>Route</th><td><Link href={ event.rwgpsUrl }>{event.route}</Link></td></tr>}
-            {!event.rwgpsUrl && <tr><th>Route</th><td>{event.route}</td></tr>}
-            {event.chapter === 'Toronto' &&
-              <tr><th>Season</th><td><Link to={`/event/${event.season}/`}>{event.season}</Link></td></tr>
-            }
-            <tr><th>Chapter</th><td>{event.chapter}</td></tr>
-            <tr><th>Type</th><td>{event.eventType}</td></tr>
-            <tr><th>Distance</th><td>{event.distance}</td></tr>
+    <Layout>
+      <ContentWrapper>
+        <TabMenu activeRoute={`/event/${event.season}/`} section="seasons" />
+        <h1>{event.route}</h1>
+        <h2>
+          {event.distance} {event.eventType}
+        </h2>
+      </ContentWrapper>
+      <ContentWrapper container>
+        {event.rwgpsId && (
+          <ContentChild>
+            <RwgpsRoute routeId={event.rwgpsId} />
+          </ContentChild>
+        )}
+        <ContentChild>
+          <table>
+            <tbody>
+              <tr>
+                <th>Start location</th>
+                <td>
+                  <MapLink location={event.startLocation}>
+                    {event.startLocation}
+                  </MapLink>
+                </td>
+              </tr>
+              <tr>
+                <th>Start time</th>
+                <td>{getDateTimeLong(new Date(event.date))}</td>
+              </tr>
+              {event.rwgpsUrl && (
+                <tr>
+                  <th>Route</th>
+                  <td>
+                    <Link href={event.rwgpsUrl}>{event.route}</Link>
+                  </td>
+                </tr>
+              )}
+              {!event.rwgpsUrl && (
+                <tr>
+                  <th>Route</th>
+                  <td>{event.route}</td>
+                </tr>
+              )}
+              {event.chapter === 'Toronto' && (
+                <tr>
+                  <th>Season</th>
+                  <td>
+                    <Link to={`/event/${event.season}/`}>{event.season}</Link>
+                  </td>
+                </tr>
+              )}
+              <tr>
+                <th>Chapter</th>
+                <td>{event.chapter}</td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>{event.eventType}</td>
+              </tr>
+              <tr>
+                <th>Distance</th>
+                <td>{event.distance}</td>
+              </tr>
             </tbody>
-        </table>
-        {(Date.now() < new Date(event.date).valueOf()) &&
-          <p>
-            <LinkButton block primary to={`/registration/`}>
-              Register to ride
-            </LinkButton>
-          </p>}
-        {(Date.now() > new Date(event.date).valueOf()) &&
-          <p>
-            <LinkButton block secondary href={`https://randonneursontario.ca/result/torres${event.season.toString().slice(-2)}.html`}>
-              View official results
-            </LinkButton>
-          </p>}
-      </ContentChild>
+          </table>
+          {Date.now() < new Date(event.date).valueOf() && (
+            <p>
+              <LinkButton
+                block
+                primary
+                href={`https://register.randonneurs-ontario.ca/schedule/${event.scheduleId}}`}
+              >
+                Register to ride
+              </LinkButton>
+            </p>
+          )}
+          {Date.now() > new Date(event.date).valueOf() && (
+            <p>
+              <LinkButton
+                block
+                secondary
+                href={`https://randonneursontario.ca/result/torres${event.season
+                  .toString()
+                  .slice(-2)}.html`}
+              >
+                View official results
+              </LinkButton>
+            </p>
+          )}
+        </ContentChild>
       </ContentWrapper>
       <ContentWrapper>
         <h2>Who's riding</h2>
         {isLoading && <Loading />}
-        {data && <ul>
-          {data.riders.length === 0 && <li>No riders registered</li>}
-          {data.riders.map(({rider}) => (<li>{rider.riderName}</li>))}
-        </ul>}
+        {data && (
+          <ul>
+            {data.riders.length === 0 && <li>No riders registered</li>}
+            {data.riders.map(({ rider }) => (
+              <li>{rider.riderName}</li>
+            ))}
+          </ul>
+        )}
       </ContentWrapper>
-    <SeasonsCta />
-  </Layout>
-)}
+      <SeasonsCta />
+    </Layout>
+  )
+}
 
-export const Head = ({ data: { event } }: EventProps) => (<SEO
-  title={`${event.route} | ${getDateTimeShort(new Date(event.date))}`}
-  description={`A ${event.distance}km ride starting from ${event.startLocation} with the ${event.chapter} Chapter of Randonneurs Ontario, a long distance cycling club associated with the Audax Club Parisien.`}
-/>)
+export const Head = ({ data: { event } }: EventProps) => (
+  <SEO
+    title={`${event.route} | ${getDateTimeShort(new Date(event.date))}`}
+    description={`A ${event.distance}km ride starting from ${event.startLocation} with the ${event.chapter} Chapter of Randonneurs Ontario, a long distance cycling club associated with the Audax Club Parisien.`}
+  />
+)
 
 export default Event
