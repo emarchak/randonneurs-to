@@ -107,7 +107,7 @@ const Event = ({ data: { event } }: EventProps) => {
               <LinkButton
                 block
                 primary
-                href={`https://register.randonneurs-ontario.ca/schedule/${event.scheduleId}}`}
+                href={`https://register.randonneursontario.ca/registration?schedule=${event.scheduleId}`}
               >
                 Register to ride
               </LinkButton>
