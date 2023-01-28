@@ -1,0 +1,3 @@
+/register        https://register.randonneurs-ontario.ca/registration         301!
+/registration/*  https://register.randonneurs-ontario.ca/registration/:splat  301!
+/covid           https://register.randonneurs-ontario.ca/registration/covid   301!

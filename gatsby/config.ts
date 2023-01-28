@@ -18,6 +18,7 @@ export const siteMetadata = {
 }
 
 export const plugins = [
+  'gatsby-plugin-netlify',
   'gatsby-plugin-root-import',
   'gatsby-plugin-typescript',
   'gatsby-transformer-sharp',
