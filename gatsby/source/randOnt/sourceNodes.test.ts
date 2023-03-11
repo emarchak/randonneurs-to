@@ -83,6 +83,7 @@ describe('eventTypes()', () => {
     it('returns returns known event types and other', () => {
         expect(eventTypes('Brevet')).toBe('Brevet')
         expect(eventTypes('Permanent')).toBe('Permanent')
+        expect(eventTypes('Populaire (Spring)')).toBe('Populaire')
         expect(eventTypes('Something weird')).toBe('Other')
     })
 })
