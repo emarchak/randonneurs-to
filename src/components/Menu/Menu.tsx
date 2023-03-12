@@ -1,7 +1,7 @@
 import React from 'react'
 import { slide as Burger } from 'react-burger-menu'
 import { Link } from 'src/components/Link'
-import routes from './routes'
+import routes, { MenuRoute } from './routes'
 import * as styles from '../styles/menu.module.scss'
 
 export const menuConfig = {
@@ -55,14 +55,18 @@ const SectionItem = (props: any) => <li><Link {...props} className={styles.linkS
 const List = (props: any) => <ul {...props} className={styles.list} />
 const ListItem = (props: any) => <ul {...props} className={styles.listItem} />
 
-const renderSectionItems = page => <SectionItem key={page.route} to={page.route}>{page.description || page.label}</SectionItem>
+const renderSectionItems = (page: MenuRoute) => <SectionItem {...{
+  key: page.route,
+  to: !page.external ? page.route : undefined,
+  href: page.external ? page.route : undefined
+}}>{page.description || page.label}</SectionItem>
 
 export const Menu = ({ isOpen, onMenuChange }: MenuProps) => (
   <Burger {...menuConfig} styles={menuStyles} isOpen={isOpen} onStateChange={onMenuChange} customBurgerIcon={false} right>
     <List>
       <ListItem><SectionTitle to='/'>Home</SectionTitle></ListItem>
       <ListItem>
-        <SectionTitle to='/registration/'>Register for a ride</SectionTitle>
+        <SectionTitle>Register for a ride</SectionTitle>
         <List>
           {routes.registration.map(renderSectionItems)}
         </List>

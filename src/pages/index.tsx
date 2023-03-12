@@ -113,7 +113,7 @@ const IndexPage = () => {
             ))}
           </ul>
           <footer className={styles.eventFooter}>
-            <LinkButton to="/registration/" primary small block>
+            <LinkButton href="https://register.randonneursontario.ca/registration/" primary small block>
               Register to ride
             </LinkButton>
           </footer>

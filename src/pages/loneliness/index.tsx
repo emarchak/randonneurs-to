@@ -17,7 +17,7 @@ import * as style from '../styles/loneliness.module.scss'
 export const routes = [
   { label: 'Club', route: '/loneliness/' },
   { label: 'Shop', route: '/shop/audax-a-distance/' },
-  { label: 'Trace', route: '/registration/trace-virtuelle/' },
+  { label: 'Trace', route: 'https://register.randonneursontario.ca/registration/trace-virtuelle/', external: true },
 ]
 
 const imageQuery = graphql`
