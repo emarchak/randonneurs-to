@@ -21,4 +21,9 @@ describe('<Menu>', () => {
             expect(getByRole('link', { name: link.label })).toBeInTheDocument()
         })
     })
+    it('renders external urls', () => {
+        const { getByText } = render(<Menu isOpen={true} />)
+
+        expect(getByText('Become a member')).toHaveProperty('href', 'https://register.randonneursontario.ca/registration/membership/')
+    })
 })

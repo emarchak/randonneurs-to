@@ -1,7 +1,4 @@
 /covid            https://register.randonneursontario.ca/registration/covid   301!
-/covid/           https://register.randonneursontario.ca/registration/covid   301!
 /register         https://register.randonneursontario.ca/registration         301!
-/register/        https://register.randonneursontario.ca/registration         301!
 /registration     https://register.randonneursontario.ca/registration         301!
-/registration/    https://register.randonneursontario.ca/registration         301!
 /registration/*   https://register.randonneursontario.ca/registration/:splat  301!

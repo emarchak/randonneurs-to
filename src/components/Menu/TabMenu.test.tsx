@@ -19,6 +19,6 @@ describe('<TabMenu>', () => {
             expect(getByRole('option', {name: tab.label})).toBeInTheDocument()
         })
 
-        expect(getByRole('combobox')).toHaveValue('/registration/')
+        expect(getByRole('combobox')).toHaveValue('https://register.randonneursontario.ca/registration/membership/')
     })
 })
