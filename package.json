@@ -41,7 +41,7 @@
     "react-query": "^3.39.0",
     "sass": "^1.30.0",
     "typescript": ">=2.7",
-    "webpack": "^5.0.0"
+    "webpack": "^5.81.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.13.11",
