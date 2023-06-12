@@ -16,7 +16,7 @@
     "apollo-server-lambda": "^3.6.6",
     "cross-fetch": "^3.1.5",
     "date-time-format-timezone": "^1.0.22",
-    "gatsby": "^5.3.3",
+    "gatsby": "^5.10.0",
     "gatsby-plugin-google-gtag": "^5.0.0",
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-netlify": "^5.1.0",
